@@ -7,7 +7,7 @@
 #include <cstddef>
 #include <iterator>
 
-namespace feng
+namespace vg
 {
 
     template <
@@ -82,7 +82,7 @@ namespace feng
     };
 
 
-}//namespace feng
+}//namespace vg
 
 #include "variate_generator/variate_generator.tcc"
 

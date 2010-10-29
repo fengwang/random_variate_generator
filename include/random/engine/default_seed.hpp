@@ -4,7 +4,7 @@
 #include <cstddef>
 #include <ctime>
 
-namespace feng
+namespace vg
 {
 
     struct default_seed
@@ -28,7 +28,7 @@ namespace feng
 
     }; // end of struct default_seed
 
-}// end of namespace feng
+}// end of namespace vg
 
 #endif//_DEFAULT_SEED_HPP_INCLUDED_SDFOIUJ4OIUASF8U3OIAUF983ILAUFSO8U34LIUFSDLIJ
 

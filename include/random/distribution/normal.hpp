@@ -4,7 +4,7 @@
 #include <cmath>
 
 
-namespace feng
+namespace vg
 {
 
     template <   typename Return_Type,
@@ -73,7 +73,7 @@ namespace feng
 
 
 
-}//namespace feng
+}//namespace vg
 
 
 

@@ -13,7 +13,7 @@ p and n=0 ("failure") occurs with probability q=1-p, where 0<p<1.
 #include <cassert>
 #include <cstddef>
 
-namespace feng
+namespace vg
 {
 
     template <
@@ -58,7 +58,7 @@ namespace feng
 
     };
 
-}//namespace feng
+}//namespace vg
 
 
 #endif//_BERNOULLI_HPP_INCLUDED_2I8HJAFLKHJFSDKMNVCLKJNAJIHEIUAO9HWE9U8HYSDFIHJ2

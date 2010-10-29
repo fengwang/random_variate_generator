@@ -5,7 +5,7 @@
 
 #include <cassert>
 
-namespace feng
+namespace vg
 {
 
     template <   typename Return_Type,
@@ -48,7 +48,7 @@ namespace feng
 
     };
 
-}//feng
+}//vg
 
 
 #endif//_WEIBULL_HPP_INCLUDED_OIJH98HUSFA98UHJALKJQ1PH9IAFOIUJWKLJNALKJSDIOUH3D

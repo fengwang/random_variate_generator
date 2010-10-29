@@ -10,7 +10,7 @@
 #include <cmath>
 #include <cassert>
 
-namespace feng
+namespace vg
 {
     template <   typename Return_Type,
                  typename Engine
@@ -56,7 +56,7 @@ namespace feng
 
     };
 
-}//feng
+}//vg
 
 #endif//_CAUCHY_HPP_INCLUDED_SDOIFJ32OIJASF0O9UI34LIAFSO0U340U9AFSLIUJRLIJDFSLKJ
 

@@ -4,7 +4,7 @@
 #include <cmath>
 #include <cassert>
 
-namespace feng
+namespace vg
 {
 
     template <   typename Return_Type,
@@ -45,7 +45,7 @@ namespace feng
 
     };
 
-}//feng
+}//vg
 
 
 #endif//_EXPONENTIAL_HPP_INCLUDED_98JKLJHWE8UHSFDWE98HSFDIUHEUHSAKUHAIUHWEIUHASF

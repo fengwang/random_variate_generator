@@ -6,7 +6,7 @@
 #include <cmath>
 #include <cassert>
 
-namespace feng
+namespace vg
 {
 
     template <   typename Return_Type,
@@ -86,7 +86,7 @@ namespace feng
                 return static_cast<return_type>(ans);
             }
     };
-}//feng
+}//vg
 
 #endif//_GAMMA_HPP_INCLUDED_2I8HJFASKJLNHVJMNXVUHNZVSJHWOIUHAP9I3LKJSOIUJ3OIJSIA
 

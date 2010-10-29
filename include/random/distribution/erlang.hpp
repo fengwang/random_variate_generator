@@ -11,7 +11,7 @@ a sum of the squares of k independent standard normal random variables.
 
 #include "gamma.hpp"
 
-namespace feng
+namespace vg
 {
 
     template <   typename Return_Type,
@@ -54,7 +54,7 @@ namespace feng
 
     };
 
-}//feng
+}//vg
 
 
 #endif//_ERLANG_HPP_INCLUDED_MBSDLKJ98USIJEIJHFD984KJHSDFIOUHJS98E3D8EOIUHS9

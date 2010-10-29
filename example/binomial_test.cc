@@ -5,7 +5,7 @@
 #include <iterator>
 #include <numeric>
 
-using namespace feng;
+using namespace vg;
 using namespace std;
 
 int main()

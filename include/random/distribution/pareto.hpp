@@ -4,7 +4,7 @@
 #include <cmath>
 #include <cassert>
 
-namespace feng
+namespace vg
 {
 
     template <   typename Return_Type,
@@ -41,7 +41,7 @@ namespace feng
         }
     };
 
-}//feng
+}//vg
 
 
 #endif//_PARETO_HPP_INCLUDED_ASFLDKJO3RUI9LASFIKJ38U9ALFISFJOIUWERLKJFSDLKJASFLK

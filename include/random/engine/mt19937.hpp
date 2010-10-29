@@ -5,7 +5,7 @@
 
 #include <cstddef>
 
-namespace feng
+namespace vg
 {
 
     struct mt19937
@@ -80,7 +80,7 @@ namespace feng
             mt19937& operator = ( const self_type& );
     };
 
-}//namespace feng
+}//namespace vg
 
 #endif//_MT19937_HPP_INCLUDED28903RUAFSLDKJASFDOIJ4890UAFOPSI1209AFLKJ34OIUFJKDS
 

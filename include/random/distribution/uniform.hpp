@@ -3,7 +3,7 @@
 
 #include <cassert>
 
-namespace feng
+namespace vg
 {
 
     template <
@@ -42,7 +42,7 @@ namespace feng
 
     };
 
-}//namespace feng
+}//namespace vg
 
 #endif//_UNIFORM_HPP_INCLUDED_98U3LKJFASD98IHJ3WLKJNASF98YU12LAKFJ289UJAWOIJUW2I
 

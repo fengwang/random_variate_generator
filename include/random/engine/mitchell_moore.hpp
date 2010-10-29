@@ -5,7 +5,7 @@
 
 #include <cstddef>
 
-namespace feng
+namespace vg
 {
 
     struct mitchell_moore
@@ -75,7 +75,7 @@ namespace feng
             mitchell_moore& operator = ( const self_type& );
     };// end of struct mitchell_moore
 
-}//namespace feng
+}//namespace vg
 
 #endif//_MITCHELL_MOORE_HPP_INCLUDED_3UHSFKJHNSAIFUNVCJMNZKJHDEIUHE3IUHSIKUJHEE8
 

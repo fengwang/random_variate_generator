@@ -3,7 +3,7 @@
 
 #include "default_seed.hpp"
 
-namespace feng
+namespace vg
 {
     struct linear_congruential
     {
@@ -36,7 +36,7 @@ namespace feng
             linear_congruential( const self_type& );
             linear_congruential& operator = ( const self_type& );
     };// end of struct linear_congruential
-}//namespace feng
+}//namespace vg
 
 #endif//_LINEAR_CONGRUENTIAL_HPP_INCLUDED_3UHSFKJHNSAIFUNVCJMNZKJHDEIUHE3IUHSIKUJHEE8
 

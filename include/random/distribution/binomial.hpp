@@ -16,7 +16,7 @@ called a Bernoulli experiment or Bernoulli trial.
 #include <cmath>
 
 
-namespace feng
+namespace vg
 {
 
     template <
@@ -290,7 +290,7 @@ namespace feng
 
     };
 
-}//namespace feng
+}//namespace vg
 
 
 

@@ -6,7 +6,7 @@
 #include <cmath>
 #include <cassert>
 
-namespace feng
+namespace vg
 {
 
     template <   typename Return_Type,
@@ -51,7 +51,7 @@ namespace feng
             }
     };
 
-}//feng
+}//vg
 
 #endif//_BETA_HPP_INCLUDED_SODFIJ34LKJASFODIJ3498UAFSLKJ4398UAFSLKJ498UAFSLKJ34D
 

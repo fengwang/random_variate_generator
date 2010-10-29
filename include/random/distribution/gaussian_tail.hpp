@@ -5,7 +5,7 @@
 
 #include <cassert>
 
-namespace feng
+namespace vg
 {
 
     template <   typename Return_Type,
@@ -78,7 +78,7 @@ namespace feng
         }
     };
 
-}//feng
+}//vg
 
 
 #endif//_GAUSSIAN_TAIL_HPP_INCLUDED_OIHJ3LKJAFS98UYH3KJHFAS9I8UHY2QR3OIUHFSIOUHEIUHY3
