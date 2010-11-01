@@ -31,13 +31,28 @@ namespace vg
         return_type
         operator ()()
         {
+            return do_generation( delta_ );
+        }
+
+    protected:
+        return_type 
+        do_generation( const return_type delta )
+        {
+            return direct_impl( delta );
+        }
+
+    private:
+        return_type
+        direct_impl( const return_type delta )
+        {
             const final_type u      =   e_();
 			const final_type tmp1   =   std::log( u );
-			const final_type tmp2   =   delta_ * delta_ - tmp1 - tmp1;
+			const final_type tmp2   =   delta * delta - tmp1 - tmp1;
 			const final_type ans    =   std::sqrt( tmp2 );
 
 			return static_cast<return_type>( ans );
         }
+
     };
 
 }//vg

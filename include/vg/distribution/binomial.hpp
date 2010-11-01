@@ -49,15 +49,23 @@ namespace vg
             return_type
             operator()()
             {
-                if ( n_ < 8 )
-                    { return coin_flip_method( n_, p_ ); }
-
-                if ( n_ * p_ < 16 )
-                    { return second_waiting_time_method( n_, p_ ); }
-
-                return rejection_method( n_, p_ );
+                return do_generation( n_, p_ );
             }
 
+        protected:
+            return_type 
+            do_generation( const size_type N, const final_type P )
+            {
+                if ( N < 8 )
+                    { return coin_flip_method( N, P ); }
+
+                if ( N * P < 16 )
+                    { return second_waiting_time_method( N, P ); }
+
+                return rejection_method( N, P );
+            }
+            
+        private:
 #if 0
             X < - 0
         FOR i :
@@ -67,7 +75,6 @@ namespace vg
               X < - X + B
               RETURN X
 #endif
-        protected:
             return_type
             coin_flip_method( const size_type N, const final_type P )
             {
@@ -126,7 +133,7 @@ namespace vg
                 {
                     const size_type a = 1 + ( n / 2 );
                     const size_type b = 1 + n - a;
-                    const final_type X = direct_beta_impl( final_type(a), final_type(b) );
+                    const final_type X = beta<typename Engine::final_type, Engine>::do_generation( final_type(a), final_type(b) );
 
                     if ( X >= p )
                     {

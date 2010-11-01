@@ -8,8 +8,8 @@ namespace vg
 {
 
     template <
-                typename Return_Type = unsigned long,
-                typename Engine = mitchell_moore
+                typename Return_Type ,
+                typename Engine
              >
     struct geometric
     {
@@ -24,34 +24,41 @@ namespace vg
         explicit geometric( final_type p = final_type( 0.5 ),
                             const seed_type s = seed_type( 0 ) )
             : p_( p ), e_( s )
-        {}
+        {
+            assert( p_ > final_type( 0 ) );
+            assert( p_ < final_type( 1 ) );
+        }
 
         return_type
         operator()()
         {
-            assert( p_ > final_type( 0 ) );
-            assert( p_ < final_type( 1 ) );
-
-            return polar_method();
+            return do_generation( p_ );
         }
 
     protected:
         return_type
-        coin_flip_method()
+        do_generation( const final_type P )
+        {
+            return polar_method( P );
+        }
+
+    private:
+        return_type
+        coin_flip_method( const final_type P )
         {
             value_type ans = 1;
 
-            while ( e_() > p_ )
+            while ( e_() > P )
                 { ++ans; }
 
             return ans;
         }
 
         return_type
-        polar_method()
+        polar_method( const final_type P )
         {
             const final_type u = e_();
-            const final_type n = std::ceil( log( u ) / log( final_type( 1 ) - p_ ) );
+            const final_type n = std::ceil( log( u ) / log( final_type( 1 ) - P ) );
             return static_cast<return_type>( n );
         }
 

@@ -16,9 +16,8 @@ OBJECTS_DIR   = ./obj
 BIN_DIR       = ./bin
 
 ####### Files
-SOURCES       = example/uniform_test.cc
-OBJECTS       = binomial_test.o 
-TARGET        = binomial_test 
+OBJECTS       = binomial_test.o poisson_test.o
+TARGET        = binomial_test poisson_test 
 
 first: all
 ####### Implicit rules
@@ -38,7 +37,13 @@ distclean: clean
 binomial_test.o : example/binomial_test.cc
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $(OBJECTS_DIR)/binomial_test.o example/binomial_test.cc
 
+poisson_test.o : example/poisson_test.cc
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $(OBJECTS_DIR)/poisson_test.o example/poisson_test.cc
+
 ####### Detailed Build Rules
 binomial_test: binomial_test.o 
 	$(LINK) $(LFLAGS) -o $(BIN_DIR)/binomial_test $(OBJECTS_DIR)/binomial_test.o $(OBJCOMP) $(LIBS)
+
+poisson_test: poisson_test.o 
+	$(LINK) $(LFLAGS) -o $(BIN_DIR)/poisson_test $(OBJECTS_DIR)/poisson_test.o $(OBJCOMP) $(LIBS)
 

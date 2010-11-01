@@ -22,15 +22,20 @@ namespace vg
         explicit normal( const seed_type sd = 0 ) : e_( sd )
         {}
         
-        ~normal() {}
-
         return_type
         operator ()()
+        {
+            return do_generation();
+        }
+
+    protected:
+        return_type 
+        do_generation()
         {
             return kinderman_monahan_method();
         }
 
-    protected:
+    private:
         //A. J. Kinderman and J. F. Monahan (1977) 
         //"Computer Generation of Random Variables Using the Ratio of Uniform Deviates," 
         //ACM Transactions on Mathematical Software 3: 257-260. 

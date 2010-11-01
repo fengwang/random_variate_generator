@@ -33,9 +33,23 @@ namespace vg
         return_type
         operator ()()
         {
+            return do_generation( a_, b_ );
+        }
+
+    protected:
+        return_type
+        do_generation( const return_type A, const return_type B )
+        {
+            return direct_impl( A, B );
+        }
+
+    private:
+        return_type
+        direct_impl( const return_type A, const return_type B )
+        {
             const final_type u = e_();
-			const final_type tmp = std::pow( u, final_type(1)/a_ );
-			const final_type ans = b_ / tmp;
+			const final_type tmp = std::pow( u, final_type(1)/A );
+			const final_type ans = B / tmp;
 
 			return static_cast<return_type>( ans );
         }

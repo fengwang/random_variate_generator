@@ -38,14 +38,23 @@ namespace vg
         return_type
         operator ()()
         {
-            return chi_square_direct_impl( k_ );
+            return do_generation( k_ );
         }
 
         protected:
         return_type
+        do_generation( const size_type K )
+        {
+            return chi_square_direct_impl( K );    
+        }
+
+        private:
+
+        return_type
         chi_square_direct_impl( const size_type K )
         {
-            const final_type ans = gamma<Return_Type, Engine>::marsaglia_tsang_method(final_type(K)/final_type(2), final_type(1));
+            //const final_type ans = gamma<Return_Type, Engine>::marsaglia_tsang_method(final_type(K)/final_type(2), final_type(1));
+            const final_type ans = gamma<Return_Type, Engine>::do_generation(final_type(K)/final_type(2), final_type(1));
 
             return static_cast<return_type>( ans + ans );
         }

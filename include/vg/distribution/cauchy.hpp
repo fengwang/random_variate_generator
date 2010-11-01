@@ -36,10 +36,17 @@ namespace vg
         return_type
         operator ()()
         {
+            return do_generation( delta_ );
+        }
+
+    protected:
+        return_type
+        do_generation( const final_type Delta )
+        {
             return cauchy_direct_impl( delta_ );
         }
 
-        protected:
+    private:
         return_type
         cauchy_direct_impl( const final_type Delta )
         {

@@ -37,16 +37,21 @@ namespace vg
             return_type
             operator()()
             {
-                return direct_beta_impl( a_, b_ );
+                return do_generation( a_, b_ );
             }
 
         protected:
+            return_type
+            do_generation( const final_type A, const final_type B )
+            {
+                return direct_beta_impl( A, B );
+            }
 
             return_type
             direct_beta_impl( const final_type A, const final_type B )
             {
-                const final_type a =  marsaglia_tsang_method( A, final_type( 1 ) );
-                const final_type b =  marsaglia_tsang_method( B, final_type( 1 ) );
+                const final_type a =  gamma<Return_Type,Engine>::do_generation( A, final_type( 1 ) );
+                const final_type b =  gamma<Return_Type,Engine>::do_generation( B, final_type( 1 ) );
                 return static_cast<return_type>( a / ( a + b ) );
             }
     };

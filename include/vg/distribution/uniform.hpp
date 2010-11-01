@@ -32,14 +32,27 @@ namespace vg
         return_type
         operator()()
         {
-			const final_type lower_f    =   static_cast<final_type>(lower_);
-			const final_type upper_f    =   static_cast<final_type>(upper_);
+            return do_generation( lower_, upper_ );
+        }
+
+        protected:
+        return_type
+        do_generation( const value_type lower, const value_type upper )
+        {
+            return direct_impl( lower, upper );
+        }
+
+        private:
+        return_type
+        direct_impl( const value_type lower, const value_type upper )
+        {
+			const final_type lower_f    =   static_cast<final_type>(lower);
+			const final_type upper_f    =   static_cast<final_type>(upper);
 			const final_type ans_f      =   lower_f + e_() * ( upper_f - lower_f );
 			const return_type ans       =   static_cast<return_type>( ans_f );
 
 			return ans;
         }
-
     };
 
 }//namespace vg

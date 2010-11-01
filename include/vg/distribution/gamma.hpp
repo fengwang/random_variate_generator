@@ -36,10 +36,17 @@ namespace vg
             return_type
             operator()()
             {
-                return marsaglia_tsang_method( a_, b_ );
+                return do_generation( a_, b_ );
             }
 
         protected:
+            return_type 
+            do_generation( const final_type A, const final_type B )
+            {
+                return marsaglia_tsang_method( A, B );
+            }
+
+        private:
             //Marsaglia and Tsang, "A Simple Method for generating gamma variables",
             //ACM Transactions on Mathematical Software, Vol 26, No 3 (2000), p363-372.
             return_type
@@ -57,8 +64,7 @@ namespace vg
                 {
                     for ( ;; )
                     {
-                        //x = kinderman_monahan_method(); //normal distribution
-                        x = normal<Return_Type,Engine>::kinderman_monahan_method(); //normal distribution
+                        x = normal<Return_Type,Engine>::do_generation(); //normal distribution
                         v = final_type( 1 ) + c * x;
 
                         if ( v > 0 )

@@ -42,10 +42,17 @@ namespace vg
         return_type
         operator()()
         {
-            return coin_flip_method();
+            return do_generation( p_ );
         }
 
     protected:
+        return_type
+        do_generation( const final_type P )
+        {
+            return coin_flip_method( P );
+        }
+
+    private:
         return_type 
         coin_flip_method( const final_type P )
         {

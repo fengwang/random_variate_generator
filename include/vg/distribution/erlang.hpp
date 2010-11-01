@@ -40,14 +40,22 @@ namespace vg
         return_type
         operator ()()
         {
-            return erlang_direct_impl( a_, n_ );
+            return do_generation( a_, n_ );
         }
 
         protected:
+        return_type 
+        do_generation( const final_type A, const final_type N )
+        {
+            return erlang_direct_impl( a_, n_ );
+        }
+
+        private:
         return_type
         erlang_direct_impl( const final_type A, const final_type N )
         {
-            const final_type ans = gamma<Return_Type, Engine>::marsaglia_tsang_method(N, A);
+            //const final_type ans = gamma<Return_Type, Engine>::marsaglia_tsang_method(N, A);
+            const final_type ans = gamma<Return_Type, Engine>::do_generation(N, A);
 
             return static_cast<return_type>( ans );
         }

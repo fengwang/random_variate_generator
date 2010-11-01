@@ -2,9 +2,9 @@
 #define _RANDOM_HPP_INCLUDED_9IJHWSKJLSKJH2IU83487UY5R4KJ1H2U7HFSAKJVNCIKJNFFUHD
 
 
-#include "random/engine.hpp"
-#include "random/distribution.hpp"
-#include "random/variate_generator.hpp"
+#include "vg/engine.hpp"
+#include "vg/distribution.hpp"
+#include "vg/variate_generator.hpp"
 
 
 

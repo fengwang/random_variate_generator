@@ -31,10 +31,16 @@ namespace vg
         return_type
         operator ()()
         {
-            return direct_exponential_impl( lambda_ );
+            return do_generation( lambda_ );
         }
 
     protected:
+        return_type 
+        do_generation( const final_type Lambda )
+        {
+            return direct_exponential_impl( Lambda );
+        }
+    private:
         return_type
         direct_exponential_impl( const final_type Lambda )
         {

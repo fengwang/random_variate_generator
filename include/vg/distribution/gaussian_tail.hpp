@@ -36,13 +36,20 @@ namespace vg
         return_type
         operator ()()
         {
-            if ( variance_ > a_ )
-                return gaussian_tail_direct_impl( a_, variance_ );
-
-            return rectangle_wedge_tail_method( a_, variance_ );
+            return do_generation( a_, variance_ );
         }
 
     protected:
+        return_type
+        do_generation( const final_type A, const final_type Variance )
+        {
+            if ( Variance > A )
+                return gaussian_tail_direct_impl( A, Variance );
+
+            return rectangle_wedge_tail_method( A, Variance );
+        }
+        
+    private:
         return_type         
         rectangle_wedge_tail_method( const final_type A, const final_type Variance )
         {
@@ -70,7 +77,8 @@ namespace vg
 
             for (;;)
             {
-                const final_type ans = normal<Return_Type, Engine>:: kinderman_monahan_method();
+                const final_type ans = normal<Return_Type, Engine>:: do_generation();
+                //const final_type ans = normal<Return_Type, Engine>:: kinderman_monahan_method();
 
                 if ( ans >= s )
                     return static_cast<return_type>(ans);

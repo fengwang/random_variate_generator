@@ -32,19 +32,30 @@ namespace vg
 			assert( k_ > 0 );
         }
 
-        ~weibull() {}
-
         return_type
         operator ()()
         {
+            return do_generation( lambda_, k_ );
+        }
+
+        protected:
+        return_type
+        do_generation( const return_type lambda, const return_type k )
+        {
+            return direct_impl( lambda, k );
+        }
+
+        private:
+        return_type 
+        direct_impl( const return_type lambda, const return_type k )
+        {
             const final_type tmp1   =   e_();
-            const final_type tmp2   =   - std::log( - tmp1 + final_type(1) ) / k_;
-			const final_type tmp3   =   final_type(1) / lambda_;
+            const final_type tmp2   =   - std::log( - tmp1 + final_type(1) ) / k;
+			const final_type tmp3   =   final_type(1) / lambda;
 			const final_type ans    =   std::pow(tmp2, tmp3);
             
 			return static_cast<return_type>( ans );
         }
-
 
     };
 
