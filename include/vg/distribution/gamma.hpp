@@ -40,7 +40,7 @@ namespace vg
             }
 
         protected:
-            return_type 
+            return_type
             do_generation( const final_type A, const final_type B )
             {
                 return marsaglia_tsang_method( A, B );
@@ -64,7 +64,7 @@ namespace vg
                 {
                     for ( ;; )
                     {
-                        x = normal<Return_Type,Engine>::do_generation(); //normal distribution
+                        x = normal<Return_Type, Engine>::do_generation(); //normal distribution
                         v = final_type( 1 ) + c * x;
 
                         if ( v > 0 )
@@ -89,7 +89,7 @@ namespace vg
                 if ( A < 1 )
                     { ans *= std::pow( e_(), final_type( 1 ) / A ); }
 
-                return static_cast<return_type>(ans);
+                return static_cast<return_type>( ans );
             }
     };
 }//vg

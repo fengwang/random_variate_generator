@@ -2,6 +2,8 @@
 #define _POISSON_HPP_INCLUDED_9URHFADSKJHSAFUHE9U8HDFUJHDUIHEUHFDUJHDSUI893U7FSDK
 
 #include "normal.hpp"
+#include "gamma_unary.hpp"
+#include "binomial.hpp"
 
 #include <cmath>
 #include <cstddef>
@@ -13,7 +15,9 @@ namespace vg
     template <   typename Return_Type,
                  typename Engine
              >
-    struct poisson : private normal<Return_Type, Engine>
+    struct poisson : private normal<Return_Type, Engine>,
+        private gamma_unary<Return_Type, Engine>,
+        private binomial<Return_Type, Engine>
     {
             typedef typename Engine::final_type     final_type;
             typedef Return_Type                     return_type;
@@ -36,9 +40,11 @@ namespace vg
             return_type
             do_generation( const final_type lambda )
             {
-                //if (lambda < final_type(10) )
-                    return exponential_inter_arrival_times_method( lambda );
-                return rejection_method(lambda);
+                if ( lambda < final_type( 10 ) )
+                    { return exponential_inter_arrival_times_method( lambda ); }
+
+                //return rejection_method(lambda);
+                return rejection_method_from_kruth( lambda );
             }
 
         private:
@@ -60,6 +66,29 @@ namespace vg
             }
 
             return_type
+            rejection_method_from_kruth( final_type lambda )
+            {
+                std::size_t ans = 0;
+
+                for ( ;; )
+                {
+                    std::size_t M = static_cast<std::size_t>( lambda * 0.875 );
+                    const final_type X = gamma_unary<return_type, engine_type>::do_generation( static_cast<final_type>( M ) );
+
+                    if ( X > lambda )
+                        { return ans + binomial<return_type, engine_type>::do_generation( M - 1, lambda / X ); }
+                    else
+                    {
+                        ans += M;
+                        lambda -= X;
+                    }
+
+                    if ( lambda < 10 )
+                        { return ans + exponential_inter_arrival_times_method( lambda ); }
+                }
+            }
+
+            return_type
             rejection_method( const final_type lambda )
             {
                 const final_type mu = std::floor( lambda );
@@ -67,7 +96,7 @@ namespace vg
                 const final_type mu_mu_delta = mu + mu + delta;
                 const final_type pi = 3.1415926535897932384626433L;
                 const final_type c_1 = std::sqrt( pi * mu / final_type( 2 ) );
-                const final_type c_2 = c_1 + std::sqrt( pi * mu_mu_delta / final_type( 4 ) ) * std::exp( final_type(1) / ( mu_mu_delta ) );
+                const final_type c_2 = c_1 + std::sqrt( pi * mu_mu_delta / final_type( 4 ) ) * std::exp( final_type( 1 ) / ( mu_mu_delta ) );
                 const final_type c_3 = c_2 + final_type( 1 );
                 const final_type c_4 = c_3 + std::exp( final_type( 1 ) / final_type( 78 ) );
                 const final_type c = c_4 + ( mu_mu_delta + mu_mu_delta ) / delta * std::exp( - delta * ( final_type( 2 ) + delta ) / ( mu_mu_delta + mu_mu_delta ) );

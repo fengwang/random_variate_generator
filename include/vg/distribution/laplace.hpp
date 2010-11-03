@@ -3,53 +3,56 @@
 
 #include <cmath>
 
-
 namespace vg
 {
 
     template <   typename Return_Type,
-				 typename Engine
+                 typename Engine
              >
     struct laplace
     {
-        typedef typename Engine::final_type     final_type;
-        typedef Return_Type                     return_type;
-        typedef typename Engine::seed_type      seed_type;
-        typedef Engine                          engine_type;
+            typedef typename Engine::final_type     final_type;
+            typedef Return_Type                     return_type;
+            typedef typename Engine::seed_type      seed_type;
+            typedef Engine                          engine_type;
 
-        return_type a_;
-        engine_type e_;
+            return_type mu_;
+            return_type b_;
+            engine_type e_;
 
-        explicit laplace( const seed_type sd = 0, const return_type a = 1 ) 
-            : a_(a), e_( sd )
-        {}
-        
-        return_type
-        operator ()()
-        {
-            return do_generation( a );
-        }
+            explicit laplace( const return_type mu = 1, const return_type b = 1, const seed_type sd = 0 )
+                : mu_(mu), b_( b ), e_( sd )
+            {}
 
-    protected:
-        return_type 
-        do_generation( a )
-        {
-        }
-
-    private:
-        return_type
-        direct_invertion_method( const return_type a )
-        {
-            for ( ;; )
+            return_type
+            operator()()
             {
-                const final_type u = e_() * return_type(2) - return_type(1);
-                if ( return_type(0) == u )
-                    continue;
-                if ( u < 0 )
-                    return a * std::log(-u);
-                return - a * std::log(u);
-            }    
-        }
+                return do_generation( mu_, b_ );
+            }
+
+        protected:
+            return_type
+            do_generation( const return_type mu, const return_type b )
+            {
+                return direct_invertion_method( mu, b );
+            }
+
+        private:
+            return_type
+            direct_invertion_method( const return_type mu, const return_type b )
+            {
+                for ( ;; )
+                {
+                    const final_type u = e_() - final_type(0.5);
+                    if ( final_type(0) == u )
+                        continue;
+                    const final_type ans =  u > final_type(0) ?
+                                            mu - b * std::log( 1-u-u ) :
+                                            mu + b * std::log( 1+u+u);
+
+                    return static_cast<return_type>(ans);
+                }
+            }
     };
 
 
