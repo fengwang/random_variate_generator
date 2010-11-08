@@ -16,8 +16,8 @@ OBJECTS_DIR   = ./obj
 BIN_DIR       = ./bin
 
 ####### Files
-OBJECTS       = binomial_test.o poisson_test.o laplace_test.o bernoulli.o
-TARGET        = binomial_test poisson_test laplace_test bernoulli 
+OBJECTS       = binomial_test.o poisson_test.o laplace_test.o bernoulli_test.o t_test.o 
+TARGET        = binomial_test poisson_test laplace_test bernoulli_test t_test
 
 first: all
 ####### Implicit rules
@@ -46,6 +46,9 @@ laplace_test.o : example/laplace_test.cc
 bernoulli_test.o : example/bernoulli_test.cc
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $(OBJECTS_DIR)/bernoulli_test.o example/bernoulli_test.cc
 
+t_test.o : example/t_test.cc
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $(OBJECTS_DIR)/t_test.o example/t_test.cc
+
 ####### Detailed Build Rules
 binomial_test: binomial_test.o 
 	$(LINK) $(LFLAGS) -o $(BIN_DIR)/binomial_test $(OBJECTS_DIR)/binomial_test.o $(OBJCOMP) $(LIBS)
@@ -58,5 +61,8 @@ laplace_test: laplace_test.o
 
 bernoulli_test: bernoulli_test.o 
 	$(LINK) $(LFLAGS) -o $(BIN_DIR)/bernoulli_test $(OBJECTS_DIR)/bernoulli_test.o $(OBJCOMP) $(LIBS)
+
+t_test: t_test.o 
+	$(LINK) $(LFLAGS) -o $(BIN_DIR)/t_test $(OBJECTS_DIR)/t_test.o $(OBJCOMP) $(LIBS)
 
 

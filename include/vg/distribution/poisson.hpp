@@ -15,9 +15,9 @@ namespace vg
     template <   typename Return_Type,
                  typename Engine
              >
-    struct poisson : private normal<Return_Type, Engine>,
-        private gamma_unary<Return_Type, Engine>,
-        private binomial<Return_Type, Engine>
+    struct poisson :    private normal<Return_Type, Engine>,
+                        private gamma_unary<Return_Type, Engine>,
+                        private binomial<Return_Type, Engine>
     {
             typedef typename Engine::final_type     final_type;
             typedef Return_Type                     return_type;
@@ -43,7 +43,6 @@ namespace vg
                 if ( lambda < final_type( 10 ) )
                     { return exponential_inter_arrival_times_method( lambda ); }
 
-                //return rejection_method(lambda);
                 return rejection_method_from_kruth( lambda );
             }
 

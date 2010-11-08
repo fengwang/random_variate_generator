@@ -2,8 +2,8 @@
 #define _T_HPP_INCLUDED_9URHFADSKJHSAFUHE9U8HDFUJHDUIHEUHFDUJHDSUI893U7FSDKDSIJF
 
 #include "normal.hpp"
-#include "exponential.hpp"
 #include "chi_square.hpp"
+#include "exponential.hpp"
 
 #include <cmath>
 #include <cstddef>
@@ -33,7 +33,7 @@ namespace vg
             final_type  mu_;
             engine_type e_;
 
-            explicit t( const size_type mu = 1, const seed_type sd = 0 )
+            explicit t( const return_type mu = 1, const seed_type sd = 0 )
                 : mu_( mu ), e_( sd )
             {
                 assert( mu > 0 );
@@ -47,7 +47,7 @@ namespace vg
 
         protected:
             return_type
-            do_generation( const size_type mu )
+            do_generation( const return_type mu )
             {
                 if ( mu <= final_type( 2 ) )
                     { return direct_impl( mu ); }
@@ -57,7 +57,7 @@ namespace vg
 
         private:
             return_type
-            direct_impl( const size_type mu )
+            direct_impl( const return_type mu )
             {
                 const final_type y1 = normal_type::do_generation();
                 const final_type y2 = chi_square_type::do_generation( mu );
@@ -66,7 +66,7 @@ namespace vg
             }
 
             return_type
-            rejection_method( const size_type mu )
+            rejection_method( const return_type mu )
             {
                 for ( ;; )
                     {

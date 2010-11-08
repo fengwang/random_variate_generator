@@ -19,6 +19,7 @@
 #include "distribution/poisson.hpp"
 #include "distribution/rayleigh.hpp"
 #include "distribution/rayleigh_tail.hpp"
+#include "distribution/t.hpp"
 #include "distribution/triangular.hpp"
 #include "distribution/uniform.hpp"
 #include "distribution/weibull.hpp"
