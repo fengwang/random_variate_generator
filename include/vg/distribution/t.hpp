@@ -4,18 +4,12 @@
 #include "normal.hpp"
 #include "chi_square.hpp"
 #include "exponential.hpp"
+#include "../utility.hpp"
 
 #include <cmath>
 #include <cstddef>
 #include <limits>
 #include <cassert>
-
-namespace 
-{
-    template <typename T>
-    struct proxy : T
-    {};
-}
 
 namespace vg
 {
@@ -82,7 +76,7 @@ namespace vg
                         const final_type y2 = exponential_type::do_generation( final_type(mu-2)/final_type(2) );
                         const final_type y3 = y1 * y1 / final_type( mu - 2 );
 
-                        if ( ( y3 < 1 ) || (  - std::log( final_type( 1 ) - y3 ) < ( y2 + y3 ) ) )
+                        if ( ( y3 < 1 ) && (  - std::log( final_type( 1 ) - y3 ) < ( y2 + y3 ) ) )
                             {
                                 const final_type fac1 = final_type(mu-2) / final_type(mu);
                                 const final_type fac2 = fac1 - fac1 * y3;

@@ -4,6 +4,8 @@
 #include "normal.hpp"
 #include "gamma_unary.hpp"
 #include "binomial.hpp"
+#include "../utility.hpp"
+
 
 #include <cmath>
 #include <cstddef>
@@ -15,10 +17,14 @@ namespace vg
     template <   typename Return_Type,
                  typename Engine
              >
-    struct poisson :    private normal<Return_Type, Engine>,
-                        private gamma_unary<Return_Type, Engine>,
-                        private binomial<Return_Type, Engine>
+    struct poisson :    private proxy<normal<Return_Type, Engine> >,
+                        private proxy<gamma_unary<Return_Type, Engine> >,
+                        private proxy<binomial<Return_Type, Engine> >
     {
+            typedef proxy<normal<Return_Type, Engine> >         normal_type;
+            typedef proxy<gamma_unary<Return_Type, Engine> >    gamma_unary_type;
+            typedef proxy<binomial<Return_Type, Engine> >       binomial_type;
+
             typedef typename Engine::final_type     final_type;
             typedef Return_Type                     return_type;
             typedef typename Engine::seed_type      seed_type;
@@ -72,10 +78,10 @@ namespace vg
                 for ( ;; )
                 {
                     std::size_t M = static_cast<std::size_t>( lambda * 0.875 );
-                    const final_type X = gamma_unary<return_type, engine_type>::do_generation( static_cast<final_type>( M ) );
+                    const final_type X = gamma_unary_type::do_generation( static_cast<final_type>( M ) );
 
                     if ( X > lambda )
-                        { return ans + binomial<return_type, engine_type>::do_generation( M - 1, lambda / X ); }
+                        { return ans + binomial_type::do_generation( M - 1, lambda / X ); }
                     else
                     {
                         ans += M;
@@ -109,7 +115,7 @@ namespace vg
 
                     if ( U <= c_1 )
                     {
-                        const final_type N = normal<return_type, engine_type>::do_generation();
+                        const final_type N = normal_type::do_generation();
                         const final_type Y = - std::fabs( N ) * std::sqrt( mu );
                         X = std::floor( Y );
                         W = - N * N / final_type( 2 ) - E - X * std::log( lambda / mu );
@@ -120,7 +126,7 @@ namespace vg
                     else
                         if ( U <= c_2 )
                         {
-                            const final_type N = normal<return_type, engine_type>::do_generation();
+                            const final_type N = normal_type::do_generation();
                             const final_type Y = final_type( 1 ) + std::fabs( N ) * std::sqrt( mu_mu_delta / final_type( 2 ) );
                             X = std::ceil( Y );
                             W = Y * ( final_type( 2 ) - Y ) / mu_mu_delta - E - X * log( lambda / mu );
@@ -151,8 +157,7 @@ namespace vg
                     if ( W > X * std::log( lambda ) + std::lgamma( mu ) - std::lgamma( mu + X ) )
                         { break; }
                 }
-
-                return static_cast<return_type>( X + mu );
+                return X + mu;
             }
 
 

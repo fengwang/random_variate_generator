@@ -27,8 +27,6 @@ namespace vg
             explicit lognormal( const return_type zeta = 1, const return_type sigma = 1, const seed_type sd = 0 )
                 : zeta_( zeta ), sigma_( sigma ), e_( sd )
             {
-                assert( zeta > 0 );
-                assert( sigma > 0 );
             }
 
             return_type
@@ -52,7 +50,7 @@ namespace vg
                 {
                     const final_type u = e_() * final_type( 2 ) - final_type( 1 );
                     const final_type v = e_() * final_type( 2 ) - final_type( 1 );
-                    const final_type r = u * u - v * v;
+                    const final_type r = u * u + v * v;
 
                     if ( r <= final_type( 1 ) && r != final_type( 0 ) )
                     {

@@ -9,6 +9,11 @@
 namespace vg
 {
 
+#if 0
+        f(x|a,b)= a b e^{-(b e^{-ax} + ax)}\,
+        for  -\infty < x < \infty. 
+#endif 
+
     template <   typename Return_Type,
                  typename Engine
              >
@@ -27,7 +32,6 @@ namespace vg
             explicit gumbel_1( const return_type a = 1, const return_type b = 1, const seed_type sd = 0 )
                 : a_( a ), b_(b), e_( sd )
             {
-                assert( a > 0 );
                 assert( b > 0 );
             }
 
