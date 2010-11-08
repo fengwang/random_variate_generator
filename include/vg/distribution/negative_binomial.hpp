@@ -3,6 +3,7 @@
 
 #include "gamma.hpp"
 #include "poisson.hpp"
+#include "../utility.hpp"
 
 #include <cassert>
 #include <cstddef>
@@ -16,11 +17,11 @@ namespace vg
                 typename Return_Type,
                 typename Engine
              >
-    struct negative_binomial :  private gamma<typename Engine::final_type, Engine>,
-                                private poisson<typename Engine::final_type, Engine>
+    struct negative_binomial :  private proxy<gamma<typename Engine::final_type, Engine> >,
+                                private proxy<poisson<typename Engine::final_type, Engine> >
     {
-            typedef gamma<typename::final_type, Engine>         gamma_type;
-            typedef poisson<typename::final_type, Engine>       poisson_type;
+            typedef proxy<gamma<typename Engine::final_type, Engine> >         gamma_type;
+            typedef proxy<poisson<typename Engine::final_type, Engine> >       poisson_type;
 
             typedef typename Engine::final_type     final_type;
             typedef Return_Type                     return_type;
@@ -61,7 +62,7 @@ namespace vg
             direct_impl( const size_type N, const final_type P )
             {
                 const final_type x = gamma_type::do_generation( N, final_type(1) );
-                const final_type ans = poisson_type::do_generation( x * ( final_type(1) - p ) / p );
+                const final_type ans = poisson_type::do_generation( x * ( final_type(1) - P ) / P );
                 return ans;
             }
     };
