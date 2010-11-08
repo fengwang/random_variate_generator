@@ -16,8 +16,10 @@ OBJECTS_DIR   = ./obj
 BIN_DIR       = ./bin
 
 ####### Files
-OBJECTS       = binomial_test.o poisson_test.o laplace_test.o bernoulli_test.o t_test.o 
-TARGET        = binomial_test poisson_test laplace_test bernoulli_test t_test
+OBJECTS       = binomial_test.o poisson_test.o laplace_test.o bernoulli_test.o t_test.o exponential_test.o \
+                f_test.o
+TARGET        = binomial_test poisson_test laplace_test bernoulli_test t_test exponential_test \
+                f_test
 
 first: all
 ####### Implicit rules
@@ -49,6 +51,12 @@ bernoulli_test.o : example/bernoulli_test.cc
 t_test.o : example/t_test.cc
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $(OBJECTS_DIR)/t_test.o example/t_test.cc
 
+exponential_test.o : example/exponential_test.cc
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $(OBJECTS_DIR)/exponential_test.o example/exponential_test.cc
+
+f_test.o : example/f_test.cc
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $(OBJECTS_DIR)/f_test.o example/f_test.cc
+
 ####### Detailed Build Rules
 binomial_test: binomial_test.o 
 	$(LINK) $(LFLAGS) -o $(BIN_DIR)/binomial_test $(OBJECTS_DIR)/binomial_test.o $(OBJCOMP) $(LIBS)
@@ -64,5 +72,11 @@ bernoulli_test: bernoulli_test.o
 
 t_test: t_test.o 
 	$(LINK) $(LFLAGS) -o $(BIN_DIR)/t_test $(OBJECTS_DIR)/t_test.o $(OBJCOMP) $(LIBS)
+
+exponential_test: exponential_test.o 
+	$(LINK) $(LFLAGS) -o $(BIN_DIR)/exponential_test $(OBJECTS_DIR)/exponential_test.o $(OBJCOMP) $(LIBS)
+
+f_test: f_test.o 
+	$(LINK) $(LFLAGS) -o $(BIN_DIR)/f_test $(OBJECTS_DIR)/f_test.o $(OBJCOMP) $(LIBS)
 
 

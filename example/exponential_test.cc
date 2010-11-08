@@ -10,11 +10,11 @@ using namespace std;
 
 int main()
 {
-    variate_generator<double, exponential> vg(10);    
+    variate_generator<double, exponential> vg(10.0);    
 
-    copy( vg.begin(), vg.begin()+1000, ostream_iterator<double>(cout, "\n"));
+    copy( vg.begin(), vg.begin()+100, ostream_iterator<double>(cout, "\n"));
 
-    auto sum = accumulate( vg.begin(), vg.begin()+1000, 0.0 );
+    auto sum = accumulate( vg.begin(), vg.begin()+100, 0.0 );
 
     cout << sum << endl;
 

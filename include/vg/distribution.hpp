@@ -8,6 +8,7 @@
 #include "distribution/chi_square.hpp"
 #include "distribution/erlang.hpp"
 #include "distribution/exponential.hpp"
+#include "distribution/f.hpp"
 #include "distribution/gamma.hpp"
 #include "distribution/gamma_unary.hpp"
 #include "distribution/gaussian.hpp"

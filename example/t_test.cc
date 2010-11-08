@@ -10,7 +10,7 @@ using namespace std;
 
 int main()
 {
-    variate_generator<double, t> vg(10);    
+    variate_generator<double, t> vg(100);    
 
     copy( vg.begin(), vg.begin()+1000, ostream_iterator<double>(cout, "\n"));
 

@@ -40,13 +40,15 @@ namespace vg
         {
             return direct_exponential_impl( Lambda );
         }
+
     private:
         return_type
         direct_exponential_impl( const final_type Lambda )
         {
-            const final_type ans =  - std::log( - e_() ) / Lambda;
-            
-			return static_cast<return_type>( ans );
+            const final_type u = e_();
+            const final_type ans =  - std::log( u ) / Lambda;
+
+            return ans;
         }
 
     };
