@@ -10,17 +10,25 @@
 #include <limits>
 #include <cassert>
 
+namespace 
+{
+    template <typename T>
+    struct proxy : T
+    {};
+}
+
 namespace vg
 {
 
     template <   typename Return_Type,
                  typename Engine
              >
-    struct t :  private normal<Return_Type, Engine>,
+    struct t :  private proxy<normal<Return_Type, Engine> >,
                 private chi_square<Return_Type, Engine>,
                 private exponential<Return_Type, Engine>
     {
             typedef normal<Return_Type, Engine>         normal_type;
+            typedef proxy<normal_type>                  proxy_normal_type;
             typedef chi_square<Return_Type, Engine>     chi_square_type;
             typedef exponential<Return_Type, Engine>    exponential_type;
 
@@ -59,7 +67,7 @@ namespace vg
             return_type
             direct_impl( const return_type mu )
             {
-                const final_type y1 = normal_type::do_generation();
+                const final_type y1 = proxy_normal_type::do_generation();
                 const final_type y2 = chi_square_type::do_generation( mu );
                 const final_type ans = y1 / std::sqrt( y2 / mu );
                 return ans;
@@ -70,11 +78,11 @@ namespace vg
             {
                 for ( ;; )
                     {
-                        const final_type y1 = normal_type::do_generation();
-                        const final_type y2 = exponential_type::do_generation( final_type(2)/final_type(mu-2) );
-                        const final_type y3 = y1 * y2 / final_type( mu - 2 );
+                        const final_type y1 = proxy_normal_type::do_generation();
+                        const final_type y2 = exponential_type::do_generation( final_type(mu-2)/final_type(2) );
+                        const final_type y3 = y1 * y1 / final_type( mu - 2 );
 
-                        if ( ( y3 < 1 ) || ( ( y2 - y3 ) > std::log( final_type( 1 ) - y3 ) ) )
+                        if ( ( y3 < 1 ) || (  - std::log( final_type( 1 ) - y3 ) < ( y2 + y3 ) ) )
                             {
                                 const final_type fac1 = final_type(mu-2) / final_type(mu);
                                 const final_type fac2 = fac1 - fac1 * y3;
@@ -86,15 +94,7 @@ namespace vg
             }
     };
 
-
-
-
 }//namespace vg
 
-
-
-
 #endif//_T_HPP_INCLUDED_9URHFADSKJHSAFUHE9U8HDFUJHDUIHEUHFDUJHDSUI893U7FSDKDSIJF
-
-
 
