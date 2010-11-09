@@ -21,7 +21,7 @@ namespace vg
             engine_type e_;
 
             explicit laplace( const return_type mu = 1, const return_type b = 1, const seed_type sd = 0 )
-                : mu_(mu), b_( b ), e_( sd )
+                : mu_( mu ), b_( b ), e_( sd )
             {}
 
             return_type
@@ -43,14 +43,16 @@ namespace vg
             {
                 for ( ;; )
                 {
-                    const final_type u = e_() - final_type(0.5);
-                    if ( final_type(0) == u )
-                        continue;
-                    const final_type ans =  u > final_type(0) ?
-                                            mu - b * std::log( 1-u-u ) :
-                                            mu + b * std::log( 1+u+u);
+                    const final_type u = e_() - final_type( 0.5 );
 
-                    return static_cast<return_type>(ans);
+                    if ( final_type( 0 ) == u )
+                        { continue; }
+
+                    const final_type ans =  u > final_type( 0 ) ?
+                                            mu - b * std::log( 1 - u - u ) :
+                                            mu + b * std::log( 1 + u + u );
+
+                    return static_cast<return_type>( ans );
                 }
             }
     };

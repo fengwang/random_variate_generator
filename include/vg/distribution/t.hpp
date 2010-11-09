@@ -18,8 +18,8 @@ namespace vg
                  typename Engine
              >
     struct t :  private proxy<normal<Return_Type, Engine> >,
-                private chi_square<Return_Type, Engine>,
-                private exponential<Return_Type, Engine>
+        private chi_square<Return_Type, Engine>,
+        private exponential<Return_Type, Engine>
     {
             typedef normal<Return_Type, Engine>         normal_type;
             typedef proxy<normal_type>                  proxy_normal_type;
@@ -71,20 +71,19 @@ namespace vg
             rejection_method( const return_type mu )
             {
                 for ( ;; )
+                {
+                    const final_type y1 = proxy_normal_type::do_generation();
+                    const final_type y2 = exponential_type::do_generation( final_type( mu - 2 ) / final_type( 2 ) );
+                    const final_type y3 = y1 * y1 / final_type( mu - 2 );
+
+                    if (( y3 < 1 ) && ( - std::log( final_type( 1 ) - y3 ) < ( y2 + y3 ) ) )
                     {
-                        const final_type y1 = proxy_normal_type::do_generation();
-                        const final_type y2 = exponential_type::do_generation( final_type(mu-2)/final_type(2) );
-                        const final_type y3 = y1 * y1 / final_type( mu - 2 );
-
-                        if ( ( y3 < 1 ) && (  - std::log( final_type( 1 ) - y3 ) < ( y2 + y3 ) ) )
-                            {
-                                const final_type fac1 = final_type(mu-2) / final_type(mu);
-                                const final_type fac2 = fac1 - fac1 * y3;
-                                const final_type ans = y1 / std::sqrt( fac2 );
-
-                                return ans;
-                            }
+                        const final_type fac1 = final_type( mu - 2 ) / final_type( mu );
+                        const final_type fac2 = fac1 - fac1 * y3;
+                        const final_type ans = y1 / std::sqrt( fac2 );
+                        return ans;
                     }
+                }
             }
     };
 

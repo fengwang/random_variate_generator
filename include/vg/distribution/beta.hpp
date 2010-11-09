@@ -50,8 +50,8 @@ namespace vg
             return_type
             direct_beta_impl( const final_type A, const final_type B )
             {
-                const final_type a =  gamma<Return_Type,Engine>::do_generation( A, final_type( 1 ) );
-                const final_type b =  gamma<Return_Type,Engine>::do_generation( B, final_type( 1 ) );
+                const final_type a =  gamma<Return_Type, Engine>::do_generation( A, final_type( 1 ) );
+                const final_type b =  gamma<Return_Type, Engine>::do_generation( B, final_type( 1 ) );
                 return static_cast<return_type>( a / ( a + b ) );
             }
     };

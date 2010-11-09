@@ -30,13 +30,13 @@ namespace vg
             size_type       k_;
             engine_type     e_;
 
-            explicit chi_square(    const size_type k = 10,
-                                    const seed_type sd = 0 )
+            explicit chi_square( const size_type k = 10,
+                                 const seed_type sd = 0 )
                 : k_( k ), e_( sd )
             {}
 
             return_type
-            operator ()()
+            operator()()
             {
                 return do_generation( k_ );
             }
@@ -52,8 +52,8 @@ namespace vg
             return_type
             chi_square_direct_impl( const size_type K )
             {
-                const final_type ans = gamma_type::do_generation( final_type( K ) / final_type( 2 ), 
-                                                                  final_type( 1 ) );
+                const final_type ans = gamma_type::do_generation( final_type( K ) / final_type( 2 ),
+                                       final_type( 1 ) );
                 return static_cast<return_type>( ans + ans );
             }
 

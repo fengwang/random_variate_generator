@@ -11,12 +11,13 @@ namespace vg
 
 #if 0
     f( x | a, b ) = a b x ^ { -a - 1} e ^ { -b x ^ { -a}}\,
+
     for 0 < x < \infty.
 #endif
 
-    template <   typename Return_Type,
-                 typename Engine
-             >
+template <   typename Return_Type,
+             typename Engine
+         >
 struct gumbel_2
 {
         typedef typename Engine::final_type     final_type;

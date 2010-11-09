@@ -31,7 +31,7 @@ namespace vg
             engine_type e_;
 
             explicit f( const return_type mu1 = 2, const return_type mu2 = 2, const seed_type sd = 0 )
-                : mu1_( mu1 ), mu2_(mu2), e_( sd )
+                : mu1_( mu1 ), mu2_( mu2 ), e_( sd )
             {
                 assert( mu1 > 0 );
                 assert( mu2 > 0 );
@@ -54,9 +54,9 @@ namespace vg
             return_type
             direct_impl( const return_type mu1, const return_type mu2 )
             {
-                const final_type y1 = gamma_type::do_generation( mu1/final_type(2), final_type(2) );
-                const final_type y2 = gamma_type::do_generation( mu2/final_type(2), final_type(2) );
-                const final_type ans = y1 * mu2 / (y2 * mu1);
+                const final_type y1 = gamma_type::do_generation( mu1 / final_type( 2 ), final_type( 2 ) );
+                const final_type y2 = gamma_type::do_generation( mu2 / final_type( 2 ), final_type( 2 ) );
+                const final_type ans = y1 * mu2 / ( y2 * mu1 );
                 return ans;
             }
 

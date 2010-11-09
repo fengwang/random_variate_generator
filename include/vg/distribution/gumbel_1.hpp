@@ -10,27 +10,28 @@ namespace vg
 {
 
 #if 0
-        f(x|a,b)= a b e^{-(b e^{-ax} + ax)}\,
-        for  -\infty < x < \infty. 
-#endif 
+    f( x | a, b ) = a b e ^ { -( b e ^ { -ax} + ax )}\,
 
-    template <   typename Return_Type,
-                 typename Engine
-             >
-    struct gumbel_1
-    {
-            typedef typename Engine::final_type     final_type;
-            typedef Return_Type                     return_type;
-            typedef typename Engine::seed_type      seed_type;
-            typedef typename Engine::size_type      size_type;
-            typedef Engine                          engine_type;
+    for  - \infty < x < \infty.
+#endif
 
-            final_type  a_;
-            final_type  b_;
-            engine_type e_;
+template <   typename Return_Type,
+             typename Engine
+         >
+struct gumbel_1
+{
+        typedef typename Engine::final_type     final_type;
+        typedef Return_Type                     return_type;
+        typedef typename Engine::seed_type      seed_type;
+        typedef typename Engine::size_type      size_type;
+        typedef Engine                          engine_type;
 
-            explicit gumbel_1( const return_type a = 1, const return_type b = 1, const seed_type sd = 0 )
-                : a_( a ), b_(b), e_( sd )
+        final_type  a_;
+        final_type  b_;
+        engine_type e_;
+
+        explicit gumbel_1( const return_type a = 1, const return_type b = 1, const seed_type sd = 0 )
+                : a_( a ), b_( b ), e_( sd )
             {
                 assert( b > 0 );
             }
@@ -53,12 +54,13 @@ namespace vg
             direct_impl( const return_type a, const return_type b )
             {
                 final_type x = e_();
-                while ( final_type(0) == x )
+
+                while ( final_type( 0 ) == x )
                 {
                     x = e_();
                 }
 
-                const final_type ans = ( std::log(b) - log( -log(x) ) ) / a;
+                const final_type ans = ( std::log( b ) - log( -log( x ) ) ) / a;
 
                 return ans;
             }

@@ -53,7 +53,7 @@ namespace vg
             }
 
         protected:
-            return_type 
+            return_type
             do_generation( const size_type N, const final_type P )
             {
                 if ( N < 8 )
@@ -64,8 +64,7 @@ namespace vg
 
                 return rejection_method( N, P );
             }
-            
-        private:
+
 #if 0
             X < - 0
         FOR i :
@@ -75,6 +74,7 @@ namespace vg
               X < - X + B
               RETURN X
 #endif
+        private:
             return_type
             coin_flip_method( const size_type N, const final_type P )
             {
@@ -129,11 +129,11 @@ namespace vg
                 final_type  p   =   P;
                 size_type   ans = 0;
 
-                while ( n > 8 )  
+                while ( n > 8 )
                 {
                     const size_type a = 1 + ( n / 2 );
                     const size_type b = 1 + n - a;
-                    const final_type X = beta<typename Engine::final_type, Engine>::do_generation( final_type(a), final_type(b) );
+                    const final_type X = beta<typename Engine::final_type, Engine>::do_generation( final_type( a ), final_type( b ) );
 
                     if ( X >= p )
                     {
@@ -144,12 +144,11 @@ namespace vg
                     {
                         ans += a;
                         n = b - 1;
-                        p = ( p - X ) / ( final_type(1) - X );
+                        p = ( p - X ) / ( final_type( 1 ) - X );
                     }
                 }
 
                 ans += coin_flip_method( n, p );
-
                 return ans;
             }//rejection_method
 

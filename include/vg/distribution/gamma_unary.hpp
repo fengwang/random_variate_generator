@@ -59,7 +59,7 @@ namespace vg
                     ans -= std::log( e_() );
                 }
 
-                if ( A-N != value_type(0) )
+                if ( A - N != value_type( 0 ) )
                 {
                     const value_type diff = A - N;
                     ans += frac_method( diff );

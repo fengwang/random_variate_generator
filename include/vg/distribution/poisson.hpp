@@ -18,8 +18,8 @@ namespace vg
                  typename Engine
              >
     struct poisson :    private proxy<normal<Return_Type, Engine> >,
-                        private proxy<gamma_unary<Return_Type, Engine> >,
-                        private proxy<binomial<Return_Type, Engine> >
+        private proxy<gamma_unary<Return_Type, Engine> >,
+        private proxy<binomial<Return_Type, Engine> >
     {
             typedef proxy<normal<Return_Type, Engine> >         normal_type;
             typedef proxy<gamma_unary<Return_Type, Engine> >    gamma_unary_type;
@@ -157,6 +157,7 @@ namespace vg
                     if ( W > X * std::log( lambda ) + std::lgamma( mu ) - std::lgamma( mu + X ) )
                         { break; }
                 }
+
                 return X + mu;
             }
 
