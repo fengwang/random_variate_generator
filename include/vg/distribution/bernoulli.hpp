@@ -17,8 +17,8 @@ namespace vg
 {
 
     template <
-				typename Return_Type = unsigned long,
-				typename Engine = mitchell_moore
+				typename Return_Type,
+				typename Engine
              >
     struct bernoulli
     {

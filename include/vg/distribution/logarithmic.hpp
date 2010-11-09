@@ -1,7 +1,7 @@
 #ifndef _LOGARITHMIC_HPP_INCLUDED_SODFJIN4ELIJASFO9I8U4AJSFDLKJ4OIJASFLIJ3OASIFJ
 #define _LOGARITHMIC_HPP_INCLUDED_SODFJIN4ELIJASFO9I8U4AJSFDLKJ4OIJASFLIJ3OASIFJ
 
-#include <camth>
+#include <cmath>
 #include <cassert>
 #include <cstddef>
 
@@ -41,12 +41,12 @@ namespace vg
         return_type
         do_generation( const final_type P )
         {
-            return direct_impl( p );
+            return direct_impl( P );
         }
 
     private:
         return_type 
-        direct_impl( const final_type p )
+        direct_impl( const final_type P )
         {
             final_type v = e_();
             while ( final_type(0) == v )
@@ -60,10 +60,10 @@ namespace vg
                 u = e_();
             }
 
-            const final_type c = std::log( final_type(1) - p );
+            const final_type c = std::log( final_type(1) - P );
             const final_type q = final_type(1) - std::exp( c * u );
 
-            if ( v >= p )
+            if ( v >= P )
                 return 1;
            
             if ( q * q > v )

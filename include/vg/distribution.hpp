@@ -17,6 +17,7 @@
 #include "distribution/gumbel_1.hpp"
 #include "distribution/gumbel_2.hpp"
 #include "distribution/laplace.hpp"
+#include "distribution/logarithmic.hpp"
 #include "distribution/lognormal.hpp"
 #include "distribution/negative_binomial.hpp"
 #include "distribution/normal.hpp"

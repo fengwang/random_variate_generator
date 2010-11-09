@@ -17,9 +17,9 @@ BIN_DIR       = ./bin
 
 ####### Files
 OBJECTS       = binomial_test.o poisson_test.o laplace_test.o bernoulli_test.o t_test.o exponential_test.o \
-                f_test.o gumbel_1_test.o gumbel_2_test.o negative_binomial_test.o lognormal_test.o
+                f_test.o gumbel_1_test.o gumbel_2_test.o negative_binomial_test.o lognormal_test.o logarithmic_test.o
 TARGET        = binomial_test poisson_test laplace_test bernoulli_test t_test exponential_test \
-                f_test gumbel_1_test gumbel_2_test negative_binomial_test lognormal_test
+                f_test gumbel_1_test gumbel_2_test negative_binomial_test lognormal_test logarithmic_test
 
 first: all
 ####### Implicit rules
@@ -69,6 +69,9 @@ negative_binomial_test.o : example/negative_binomial_test.cc
 lognormal_test.o : example/lognormal_test.cc
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $(OBJECTS_DIR)/lognormal_test.o example/lognormal_test.cc
 
+logarithmic_test.o : example/logarithmic_test.cc
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $(OBJECTS_DIR)/logarithmic_test.o example/logarithmic_test.cc
+
 ####### Detailed Build Rules
 binomial_test: binomial_test.o 
 	$(LINK) $(LFLAGS) -o $(BIN_DIR)/binomial_test $(OBJECTS_DIR)/binomial_test.o $(OBJCOMP) $(LIBS)
@@ -102,6 +105,9 @@ negative_binomial_test: negative_binomial_test.o
 
 lognormal_test: lognormal_test.o 
 	$(LINK) $(LFLAGS) -o $(BIN_DIR)/lognormal_test $(OBJECTS_DIR)/lognormal_test.o $(OBJCOMP) $(LIBS)
+
+logarithmic_test: logarithmic_test.o 
+	$(LINK) $(LFLAGS) -o $(BIN_DIR)/logarithmic_test $(OBJECTS_DIR)/logarithmic_test.o $(OBJCOMP) $(LIBS)
 
 
 
