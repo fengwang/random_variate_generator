@@ -1,8 +1,8 @@
 #ifndef _VARIATE_GENERATOR_HPP_INCLUDED_IUH398UHFKJH29U8HSFIOUHE98UHDUHE98UH23UJ
 #define _VARIATE_GENERATOR_HPP_INCLUDED_IUH398UHFKJH29U8HSFIOUHE98UHDUHE98UH23UJ
 
-#include "distribution.hpp"
-#include "engine.hpp"
+#include <vg/distribution.hpp>
+#include <vg/engine.hpp>
 
 #include <cstddef>
 #include <iterator>

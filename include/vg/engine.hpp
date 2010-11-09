@@ -1,10 +1,9 @@
 #ifndef _ENGINE_HPP_INCLUDED_49388943OIUSDFH98U3498UHAF98UH3KUHJNFKNVCSUIODNHJFF
 #define _ENGINE_HPP_INCLUDED_49388943OIUSDFH98U3498UHAF98UH3KUHJNFKNVCSUIODNHJFF
 
-#include "engine/mitchell_moore.hpp"
-#include "engine/mt19937.hpp"
-
+#include <vg/engine/linear_congruential.hpp>
+#include <vg/engine/mitchell_moore.hpp>
+#include <vg/engine/mt19937.hpp>
 
 #endif//_ENGINE_HPP_INCLUDED_49388943OIUSDFH98U3498UHAF98UH3KUHJNFKNVCSUIODNHJFF
-
 

@@ -1,8 +1,7 @@
 #ifndef _MT19937_HPP_INCLUDED28903RUAFSLDKJASFDOIJ4890UAFOPSI1209AFLKJ34OIUFJKDS
 #define _MT19937_HPP_INCLUDED28903RUAFSLDKJASFDOIJ4890UAFOPSI1209AFLKJ34OIUFJKDS
 
-#include "default_seed.hpp"
-
+#include <vg/engine/default_seed.hpp>
 #include <cstddef>
 
 namespace vg

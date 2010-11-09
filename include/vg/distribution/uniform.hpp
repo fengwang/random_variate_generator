@@ -7,8 +7,8 @@ namespace vg
 {
 
     template <
-                typename Return_Type = long double,
-                typename Engine = mitchell_moore
+                typename Return_Type,
+                typename Engine
              >
     struct uniform
     {

@@ -1,12 +1,15 @@
 ####### Compiler, tools and options
 CC            = gcc
-CXX           = g++
+CXX           = icpc
+#CXX           = g++
 DEFINES       = -Wall -g -std=c++0x
 CFLAGS        = -O2 $(DEFINES)
 CXXFLAGS        = -O2 $(DEFINES)
 INCPATH       = -Iinclude 
-LINK          = g++
-LFLAGS        = -Wl,--as-needed -Wl,-O1
+LINK          = icpc
+#LINK          = g++
+LFLAGS        = 
+#LFLAGS        = -Wl,--as-needed -Wl,-O1
 DEL_FILE      = rm -f
 DEL_DIR       = rmdir
 MOVE          = mv -f

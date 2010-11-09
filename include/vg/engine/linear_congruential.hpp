@@ -1,7 +1,8 @@
 #ifndef _LINEAR_CONGRUENTIAL_HPP_INCLUDED_3UHSFKJHNSAIFUNVCJMNZKJHDEIUHE3IUHSIKUJHEE8
 #define _LINEAR_CONGRUENTIAL_HPP_INCLUDED_3UHSFKJHNSAIFUNVCJMNZKJHDEIUHE3IUHSIKUJHEE8
 
-#include "default_seed.hpp"
+#include <vg/engine/default_seed.hpp>
+#include <cstddef>
 
 namespace vg
 {
@@ -11,6 +12,7 @@ namespace vg
             typedef long double				final_type;
             typedef unsigned long long		value_type;
             typedef value_type				seed_type;
+            typedef std::size_t             size_type;
 
         private:
 			static const value_type a_ = 6364136223846793005ULL;
