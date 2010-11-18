@@ -1,7 +1,7 @@
 #ifndef _BETA_HPP_INCLUDED_SODFIJ34LKJASFODIJ3498UAFSLKJ4398UAFSLKJ498UAFSLKJ34D
 #define _BETA_HPP_INCLUDED_SODFIJ34LKJASFODIJ3498UAFSLKJ4398UAFSLKJ498UAFSLKJ34D
 
-#include "gamma.hpp"
+#include <vg/distribution/gamma.hpp>
 
 #include <cmath>
 #include <cassert>
@@ -14,6 +14,7 @@ namespace vg
              >
     struct beta : private gamma<Return_Type, Engine>
     {
+            typedef gamma<Return_Type, Engine>                  gamma_type;
             typedef Return_Type                         		return_type;
             typedef Engine                              		engine_type;
             typedef return_type                                 value_type;
@@ -50,9 +51,9 @@ namespace vg
             return_type
             direct_beta_impl( const final_type A, const final_type B )
             {
-                const final_type a =  gamma<Return_Type, Engine>::do_generation( A, final_type( 1 ) );
-                const final_type b =  gamma<Return_Type, Engine>::do_generation( B, final_type( 1 ) );
-                return static_cast<return_type>( a / ( a + b ) );
+                const final_type a =  gamma_type::do_generation( A, final_type( 1 ) );
+                const final_type b =  gamma_type::do_generation( B, final_type( 1 ) );
+                return  a / ( a + b );
             }
     };
 

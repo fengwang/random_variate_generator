@@ -25,6 +25,7 @@ namespace vg
              >
     struct binomial : private beta<typename Engine::final_type, Engine>
     {
+            typedef beta<typename Engine::final_type, Engine> beta_type;
             typedef typename Engine::final_type     final_type;
             typedef Return_Type                     return_type;
             typedef Return_Type                     value_type;
@@ -56,6 +57,8 @@ namespace vg
             return_type
             do_generation( const size_type N, const final_type P )
             {
+                if ( 0 == N )
+                    return 0;
                 if ( N < 8 )
                     { return coin_flip_method( N, P ); }
 
@@ -133,7 +136,7 @@ namespace vg
                 {
                     const size_type a = 1 + ( n / 2 );
                     const size_type b = 1 + n - a;
-                    const final_type X = beta<typename Engine::final_type, Engine>::do_generation( final_type( a ), final_type( b ) );
+                    const final_type X = beta_type::do_generation( final_type( a ), final_type( b ) );
 
                     if ( X >= p )
                     {

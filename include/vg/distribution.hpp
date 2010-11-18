@@ -8,6 +8,7 @@
 #include <vg/distribution/chi_square.hpp>
 #include <vg/distribution/erlang.hpp>
 #include <vg/distribution/exponential.hpp>
+#include <vg/distribution/exponential_power.hpp>
 #include <vg/distribution/f.hpp>
 #include <vg/distribution/gamma.hpp>
 #include <vg/distribution/gamma_unary.hpp>

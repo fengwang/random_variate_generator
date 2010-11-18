@@ -10,6 +10,7 @@ using namespace std;
 
 int main()
 {
+    //variate_generator<int, binomial, mt19937> vg(200, 0.3);    
     variate_generator<int, binomial> vg(200, 0.3);    
 
     copy( vg.begin(), vg.begin()+1000, ostream_iterator<int>(cout, "\n"));

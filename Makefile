@@ -1,18 +1,19 @@
 ####### Compiler, tools and options
 CC            = gcc
-CXX           = icpc
-#CXX           = g++
+#CXX           = icpc
+CXX           = g++
 DEFINES       = -Wall -g -std=c++0x
 CFLAGS        = -O2 $(DEFINES)
 CXXFLAGS        = -O2 $(DEFINES)
 INCPATH       = -Iinclude 
-LINK          = icpc
-#LINK          = g++
+#LINK          = icpc
+LINK          = g++
 LFLAGS        = 
 #LFLAGS        = -Wl,--as-needed -Wl,-O1
 DEL_FILE      = rm -f
 DEL_DIR       = rmdir
 MOVE          = mv -f
+MAKE_DIR      = mkdir
 
 ####### Output directory
 OBJECTS_DIR   = ./obj
@@ -20,16 +21,20 @@ BIN_DIR       = ./bin
 
 ####### Files
 OBJECTS       = binomial_test.o poisson_test.o laplace_test.o bernoulli_test.o t_test.o exponential_test.o \
-                f_test.o gumbel_1_test.o gumbel_2_test.o negative_binomial_test.o lognormal_test.o logarithmic_test.o
+                f_test.o gumbel_1_test.o gumbel_2_test.o negative_binomial_test.o lognormal_test.o logarithmic_test.o exponential_power_test.o
 TARGET        = binomial_test poisson_test laplace_test bernoulli_test t_test exponential_test \
-                f_test gumbel_1_test gumbel_2_test negative_binomial_test lognormal_test logarithmic_test
+                f_test gumbel_1_test gumbel_2_test negative_binomial_test lognormal_test logarithmic_test exponential_power_test
 
 first: all
 ####### Implicit rules
 
-all:  $(TARGET)
+all:  makedir $(TARGET)
 
-$(TARGET):  $(OBJECTS)  
+$(TARGET): 
+
+makedir: 
+	test -z $(OBJECTS_DIR) || $(MAKE_DIR) -p $(OBJECTS_DIR)
+	test -z $(BIN_DIR) || $(MAKE_DIR) -p $(BIN_DIR)
 
 clean: 
 	-$(DEL_FILE) $(OBJECTS_DIR)/*.o
@@ -56,6 +61,9 @@ t_test.o : example/t_test.cc
 
 exponential_test.o : example/exponential_test.cc
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $(OBJECTS_DIR)/exponential_test.o example/exponential_test.cc
+
+exponential_power_test.o : example/exponential_power_test.cc
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $(OBJECTS_DIR)/exponential_power_test.o example/exponential_power_test.cc
 
 f_test.o : example/f_test.cc
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $(OBJECTS_DIR)/f_test.o example/f_test.cc
@@ -93,6 +101,9 @@ t_test: t_test.o
 
 exponential_test: exponential_test.o 
 	$(LINK) $(LFLAGS) -o $(BIN_DIR)/exponential_test $(OBJECTS_DIR)/exponential_test.o $(OBJCOMP) $(LIBS)
+
+exponential_power_test: exponential_power_test.o 
+	$(LINK) $(LFLAGS) -o $(BIN_DIR)/exponential_power_test $(OBJECTS_DIR)/exponential_power_test.o $(OBJCOMP) $(LIBS)
 
 f_test: f_test.o 
 	$(LINK) $(LFLAGS) -o $(BIN_DIR)/f_test $(OBJECTS_DIR)/f_test.o $(OBJCOMP) $(LIBS)

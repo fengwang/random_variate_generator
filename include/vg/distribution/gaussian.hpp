@@ -1,7 +1,7 @@
 #ifndef _GAUSSIAN_HPP_INCLUDED_OIHJ3LKJAFS98UYH3KJHFAS9I8UHY2QR3OIUHFSIOUHEIUHY3
 #define _GAUSSIAN_HPP_INCLUDED_OIHJ3LKJAFS98UYH3KJHFAS9I8UHY2QR3OIUHFSIOUHEIUHY3
 
-#include "normal.hpp"
+#include <vg/distribution/normal.hpp>
 
 #include <cassert>
 
@@ -13,11 +13,9 @@ namespace vg
              >
     struct gaussian : private normal<Return_Type, Engine>
     {
+            typedef normal<Return_Type, Engine>         normal_type;
             typedef Return_Type                         return_type;
             typedef Engine                              engine_type;
-
-            typedef normal<return_type, engine_type>    normal_type;
-
             typedef typename normal_type::final_type    final_type;
             typedef typename normal_type::seed_type     seed_type;
 
@@ -49,7 +47,7 @@ namespace vg
             return_type
             gaussian_direct_impl( const final_type Variance, const final_type Mean )
             {
-                const final_type ans =  normal<Return_Type, Engine>::do_generation() * Variance + Mean;
+                const final_type ans =  normal_type::do_generation() * Variance + Mean;
                 return ans;
             }
     };
