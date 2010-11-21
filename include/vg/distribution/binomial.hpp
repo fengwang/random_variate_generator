@@ -9,7 +9,7 @@ yields success with probability  p. Such a success / failure experiment is also
 called a Bernoulli experiment or Bernoulli trial.
 #endif
 
-#include "beta.hpp"
+#include <vg/distribution/beta.hpp>
 
 #include <cassert>
 #include <cstddef>
