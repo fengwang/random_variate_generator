@@ -1,6 +1,8 @@
 ####### Compiler, tools and options
 CC            = gcc
+#CC            = gcc-4.6
 #CXX           = icpc
+#CXX           = g++-4.6
 CXX           = g++
 DEFINES       = -Wall -g -std=c++0x
 CFLAGS        = -O2 $(DEFINES)
@@ -8,6 +10,7 @@ CXXFLAGS        = -O2 $(DEFINES)
 INCPATH       = -Iinclude 
 #LINK          = icpc
 LINK          = g++
+#LINK          = g++-4.6
 LFLAGS        = 
 #LFLAGS        = -Wl,--as-needed -Wl,-O1
 DEL_FILE      = rm -f
@@ -21,9 +24,11 @@ BIN_DIR       = ./bin
 
 ####### Files
 OBJECTS       = binomial_test.o poisson_test.o laplace_test.o bernoulli_test.o t_test.o exponential_test.o \
-                f_test.o gumbel_1_test.o gumbel_2_test.o negative_binomial_test.o lognormal_test.o logarithmic_test.o exponential_power_test.o
+                f_test.o gumbel_1_test.o gumbel_2_test.o negative_binomial_test.o lognormal_test.o logarithmic_test.o \
+                exponential_power_test.o  gaussian_test.o
 TARGET        = binomial_test poisson_test laplace_test bernoulli_test t_test exponential_test \
-                f_test gumbel_1_test gumbel_2_test negative_binomial_test lognormal_test logarithmic_test exponential_power_test
+                f_test gumbel_1_test gumbel_2_test negative_binomial_test lognormal_test logarithmic_test \
+                exponential_power_test gaussian_test
 
 first: all
 ####### Implicit rules
@@ -83,6 +88,9 @@ lognormal_test.o : example/lognormal_test.cc
 logarithmic_test.o : example/logarithmic_test.cc
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $(OBJECTS_DIR)/logarithmic_test.o example/logarithmic_test.cc
 
+gaussian_test.o : example/gaussian_test.cc
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $(OBJECTS_DIR)/gaussian_test.o example/gaussian_test.cc
+
 ####### Detailed Build Rules
 binomial_test: binomial_test.o 
 	$(LINK) $(LFLAGS) -o $(BIN_DIR)/binomial_test $(OBJECTS_DIR)/binomial_test.o $(OBJCOMP) $(LIBS)
@@ -122,6 +130,9 @@ lognormal_test: lognormal_test.o
 
 logarithmic_test: logarithmic_test.o 
 	$(LINK) $(LFLAGS) -o $(BIN_DIR)/logarithmic_test $(OBJECTS_DIR)/logarithmic_test.o $(OBJCOMP) $(LIBS)
+
+gaussian_test: gaussian_test.o 
+	$(LINK) $(LFLAGS) -o $(BIN_DIR)/gaussian_test $(OBJECTS_DIR)/gaussian_test.o $(OBJCOMP) $(LIBS)
 
 
 
