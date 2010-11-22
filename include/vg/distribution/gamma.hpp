@@ -1,7 +1,7 @@
 #ifndef _GAMMA_HPP_INCLUDED_2I8HJFASKJLNHVJMNXVUHNZVSJHWOIUHAP9I3LKJSOIUJ3OIJSIA
 #define _GAMMA_HPP_INCLUDED_2I8HJFASKJLNHVJMNXVUHNZVSJHWOIUHAP9I3LKJSOIUJ3OIJSIA
 
-#include "normal.hpp"
+#include <vg/distribution/normal.hpp>
 
 #include <cmath>
 #include <cassert>
@@ -14,6 +14,7 @@ namespace vg
              >
     struct gamma : private normal<Return_Type, Engine>
     {
+            typedef normal<Return_Type, Engine>                 normal_type;
             typedef Return_Type                         		return_type;
             typedef Engine                              		engine_type;
             typedef return_type                                 value_type;
@@ -64,7 +65,7 @@ namespace vg
                 {
                     for ( ;; )
                     {
-                        x = normal<Return_Type, Engine>::do_generation(); //normal distribution
+                        x = normal_type::do_generation(); //normal distribution
                         v = final_type( 1 ) + c * x;
 
                         if ( v > 0 )
