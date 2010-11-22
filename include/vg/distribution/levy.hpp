@@ -16,12 +16,12 @@ namespace vg
             typedef exponential<Return_Type, Engine>    exponential_type;
             typedef Return_Type                         return_type;
             typedef Engine                              engine_type;
-            typedef typename normal_type::final_type    final_type;
-            typedef typename normal_type::seed_type     seed_type;
+            typedef typename engine_type::final_type    final_type;
+            typedef typename engine_type::seed_type     seed_type;
 
             return_type c_;
             return_type alpha_;
-            engine_type e_
+            engine_type e_;
 
             explicit levy( const return_type c = 1,
                            const return_type alpha = 1,
@@ -67,6 +67,7 @@ namespace vg
                 const final_type u = ( e_() - final_type(0.5) ) * 3.1415926535897932384626433;
                 final_type v = exponential_type::do_generation( final_type( 1 ) );
                 while ( final_type( 0 ) == v )
+                    { v = exponential_type::do_generation( final_type( 1 ) ); }
                 const final_type ans = c * std::sin( u ) * std::sqrt( v );
                 return ans + ans;
             }
