@@ -4,6 +4,7 @@
 #include <vg/distribution/exponential.hpp>
 
 #include <cassert>
+#include <cmath>
 
 namespace vg
 {
