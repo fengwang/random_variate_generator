@@ -48,6 +48,7 @@ namespace vg
                 return direct_beta_impl( A, B );
             }
 
+        private:
             return_type
             direct_beta_impl( const final_type A, const final_type B )
             {
