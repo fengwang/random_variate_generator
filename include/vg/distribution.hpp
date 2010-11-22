@@ -21,6 +21,7 @@
 #include <vg/distribution/laplace.hpp>
 #include <vg/distribution/levy.hpp>
 #include <vg/distribution/logarithmic.hpp>
+#include <vg/distribution/logistic.hpp>
 #include <vg/distribution/lognormal.hpp>
 #include <vg/distribution/negative_binomial.hpp>
 #include <vg/distribution/normal.hpp>
