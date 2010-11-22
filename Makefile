@@ -25,10 +25,10 @@ BIN_DIR       = ./bin
 ####### Files
 OBJECTS       = binomial_test.o poisson_test.o laplace_test.o bernoulli_test.o t_test.o exponential_test.o \
                 f_test.o gumbel_1_test.o gumbel_2_test.o negative_binomial_test.o lognormal_test.o logarithmic_test.o \
-                exponential_power_test.o  gaussian_test.o
+                exponential_power_test.o  gaussian_test.o hypergeometric_test.o
 TARGET        = binomial_test poisson_test laplace_test bernoulli_test t_test exponential_test \
                 f_test gumbel_1_test gumbel_2_test negative_binomial_test lognormal_test logarithmic_test \
-                exponential_power_test gaussian_test
+                exponential_power_test gaussian_test hypergeometric_test 
 
 first: all
 ####### Implicit rules
@@ -91,6 +91,9 @@ logarithmic_test.o : example/logarithmic_test.cc
 gaussian_test.o : example/gaussian_test.cc
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $(OBJECTS_DIR)/gaussian_test.o example/gaussian_test.cc
 
+hypergeometric_test.o : example/hypergeometric_test.cc
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $(OBJECTS_DIR)/hypergeometric_test.o example/hypergeometric_test.cc
+
 ####### Detailed Build Rules
 binomial_test: binomial_test.o 
 	$(LINK) $(LFLAGS) -o $(BIN_DIR)/binomial_test $(OBJECTS_DIR)/binomial_test.o $(OBJCOMP) $(LIBS)
@@ -133,6 +136,9 @@ logarithmic_test: logarithmic_test.o
 
 gaussian_test: gaussian_test.o 
 	$(LINK) $(LFLAGS) -o $(BIN_DIR)/gaussian_test $(OBJECTS_DIR)/gaussian_test.o $(OBJCOMP) $(LIBS)
+
+hypergeometric_test: hypergeometric_test.o 
+	$(LINK) $(LFLAGS) -o $(BIN_DIR)/hypergeometric_test $(OBJECTS_DIR)/hypergeometric_test.o $(OBJCOMP) $(LIBS)
 
 
 

@@ -5,7 +5,6 @@
 #include <cstddef>
 #include <cmath>
 
-
 namespace vg
 {
 
