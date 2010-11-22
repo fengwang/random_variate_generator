@@ -26,6 +26,7 @@
 #include <vg/distribution/negative_binomial.hpp>
 #include <vg/distribution/normal.hpp>
 #include <vg/distribution/pareto.hpp>
+#include <vg/distribution/pascal.hpp>
 #include <vg/distribution/poisson.hpp>
 #include <vg/distribution/rayleigh.hpp>
 #include <vg/distribution/rayleigh_tail.hpp>

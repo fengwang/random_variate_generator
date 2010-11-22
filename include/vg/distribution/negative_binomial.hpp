@@ -61,8 +61,8 @@ namespace vg
             return_type
             direct_impl( const size_type N, const final_type P )
             {
-                const final_type x = gamma_type::do_generation( N, final_type( 1 ) );
-                const final_type ans = poisson_type::do_generation( x / P - X );
+                const final_type X = gamma_type::do_generation( N, final_type( 1 ) );
+                const final_type ans = poisson_type::do_generation( X / P - X );
                 return ans;
             }
     };

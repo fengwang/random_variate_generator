@@ -26,11 +26,11 @@ BIN_DIR       = ./bin
 OBJECTS       = binomial_test.o poisson_test.o laplace_test.o bernoulli_test.o t_test.o exponential_test.o \
                 f_test.o gumbel_1_test.o gumbel_2_test.o negative_binomial_test.o lognormal_test.o logarithmic_test.o \
                 exponential_power_test.o  gaussian_test.o hypergeometric_test.o levy_test.o beta_test.o \
-                logistic_test.o
+                logistic_test.o pascal_test.o
 TARGET        = binomial_test poisson_test laplace_test bernoulli_test t_test exponential_test \
                 f_test gumbel_1_test gumbel_2_test negative_binomial_test lognormal_test logarithmic_test \
                 exponential_power_test gaussian_test hypergeometric_test levy_test beta_test \
-                logistic_test 
+                logistic_test pascal_test 
 
 first: all
 ####### Implicit rules
@@ -105,6 +105,9 @@ beta_test.o : example/beta_test.cc
 logistic_test.o : example/logistic_test.cc
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $(OBJECTS_DIR)/logistic_test.o example/logistic_test.cc
 
+pascal_test.o : example/pascal_test.cc
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $(OBJECTS_DIR)/pascal_test.o example/pascal_test.cc
+
 ####### Detailed Build Rules
 binomial_test: binomial_test.o 
 	$(LINK) $(LFLAGS) -o $(BIN_DIR)/binomial_test $(OBJECTS_DIR)/binomial_test.o $(OBJCOMP) $(LIBS)
@@ -159,6 +162,9 @@ beta_test: beta_test.o
 
 logistic_test: logistic_test.o 
 	$(LINK) $(LFLAGS) -o $(BIN_DIR)/logistic_test $(OBJECTS_DIR)/logistic_test.o $(OBJCOMP) $(LIBS)
+
+pascal_test: pascal_test.o 
+	$(LINK) $(LFLAGS) -o $(BIN_DIR)/pascal_test $(OBJECTS_DIR)/pascal_test.o $(OBJCOMP) $(LIBS)
 
 
 
