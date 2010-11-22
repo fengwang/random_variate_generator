@@ -39,9 +39,9 @@ namespace vg
                     const seed_type s = seed_type( 0 ) )
                 : n_( n ), p_( p ), e_( s )
             {
-                assert( n_ != size_type( 0 ) );
-                assert( p_ > final_type( 0 ) );
-                assert( p_ < final_type( 1 ) );
+                assert( n != size_type( 0 ) );
+                assert( p > final_type( 0 ) );
+                assert( p < final_type( 1 ) );
             }
 
             return_type
@@ -62,7 +62,7 @@ namespace vg
             direct_impl( const size_type N, const final_type P )
             {
                 const final_type x = gamma_type::do_generation( N, final_type( 1 ) );
-                const final_type ans = poisson_type::do_generation( x * ( final_type( 1 ) - P ) / P );
+                const final_type ans = poisson_type::do_generation( x / P - X );
                 return ans;
             }
     };
