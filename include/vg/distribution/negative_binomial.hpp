@@ -1,9 +1,9 @@
 #ifndef _NEGATIVE_BINOMIAL_HPP_INCLUDED_SDOFIJ34OU89AFS908U4LKJASFDOIU4OIAJSFDLK
 #define _NEGATIVE_BINOMIAL_HPP_INCLUDED_SDOFIJ34OU89AFS908U4LKJASFDOIU4OIAJSFDLK
 
-#include "gamma.hpp"
-#include "poisson.hpp"
-#include "../utility.hpp"
+#include <vg/distribution/gamma.hpp>
+#include <vg/distribution/poisson.hpp>
+#include <vg/utility.hpp>
 
 #include <cassert>
 #include <cstddef>
