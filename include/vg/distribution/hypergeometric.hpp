@@ -66,16 +66,16 @@ namespace vg
             return_type
             direct_impl( const size_type n1, const size_type n2, const size_type k )
             {
-                size_type b = n1 + n2;
-                size_type a = n1;
+                size_type left_all = n1 + n2;
+                size_type left_good = n1;
                 size_type ans = 0;
 
                 for ( size_type i = 0; i < k; ++i )
                 {
-                    if ( e_() * final_type( b-- ) < final_type( a ) )
+                    if ( e_() * final_type( left_all-- ) < final_type( left_good ) )
                     {
                         ++ans;
-                        --a;
+                        --left_good;
 
                         if ( ans ==  n1 )
                             { break; }
