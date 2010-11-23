@@ -55,6 +55,12 @@ namespace vg
             iterator_ = iterator( &dt_ );
         }
 
+        template<typename T1, typename T2, typename T3, typename T4>
+        variate_generator( const T1 t1, const T2 t2, const T3 t3, const T4 t4 ) : dt_( t1, t2, t3, t4 )
+        {
+            iterator_ = iterator( &dt_ );
+        }
+
         ~variate_generator() {}
 
     public:
@@ -84,7 +90,7 @@ namespace vg
 
 }//namespace vg
 
-#include "variate_generator/variate_generator.tcc"
+#include <vg/variate_generator/variate_generator.tcc>
 
 
 #endif//_VARIATE_GENERATOR_HPP_INCLUDED_IUH398UHFKJH29U8HSFIOUHE98UHDUHE98UH23UJ
