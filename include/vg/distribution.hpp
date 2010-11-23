@@ -3,6 +3,7 @@
 
 #include <vg/distribution/bernoulli.hpp>
 #include <vg/distribution/beta.hpp>
+#include <vg/distribution/beta_binomial.hpp>
 #include <vg/distribution/binomial.hpp>
 #include <vg/distribution/cauchy.hpp>
 #include <vg/distribution/chi_square.hpp>
