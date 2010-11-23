@@ -36,6 +36,7 @@
 #include <vg/distribution/triangular.hpp>
 #include <vg/distribution/uniform.hpp>
 #include <vg/distribution/weibull.hpp>
+#include <vg/distribution/zipf.hpp>
 
 #endif//_DISTRIBUTION_HPP_INCLUDED_FKHJOIUH3E98FASDKJHNSDFUJHNFDKJHDIUHEIUOHWUHE
 
