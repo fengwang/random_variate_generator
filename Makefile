@@ -26,11 +26,11 @@ BIN_DIR       = ./bin
 OBJECTS       = binomial_test.o poisson_test.o laplace_test.o bernoulli_test.o t_test.o exponential_test.o \
                 f_test.o gumbel_1_test.o gumbel_2_test.o negative_binomial_test.o lognormal_test.o logarithmic_test.o \
                 exponential_power_test.o  gaussian_test.o hypergeometric_test.o levy_test.o beta_test.o \
-                logistic_test.o pascal_test.o polya_test.o beta_binomial_test.o zipf_test.o
+                logistic_test.o pascal_test.o polya_test.o beta_binomial_test.o zipf_test.o gamma_test.o
 TARGET        = binomial_test poisson_test laplace_test bernoulli_test t_test exponential_test \
                 f_test gumbel_1_test gumbel_2_test negative_binomial_test lognormal_test logarithmic_test \
                 exponential_power_test gaussian_test hypergeometric_test levy_test beta_test \
-                logistic_test pascal_test polya_test beta_binomial_test zipf_test 
+                logistic_test pascal_test polya_test beta_binomial_test zipf_test gamma_test
 
 first: all
 ####### Implicit rules
@@ -117,6 +117,9 @@ beta_binomial_test.o : example/beta_binomial_test.cc
 zipf_test.o : example/zipf_test.cc
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $(OBJECTS_DIR)/zipf_test.o example/zipf_test.cc
 
+gamma_test.o : example/gamma_test.cc
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $(OBJECTS_DIR)/gamma_test.o example/gamma_test.cc
+
 ####### Detailed Build Rules
 binomial_test: binomial_test.o 
 	$(LINK) $(LFLAGS) -o $(BIN_DIR)/binomial_test $(OBJECTS_DIR)/binomial_test.o $(OBJCOMP) $(LIBS)
@@ -183,6 +186,9 @@ beta_binomial_test: beta_binomial_test.o
 
 zipf_test: zipf_test.o 
 	$(LINK) $(LFLAGS) -o $(BIN_DIR)/zipf_test $(OBJECTS_DIR)/zipf_test.o $(OBJCOMP) $(LIBS)
+
+gamma_test: gamma_test.o 
+	$(LINK) $(LFLAGS) -o $(BIN_DIR)/gamma_test $(OBJECTS_DIR)/gamma_test.o $(OBJCOMP) $(LIBS)
 
 
 
