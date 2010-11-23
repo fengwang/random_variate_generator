@@ -1,9 +1,7 @@
 #ifndef _F_HPP_INCLUDED_SOIFJ34LIJAFSPOIJ4398AFSOHSOIJ4LKJASFLKJ3LKJASFDLKJ3IFAK
 #define _F_HPP_INCLUDED_SOIFJ34LIJAFSPOIJ4398AFSOHSOIJ4LKJASFLKJ3LKJASFDLKJ3IFAK
 
-#include "gamma.hpp"
-#include "chi_square.hpp"
-#include "exponential.hpp"
+#include <vg/distribution/gamma.hpp>
 
 #include <cmath>
 #include <cstddef>
@@ -19,7 +17,6 @@ namespace vg
     struct f :  private gamma<Return_Type, Engine>
     {
             typedef gamma<Return_Type, Engine>      gamma_type;
-
             typedef typename Engine::final_type     final_type;
             typedef Return_Type                     return_type;
             typedef typename Engine::seed_type      seed_type;

@@ -1,10 +1,10 @@
 #ifndef _T_HPP_INCLUDED_9URHFADSKJHSAFUHE9U8HDFUJHDUIHEUHFDUJHDSUI893U7FSDKDSIJF
 #define _T_HPP_INCLUDED_9URHFADSKJHSAFUHE9U8HDFUJHDUIHEUHFDUJHDSUI893U7FSDKDSIJF
 
-#include "normal.hpp"
-#include "chi_square.hpp"
-#include "exponential.hpp"
-#include "../utility.hpp"
+#include <vg/distribution/normal.hpp>
+#include <vg/distribution/chi_square.hpp>
+#include <vg/distribution/exponential.hpp>
+#include <vg/utility.hpp>
 
 #include <cmath>
 #include <cstddef>

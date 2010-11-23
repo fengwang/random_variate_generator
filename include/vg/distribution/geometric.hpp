@@ -25,8 +25,8 @@ namespace vg
                                 const seed_type s = seed_type( 0 ) )
                 : p_( p ), e_( s )
             {
-                assert( p_ > final_type( 0 ) );
-                assert( p_ < final_type( 1 ) );
+                assert( p > final_type( 0 ) );
+                assert( p < final_type( 1 ) );
             }
 
             return_type
@@ -39,6 +39,7 @@ namespace vg
             return_type
             do_generation( const final_type P )
             {
+
                 return polar_method( P );
             }
 
@@ -59,7 +60,7 @@ namespace vg
             {
                 const final_type u = e_();
                 const final_type n = std::ceil( log( u ) / log( final_type( 1 ) - P ) );
-                return static_cast<return_type>( n );
+                return n;
             }
 
     };

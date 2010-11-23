@@ -9,7 +9,7 @@ a sum of the squares of k independent standard normal random variables.
 
 #endif
 
-#include "gamma.hpp"
+#include <vg/distribution/gamma.hpp>
 
 namespace vg
 {
@@ -19,6 +19,7 @@ namespace vg
              >
     struct erlang : private gamma<Return_Type, Engine>
     {
+            typedef gamma<Return_Type, Engine>          gamma_type;
             typedef Return_Type                         return_type;
             typedef Engine                              engine_type;
 
@@ -54,9 +55,8 @@ namespace vg
             return_type
             erlang_direct_impl( const final_type A, const final_type N )
             {
-                //const final_type ans = gamma<Return_Type, Engine>::marsaglia_tsang_method(N, A);
-                const final_type ans = gamma<Return_Type, Engine>::do_generation( N, A );
-                return static_cast<return_type>( ans );
+                const final_type ans = gamma_type::do_generation( N, A );
+                return ans;
             }
 
     };

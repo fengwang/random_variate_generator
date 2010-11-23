@@ -18,7 +18,7 @@ namespace vg
                 typename Engine
              >
     struct negative_binomial :  private proxy<gamma<typename Engine::final_type, Engine> >,
-        private proxy<poisson<typename Engine::final_type, Engine> >
+                                private proxy<poisson<typename Engine::final_type, Engine> >
     {
             typedef proxy<gamma<typename Engine::final_type, Engine> >         gamma_type;
             typedef proxy<poisson<typename Engine::final_type, Engine> >       poisson_type;

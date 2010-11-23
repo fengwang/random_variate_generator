@@ -9,7 +9,7 @@ a sum of the squares of k independent standard normal random variables.
 
 #endif
 
-#include "gamma.hpp"
+#include <vg/distribution/gamma.hpp>
 
 namespace vg
 {
@@ -52,9 +52,8 @@ namespace vg
             return_type
             chi_square_direct_impl( const size_type K )
             {
-                const final_type ans = gamma_type::do_generation( final_type( K ) / final_type( 2 ),
-                                       final_type( 1 ) );
-                return static_cast<return_type>( ans + ans );
+                const final_type ans = gamma_type::do_generation( final_type( K ) / final_type( 2 ) );
+                return ans + ans;
             }
 
     };

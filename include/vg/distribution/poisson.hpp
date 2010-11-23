@@ -1,10 +1,10 @@
 #ifndef _POISSON_HPP_INCLUDED_9URHFADSKJHSAFUHE9U8HDFUJHDUIHEUHFDUJHDSUI893U7FSDK
 #define _POISSON_HPP_INCLUDED_9URHFADSKJHSAFUHE9U8HDFUJHDUIHEUHFDUJHDSUI893U7FSDK
 
-#include "normal.hpp"
-#include "gamma_unary.hpp"
-#include "binomial.hpp"
-#include "../utility.hpp"
+#include <vg/distribution/normal.hpp>
+#include <vg/distribution/gamma.hpp>
+#include <vg/distribution/binomial.hpp>
+#include <vg/utility.hpp>
 
 
 #include <cmath>
@@ -18,11 +18,11 @@ namespace vg
                  typename Engine
              >
     struct poisson :    private proxy<normal<Return_Type, Engine> >,
-        private proxy<gamma_unary<Return_Type, Engine> >,
-        private proxy<binomial<Return_Type, Engine> >
+                        private proxy<gamma<Return_Type, Engine> >,
+                        private proxy<binomial<Return_Type, Engine> >
     {
             typedef proxy<normal<Return_Type, Engine> >         normal_type;
-            typedef proxy<gamma_unary<Return_Type, Engine> >    gamma_unary_type;
+            typedef proxy<gamma<Return_Type, Engine> >          gamma_type;
             typedef proxy<binomial<Return_Type, Engine> >       binomial_type;
 
             typedef typename Engine::final_type     final_type;
@@ -53,7 +53,6 @@ namespace vg
             }
 
         private:
-
             return_type
             exponential_inter_arrival_times_method( const final_type lambda )
             {
@@ -78,7 +77,7 @@ namespace vg
                 for ( ;; )
                 {
                     std::size_t M = static_cast<std::size_t>( lambda * 0.875 );
-                    const final_type X = gamma_unary_type::do_generation( static_cast<final_type>( M ) );
+                    const final_type X = gamma_type::do_generation( static_cast<final_type>( M ) );
 
                     if ( X > lambda )
                         { return ans + binomial_type::do_generation( M - 1, lambda / X ); }
@@ -161,10 +160,7 @@ namespace vg
                 return X + mu;
             }
 
-
-
-
-    };
+    }; // poisson 
 
 
 
