@@ -28,6 +28,7 @@
 #include <vg/distribution/normal.hpp>
 #include <vg/distribution/pareto.hpp>
 #include <vg/distribution/pascal.hpp>
+#include <vg/distribution/planck.hpp>
 #include <vg/distribution/poisson.hpp>
 #include <vg/distribution/polya.hpp>
 #include <vg/distribution/rayleigh.hpp>
