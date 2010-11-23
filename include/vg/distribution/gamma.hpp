@@ -35,13 +35,6 @@ namespace vg
                 assert( b > 0 );
             }
 
-            explicit gamma(	const value_type a = value_type( 1 ),
-                            const seed_type sd = 0 )
-                : a_( a ), b_( 1 ), e_( sd )
-            {
-                assert( a > 0 );
-            }
-
             return_type
             operator()()
             {

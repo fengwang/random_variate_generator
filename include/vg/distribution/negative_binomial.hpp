@@ -17,11 +17,11 @@ namespace vg
                 typename Return_Type,
                 typename Engine
              >
-    struct negative_binomial :  private proxy<gamma<typename Engine::final_type, Engine> >,
-                                private proxy<poisson<typename Engine::final_type, Engine> >
+    struct negative_binomial :  private proxy<gamma<typename Engine::final_type, Engine>, 1 >,
+                                private proxy<poisson<typename Engine::final_type, Engine>, 2 >
     {
-            typedef proxy<gamma<typename Engine::final_type, Engine> >         gamma_type;
-            typedef proxy<poisson<typename Engine::final_type, Engine> >       poisson_type;
+            typedef proxy<gamma<typename Engine::final_type, Engine>, 1 >                 gamma_type;
+            typedef proxy<poisson<typename Engine::final_type, Engine>, 2 >               poisson_type;
 
             typedef typename Engine::final_type     final_type;
             typedef Return_Type                     return_type;
@@ -35,8 +35,8 @@ namespace vg
             engine_type         e_;
 
             explicit negative_binomial( size_type n = size_type( 1 ),
-                    final_type p = final_type( 0.5 ),
-                    const seed_type s = seed_type( 0 ) )
+                                        final_type p = final_type( 0.5 ),
+                                        const seed_type s = seed_type( 0 ) )
                 : n_( n ), p_( p ), e_( s )
             {
                 assert( n != size_type( 0 ) );
@@ -61,7 +61,7 @@ namespace vg
             return_type
             direct_impl( const size_type N, const final_type P )
             {
-                const final_type X = gamma_type::do_generation( N, final_type( 1 ) );
+                const final_type X = gamma_type::do_generation( N );
                 const final_type ans = poisson_type::do_generation( X / P - X );
                 return ans;
             }
