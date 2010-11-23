@@ -45,7 +45,7 @@ namespace vg
             rejection_method( const final_type A )
             {
                 const final_type a_1 = A - final_type(1);
-                const final_type b = std::pow( 2, a_1 );
+                const final_type b = std::exp2( a_1 );
                 const final_type b_1 = b - final_type(1);
 
                 for ( ;; )
