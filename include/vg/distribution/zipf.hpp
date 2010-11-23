@@ -53,7 +53,7 @@ namespace vg
                     const final_type u = e_();
                     const final_type v = e_();
                     const final_type x = std::pow( u, -final_type(1) / a_1 );
-                    const final_type X = std:ceil( x );
+                    const final_type X = std::ceil( x );
                     const final_type T = std::pow( (X+final_type(1))/X, a_1 );
                     const final_type T_1 = T - final_type(1);
                     const final_type lhs = v * X * T_1 / b_1;
