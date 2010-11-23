@@ -32,6 +32,14 @@ namespace vg
                 : a_( a ), b_( b ), e_( sd )
             {
                 assert( a > 0 );
+                assert( b > 0 );
+            }
+
+            explicit gamma(	const value_type a = value_type( 1 ),
+                            const seed_type sd = 0 )
+                : a_( a ), b_( 1 ), e_( sd )
+            {
+                assert( a > 0 );
             }
 
             return_type
@@ -44,17 +52,22 @@ namespace vg
             return_type
             do_generation( const final_type A, const final_type B )
             {
-                return marsaglia_tsang_method( A, B );
+                return marsaglia_tsang_method( A ) * B;
+            }
+
+            return_type
+            do_generation( const final_type A )
+            {
+                return marsaglia_tsang_method( A );
             }
 
         private:
             //Marsaglia and Tsang, "A Simple Method for generating gamma variables",
             //ACM Transactions on Mathematical Software, Vol 26, No 3 (2000), p363-372.
             return_type
-            marsaglia_tsang_method( const final_type A, const final_type B )
+            marsaglia_tsang_method( const final_type A )
             {
                 const final_type a = A < final_type( 1 ) ? A + final_type( 1 ) : A;
-                const final_type b = B;
                 const final_type d = a - final_type( 1 ) / final_type( 3 );
                 const final_type c = final_type( 1 ) / final_type( 3 ) / std::sqrt( d );
                 final_type u( 0 );
@@ -85,13 +98,14 @@ namespace vg
                         { break; }
                 }
 
-                final_type ans = b * d * v;
+                final_type ans = d * v;
 
                 if ( A < 1 )
                     { ans *= std::pow( e_(), final_type( 1 ) / A ); }
 
-                return static_cast<return_type>( ans );
+                return ans;
             }
+
     };
 }//vg
 
