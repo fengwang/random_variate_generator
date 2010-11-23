@@ -12,7 +12,6 @@
 #include <vg/distribution/exponential_power.hpp>
 #include <vg/distribution/f.hpp>
 #include <vg/distribution/gamma.hpp>
-#include <vg/distribution/gamma_unary.hpp>
 #include <vg/distribution/gaussian.hpp>
 #include <vg/distribution/gaussian_tail.hpp>
 #include <vg/distribution/geometric.hpp>
@@ -37,6 +36,7 @@
 #include <vg/distribution/triangular.hpp>
 #include <vg/distribution/uniform.hpp>
 #include <vg/distribution/weibull.hpp>
+#include <vg/distribution/yule.hpp>
 #include <vg/distribution/zipf.hpp>
 
 #endif//_DISTRIBUTION_HPP_INCLUDED_FKHJOIUH3E98FASDKJHNSDFUJHNFDKJHDIUHEIUOHWUHE
