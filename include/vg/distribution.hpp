@@ -14,6 +14,7 @@
 #include <vg/distribution/gamma.hpp>
 #include <vg/distribution/gaussian.hpp>
 #include <vg/distribution/gaussian_tail.hpp>
+#include <vg/distribution/generalized_hypergeometric_b3.hpp>
 #include <vg/distribution/geometric.hpp>
 #include <vg/distribution/gumbel_1.hpp>
 #include <vg/distribution/gumbel_2.hpp>
