@@ -40,6 +40,7 @@
 #include <vg/distribution/t.hpp>
 #include <vg/distribution/triangular.hpp>
 #include <vg/distribution/uniform.hpp>
+#include <vg/distribution/waring.hpp>
 #include <vg/distribution/weibull.hpp>
 #include <vg/distribution/yule.hpp>
 #include <vg/distribution/zipf.hpp>
