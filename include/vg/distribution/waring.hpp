@@ -23,31 +23,33 @@ namespace vg
         typedef Engine                          engine_type;
 
         value_type           a_; 
+        value_type           b_; 
         engine_type          e_;
 
-        explicit waring(value_type a = 1 , seed_type s = 0 ) : a_( a ), e_( s ) 
+        explicit waring(value_type a = 1, value_type b = 1, seed_type s = 0 ) : a_( a ), b_( b ), e_( s ) 
         {
             assert( a > 0 );
+            assert( b > 0 );
         }
 
         return_type
         operator()()
         {
-            return do_generation( a_ );
+            return do_generation( a_, b_ );
         }
 
     protected:
         return_type
-        do_generation( const value_type a )
+        do_generation( const value_type a, const value_type b )
         {
-            return direct_impl( a );
+            return direct_impl( a, b );
         }
 
     private:
         return_type
-        direct_impl( const value_type a )
+        direct_impl( const value_type a, const value_type b )
         {
-            const final_type ans = GHgB3_type::do_generation( a, final_type(1), final_type(1) );
+            const final_type ans = GHgB3_type::do_generation( a, b, final_type(1) );
             return ans;
         }
     };
