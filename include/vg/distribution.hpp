@@ -26,6 +26,7 @@
 #include <vg/distribution/logarithmic.hpp>
 #include <vg/distribution/logistic.hpp>
 #include <vg/distribution/lognormal.hpp>
+#include <vg/distribution/mizutani.hpp>
 #include <vg/distribution/negative_binomial.hpp>
 #include <vg/distribution/negative_binomial_beta.hpp>
 #include <vg/distribution/normal.hpp>

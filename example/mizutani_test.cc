@@ -10,7 +10,7 @@ using namespace std;
 
 int main()
 {
-    variate_generator<double, vg::poisson, vg::linear_congruential> vg(14.23);    
+    variate_generator<double, vg::mizutani, vg::linear_congruential> vg(14.23);    
 
     copy( vg.begin(), vg.begin()+1000, ostream_iterator<double>(cout, "\n"));
 
