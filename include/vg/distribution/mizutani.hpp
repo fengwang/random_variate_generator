@@ -22,33 +22,33 @@ namespace vg
         typedef std::size_t                     size_type;
         typedef Engine                          engine_type;
 
-        value_type           c_; 
+        value_type           a_; 
         engine_type          e_;
 
-        explicit mizutani(value_type c = 1 , seed_type s = 0 ) : c_( c ), e_( s ) 
+        explicit mizutani(value_type a = 1 , seed_type s = 0 ) : a_( a ), e_( s ) 
         {
-            assert( c > 0 );
+            assert( a > 0 );
         }
 
         return_type
         operator()()
         {
-            return do_generation( c_ );
+            return do_generation( a_ );
         }
 
     protected:
         return_type
-        do_generation( const value_type c )
+        do_generation( const value_type a )
         {
-            return direct_impl( c );
+            return direct_impl( a );
         }
 
     private:
         // S. Mizutani, Vocabulary in women's magazines, Kokken-Hokoku, National Language Research Institute, Tokyo, 1953.
         return_type
-        direct_impl( const value_type c )
+        direct_impl( const value_type a )
         {
-            const final_type ans = GHgB3_type::do_generation( final_type(1), final_type(1), c );
+            const final_type ans = GHgB3_type::do_generation( a, final_type(1), final_type(1) );
             return ans;
         }
     };
