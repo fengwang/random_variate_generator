@@ -11,6 +11,7 @@
 #include <vg/distribution/exponential.hpp>
 #include <vg/distribution/exponential_power.hpp>
 #include <vg/distribution/f.hpp>
+#include <vg/distribution/factorial.hpp>
 #include <vg/distribution/gamma.hpp>
 #include <vg/distribution/gaussian.hpp>
 #include <vg/distribution/gaussian_tail.hpp>
