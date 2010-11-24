@@ -46,6 +46,7 @@ namespace vg
             /*
              *   X <- - \frac{E}{ \log{ 1 - e^{-\frac{E^{*}}{a-1} } } }  
              */
+            // H. A. Simon, "Some futher notes on a class of skew distribution functions", Information and Control, vol. 3, pp.90-98, 1960.
             return_type
             exponential_impl( const final_type a )
             {

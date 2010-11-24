@@ -27,12 +27,12 @@ OBJECTS       = binomial_test.o poisson_test.o laplace_test.o bernoulli_test.o t
                 f_test.o gumbel_1_test.o gumbel_2_test.o negative_binomial_test.o lognormal_test.o logarithmic_test.o \
                 exponential_power_test.o  gaussian_test.o hypergeometric_test.o levy_test.o beta_test.o \
                 logistic_test.o pascal_test.o polya_test.o beta_binomial_test.o zipf_test.o gamma_test.o planck_test.o \
-                yule_test.o generalized_hypergeometric_b3_test.o generalized_waring_test.o
+                yule_test.o generalized_hypergeometric_b3_test.o generalized_waring_test.o mizutani_test.o
 TARGET        = binomial_test poisson_test laplace_test bernoulli_test t_test exponential_test \
                 f_test gumbel_1_test gumbel_2_test negative_binomial_test lognormal_test logarithmic_test \
                 exponential_power_test gaussian_test hypergeometric_test levy_test beta_test \
                 logistic_test pascal_test polya_test beta_binomial_test zipf_test gamma_test planck_test \
-                yule_test.o generalized_hypergeometric_b3_test generalized_waring_test
+                yule_test.o generalized_hypergeometric_b3_test generalized_waring_test mizutani_test 
 
 first: all
 ####### Implicit rules
@@ -134,6 +134,9 @@ generalized_hypergeometric_b3_test.o : example/generalized_hypergeometric_b3_tes
 generalized_waring_test.o : example/generalized_waring_test.cc
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $(OBJECTS_DIR)/generalized_waring_test.o example/generalized_waring_test.cc
 
+mizutani_test.o : example/mizutani_test.cc
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $(OBJECTS_DIR)/mizutani_test.o example/mizutani_test.cc
+
 ####### Detailed Build Rules
 binomial_test: binomial_test.o 
 	$(LINK) $(LFLAGS) -o $(BIN_DIR)/binomial_test $(OBJECTS_DIR)/binomial_test.o $(OBJCOMP) $(LIBS)
@@ -215,6 +218,9 @@ generalized_hypergeometric_b3_test: generalized_hypergeometric_b3_test.o
 
 generalized_waring_test: generalized_waring_test.o 
 	$(LINK) $(LFLAGS) -o $(BIN_DIR)/generalized_waring_test $(OBJECTS_DIR)/generalized_waring_test.o $(OBJCOMP) $(LIBS)
+
+mizutani_test: mizutani_test.o 
+	$(LINK) $(LFLAGS) -o $(BIN_DIR)/mizutani_test $(OBJECTS_DIR)/mizutani_test.o $(OBJCOMP) $(LIBS)
 
 
 

@@ -49,6 +49,9 @@ namespace vg
         }
 
     private:
+        // J. O. Irwin, "The generalized Waring distribution, part I", Journal of the Royal Statistical Society, vol. A138, pp. 18-31, 1975
+        // J. O. Irwin, "The generalized Waring distribution, part II", Journal of the Royal Statistical Society, vol. A138, pp. 205-225, 1975
+        // J. O. Irwin, "The generalized Waring distribution, part III", Journal of the Royal Statistical Society, vol. A138, pp. 374-384, 1975
         return_type
         direct_impl( const value_type a, const value_type b, const value_type c )
         {
