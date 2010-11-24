@@ -30,42 +30,43 @@ struct gumbel_1
         final_type  b_;
         engine_type e_;
 
-        explicit gumbel_1( const return_type a = 1, const return_type b = 1, const seed_type sd = 0 )
-                : a_( a ), b_( b ), e_( sd )
+        explicit 
+        gumbel_1( const return_type a = 1, const return_type b = 1, const seed_type sd = 0 )
+            : a_( a ), b_( b ), e_( sd )
+        {
+            assert( b > 0 );
+        }
+
+        return_type
+        operator()()
+        {
+            return do_generation( a_, b_ );
+        }
+
+    protected:
+        return_type
+        do_generation( const return_type a, const return_type b )
+        {
+            return direct_impl( a, b );
+        }
+
+    private:
+        return_type
+        direct_impl( const return_type a, const return_type b )
+        {
+            final_type x = e_();
+
+            while ( final_type( 0 ) == x )
             {
-                assert( b > 0 );
+                x = e_();
             }
 
-            return_type
-            operator()()
-            {
-                return do_generation( a_, b_ );
-            }
+            const final_type ans = ( std::log( b ) - std::log( -std::log( x ) ) ) / a;
 
-        protected:
-            return_type
-            do_generation( const return_type a, const return_type b )
-            {
-                return direct_impl( a, b );
-            }
+            return ans;
+        }
 
-        private:
-            return_type
-            direct_impl( const return_type a, const return_type b )
-            {
-                final_type x = e_();
-
-                while ( final_type( 0 ) == x )
-                {
-                    x = e_();
-                }
-
-                const final_type ans = ( std::log( b ) - log( -log( x ) ) ) / a;
-
-                return ans;
-            }
-
-    };
+};
 
 }//namespace vg
 

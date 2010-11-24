@@ -2,8 +2,6 @@
 #define _GUMBEL_2_HPP_INCLUDED_DSOIUJ3498AFSLKJH4938UYAFKLJI34OIUAFSLKJ3OIJFSDLK
 
 #include <cmath>
-#include <cstddef>
-#include <limits>
 #include <cassert>
 
 namespace vg

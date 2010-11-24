@@ -3,9 +3,6 @@
 
 #include <vg/distribution/gamma.hpp>
 
-#include <cmath>
-#include <cstddef>
-#include <limits>
 #include <cassert>
 
 namespace vg
