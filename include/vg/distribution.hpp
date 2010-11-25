@@ -8,6 +8,7 @@
 #include <vg/distribution/binomial.hpp>
 #include <vg/distribution/cauchy.hpp>
 #include <vg/distribution/chi_square.hpp>
+#include <vg/distribution/digamma.hpp>
 #include <vg/distribution/erlang.hpp>
 #include <vg/distribution/exponential.hpp>
 #include <vg/distribution/exponential_power.hpp>
