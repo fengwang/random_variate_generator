@@ -8,6 +8,9 @@ namespace vg
 
     namespace special_function
     {
+        //Abramowitz, M. and Stegun, I. A. (Eds.). "psi (Digamma) Function." 
+        //¡ì6.3 in Handbook of Mathematical Functions with Formulas, Graphs, and Mathematical Tables, 9th printing. 
+        //New York: Dover, pp. 258-259, 1972.
         struct digamma
         {
 
