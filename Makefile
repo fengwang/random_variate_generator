@@ -28,13 +28,13 @@ OBJECTS       = binomial_test.o poisson_test.o laplace_test.o bernoulli_test.o t
                 exponential_power_test.o  gaussian_test.o hypergeometric_test.o levy_test.o beta_test.o \
                 logistic_test.o pascal_test.o polya_test.o beta_binomial_test.o zipf_test.o gamma_test.o planck_test.o \
                 yule_test.o generalized_hypergeometric_b3_test.o generalized_waring_test.o mizutani_test.o \
-                waring_test.o digamma_test.o
+                waring_test.o digamma_test.o trigamma_test.o
 TARGET        = binomial_test poisson_test laplace_test bernoulli_test t_test exponential_test \
                 f_test gumbel_1_test gumbel_2_test negative_binomial_test lognormal_test logarithmic_test \
                 exponential_power_test gaussian_test hypergeometric_test levy_test beta_test \
                 logistic_test pascal_test polya_test beta_binomial_test zipf_test gamma_test planck_test \
                 yule_test.o generalized_hypergeometric_b3_test generalized_waring_test mizutani_test \
-                waring_test digamma_test 
+                waring_test digamma_test trigamma_test 
 
 first: all
 ####### Implicit rules
@@ -145,6 +145,9 @@ waring_test.o : example/waring_test.cc
 digamma_test.o : example/digamma_test.cc
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $(OBJECTS_DIR)/digamma_test.o example/digamma_test.cc
 
+trigamma_test.o : example/trigamma_test.cc
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $(OBJECTS_DIR)/trigamma_test.o example/trigamma_test.cc
+
 ####### Detailed Build Rules
 binomial_test: binomial_test.o 
 	$(LINK) $(LFLAGS) -o $(BIN_DIR)/binomial_test $(OBJECTS_DIR)/binomial_test.o $(OBJCOMP) $(LIBS)
@@ -235,6 +238,9 @@ waring_test: waring_test.o
 
 digamma_test: digamma_test.o 
 	$(LINK) $(LFLAGS) -o $(BIN_DIR)/digamma_test $(OBJECTS_DIR)/digamma_test.o $(OBJCOMP) $(LIBS)
+
+trigamma_test: trigamma_test.o 
+	$(LINK) $(LFLAGS) -o $(BIN_DIR)/trigamma_test $(OBJECTS_DIR)/trigamma_test.o $(OBJCOMP) $(LIBS)
 
 
 
