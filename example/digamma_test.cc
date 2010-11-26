@@ -10,7 +10,7 @@ using namespace std;
 
 int main()
 {
-    variate_generator<double, vg::digamma> vg(1.2, 34.56);    
+    variate_generator<double, vg::digamma> vg(0.12, 1.56);    
 
     copy( vg.begin(), vg.begin()+100, ostream_iterator<double>(cout, "\n"));
 
