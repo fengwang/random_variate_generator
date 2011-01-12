@@ -1,5 +1,5 @@
 vg is a pesudo-random variate generator library, aiming to generate a large amount of random numbers, 
-with a luxury kinds of builtin distributions(currently 47), aiding applications in gambling, 
+with a luxury kinds of builtin distributions(currently 49), aiding applications in gambling, 
 statistical sampling, computer simulation, cryptography, completely randomized design, and other areas 
 where producing an unpredictable result is desirable. In the wake of C++ generic template 
 meta-programming, it is written in c++, compatible with STL.
@@ -149,6 +149,7 @@ DISTRIBUTIONS:
         gumbel_1
         gumbel_2
         hypergeometric
+        inverse_gaussian
         inverse_polya_eggenberger
         laplace
         levy
@@ -170,6 +171,7 @@ DISTRIBUTIONS:
         triangular
         trigamma
         uniform
+        wald
         waring
         weibull
         yule
