@@ -45,6 +45,7 @@
 #include <vg/distribution/triangular.hpp>
 #include <vg/distribution/trigamma.hpp>
 #include <vg/distribution/uniform.hpp>
+#include <vg/distribution/wald.hpp>
 #include <vg/distribution/waring.hpp>
 #include <vg/distribution/weibull.hpp>
 #include <vg/distribution/yule.hpp>
