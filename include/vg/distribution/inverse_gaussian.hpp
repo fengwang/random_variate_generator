@@ -1,5 +1,5 @@
-#ifndef _GAUSSIAN_HPP_INCLUDED_OIHJ3LKJAFS98UYH3KJHFAS9I8UHY2QR3OIUHFSIOUHEIUHY3
-#define _GAUSSIAN_HPP_INCLUDED_OIHJ3LKJAFS98UYH3KJHFAS9I8UHY2QR3OIUHFSIOUHEIUHY3
+#ifndef _INVERSE_GAUSSIAN_HPP_INCLUDED_DSOIJ3LKJSF8U4LKJDFLKCMSOIJ34OISFLKJ4OIJFSLKJSLFK34IJSLFDKJ4OIJSLKJ4OIJSLKJSOFDIJLFKJ4IJLSFKDSKLJFSJFKLOE
+#define _INVERSE_GAUSSIAN_HPP_INCLUDED_DSOIJ3LKJSF8U4LKJDFLKCMSOIJ34OISFLKJ4OIJFSLKJSLFK34IJSLFDKJ4OIJSLKJ4OIJSLKJSOFDIJLFKJ4IJLSFKDSKLJFSJFKLOE
 
 #include <vg/distribution/normal.hpp>
 
@@ -11,7 +11,7 @@ namespace vg
     template <   typename Return_Type,
                  typename Engine
              >
-    struct gaussian : private normal<Return_Type, Engine>
+    struct inverse_gaussian : private normal<Return_Type, Engine>
     {
             typedef normal<Return_Type, Engine>         normal_type;
             typedef Return_Type                         return_type;
@@ -23,7 +23,7 @@ namespace vg
             return_type lambda_;
             engine_type e_;
 
-            explicit gaussian( const return_type mu = 1,
+            explicit inverse_gaussian( const return_type mu = 1,
                                const return_type lambda = 1,
                                const seed_type sd = 0 )
                 : mu_( mu ), lambda_( lambda ), e_( sd )
@@ -62,6 +62,7 @@ namespace vg
 }//vg
 
 
-#endif//_GAUSSIAN_HPP_INCLUDED_OIHJ3LKJAFS98UYH3KJHFAS9I8UHY2QR3OIUHFSIOUHEIUHY3
+#endif//_INVERSE_GAUSSIAN_HPP_INCLUDED_DSOIJ3LKJSF8U4LKJDFLKCMSOIJ34OISFLKJ4OIJFSLKJSLFK34IJSLFDKJ4OIJSLKJ4OIJSLKJSOFDIJLFKJ4IJLSFKDSKLJFSJFKLOE
+
 
 
