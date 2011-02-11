@@ -25,11 +25,11 @@ namespace vg
             typedef typename normal_type::seed_type       seed_type;
 
             return_type alpha_;
-            seed_type sd_;
+            engine_type e_;
 
             explicit teichroew( const return_type alpha = 1,
                                 const seed_type sd = 0 )
-                : alpha_( alpha ), sd_( sd )
+                : alpha_( alpha ), e_( sd )
             {
                 assert( alpha > 0 );
             }
