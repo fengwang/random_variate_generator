@@ -42,6 +42,7 @@
 #include <vg/distribution/rayleigh.hpp>
 #include <vg/distribution/rayleigh_tail.hpp>
 #include <vg/distribution/t.hpp>
+#include <vg/distribution/teichroew.hpp>
 #include <vg/distribution/triangular.hpp>
 #include <vg/distribution/trigamma.hpp>
 #include <vg/distribution/uniform.hpp>

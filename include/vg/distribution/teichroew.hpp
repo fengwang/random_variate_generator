@@ -14,24 +14,24 @@ namespace vg
     template <   typename Return_Type,
                  typename Engine
              >
-    struct teichroew : private proxy<normal<Return_Type, Engine>, 1>
-                      private proxy<gamma<Return_Type, Engine>, 2>
+    struct teichroew : private proxy<normal<Return_Type, Engine>, 1>, 
+                       private proxy<gamma<Return_Type, Engine>, 2>
     {
-            typedef normal<Return_Type, Engine>         normal_type;
-            typedef gamma<Return_Type, Engine>          gamma_type;
-            typedef Return_Type                         return_type;
-            typedef Engine                              engine_type;
-            typedef typename normal_type::final_type    final_type;
-            typedef typename normal_type::seed_type     seed_type;
+            typedef proxy<normal<Return_Type, Engine>, 1> normal_type;
+            typedef proxy<gamma<Return_Type, Engine>, 2>  gamma_type;
+            typedef Return_Type                           return_type;
+            typedef Engine                                engine_type;
+            typedef typename normal_type::final_type      final_type;
+            typedef typename normal_type::seed_type       seed_type;
 
             return_type alpha_;
-            normal_type n_;
+            seed_type sd_;
 
-            explicit teichroew( const return_type alpha = 0,
+            explicit teichroew( const return_type alpha = 1,
                                 const seed_type sd = 0 )
-                : alpha_( alpha ) n_( sd )
+                : alpha_( alpha ), sd_( sd )
             {
-                assert( variance > 0 );
+                assert( alpha > 0 );
             }
 
             return_type
