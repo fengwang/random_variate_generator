@@ -41,6 +41,7 @@
 #include <vg/distribution/planck.hpp>
 #include <vg/distribution/poisson.hpp>
 #include <vg/distribution/polya.hpp>
+#include <vg/distribution/polya_aeppli.hpp>
 #include <vg/distribution/rayleigh.hpp>
 #include <vg/distribution/rayleigh_tail.hpp>
 #include <vg/distribution/t.hpp>
