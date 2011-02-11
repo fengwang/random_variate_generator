@@ -20,6 +20,7 @@
 #include <vg/distribution/generalized_hypergeometric_b3.hpp>
 #include <vg/distribution/generalized_waring.hpp>
 #include <vg/distribution/geometric.hpp>
+#include <vg/distribution/grassia.hpp>
 #include <vg/distribution/gumbel_1.hpp>
 #include <vg/distribution/gumbel_2.hpp>
 #include <vg/distribution/hypergeometric.hpp>

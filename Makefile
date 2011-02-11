@@ -29,14 +29,14 @@ OBJECTS       = binomial_test.o poisson_test.o laplace_test.o bernoulli_test.o t
                 logistic_test.o pascal_test.o polya_test.o beta_binomial_test.o zipf_test.o gamma_test.o planck_test.o \
                 yule_test.o generalized_hypergeometric_b3_test.o generalized_waring_test.o mizutani_test.o \
                 waring_test.o digamma_test.o trigamma_test.o inverse_gaussian_test.o wald_test.o teichroew_test.o \
-				pearson_vi_test.o
+				pearson_vi_test.o grassia_test.o
 TARGET        = binomial_test poisson_test laplace_test bernoulli_test t_test exponential_test \
                 f_test gumbel_1_test gumbel_2_test negative_binomial_test lognormal_test logarithmic_test \
                 exponential_power_test gaussian_test hypergeometric_test levy_test beta_test \
                 logistic_test pascal_test polya_test beta_binomial_test zipf_test gamma_test planck_test \
                 yule_test.o generalized_hypergeometric_b3_test generalized_waring_test mizutani_test \
                 waring_test digamma_test trigamma_test inverse_gaussian_test wald_test teichroew_test \
-				pearson_vi_test
+				pearson_vi_test grassia_test
 
 first: all
 ####### Implicit rules
@@ -267,4 +267,11 @@ pearson_vi_test.o : example/pearson_vi_test.cc
 
 pearson_vi_test: pearson_vi_test.o 
 	$(LINK) $(LFLAGS) -o $(BIN_DIR)/pearson_vi_test $(OBJECTS_DIR)/pearson_vi_test.o $(OBJCOMP) $(LIBS)
+
+grassia_test.o : example/grassia_test.cc
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $(OBJECTS_DIR)/grassia_test.o example/grassia_test.cc
+
+grassia_test: grassia_test.o 
+	$(LINK) $(LFLAGS) -o $(BIN_DIR)/grassia_test $(OBJECTS_DIR)/grassia_test.o $(OBJCOMP) $(LIBS)
+
 
