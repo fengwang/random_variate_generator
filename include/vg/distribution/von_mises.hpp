@@ -53,15 +53,15 @@ namespace vg
 
                 for ( ; ; )
                 {
-                    const final_type u = e_() * final_type(2) - final_type(1);
+                    const final_type u = e_();
                     const final_type v = e_();
                     const final_type pi = 3.1415926535897932384626433L;
                     const final_type z = std::cos( pi * u );
                     const final_type w = ( final_type(1) + s * z ) / ( s + z );
                     const final_type y = k * ( s - w );
-                    const bool accept =  ( y + y >= y * y + v ) ? true : ( std::log( y / v ) + 1 > y );
+                    const bool accept =  ( y + y >= y * y + v ) ? true : ( std::log( y / v ) + final_type(1) > y );
                     if ( accept ) 
-                        return a + std::sin(u) / std::cos(w);
+                        return a + ( u  > final_type(0.5L) ? final_type(1.0L) : final_type(-1.0L) ) / std::cos(w);
                 }
 
             }
