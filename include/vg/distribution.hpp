@@ -23,6 +23,7 @@
 #include <vg/distribution/grassia.hpp>
 #include <vg/distribution/gumbel_1.hpp>
 #include <vg/distribution/gumbel_2.hpp>
+#include <vg/distribution/hyperbolic_secant.hpp>
 #include <vg/distribution/hypergeometric.hpp>
 #include <vg/distribution/inverse_gaussian.hpp>
 #include <vg/distribution/inverse_polya_eggenberger.hpp>
