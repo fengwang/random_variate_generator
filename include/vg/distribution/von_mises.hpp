@@ -59,7 +59,7 @@ namespace vg
                     const final_type z = std::cos( pi * u );
                     const final_type w = ( final_type(1) + s * z ) / ( s + z );
                     const final_type y = k * ( s - w );
-                    const bool accept =  ( y + y >= y * y + v ) ? true : ( std::log( y / v ) + final_type(1) > y );
+                    const bool accept =  ( y + y >= y * y + v ) ? true : ( std::log( y / v ) + final_type(1) >= y );
                     if ( accept ) 
                         return a + ( u  > final_type(0.5L) ? final_type(1.0L) : final_type(-1.0L) ) / std::cos(w);
                 }
