@@ -32,11 +32,11 @@ struct newton_raphson
     value_type 
     operator()() const 
     {
-        value_type ans = ( first + last ) / value_type(2);
+        value_type ans = ( first_ + last_ ) / value_type(2);
 
         for ( size_type i = 0; i < times_; ++i )
         {
-            assert( (ans-first)*(ans-last) < value_type(0) );
+            assert( (ans-first_)*(ans-last_) < value_type(0) );
             ans -= f(ans) / df(ans);
         }
 
