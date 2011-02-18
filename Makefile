@@ -41,7 +41,7 @@ TARGET        = binomial_test poisson_test laplace_test bernoulli_test t_test ex
 first: all
 ####### Implicit rules
 
-all:  mkdir -p $(TARGET)
+all: $(TARGET)
 
 $(TARGET): 
 
