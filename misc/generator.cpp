@@ -3336,10 +3336,17 @@ const std::size_t w[] = { 7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2, 1
 
 const std::size_t generate_18( const std::string& str )
 {
-    const std::size_t ans = std::inner_product( w, w + 17, &str[0], std::size_t( 0 ),
+    std::size_t ans = std::inner_product( w, w + 17, &str[0], std::size_t( 0 ),
                                                 []( std::size_t s, const std::size_t t ) -> std::size_t {return s + t;},
                                                 []( std::size_t s, char ch ) -> std::size_t {std::size_t t = ch - '0'; return s* t; }
                                               );
+
+    ans %= 11;
+
+    ans = 12 - ans;
+
+    ans %= 11;
+
     return ans;
 }
 
@@ -3350,10 +3357,7 @@ void generate_id()
     const std::string m = r_gen( month, sizeof( month ) / sizeof( 0[month] ) );
     const std::string d = r_gen( day, sizeof( day ) / sizeof( 0[day] ) );
     const std::size_t o_ = rand_gen( 1, 999 );
-    assert( 6 == p.size() );
-    assert( 4 == y.size() );
-    assert( 2 == m.size() );
-    assert( 2 == d.size() );
+
     std::stringstream ss;
     ss << o_;
     std::string o;
@@ -3367,15 +3371,9 @@ void generate_id()
 
     const std::string i17 = p + y + m + d + o;
 
-    std::size_t i18 = generate_18( i17 );
-
-    i18 %= 11;
-
-    i18 = 12 - i18;
-
-    i18 %= 11;
-
     std::cout << i17;
+
+    std::size_t i18 = generate_18( i17 );
 
     if ( i18 < 10 )
         { std::cout << i18; }
