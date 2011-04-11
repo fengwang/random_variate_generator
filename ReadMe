@@ -138,6 +138,8 @@ DISTRIBUTIONS:
         erlang
         exponential
         exponential_power
+        extreme_value
+          ---- mu(location), sigma(scale), xi(shape)
         factorial
         f
         gamma

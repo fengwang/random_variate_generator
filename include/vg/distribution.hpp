@@ -30,6 +30,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <vg/distribution/erlang.hpp>
 #include <vg/distribution/exponential.hpp>
 #include <vg/distribution/exponential_power.hpp>
+#include <vg/distribution/extreme_value.hpp>
 #include <vg/distribution/f.hpp>
 #include <vg/distribution/factorial.hpp>
 #include <vg/distribution/gamma.hpp>
