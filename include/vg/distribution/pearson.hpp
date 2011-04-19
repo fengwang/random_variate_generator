@@ -23,7 +23,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <vg/distribution/gamma.hpp>
 #include <vg/distribution/normal.hpp>
 #include <vg/distribution/beta.hpp>
-#include <vg/utility.hpp>
 
 #include <cassert>
 #include <cstddef>

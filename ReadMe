@@ -1,5 +1,5 @@
 vg is a pseudo-random variate generator library, aiming to generate a large amount of random numbers, 
-with a luxury kinds of built-in distributions(currently 59), aiding applications in gambling, 
+with a luxury kinds of built-in distributions(currently 60), aiding applications in gambling, 
 statistical sampling, computer simulation, cryptography, completely randomized design, and other areas 
 where producing an unpredictable result is desirable. In the wake of C++ generic template 
 meta-programming, it is written in c++, compatible with STL.
@@ -126,6 +126,8 @@ ENGINES:
         mt19937
 
 DISTRIBUTIONS:
+        arcsine
+            -- no parameter
         bernoulli
         beta_binomial
         beta

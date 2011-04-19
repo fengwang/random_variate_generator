@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef _DISTRIBUTION_HPP_INCLUDED_FKHJOIUH3E98FASDKJHNSDFUJHNFDKJHDIUHEIUOHWUHE
 #define _DISTRIBUTION_HPP_INCLUDED_FKHJOIUH3E98FASDKJHNSDFUJHNFDKJHDIUHEIUOHWUHE
 
+#include <vg/distribution/arcsine.hpp>
 #include <vg/distribution/bernoulli.hpp>
 #include <vg/distribution/beta.hpp>
 #include <vg/distribution/beta_binomial.hpp>
