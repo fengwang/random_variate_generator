@@ -64,6 +64,8 @@ namespace vg
             }
 
         private:
+            //the distribution function is
+            //F(x;\mu,\sigma,\xi) = \exp\left\{-\left[1+\xi\left(\frac{x-\mu}{\sigma}\right)\right]^{-1/\xi}\right\}
             return_type
             direct_reverse_impl( const final_type Mu, const final_type Sigma, const final_type Xi )
             {

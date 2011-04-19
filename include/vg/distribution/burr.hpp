@@ -45,7 +45,7 @@ namespace vg
             final_type          r_;
             engine_type         e_;
 
-            explicit burr(  const size_type  n = size_type(12),	
+            explicit burr(  const size_type  n = size_type(1),	
                             const final_type c = final_type(1),
                             const final_type k = final_type(1),
                             const final_type r = final_type(1),
@@ -83,7 +83,6 @@ namespace vg
                 //                                  u           c            k           r
                 const std::function< final_type( final_type, final_type, final_type, final_type ) > inverse_function[12] = 
                 {
-                    // all wrong!
                     // F1(x) = x
                     []( const final_type u, const final_type c, const final_type k, const final_type r ) -> final_type
                     { return u; },
