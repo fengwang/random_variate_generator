@@ -47,6 +47,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <vg/distribution/hypergeometric.hpp>
 #include <vg/distribution/inverse_gaussian.hpp>
 #include <vg/distribution/inverse_polya_eggenberger.hpp>
+#include <vg/distribution/lambda.hpp>
 #include <vg/distribution/laplace.hpp>
 #include <vg/distribution/levy.hpp>
 #include <vg/distribution/logarithmic.hpp>
