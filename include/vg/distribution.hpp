@@ -18,6 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef _DISTRIBUTION_HPP_INCLUDED_FKHJOIUH3E98FASDKJHNSDFUJHNFDKJHDIUHEIUOHWUHE
 #define _DISTRIBUTION_HPP_INCLUDED_FKHJOIUH3E98FASDKJHNSDFUJHNFDKJHDIUHEIUOHWUHE
 
+#include <vg/distribution/arcsine.hpp>
 #include <vg/distribution/bernoulli.hpp>
 #include <vg/distribution/beta.hpp>
 #include <vg/distribution/beta_binomial.hpp>
@@ -30,6 +31,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <vg/distribution/erlang.hpp>
 #include <vg/distribution/exponential.hpp>
 #include <vg/distribution/exponential_power.hpp>
+#include <vg/distribution/extreme_value.hpp>
 #include <vg/distribution/f.hpp>
 #include <vg/distribution/factorial.hpp>
 #include <vg/distribution/gamma.hpp>
@@ -45,6 +47,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <vg/distribution/hypergeometric.hpp>
 #include <vg/distribution/inverse_gaussian.hpp>
 #include <vg/distribution/inverse_polya_eggenberger.hpp>
+#include <vg/distribution/lambda.hpp>
 #include <vg/distribution/laplace.hpp>
 #include <vg/distribution/levy.hpp>
 #include <vg/distribution/logarithmic.hpp>
@@ -57,10 +60,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <vg/distribution/pareto.hpp>
 #include <vg/distribution/pascal.hpp>
 #include <vg/distribution/pearson_vi.hpp>
+#include <vg/distribution/pearson.hpp>
 #include <vg/distribution/planck.hpp>
 #include <vg/distribution/poisson.hpp>
 #include <vg/distribution/polya.hpp>
 #include <vg/distribution/polya_aeppli.hpp>
+#include <vg/distribution/singh_maddala.hpp>
 #include <vg/distribution/rayleigh.hpp>
 #include <vg/distribution/rayleigh_tail.hpp>
 #include <vg/distribution/t.hpp>

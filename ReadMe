@@ -1,5 +1,5 @@
 vg is a pseudo-random variate generator library, aiming to generate a large amount of random numbers, 
-with a luxury kinds of built-in distributions(currently 56), aiding applications in gambling, 
+with a luxury kinds of built-in distributions(currently 62), aiding applications in gambling, 
 statistical sampling, computer simulation, cryptography, completely randomized design, and other areas 
 where producing an unpredictable result is desirable. In the wake of C++ generic template 
 meta-programming, it is written in c++, compatible with STL.
@@ -126,18 +126,23 @@ ENGINES:
         mt19937
 
 DISTRIBUTIONS:
+        arcsine
+            -- no parameter
         bernoulli
         beta_binomial
         beta
         beta_pascal
         binomial
         burr family( Burr I, Burr II, Burr III, ..., Burr XII )
+          ---- n(the order, 1 -- 12), c(shape), k(shape), r(scale)
         cauchy
         chi_square
         digamma
         erlang
         exponential
         exponential_power
+        extreme_value
+          ---- mu(location), sigma(scale), xi(shape)
         factorial
         f
         gamma
@@ -153,6 +158,8 @@ DISTRIBUTIONS:
         hypergeometric
         inverse_gaussian
         inverse_polya_eggenberger
+        lambda
+          ---- lambda1(location), lambda2(scale), lambda3(shape), lambda4(shape)
         laplace
         levy
         logarithmic
@@ -165,12 +172,16 @@ DISTRIBUTIONS:
         pareto
         pascal
         pearson_vi
+        pearson
+          ---- a(shape), b(shape), c(shape), d(shape)
         planck
         poisson
         polya
         polya_aeppli
         rayleigh
         rayleigh_tail
+        singh_maddala
+          ---- c(shape), k(shape), r(scale)
         t
         teichroew
         triangular
