@@ -27,8 +27,8 @@ using namespace std;
 
 int main()
 {
-    //variate_generator<double, t, mt19937> vg(100);    
-    variate_generator<double, t, vg::mt19937> vg(100);    
+    variate_generator<double, t, mt19937> vg(100);    
+    //variate_generator<double, t, vg::mt19937> vg(100);    
 
     copy( vg.begin(), vg.begin()+1000, ostream_iterator<double>(cout, "\n"));
 
