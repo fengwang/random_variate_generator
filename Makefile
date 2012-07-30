@@ -10,6 +10,7 @@ CXXFLAGS        = -O2 $(DEFINES)
 INCPATH       = -Iinclude 
 #LINK          = icpc
 LINK          = g++
+LATEX         = xelatex
 #LINK          = g++-4.6
 LFLAGS        = 
 #LFLAGS        = -Wl,--as-needed -Wl,-O1
@@ -21,6 +22,7 @@ MAKE_DIR      = mkdir
 ####### Output directory
 OBJECTS_DIR   = ./obj
 BIN_DIR       = ./bin
+DOC_DIR       = ./doc
 
 ####### Files
 OBJECTS       = binomial_test.o poisson_test.o laplace_test.o bernoulli_test.o t_test.o exponential_test.o \
@@ -37,11 +39,15 @@ TARGET        = binomial_test poisson_test laplace_test bernoulli_test t_test ex
                 yule_test.o generalized_hypergeometric_b3_test generalized_waring_test mizutani_test \
                 waring_test digamma_test trigamma_test inverse_gaussian_test wald_test teichroew_test \
 				pearson_vi_test grassia_test
+DOC           = main.tex
 
 first: all
 ####### Implicit rules
 
 all: $(TARGET)
+
+pdf:
+	$(LATEX) -output-directory=$(DOC_DIR) $(DOC_DIR)/$(DOC)
 
 $(TARGET): 
 

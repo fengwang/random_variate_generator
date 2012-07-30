@@ -21,6 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <vg/engine/default_seed.hpp>
 
 #include <cstddef>
+#include <algorithm>
 
 namespace vg
 {
@@ -44,6 +45,7 @@ namespace vg
             mitchell_moore( const seed_type s = 0 )
                 : next_( 0 ), next_p_( 31 )
             {
+                std::fill( a_, a_+56, value_type(0) ); //just to kill valgrind uninitialization error report
                 initial( s );
             }
 

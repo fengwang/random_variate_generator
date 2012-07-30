@@ -21,22 +21,24 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <map>
 #include <iostream>
 
-using namespace vg;
-using namespace std;
-
 int main()
 {
-    variate_generator<double, gaussian, vg::mt19937> vg(0, 4);    
-    map< int, int > sample;
+    //generate double gaussian random numbers with argument (0,4), i.e. N(0,4)
+    //using mt19937 as uniform random generator engine
+    vg::variate_generator<double, vg::gaussian, vg::mt19937> vg(0, 4);    
+    std::map< int, int > sample;
 
+    //generate 500 gaussian numbers and store it in a map
     for ( auto i = vg.begin(); i != vg.begin()+500; ++i )
-        sample[round(*i)]++;
+        sample[std::round(*i)]++;
 
+    //show the number generated
     for ( auto i = sample.begin(); i != sample.end(); ++i )
     {
-        cout << "\n" << (*i).first << "\t";
+        std::cout << (*i).first << "\t";
         for ( auto j = 0; j < (*i).second; ++j )
-            cout << "*";
+            std::cout << "*";
+        std::cout << "\n";
     }
 
     return 0;
