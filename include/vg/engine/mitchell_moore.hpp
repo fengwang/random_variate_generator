@@ -22,6 +22,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <cstddef>
 #include <algorithm>
+#include <mutex>
+#include <limits>
 
 namespace vg
 {
@@ -40,17 +42,30 @@ namespace vg
             value_type a_[56];
             size_type next_;
             size_type next_p_;
+            mutable std::mutex mtx;
 
         public:
             mitchell_moore( const seed_type s = 0 )
                 : next_( 0 ), next_p_( 31 )
             {
+                std::lock_guard<std::mutex> l( mtx );
+
                 std::fill( a_, a_+56, value_type(0) ); //just to kill valgrind uninitialization error report
+                initial( s );
+            }
+
+            void reset_seed( const seed_type s = 0 )
+            {
+                if ( 0 == s ) return;
+
+                std::lock_guard<std::mutex> l( mtx );
                 initial( s );
             }
 
             final_type operator()()
             {
+                std::lock_guard<std::mutex> l( mtx );
+
                 if ( ++next_ == 56 )
                     { next_ = 1; }
 
@@ -61,7 +76,8 @@ namespace vg
 
                 a_[next_] = tmp;
                 const final_type ans = static_cast<final_type>( tmp ) /
-                                       static_cast<final_type>( value_type(-1) );
+                                       static_cast<final_type>( std::numeric_limits<value_type>::max() );
+                                       //static_cast<final_type>( value_type(-1) );
                 return ans;
             } // end of operator()
 

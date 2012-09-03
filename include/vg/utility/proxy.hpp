@@ -23,10 +23,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 namespace vg 
 {
 
-//template<typename T>
-//struct proxy : T
-//{};
-
 template< typename T, std::size_t Level = 0 >
 struct proxy;
 

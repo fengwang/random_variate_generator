@@ -20,6 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <vg/distribution/generalized_hypergeometric_b3.hpp>
 #include <vg/special_function/digamma.hpp>
+#include <vg/utility/singleton.hpp>
 
 #include <cmath>
 #include <algorithm>
@@ -28,10 +29,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 namespace vg
 {
 
-    template <
-                typename Return_Type,
-                typename Engine
-             >
+    template < typename Return_Type, typename Engine >
     struct digamma : private generalized_hypergeometric_b3<Return_Type, Engine>
     {
             typedef generalized_hypergeometric_b3< Return_Type, Engine> GHgB3_type;
@@ -44,12 +42,14 @@ namespace vg
 
             value_type           a_;
             value_type           c_;
-            engine_type          e_;
+            engine_type&         e_;
 
-            explicit digamma( value_type a = 3, value_type c = 3, seed_type s = 0 ) : a_( a ), c_( c ), e_( s )
+            explicit digamma( value_type a = 3, value_type c = 3, seed_type s = 0 ) 
+                : a_( a ), c_( c ), e_( singleton<engine_type>::instance() )
             {
                 assert( a > 0 );
                 assert( c > 0 );
+                e_.reset_seed( s );
             }
 
             return_type

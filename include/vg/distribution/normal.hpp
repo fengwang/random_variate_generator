@@ -18,15 +18,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef _NORMAL_HPP_INCLUDED_9URHFADSKJHSAFUHE9U8HDFUJHDUIHEUHFDUJHDSUI893U7FSDK
 #define _NORMAL_HPP_INCLUDED_9URHFADSKJHSAFUHE9U8HDFUJHDUIHEUHFDUJHDSUI893U7FSDK
 
-#include <cmath>
+#include <vg/utility/singleton.hpp>
 
+#include <cmath>
 
 namespace vg
 {
 
-    template <   typename Return_Type,
-                 typename Engine
-             >
+    template < typename Return_Type, typename Engine >
     struct normal
     {
             typedef typename Engine::final_type     final_type;
@@ -34,10 +33,12 @@ namespace vg
             typedef typename Engine::seed_type      seed_type;
             typedef Engine                          engine_type;
 
-            engine_type e_;
+            engine_type& e_;
 
-            explicit normal( const seed_type sd = 0 ) : e_( sd )
-            {}
+            explicit normal( const seed_type sd = 0 ) : e_( singleton<engine_type>::instance() )
+            {
+                e_.reset_seed( sd );
+            }
 
             return_type
             operator()()

@@ -25,9 +25,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 namespace vg
 {
 
-    template <   typename Return_Type,
-                 typename Engine
-             >
+    template < typename Return_Type, typename Engine >
     struct gaussian : private normal<Return_Type, Engine>
     {
             typedef normal<Return_Type, Engine>         normal_type;

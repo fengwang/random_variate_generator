@@ -29,9 +29,9 @@ int main()
 {
     variate_generator<double, vg::grassia> vg(7.12, 3.456);    
 
-    copy( vg.begin(), vg.begin()+100, ostream_iterator<double>(cout, "\n"));
+    copy( vg.begin(), vg.begin()+10, ostream_iterator<double>(cout, "\n"));
 
-    auto sum = accumulate( vg.begin(), vg.begin()+1000, 0.0 );
+    auto sum = accumulate( vg.begin(), vg.begin()+10, 0.0 );
 
     cout << sum << endl;
 

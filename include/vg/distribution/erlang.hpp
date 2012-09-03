@@ -27,13 +27,12 @@ a sum of the squares of k independent standard normal random variables.
 #endif
 
 #include <vg/distribution/gamma.hpp>
+#include <vg/utility/singleton.hpp>
 
 namespace vg
 {
 
-    template <   typename Return_Type,
-                 typename Engine
-             >
+    template < typename Return_Type, typename Engine >
     struct erlang : private gamma<Return_Type, Engine>
     {
             typedef gamma<Return_Type, Engine>          gamma_type;
@@ -46,14 +45,16 @@ namespace vg
 
             return_type     a_;
             return_type     n_;
-            engine_type     e_;
+            engine_type&    e_;
 
 
             explicit erlang( const return_type a = return_type( 1 ),
                              const return_type n = return_type( 10 ),
                              const seed_type sd = 0 )
-                : a_( a ), n_( n ), e_( sd )
-            {}
+                : a_( a ), n_( n ), e_( singleton<engine_type>::instance() )
+            {
+                e_.reset_seed( sd );
+            }
 
             return_type
             operator()()

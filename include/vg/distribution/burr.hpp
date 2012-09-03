@@ -19,6 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define _BURR_HPP_INCLUDED_SJSDFLKJ4OIFGLKJDLKJSDFGLDIU45OIUDGLKJDFLKJDGKLJDLKJFOI4LKJDOIRJLKDJGLKJVDKJHVDDKJHFJGKDKJDSGL
 
 #include <vg/numeric/newton_raphson.hpp>
+#include <vg/utility/singleton.hpp>
 
 #include <functional>
 #include <cmath>
@@ -27,9 +28,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 namespace vg
 {
 
-    template <   typename Return_Type,
-                 typename Engine
-             >
+    template < typename Return_Type, typename Engine >
     struct burr
     {
             typedef Return_Type                         		return_type;
@@ -43,19 +42,20 @@ namespace vg
             final_type          c_;
             final_type          k_;
             final_type          r_;
-            engine_type         e_;
+            engine_type&        e_;
 
             explicit burr(  const size_type  n = size_type(1),	
                             const final_type c = final_type(1),
                             const final_type k = final_type(1),
                             const final_type r = final_type(1),
                             const seed_type sd = 0 )
-                : n_(n), c_( c ), k_( k ), r_( r ), e_( sd )
+                : n_(n), c_( c ), k_( k ), r_( r ), e_( singleton<engine_type>::instance() )
             {
                 assert( n > 0 );
                 assert( n < 13 );
                 assert( c > 0 );
                 assert( k > 0 );
+                e_.reset_seed( sd );
             }
 
             return_type

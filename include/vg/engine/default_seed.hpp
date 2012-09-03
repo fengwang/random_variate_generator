@@ -21,16 +21,21 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <cstddef>
 #include <ctime>
 
+
+#include <iostream>
+
 namespace vg
 {
 
     struct default_seed
     {
-
         typedef unsigned long long		seed_type;
 
         seed_type operator()() const
         {
+
+            std::cerr << "\n!!\n!! Default Seed called.\n!!\n";
+
             const seed_type  s = static_cast<seed_type>( time( 0 ) );
             int * i = new int;
             seed_type  ans = s + ( (seed_type)(i) | ((seed_type)(i) << 32) );

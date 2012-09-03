@@ -19,6 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define _LEVY_HPP_INCLUDED_SODIFJ3IOU8ASFLIJ4OAUIFSLKJ4OIUAFSDLKJ4OIAJFLKJAS98U34AFSJ
 
 #include <vg/distribution/exponential.hpp>
+#include <vg/utility/singleton.hpp>
 
 #include <cassert>
 #include <cmath>
@@ -26,9 +27,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 namespace vg
 {
 
-    template <   typename Return_Type,
-                 typename Engine
-             >
+    template < typename Return_Type, typename Engine >
     struct levy : private exponential<Return_Type, Engine>
     {
             typedef exponential<Return_Type, Engine>    exponential_type;
@@ -37,16 +36,17 @@ namespace vg
             typedef typename engine_type::final_type    final_type;
             typedef typename engine_type::seed_type     seed_type;
 
-            return_type c_;
-            return_type alpha_;
-            engine_type e_;
+            return_type     c_;
+            return_type     alpha_;
+            engine_type&    e_;
 
             explicit levy( const return_type c = 1,
                            const return_type alpha = 1,
                            const seed_type sd = 0 )
-                : c_( c ), alpha_( alpha ), e_( sd )
+                : c_( c ), alpha_( alpha ), e_( singleton<engine_type>::instance() )
             {
                 assert( c > 0 );
+                e_.reset_seed( sd );
             }
 
             return_type
@@ -111,7 +111,5 @@ namespace vg
 
 }//vg
 
-
 #endif//_LEVY_HPP_INCLUDED_SODIFJ3IOU8ASFLIJ4OAUIFSLKJ4OIUAFSDLKJ4OIAJFLKJAS98U34AFSJ
-
 

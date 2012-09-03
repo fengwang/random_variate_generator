@@ -29,9 +29,9 @@ int main()
 {
     variate_generator<double, vg::levy, vg::mt19937> vg(1.5, 1.5);    
 
-    copy( vg.begin(), vg.begin()+1000, ostream_iterator<double>(cout, "\n"));
+    copy( vg.begin(), vg.begin()+10, ostream_iterator<double>(cout, "\n"));
 
-    auto sum = accumulate( vg.begin(), vg.begin()+1000, 0.0 );
+    auto sum = accumulate( vg.begin(), vg.begin()+10, 0.0 );
 
     cout << sum << endl;
 

@@ -27,6 +27,7 @@ called a Bernoulli experiment or Bernoulli trial.
 #endif
 
 #include <vg/distribution/beta.hpp>
+#include <vg/utility/singleton.hpp>
 
 #include <cassert>
 #include <cstddef>
@@ -36,10 +37,7 @@ called a Bernoulli experiment or Bernoulli trial.
 namespace vg
 {
 
-    template <
-                typename Return_Type,
-                typename Engine
-             >
+    template < typename Return_Type, typename Engine >
     struct binomial : private beta<typename Engine::final_type, Engine>
     {
             typedef beta<typename Engine::final_type, Engine> beta_type;
@@ -52,16 +50,17 @@ namespace vg
 
             size_type           n_;
             final_type          p_;
-            engine_type         e_;
+            engine_type&        e_;
 
             explicit binomial( size_type n = size_type( 1 ),
                                final_type p = final_type( 0.5 ),
-                               const seed_type s = seed_type( 0 ) )
-                : n_( n ), p_( p ), e_( s )
+                               const seed_type sd = seed_type( 0 ) )
+                : n_( n ), p_( p ), e_( singleton<engine_type>::instance() )
             {
                 assert( n_ != size_type( 0 ) );
                 assert( p_ > final_type( 0 ) );
                 assert( p_ < final_type( 1 ) );
+                e_.reset_seed( sd );
             }
 
             return_type

@@ -24,14 +24,14 @@ The Cauchy distribution, also called the Lorentzian distribution or Lorentz dist
     of horizontal distances at which a line segment tilted at a random angle  cuts the x - axis.
 #endif
 
+#include <vg/utility/singleton.hpp>
+
 #include <cmath>
 #include <cassert>
 
 namespace vg
 {
-    template <   typename Return_Type,
-                 typename Engine
-             >
+    template < typename Return_Type, typename Engine >
     struct cauchy
     {
             typedef Return_Type                         return_type;
@@ -40,14 +40,15 @@ namespace vg
             typedef typename engine_type::final_type    final_type;
             typedef typename engine_type::seed_type     seed_type;
 
-            return_type delta_;
-            engine_type e_;
+            return_type     delta_;
+            engine_type&    e_;
 
             explicit cauchy( const return_type delta = 1,
                              const seed_type sd = 0 )
-                : delta_( delta ), e_( sd )
+                : delta_( delta ), e_( singleton<engine_type>::instance() )
             {
                 assert( delta_ > 0 );
+                e_.reset_seed( sd );
             }
 
             return_type
@@ -75,7 +76,7 @@ namespace vg
 
                     if ( u != final_type( 0.5 ) )
                     {
-                        return static_cast<return_type>( Delta * std::tan( pi * u ) );
+                        return Delta * std::tan( pi * u );
                     }
                 }
             }

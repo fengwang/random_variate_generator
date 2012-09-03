@@ -19,7 +19,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define _LINEAR_CONGRUENTIAL_HPP_INCLUDED_3UHSFKJHNSAIFUNVCJMNZKJHDEIUHE3IUHSIKUJHEE8
 
 #include <vg/engine/default_seed.hpp>
+
 #include <cstddef>
+#include <mutex>
+#include <limits>
 
 namespace vg
 {
@@ -35,19 +38,34 @@ namespace vg
 			static const value_type a_ = 6364136223846793005ULL;
 			static const value_type c_ = 1442695040888963407ULL;
 			value_type x_;
+            mutable std::mutex mtx;
 
         public:
             linear_congruential( const seed_type s = 0 )
             {
+                std::lock_guard<std::mutex> l( mtx );
+
                 x_ = s ? s : default_seed()();
+            }
+
+            void reset_seed( const seed_type s = 0 )
+            {
+                if ( s )
+                {
+                    std::lock_guard<std::mutex> l( mtx );
+                    x_ = s;
+                }
             }
 
             final_type operator()()
             {
+                std::lock_guard<std::mutex> l( mtx );
+
 				x_ *= a_;
 				x_ += c_;
                 const final_type ans = static_cast<final_type>( x_ ) /
-                                       static_cast<final_type>( value_type(-1) );
+                                       static_cast<final_type>( std::numeric_limits<value_type>::max() );
+                                       //static_cast<final_type>( value_type(-1) );
                 return ans;
             } // end of operator()
 
@@ -58,6 +76,4 @@ namespace vg
 }//namespace vg
 
 #endif//_LINEAR_CONGRUENTIAL_HPP_INCLUDED_3UHSFKJHNSAIFUNVCJMNZKJHDEIUHE3IUHSIKUJHEE8
-
-
 

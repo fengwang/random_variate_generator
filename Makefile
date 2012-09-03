@@ -4,7 +4,7 @@ CC            = gcc
 #CXX           = icpc
 #CXX           = g++-4.6
 CXX           = g++
-DEFINES       = -Wall -std=c++0x
+DEFINES       = -Wall -std=c++11
 CFLAGS        = -O2 $(DEFINES)
 CXXFLAGS        = -O2 $(DEFINES)
 INCPATH       = -Iinclude 

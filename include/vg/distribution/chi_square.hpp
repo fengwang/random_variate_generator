@@ -27,13 +27,12 @@ a sum of the squares of k independent standard normal random variables.
 #endif
 
 #include <vg/distribution/gamma.hpp>
+//#include <vg/utility/singleton.hpp>
 
 namespace vg
 {
 
-    template <   typename Return_Type,
-                 typename Engine
-             >
+    template < typename Return_Type, typename Engine >
     struct chi_square : private gamma<Return_Type, Engine>
     {
             typedef Return_Type                         return_type;
@@ -45,12 +44,14 @@ namespace vg
             typedef typename engine_type::size_type     size_type;
 
             size_type       k_;
-            engine_type     e_;
+            //engine_type&    e_;
 
             explicit chi_square( const size_type k = 10,
                                  const seed_type sd = 0 )
-                : k_( k ), e_( sd )
-            {}
+                : k_( k )//, e_( singleton<engine_type>::instance() )
+            {
+                //e_.reset_seed( sd );
+            }
 
             return_type
             operator()()

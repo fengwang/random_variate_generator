@@ -27,18 +27,18 @@ outcomes labelled by n = 0 and n = 1 in which n = 1( "success" ) occurs with pro
 
 #endif
 
+#include <vg/utility/singleton.hpp>
+
 #include <cassert>
 #include <cstddef>
 
 namespace vg
 {
 
-    template <
-                typename Return_Type,
-                typename Engine
-             >
+    template < typename Return_Type, typename Engine >
     struct bernoulli
     {
+            typedef Engine                          engine_type;
             typedef typename Engine::final_type     final_type;
             typedef Return_Type                     return_type;
             typedef Return_Type                     value_type;
@@ -46,14 +46,15 @@ namespace vg
             typedef std::size_t                     size_type;
 
             final_type p_;
-            Engine e_;
+            engine_type& e_;
 
             explicit bernoulli( final_type p = final_type( 0.5 ),
                                 const seed_type s = seed_type( 0 ) )
-                : p_( p ), e_( s )
+                : p_( p ), e_( singleton<engine_type>::instance() )
             {
                 assert( p_ >= final_type( 0 ) );
                 assert( p_ <= final_type( 1 ) );
+                e_.reset_seed( s );
             }
 
             return_type

@@ -18,15 +18,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef _EXPONENTIAL_HPP_INCLUDED_98JKLJHWE8UHSFDWE98HSFDIUHEUHSAKUHAIUHWEIUHASF
 #define _EXPONENTIAL_HPP_INCLUDED_98JKLJHWE8UHSFDWE98HSFDIUHEUHSAKUHAIUHWEIUHASF
 
+#include <vg/utility/singleton.hpp>
+
 #include <cmath>
 #include <cassert>
 
 namespace vg
 {
 
-    template <   typename Return_Type,
-                 typename Engine
-             >
+    template < typename Return_Type, typename Engine >
     struct exponential
     {
             typedef Return_Type                         return_type;
@@ -36,13 +36,14 @@ namespace vg
             typedef typename engine_type::seed_type     seed_type;
 
             return_type         lambda_;
-            engine_type         e_;
+            engine_type&        e_;
 
             explicit exponential(	const return_type lambda = 1,
                                     const seed_type sd = 0 )
-                : lambda_( lambda ), e_( sd )
+                : lambda_( lambda ), e_( singleton<engine_type>::instance() )
             {
                 assert( lambda_ > 0 );
+                e_.reset_seed( sd );
             }
 
             return_type
@@ -71,7 +72,5 @@ namespace vg
 
 }//vg
 
-
 #endif//_EXPONENTIAL_HPP_INCLUDED_98JKLJHWE8UHSFDWE98HSFDIUHEUHSAKUHAIUHWEIUHASF
-
 

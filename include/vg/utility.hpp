@@ -19,6 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define _UTILITY_HPP_INCLUDED_SDOIFJ34O8UASFLKJ4OIUJAFLDSKJASFKLMNCVOILJASDFO8UI
 
 #include <vg/utility/proxy.hpp>
+#include <vg/utility/singleton.hpp>
 
 #endif//_UTILITY_HPP_INCLUDED_SDOIFJ34O8UASFLKJ4OIUJAFLDSKJASFKLMNCVOILJASDFO8UI
 
