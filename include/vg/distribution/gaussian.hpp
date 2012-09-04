@@ -19,6 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define _GAUSSIAN_HPP_INCLUDED_OIHJ3LKJAFS98UYH3KJHFAS9I8UHY2QR3OIUHFSIOUHEIUHY3
 
 #include <vg/distribution/normal.hpp>
+#include <vg/utility/singleton.hpp>
 
 #include <cassert>
 
@@ -34,16 +35,18 @@ namespace vg
             typedef typename normal_type::final_type    final_type;
             typedef typename normal_type::seed_type     seed_type;
 
-            return_type mean_;
-            return_type variance_;
-            normal_type n_;
+            return_type     mean_;
+            return_type     variance_;
+            engine_type&    e_;
+            //normal_type n_;
 
             explicit gaussian( const return_type mean = 0,
                                const return_type variance = 1,
                                const seed_type sd = 0 )
-                : mean_( mean ), variance_( variance ), n_( sd )
+                : mean_( mean ), variance_( variance ), e_( singleton<engine_type>::instance() )
             {
                 assert( variance > 0 );
+                e_.reset_seed( sd );
             }
 
             return_type
@@ -69,7 +72,5 @@ namespace vg
 
 }//vg
 
-
 #endif//_GAUSSIAN_HPP_INCLUDED_OIHJ3LKJAFS98UYH3KJHFAS9I8UHY2QR3OIUHFSIOUHEIUHY3
-
 

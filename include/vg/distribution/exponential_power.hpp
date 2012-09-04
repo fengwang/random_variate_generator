@@ -29,9 +29,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 namespace vg
 {
 
-    template <   typename Return_Type,
-                 typename Engine
-             >
+    template < typename Return_Type, typename Engine >
     struct exponential_power :
         private gamma<Return_Type, Engine>,
         private laplace<Return_Type, Engine>,
@@ -41,21 +39,24 @@ namespace vg
             typedef gamma<Return_Type, Engine>                  gamm_type;
             typedef laplace<Return_Type, Engine>                laplace_type;
             typedef proxy<normal<Return_Type, Engine> >         normal_type;
-            typedef Return_Type                         		return_type;
-            typedef Engine                              		engine_type;
+            typedef Return_Type                                 return_type;
+            typedef Engine                                      engine_type;
             typedef return_type                                 value_type;
-            typedef typename engine_type::size_type          	size_type;
-            typedef typename engine_type::final_type    	    final_type;
-            typedef typename engine_type::seed_type     	    seed_type;
+            typedef typename engine_type::size_type             size_type;
+            typedef typename engine_type::final_type            final_type;
+            typedef typename engine_type::seed_type             seed_type;
 
             value_type          a_;
             value_type          b_;
-            engine_type         e_;
+            engine_type&        e_;
 
-            explicit exponential_power(	const value_type a = value_type( 1 ),
+            explicit exponential_power( const value_type a = value_type( 1 ),
                     const value_type b = value_type( 1 ),
                     const seed_type sd = 0 )
-                : a_( a ), b_( b ), e_( sd ) {}
+                : a_( a ), b_( b ), e_( singleton<engine_type>::instance() ) 
+            {
+                e_.reset_seed( sd );
+            }
 
             return_type
             operator()()

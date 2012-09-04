@@ -21,7 +21,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <vg/distribution/normal.hpp>
 #include <vg/distribution/chi_square.hpp>
 #include <vg/distribution/exponential.hpp>
-#include <vg/utility.hpp>
+#include <vg/utility/singleton.hpp>
+#include <vg/utility/proxy.hpp>
 
 #include <cmath>
 #include <cstddef>
@@ -31,9 +32,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 namespace vg
 {
 
-    template <   typename Return_Type,
-                 typename Engine
-             >
+    template < typename Return_Type, typename Engine >
     struct t :  private proxy<normal<Return_Type, Engine> >,
         private chi_square<Return_Type, Engine>,
         private exponential<Return_Type, Engine>
@@ -49,13 +48,14 @@ namespace vg
             typedef typename Engine::size_type      size_type;
             typedef Engine                          engine_type;
 
-            final_type  mu_;
-            engine_type e_;
+            final_type      mu_;
+            engine_type&    e_;
 
             explicit t( const return_type mu = 1, const seed_type sd = 0 )
-                : mu_( mu ), e_( sd )
+                : mu_( mu ), e_( singleton<engine_type>::instance() )
             {
                 assert( mu > 0 );
+                e_.reset_seed( sd );
             }
 
             return_type

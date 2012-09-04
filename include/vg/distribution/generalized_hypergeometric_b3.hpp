@@ -21,6 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <vg/utility.hpp>
 #include <vg/distribution/gamma.hpp>
 #include <vg/distribution/poisson.hpp>
+#include <vg/utility/singleton.hpp>
 
 #include <cassert>
 #include <cstddef>
@@ -48,14 +49,15 @@ namespace vg
         value_type           a_;   
         value_type           b_;  
         value_type           c_; 
-        engine_type          e_;
+        engine_type&         e_;
 
         explicit generalized_hypergeometric_b3( value_type a = 1, value_type b = 1, value_type c = 1 , seed_type s = 0 )
-                : a_( a ), b_( b ), c_( c ), e_( s ) 
+                : a_( a ), b_( b ), c_( c ), e_( singleton<engine_type>::instance() ) 
         {
             assert( a > 0 );
             assert( b > 0 );
             assert( c > 0 );
+            e_.reset_seed( s );
         }
 
         return_type

@@ -59,7 +59,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <vg/distribution/normal.hpp>
 #include <vg/distribution/pareto.hpp>
 #include <vg/distribution/pascal.hpp>
-#include <vg/distribution/pearson_vi.hpp>
+//#include <vg/distribution/pearson_vi.hpp>
 #include <vg/distribution/pearson.hpp>
 #include <vg/distribution/planck.hpp>
 #include <vg/distribution/poisson.hpp>

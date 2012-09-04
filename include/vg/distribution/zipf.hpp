@@ -18,15 +18,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef _ZIPF_HPP_INCLUDED_SDO8UJ3498UASFASFDOIJHSLKJ3QP4OUJSDFOIJ4OPIAS23RIJASFOIJ498ASFDKLJ4UIOAJFLIJKASFDAFS089JIO34AFSD
 #define _ZIPF_HPP_INCLUDED_SDO8UJ3498UASFASFDOIJHSLKJ3QP4OUJSDFOIJ4OPIAS23RIJASFOIJ498ASFDKLJ4UIOAJFLIJKASFDAFS089JIO34AFSD 
 
+#include <vg/utility/singleton.hpp>
+
 #include <cmath>
 #include <cassert>
 
 namespace vg
 {
 
-    template <   typename Return_Type,
-                 typename Engine
-             >
+    template < typename Return_Type, typename Engine >
     struct zipf
     {
             typedef Return_Type                         return_type;
@@ -35,13 +35,14 @@ namespace vg
             typedef typename engine_type::seed_type     seed_type;
 
             return_type         a_;
-            engine_type         e_;
+            engine_type&        e_;
 
             explicit zipf(	const return_type a = 2,
                             const seed_type sd = 0 )
-                : a_( a ), e_( sd )
+                : a_( a ), e_( singleton<engine_type>::instance() )
             {
                 assert( a > 1 );
+                e_.reset_seed( sd );
             }
 
             return_type
@@ -87,7 +88,6 @@ namespace vg
     };
 
 }//vg
-
 
 #endif//_ZIPF_HPP_INCLUDED_SDO8UJ3498UASFASFDOIJHSLKJ3QP4OUJSDFOIJ4OPIAS23RIJASFOIJ498ASFDKLJ4UIOAJFLIJKASFDAFS089JIO34AFSD 
 

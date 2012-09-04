@@ -33,9 +33,6 @@ namespace vg
 
         seed_type operator()() const
         {
-
-            std::cerr << "\n!!\n!! Default Seed called.\n!!\n";
-
             const seed_type  s = static_cast<seed_type>( time( 0 ) );
             int * i = new int;
             seed_type  ans = s + ( (seed_type)(i) | ((seed_type)(i) << 32) );

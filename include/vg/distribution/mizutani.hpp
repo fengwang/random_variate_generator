@@ -19,16 +19,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define _MIZUTANI_HPP_INCLUDED904KLDJA1Q2W3E4RLKJFIUJ682LI4SAF89D8HFAIUYERIKASFDUIOH4AFSD98ASDFNVSSSSSSSSSSOIJWER 
 
 #include <vg/distribution/generalized_hypergeometric_b3.hpp>
+#include <vg/utility/singleton.hpp>
 
 #include <cassert>
 
 namespace vg
 {
 
-    template <
-                typename Return_Type,
-                typename Engine
-             >
+    template < typename Return_Type, typename Engine >
     struct mizutani : private generalized_hypergeometric_b3<Return_Type, Engine>
     {
         typedef generalized_hypergeometric_b3< Return_Type, Engine> GHgB3_type;
@@ -40,11 +38,13 @@ namespace vg
         typedef Engine                          engine_type;
 
         value_type           a_; 
-        engine_type          e_;
+        engine_type&         e_;
 
-        explicit mizutani(value_type a = 1 , seed_type s = 0 ) : a_( a ), e_( s ) 
+        explicit mizutani(value_type a = 1 , seed_type s = 0 ) 
+            : a_( a ), e_( singleton<engine_type>::instance() ) 
         {
             assert( a > 0 );
+            e_.reset_seed( s );
         }
 
         return_type

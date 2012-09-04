@@ -18,9 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef _TEICHROEW_HPP_INCLUDED_SDOIJ3OIUSAFKLJ498YASFDKJH49IY8AFSDKLJH4IUYASFDKLJHWEIUHYWREIUY487YSFIUSFKJHCVXJHSDFKJHSF
 #define _TEICHROEW_HPP_INCLUDED_SDOIJ3OIUSAFKLJ498YASFDKJH49IY8AFSDKLJH4IUYASFDKLJHWEIUHYWREIUY487YSFIUSFKJHCVXJHSDFKJHSF
 
-#include <vg/utility.hpp>
 #include <vg/distribution/normal.hpp>
 #include <vg/distribution/gamma.hpp>
+#include <vg/utility/singleton.hpp>
+#include <vg/utility/proxy.hpp>
 
 #include <cmath>
 #include <cassert>
@@ -28,9 +29,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 namespace vg
 {
 
-    template <   typename Return_Type,
-                 typename Engine
-             >
+    template < typename Return_Type, typename Engine >
     struct teichroew : private proxy<normal<Return_Type, Engine>, 1>, 
                        private proxy<gamma<Return_Type, Engine>, 2>
     {
@@ -41,14 +40,15 @@ namespace vg
             typedef typename normal_type::final_type      final_type;
             typedef typename normal_type::seed_type       seed_type;
 
-            return_type alpha_;
-            engine_type e_;
+            return_type     alpha_;
+            engine_type&    e_;
 
             explicit teichroew( const return_type alpha = 1,
                                 const seed_type sd = 0 )
-                : alpha_( alpha ), e_( sd )
+                : alpha_( alpha ), e_( singleton<engine_type>::instance() )
             {
                 assert( alpha > 0 );
+                e_.reset_seed( sd );
             }
 
             return_type

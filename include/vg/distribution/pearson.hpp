@@ -23,6 +23,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <vg/distribution/gamma.hpp>
 #include <vg/distribution/normal.hpp>
 #include <vg/distribution/beta.hpp>
+#include <vg/utility/singleton.hpp>
 
 #include <cassert>
 #include <cstddef>
@@ -32,10 +33,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 namespace vg
 {
 
-    template <
-                typename Return_Type,
-                typename Engine
-             >
+    template < typename Return_Type, typename Engine >
     struct pearson :  private proxy<gamma<typename Engine::final_type, Engine>, 1 >,
                       private proxy<exponential<typename Engine::final_type, Engine>, 2 >,
                       private proxy<normal<typename Engine::final_type, Engine>, 3 >,
@@ -58,7 +56,7 @@ namespace vg
             final_type          b_;
             final_type          c_;
             final_type          d_;
-            engine_type         e_;
+            engine_type&        e_;
 
             explicit pearson( size_type  n = size_type(1),
                               final_type a = final_type(1),
@@ -66,10 +64,11 @@ namespace vg
                               final_type c = final_type(1),
                               final_type d = final_type(1),
                               const seed_type s = seed_type( 0 ) )
-                : n_(n), a_(a), b_(b), c_(c), d_(d), e_( s ) 
+                : n_(n), a_(a), b_(b), c_(c), d_(d), e_( singleton<engine_type>::instance() ) 
             {
                 assert( n > 0 );
                 assert( n < 13);
+                e_.reset_seed( s );
             }
 
             return_type

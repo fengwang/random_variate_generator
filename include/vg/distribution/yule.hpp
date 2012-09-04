@@ -19,7 +19,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define _YULE_HPP_INCLUDED_DSOIJH328YASDIK398YASFDL3UHSDFLOIAFSDKJHNVJFSDSDIJ34KJHSFDJKLH349IAOSDFLKJR4ALFKSDJ3U890ASFOD 
 
 #include <vg/distribution/exponential.hpp>
-#include <vg/utility.hpp>
+#include <vg/utility/proxy.hpp>
+#include <vg/utility/singleton.hpp>
 
 #include <cassert>
 #include <cmath>
@@ -27,9 +28,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 namespace vg
 {
 
-    template <   typename Return_Type,
-                 typename Engine
-             >
+    template < typename Return_Type, typename Engine >
     struct yule : private exponential<Return_Type, Engine>
     {
             typedef exponential<Return_Type, Engine>    exponential_type;
@@ -38,12 +37,14 @@ namespace vg
             typedef typename Engine::seed_type          seed_type;
             typedef Engine                              engine_type;
 
-            final_type  a_;
-            engine_type e_;
+            final_type      a_;
+            engine_type&    e_;
 
-            explicit yule( const final_type a = 2, const seed_type sd = 0 ) : a_( a ), e_( sd ) 
+            explicit yule( const final_type a = 2, const seed_type sd = 0 ) 
+                : a_( a ), e_( singleton<engine_type>::instance() ) 
             {
                 assert( a > final_type(1) );
+                e_.reset_seed( sd );
             }
 
             return_type
@@ -79,11 +80,7 @@ namespace vg
 
     }; // yule 
 
-
-
-
 }//namespace vg
-
 
 #endif//_YULE_HPP_INCLUDED_DSOIJH328YASDIK398YASFDL3UHSDFLOIAFSDKJHNVJFSDSDIJ34KJHSFDJKLH349IAOSDFLKJR4ALFKSDJ3U890ASFOD 
 

@@ -20,6 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define _SINGH_MADDALA_HPP_INCLUDED_SOFIJ348UAS9F834298SFDOIU4OEIUWREOIUQW98RUY3428OUWE98UY498SFDJKHCKJHSKFJHSUH4387YSJKW
 
 #include <vg/distribution/burr.hpp>
+#include <vg/utility/singleton.hpp>
 
 #include <functional>
 #include <cmath>
@@ -28,9 +29,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 namespace vg
 {
 
-    template <   typename Return_Type,
-                 typename Engine
-             >
+    template < typename Return_Type, typename Engine >
     struct singh_maddala : private burr<Return_Type, Engine>
     {
             typedef burr<Return_Type, Engine>                   burr_type;
@@ -44,17 +43,18 @@ namespace vg
             final_type          c_;
             final_type          k_;
             final_type          r_;
-            engine_type         e_;
+            engine_type&        e_;
 
             explicit singh_maddala(  
                             const final_type c = final_type(1),
                             const final_type k = final_type(1),
                             const final_type r = final_type(1),
                             const seed_type sd = 0 )
-                : c_( c ), k_( k ), r_( r ), e_( sd )
+                : c_( c ), k_( k ), r_( r ), e_( singleton<engine_type>::instance() )
             {
                 assert( c > 0 );
                 assert( k > 0 );
+                e_.reset_seed( sd );
             }
 
             return_type

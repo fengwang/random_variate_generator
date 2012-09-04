@@ -39,7 +39,7 @@ namespace vg
             value_type mt[312];
             value_type mag01[2];
             size_type mti;
-            std::mutex mtx;
+            mutable std::mutex mtx;
 
         public:
             mt19937( const seed_type s = 0 )

@@ -19,15 +19,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define _INVERSE_GAUSSIAN_HPP_INCLUDED_DSOIJ3LKJSF8U4LKJDFLKCMSOIJ34OISFLKJ4OIJFSLKJSLFK34IJSLFDKJ4OIJSLKJ4OIJSLKJSOFDIJLFKJ4IJLSFKDSKLJFSJFKLOE
 
 #include <vg/distribution/normal.hpp>
+#include <vg/utility/singleton.hpp>
 
 #include <cassert>
 
 namespace vg
 {
 
-    template <   typename Return_Type,
-                 typename Engine
-             >
+    template < typename Return_Type, typename Engine >
     struct inverse_gaussian : private normal<Return_Type, Engine>
     {
             typedef normal<Return_Type, Engine>         normal_type;
@@ -36,17 +35,18 @@ namespace vg
             typedef typename normal_type::final_type    final_type;
             typedef typename normal_type::seed_type     seed_type;
 
-            return_type mu_;
-            return_type lambda_;
-            engine_type e_;
+            return_type     mu_;
+            return_type     lambda_;
+            engine_type&    e_;
 
             explicit inverse_gaussian( const return_type mu = 1,
-                               const return_type lambda = 1,
-                               const seed_type sd = 0 )
-                : mu_( mu ), lambda_( lambda ), e_( sd )
+                                       const return_type lambda = 1,
+                                       const seed_type sd = 0 )
+                : mu_( mu ), lambda_( lambda ), e_( singleton<engine_type>::instance() )
             {
                 assert( mu > 0 );
                 assert( lambda > 0 );
+                e_.reset_seed( sd );
             }
 
             return_type

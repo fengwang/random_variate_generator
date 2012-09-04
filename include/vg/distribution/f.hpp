@@ -19,15 +19,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define _F_HPP_INCLUDED_SOIFJ34LIJAFSPOIJ4398AFSOHSOIJ4LKJASFLKJ3LKJASFDLKJ3IFAK
 
 #include <vg/distribution/gamma.hpp>
+#include <vg/utility/singleton.hpp>
 
 #include <cassert>
 
 namespace vg
 {
 
-    template <   typename Return_Type,
-                 typename Engine
-             >
+    template < typename Return_Type, typename Engine >
     struct f :  private gamma<Return_Type, Engine>
     {
             typedef gamma<Return_Type, Engine>      gamma_type;
@@ -37,15 +36,16 @@ namespace vg
             typedef typename Engine::size_type      size_type;
             typedef Engine                          engine_type;
 
-            final_type  mu1_;
-            final_type  mu2_;
-            engine_type e_;
+            final_type      mu1_;
+            final_type      mu2_;
+            engine_type&    e_;
 
             explicit f( const return_type mu1 = 2, const return_type mu2 = 2, const seed_type sd = 0 )
-                : mu1_( mu1 ), mu2_( mu2 ), e_( sd )
+                : mu1_( mu1 ), mu2_( mu2 ), e_( singleton<engine_type>::instance() )
             {
                 assert( mu1 > 0 );
                 assert( mu2 > 0 );
+                e_.reset_seed( sd );
             }
 
             return_type

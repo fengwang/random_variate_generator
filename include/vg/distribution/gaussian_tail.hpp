@@ -19,15 +19,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define _GAUSSIAN_TAIL_HPP_INCLUDED_OIHJ3LKJAFS98UYH3KJHFAS9I8UHY2QR3OIUHFSIOUHEIUHY3
 
 #include <vg/distribution/normal.hpp>
+#include <vg/utility/singleton.hpp>
 
 #include <cassert>
 
 namespace vg
 {
 
-    template <   typename Return_Type,
-                 typename Engine
-             >
+    template < typename Return_Type, typename Engine >
     struct gaussian_tail : private normal<Return_Type, Engine>
     {
             typedef Return_Type                         return_type;
@@ -38,16 +37,17 @@ namespace vg
             typedef typename normal_type::final_type    final_type;
             typedef typename normal_type::seed_type     seed_type;
 
-            return_type a_;
-            return_type variance_;
-            engine_type e_;
+            return_type     a_;
+            return_type     variance_;
+            engine_type&    e_;
 
             explicit gaussian_tail( const return_type a = 0,
                                     const return_type variance = 1,
                                     const seed_type sd = 0 )
-                : a_( a ), variance_( variance ), e_( sd )
+                : a_( a ), variance_( variance ), e_( singleton<engine_type>::instance() )
             {
                 assert( variance > 0 );
+                e_.reset_seed( sd );
             }
 
             return_type
@@ -83,7 +83,7 @@ namespace vg
                     const final_type x = std::sqrt( s * s - std::log( v ) );
 
                     if ( s >= x * u )
-                        { return static_cast<return_type>( x * Variance ); }
+                        { return x * Variance; }
                 }
             }
 

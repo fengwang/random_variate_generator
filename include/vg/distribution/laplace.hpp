@@ -18,14 +18,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef _LAPLACE_HPP_INCLUDED_9URHFADSKJHSAFUHE9U8HDFUJHDUIHEUHFDUJHDSUI893U7FSDK
 #define _LAPLACE_HPP_INCLUDED_9URHFADSKJHSAFUHE9U8HDFUJHDUIHEUHFDUJHDSUI893U7FSDK
 
+#include <vg/utility/singleton.hpp>
+
 #include <cmath>
 
 namespace vg
 {
 
-    template <   typename Return_Type,
-                 typename Engine
-             >
+    template < typename Return_Type, typename Engine >
     struct laplace
     {
             typedef typename Engine::final_type     final_type;
@@ -33,13 +33,15 @@ namespace vg
             typedef typename Engine::seed_type      seed_type;
             typedef Engine                          engine_type;
 
-            return_type mu_;
-            return_type b_;
-            engine_type e_;
+            return_type     mu_;
+            return_type     b_;
+            engine_type&    e_;
 
             explicit laplace( const return_type mu = 1, const return_type b = 1, const seed_type sd = 0 )
-                : mu_( mu ), b_( b ), e_( sd )
-            {}
+                : mu_( mu ), b_( b ), e_( singleton<engine_type>::instance() )
+            {
+                e_.reset_seed( sd );
+            }
 
             return_type
             operator()()
@@ -69,7 +71,7 @@ namespace vg
                                             mu - b * std::log( 1 - u - u ) :
                                             mu + b * std::log( 1 + u + u );
 
-                    return static_cast<return_type>( ans );
+                    return ans;
                 }
             }
     };

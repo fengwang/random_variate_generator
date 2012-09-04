@@ -19,16 +19,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define _NEGATIVE_BINOMIAL_BETA_HPP_INCLUDED_SDOU347UJFDHD87Y4KUYASD786Y4KAUYSFD9784ALFKSHQ2IOPUYASDKFJLH4RUIHAFSD 
 
 #include <vg/distribution/generalized_hypergeometric_b3.hpp>
+#include <vg/utility/singleton.hpp>
 
 #include <cassert>
 
 namespace vg
 {
 
-    template <
-                typename Return_Type,
-                typename Engine
-             >
+    template < typename Return_Type, typename Engine >
     struct negative_binomial_beta : private generalized_hypergeometric_b3<Return_Type, Engine>
     {
         typedef generalized_hypergeometric_b3< Return_Type, Engine> GHgB3_type;
@@ -42,14 +40,15 @@ namespace vg
         value_type           a_;   
         value_type           b_;  
         value_type           c_; 
-        engine_type          e_;
+        engine_type&         e_;
 
         explicit negative_binomial_beta( value_type a = 1, value_type b = 1, value_type c = 1 , seed_type s = 0 )
-                : a_( a ), b_( b ), c_( c ), e_( s ) 
+                : a_( a ), b_( b ), c_( c ), e_( singleton<engine_type>::instance() ) 
         {
             assert( a > 0 );
             assert( b > 0 );
             assert( c > 0 );
+            e_.reset_seed( s );
         }
 
         return_type

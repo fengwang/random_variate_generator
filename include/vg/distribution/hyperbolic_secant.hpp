@@ -18,14 +18,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef _HYPERBOLIC_SECANT_HPP_INCLUDED_SOFDIJKOI43UJKLGJKLDIUJDFGOIU4598UDGOIUDFGJKDFKLJGLKJSDLKJDOIVLKJVLIDFOIUR5IIOGDU
 #define _HYPERBOLIC_SECANT_HPP_INCLUDED_SOFDIJKOI43UJKLGJKLDIUJDFGOIU4598UDGOIUDFGJKDFKLJGLKJSDLKJDOIVLKJVLIDFOIUR5IIOGDU
 
+#include <vg/utility/singleton.hpp>
+
 #include <cmath>
 
 namespace vg
 {
 
-    template <   typename Return_Type,
-                 typename Engine
-             >
+    template < typename Return_Type, typename Engine >
     struct hyperbolic_secant
     {
             typedef typename Engine::final_type     final_type;
@@ -33,10 +33,13 @@ namespace vg
             typedef typename Engine::seed_type      seed_type;
             typedef Engine                          engine_type;
 
-            engine_type e_;
+            engine_type&    e_;
 
-            explicit hyperbolic_secant( const seed_type sd = 0 ) : e_( sd )
-            {}
+            explicit hyperbolic_secant( const seed_type sd = 0 ) 
+                : e_( singleton<engine_type>::instance() )
+            {
+                e_.reset_seed( sd );
+            }
 
             return_type
             operator()()

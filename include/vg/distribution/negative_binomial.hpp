@@ -20,20 +20,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <vg/distribution/gamma.hpp>
 #include <vg/distribution/poisson.hpp>
-#include <vg/utility.hpp>
+#include <vg/utility/proxy.hpp>
+#include <vg/utility/singleton.hpp>
 
 #include <cassert>
 #include <cstddef>
 #include <cmath>
 
-
 namespace vg
 {
 
-    template <
-                typename Return_Type,
-                typename Engine
-             >
+    template < typename Return_Type, typename Engine >
     struct negative_binomial :  private proxy<gamma<typename Engine::final_type, Engine>, 1 >,
                                 private proxy<poisson<typename Engine::final_type, Engine>, 2 >
     {
@@ -49,16 +46,17 @@ namespace vg
 
             size_type           n_;
             final_type          p_;
-            engine_type         e_;
+            engine_type&        e_;
 
             explicit negative_binomial( size_type n = size_type( 1 ),
                                         final_type p = final_type( 0.5 ),
                                         const seed_type s = seed_type( 0 ) )
-                : n_( n ), p_( p ), e_( s )
+                : n_( n ), p_( p ), e_( singleton<engine_type>::instance() )
             {
                 assert( n != size_type( 0 ) );
                 assert( p > final_type( 0 ) );
                 assert( p < final_type( 1 ) );
+                e_.reset_seed( s );
             }
 
             return_type

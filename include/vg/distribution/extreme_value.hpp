@@ -19,6 +19,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef _EXTREME_VALUE_HPP_INCLUDED_SDFOIU4897USFD98743KLJSFDKLJSFDOIU498YSFIU45O8IUFSOIU498UFSDIUROUIOIEULDGKJDGOIU45OIU
 #define _EXTREME_VALUE_HPP_INCLUDED_SDFOIU4897USFD98743KLJSFDKLJSFDOIU498YSFIU45O8IUFSOIU498UFSDIUROUIOIEULDGKJDGOIU45OIU
 
+#include <vg/utility/singleton.hpp>
+
 #include <cmath>
 #include <cassert>
 
@@ -39,15 +41,16 @@ namespace vg
             return_type         mu_;        //location
             return_type         sigma_;     //scale
             return_type         xi_;        //sharp
-            engine_type         e_;
+            engine_type&        e_;
 
             explicit extreme_value(	const return_type mu = 0,
                                     const return_type sigma = 1,
                                     const return_type xi = 0,
                                     const seed_type sd = 0 )
-                : mu_(mu), sigma_(sigma), xi_(xi), e_( sd )
+                : mu_(mu), sigma_(sigma), xi_(xi), e_( singleton<engine_type>::instance() )
             {
                 assert( sigma_ > 0 );
+                e_.reset_seed( sd );
             }
 
             return_type

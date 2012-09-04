@@ -19,14 +19,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef _LAMBDA_HPP_INCLUDED_SOFI348OUSFLDKJ43OUISAFDKLJH45U8SDFKLJ4OUIFFFFFFFFFFFFFFFFFFFFFFFFFSUFHDIEUHSAKFDJH4UHMVBSJK
 #define _LAMBDA_HPP_INCLUDED_SOFI348OUSFLDKJ43OUISAFDKLJH45U8SDFKLJ4OUIFFFFFFFFFFFFFFFFFFFFFFFFFSUFHDIEUHSAKFDJH4UHMVBSJK
 
+#include <vg/utility/singleton.hpp>
+
 #include <cmath>
 
 namespace vg
 {
 
-    template <   typename Return_Type,
-                 typename Engine
-             >
+    template < typename Return_Type, typename Engine >
     struct lambda 
     {
             typedef typename Engine::final_type     final_type;
@@ -34,18 +34,21 @@ namespace vg
             typedef typename Engine::seed_type      seed_type;
             typedef Engine                          engine_type;
 
-            final_type  lambda1_;
-            final_type  lambda2_;
-            final_type  lambda3_;
-            final_type  lambda4_;
-            engine_type e_;
+            final_type      lambda1_;
+            final_type      lambda2_;
+            final_type      lambda3_;
+            final_type      lambda4_;
+            engine_type&    e_;
 
             explicit lambda( const return_type lambda1 = 1, 
                              const return_type lambda2 = 1, 
                              const return_type lambda3 = 1, 
                              const return_type lambda4 = 1, 
                              const seed_type sd = 0 )
-                : lambda1_(lambda1), lambda2_(lambda2), lambda3_(lambda3), lambda4_(lambda4), e_(sd) {} 
+                : lambda1_(lambda1), lambda2_(lambda2), lambda3_(lambda3), lambda4_(lambda4), e_(singleton<engine_type>::instance()) 
+            {
+                e_.reset_seed( sd );
+            } 
 
             return_type
             operator()()

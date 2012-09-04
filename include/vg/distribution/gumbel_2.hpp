@@ -18,6 +18,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef _GUMBEL_2_HPP_INCLUDED_DSOIUJ3498AFSLKJH4938UYAFKLJI34OIUAFSLKJ3OIJFSDLK
 #define _GUMBEL_2_HPP_INCLUDED_DSOIUJ3498AFSLKJH4938UYAFKLJI34OIUAFSLKJ3OIJFSDLK
 
+#include <vg/utility/singleton.hpp>
+
 #include <cmath>
 #include <cassert>
 
@@ -30,9 +32,7 @@ namespace vg
     for 0 < x < \infty.
 #endif
 
-template <   typename Return_Type,
-             typename Engine
-         >
+template < typename Return_Type, typename Engine >
 struct gumbel_2
 {
         typedef typename Engine::final_type     final_type;
@@ -41,14 +41,15 @@ struct gumbel_2
         typedef typename Engine::size_type      size_type;
         typedef Engine                          engine_type;
 
-        final_type  a_;
-        final_type  b_;
-        engine_type e_;
+        final_type      a_;
+        final_type      b_;
+        engine_type&    e_;
 
         explicit gumbel_2( const return_type a = 1, const return_type b = 1, const seed_type sd = 0 )
-                : a_( a ), b_( b ), e_( sd )
+                : a_( a ), b_( b ), e_( singleton<engine_type>::instance() )
             {
                 assert( b > 0 );
+                e_.reset_seed( sd );
             }
 
             return_type

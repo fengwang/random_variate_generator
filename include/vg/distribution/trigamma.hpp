@@ -20,7 +20,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <vg/distribution/generalized_hypergeometric_b3.hpp>
 #include <vg/distribution/digamma.hpp>
-#include <vg/utility.hpp>
+#include <vg/utility/singleton.hpp>
+#include <vg/utility/proxy.hpp>
 
 #include <cmath>
 #include <algorithm>
@@ -29,12 +30,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 namespace vg
 {
 
-    template <
-                typename Return_Type,
-                typename Engine
-             >
-    struct trigamma : private proxy<generalized_hypergeometric_b3<Return_Type, Engine> >,
-                      private proxy<digamma<Return_Type, Engine> >
+    template < typename Return_Type, typename Engine >
+    struct trigamma : private proxy<generalized_hypergeometric_b3<Return_Type, Engine>, 1>,
+                      private proxy<digamma<Return_Type, Engine>, 2>
     {
             typedef proxy<generalized_hypergeometric_b3< Return_Type, Engine> > GHgB3_type;
             typedef proxy<digamma< Return_Type, Engine > >   digamma_type;
@@ -46,11 +44,13 @@ namespace vg
             typedef Engine                          engine_type;
 
             value_type           c_;
-            engine_type          e_;
+            engine_type&         e_;
 
-            explicit trigamma( value_type c = 3, seed_type s = 0 ) : c_( c ), e_( s )
+            explicit trigamma( value_type c = 3, seed_type s = 0 ) 
+                : c_( c ), e_( singleton<engine_type>::instance() )
             {
                 assert( c > 0 );
+                e_.reset_seed( s );
             }
 
             return_type
@@ -92,19 +92,6 @@ namespace vg
     };
 
 }//namespace vg
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 #endif//_TRIGAMMA_HPP_INCLUDED_SDFOIJSLKJ4OIUASFD2SKLJSALKJSFLKJ4OUISDFLKJ54OIJFLKJSFDOIJ4LKJFSDOIJ4LKJFSDOIJRT 
 

@@ -18,9 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef _POLYA_AEPPLI_HPP_INCLUDED_DSKL4EOIUJSARIGHHEREFORYOUTHEEOIJSFLKJSFLKJASLKJSFLKJSFDLKJSDDFLKJSFLKJDJFLKJSFLKJSFLD
 #define _POLYA_AEPPLI_HPP_INCLUDED_DSKL4EOIUJSARIGHHEREFORYOUTHEEOIJSFLKJSFLKJASLKJSFLKJSFDLKJSDDFLKJSFLKJDJFLKJSFLKJSFLD
 
-#include <vg/utility.hpp>
 #include <vg/distribution/poisson.hpp>
 #include <vg/distribution/gamma.hpp>
+#include <vg/utility/singleton.hpp>
+#include <vg/utility/proxy.hpp>
 
 #include <cmath>
 #include <cassert>
@@ -28,9 +29,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 namespace vg
 {
 
-    template <   typename Return_Type,
-                 typename Engine
-             >
+    template < typename Return_Type, typename Engine >
     struct polya_aeppli : private proxy<poisson<Return_Type, Engine>, 1>, 
                        private proxy<gamma<Return_Type, Engine>, 2>
     {
@@ -41,20 +40,21 @@ namespace vg
             typedef typename poisson_type::final_type      final_type;
             typedef typename poisson_type::seed_type       seed_type;
 
-            return_type beta_;
-            return_type theta_;
-            return_type lambda_;
-            engine_type e_;
+            return_type     beta_;
+            return_type     theta_;
+            return_type     lambda_;
+            engine_type&    e_;
 
             explicit polya_aeppli( const return_type beta = 1,
                                 const return_type theta = 1,
                                 const return_type lambda = 1,
                                 const seed_type sd = 0 )
-                : beta_( beta ), theta_( theta ), lambda_( lambda ), e_( sd )
+                : beta_( beta ), theta_( theta ), lambda_( lambda ), e_( singleton<engine_type>::instance() )
             {
                 assert( beta > 0 );
                 assert( theta > 0 );
                 assert( lambda > 0 );
+                e_.reset_seed( sd );
             }
 
             return_type

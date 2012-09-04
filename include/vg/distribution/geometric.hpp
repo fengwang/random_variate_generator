@@ -18,32 +18,32 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef _GEOMETRIC_HPP_INCLUDED_SO8IU298ALKJSDLKJCNO8UJA98Y3OLIAFDPOIHJSDALKJ344
 #define _GEOMETRIC_HPP_INCLUDED_SO8IU298ALKJSDLKJCNO8UJA98Y3OLIAFDPOIHJSDALKJ344
 
+#include <vg/utility/singleton.hpp>
 
 #include <cassert>
 
 namespace vg
 {
 
-    template <
-                typename Return_Type ,
-                typename Engine
-             >
+    template < typename Return_Type , typename Engine >
     struct geometric
     {
+            typedef Engine                          engine_type;
             typedef typename Engine::final_type     final_type;
             typedef Return_Type                     return_type;
             typedef Return_Type                     value_type;
             typedef typename Engine::seed_type      seed_type;
 
-            final_type p_;
-            Engine e_;
+            final_type      p_;
+            engine_type&    e_;
 
             explicit geometric( final_type p = final_type( 0.5 ),
                                 const seed_type s = seed_type( 0 ) )
-                : p_( p ), e_( s )
+                : p_( p ), e_( singleton<engine_type>::instance() )
             {
                 assert( p > final_type( 0 ) );
                 assert( p < final_type( 1 ) );
+                e_.reset_seed( s );
             }
 
             return_type

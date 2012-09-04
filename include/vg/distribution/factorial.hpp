@@ -19,16 +19,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define _FACTORIAL_HPP_INCLUDED_SDOIJ34OPIUASFDLKJ4OIUJSDLKJFFFFFFFFFFFFFFFFFFFFFFFFFFFFFSLKJDOAIJSLKJAJ 
 
 #include <vg/distribution/generalized_hypergeometric_b3.hpp>
+#include <vg/utility/singleton.hpp>
 
 #include <cassert>
 
 namespace vg
 {
 
-    template <
-                typename Return_Type,
-                typename Engine
-             >
+    template < typename Return_Type, typename Engine >
     struct factorial : private generalized_hypergeometric_b3<Return_Type, Engine>
     {
         typedef generalized_hypergeometric_b3< Return_Type, Engine> GHgB3_type;
@@ -41,12 +39,14 @@ namespace vg
 
         value_type           k_; 
         value_type           r_; 
-        engine_type          e_;
+        engine_type&         e_;
 
-        explicit factorial(value_type k = 3, value_type r = 3, seed_type s = 0 ) : k_( k ), r_( r ), e_( s ) 
+        explicit factorial(value_type k = 3, value_type r = 3, seed_type s = 0 ) 
+            : k_( k ), r_( r ), e_( singleton<engine_type>::instance() ) 
         {
             assert( k >= 2 );
             assert( r >= k );
+            e_.reset_seed( s );
         }
 
         return_type

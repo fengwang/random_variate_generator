@@ -18,17 +18,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef _UNIFORM_HPP_INCLUDED_98U3LKJFASD98IHJ3WLKJNASF98YU12LAKFJ289UJAWOIJUW2I
 #define _UNIFORM_HPP_INCLUDED_98U3LKJFASD98IHJ3WLKJNASF98YU12LAKFJ289UJAWOIJUW2I
 
+#include <vg/utility/singleton.hpp>
+
 #include <cassert>
 
 namespace vg
 {
 
-    template <
-                typename Return_Type,
-                typename Engine
-             >
+    template < typename Return_Type, typename Engine >
     struct uniform
     {
+            typedef Engine                          engine_type;
             typedef typename Engine::final_type     final_type;
             typedef Return_Type                     return_type;
             typedef Return_Type                     value_type;
@@ -36,14 +36,15 @@ namespace vg
 
             value_type      lower_;
             value_type      upper_;
-            Engine          e_;
+            engine_type&    e_;
 
             explicit uniform( const value_type lower = value_type( 0 ),
                               const value_type upper = value_type( 1 ),
                               const seed_type s = seed_type( 0 ) )
-                : lower_( lower ), upper_( upper ), e_( s )
+                : lower_( lower ), upper_( upper ), e_( singleton<engine_type>::instance() )
             {
                 assert( upper > lower );
+                e_.reset_seed( s );
             }
 
             return_type

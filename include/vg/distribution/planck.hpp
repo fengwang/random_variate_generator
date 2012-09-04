@@ -20,6 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <vg/distribution/gamma.hpp>
 #include <vg/distribution/zipf.hpp>
+#include <vg/utility/singleton.hpp>
 
 #include <cmath>
 #include <cassert>
@@ -27,9 +28,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 namespace vg
 {
 
-    template <   typename Return_Type,
-                 typename Engine
-             >
+    template < typename Return_Type, typename Engine >
     struct planck : private gamma<Return_Type, Engine>,
                     private zipf<Return_Type, Engine>
     {
@@ -44,15 +43,16 @@ namespace vg
 
             value_type          a_;
             value_type          b_;
-            engine_type         e_;
+            engine_type&        e_;
 
             explicit planck(	const value_type a = value_type( 1 ),
                                 const value_type b = value_type( 1 ),
                                 const seed_type sd = 0 )
-                : a_( a ), b_( b ), e_( sd )
+                : a_( a ), b_( b ), e_( singleton<engine_type>::instance() )
             {
                 assert( a > 0 );
                 assert( b > 0 );
+                e_.reset_seed( sd );
             }
 
             return_type

@@ -18,16 +18,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef _WEIBULL_HPP_INCLUDED_OIJH98HUSFA98UHJALKJQ1PH9IAFOIUJWKLJNALKJSDIOUH3D
 #define _WEIBULL_HPP_INCLUDED_OIJH98HUSFA98UHJALKJQ1PH9IAFOIUJWKLJNALKJSDIOUH3D
 
-#include <cmath>
+#include <vg/utility/singleton.hpp>
 
+#include <cmath>
 #include <cassert>
 
 namespace vg
 {
 
-    template <   typename Return_Type,
-                 typename Engine
-             >
+    template < typename Return_Type, typename Engine >
     struct weibull
     {
             typedef Return_Type                         return_type;
@@ -36,17 +35,18 @@ namespace vg
             typedef typename engine_type::final_type    final_type;
             typedef typename engine_type::seed_type     seed_type;
 
-            return_type lambda_;
-            return_type k_;
-            engine_type e_;
+            return_type     lambda_;
+            return_type     k_;
+            engine_type&    e_;
 
             explicit weibull(	const return_type lambda = 1,
                                 const return_type k = 1,
                                 const seed_type sd = 0 )
-                : lambda_( lambda ), k_( k ), e_( sd )
+                : lambda_( lambda ), k_( k ), e_( singleton<engine_type>::instance() )
             {
                 assert( lambda_ > 0 );
                 assert( k_ > 0 );
+                e_.reset_seed( sd );
             }
 
             return_type
@@ -72,12 +72,9 @@ namespace vg
                 const final_type ans    =   std::pow( tmp2, tmp3 );
                 return ans;
             }
-
     };
 
 }//vg
 
-
 #endif//_WEIBULL_HPP_INCLUDED_OIJH98HUSFA98UHJALKJQ1PH9IAFOIUJWKLJNALKJSDIOUH3D
-
 

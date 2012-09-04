@@ -21,8 +21,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <vg/distribution/normal.hpp>
 #include <vg/distribution/gamma.hpp>
 #include <vg/distribution/binomial.hpp>
-#include <vg/utility.hpp>
-
+#include <vg/utility/proxy.hpp>
+#include <vg/utility/singleton.hpp>
 
 #include <cmath>
 #include <cstddef>
@@ -31,9 +31,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 namespace vg
 {
 
-    template <   typename Return_Type,
-                 typename Engine
-             >
+    template < typename Return_Type, typename Engine >
     struct poisson :    private proxy<normal<Return_Type, Engine> >,
                         private proxy<gamma<Return_Type, Engine> >,
                         private proxy<binomial<Return_Type, Engine> >
@@ -47,11 +45,14 @@ namespace vg
             typedef typename Engine::seed_type      seed_type;
             typedef Engine                          engine_type;
 
-            final_type  lambda_;
-            engine_type e_;
+            final_type          lambda_;
+            engine_type&        e_;
 
             explicit poisson( const final_type lambda = 1, const seed_type sd = 0 )
-                : lambda_( lambda ), e_( sd ) {}
+                : lambda_( lambda ), e_( singleton<engine_type>::instance() ) 
+            {
+                e_.reset_seed( sd );
+            }
 
             return_type
             operator()()

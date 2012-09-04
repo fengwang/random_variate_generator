@@ -18,15 +18,15 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef _TRIANGULAR_HPP_INCLUDED_WOIJALDKJ4OIUASFLKJ34OUAFSLKJ4OIJAFLKJ3OIJAFSLA
 #define _TRIANGULAR_HPP_INCLUDED_WOIJALDKJ4OIUASFLKJ34OUAFSLKJ4OIJAFLKJ3OIJAFSLA
 
+#include <vg/utility/singleton.hpp>
+
 #include <cmath>
 #include <cassert>
 
 namespace vg
 {
 
-    template <   typename Return_Type,
-                 typename Engine
-             >
+    template < typename Return_Type, typename Engine >
     struct triangular
     {
             typedef Return_Type                         return_type;
@@ -35,14 +35,15 @@ namespace vg
             typedef typename engine_type::final_type    final_type;
             typedef typename engine_type::seed_type     seed_type;
 
-            return_type delta_;
-            engine_type e_;
+            return_type     delta_;
+            engine_type&    e_;
 
             explicit triangular(	const return_type delta = 1,
                                     const seed_type sd = 0 )
-                : delta_( delta ), e_( sd )
+                : delta_( delta ), e_( singleton<engine_type>::instance() )
             {
                 assert( delta_ > 0 );
+                e_.reset_seed( sd );
             }
 
             return_type
@@ -63,9 +64,9 @@ namespace vg
             direct_impl( const return_type delta )
             {
                 const final_type u      =       e_();
-                const final_type tmp    =       1 - std::log( u );
+                const final_type tmp    =       return_type(1) - std::log( u );
                 const final_type ans    =       delta * tmp;
-                return static_cast<return_type>( ans );
+                return ans;
             }
     };
 

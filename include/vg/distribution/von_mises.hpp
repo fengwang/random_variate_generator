@@ -18,18 +18,18 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef _VON_MISES_HPP_INCLUDED_SOIJ4OIUFSDLKJ4OIUKLJGDKLJROIUDGLKJFLKJDOIU5LKJDGOIUOIUDGLKJDLKJDLKJGOIJDOIJDLKJGOIJFLKJG
 #define _VON_MISES_HPP_INCLUDED_SOIJ4OIUFSDLKJ4OIUKLJGDKLJROIUDGLKJFLKJDOIU5LKJDGOIUOIUDGLKJDLKJDLKJGOIJDOIJDLKJGOIJFLKJG
 
+#include <vg/utility/singleton.hpp>
+
 #include <cassert>
 #include <cmath>
 
 namespace vg
 {
 
-    template <
-                typename Return_Type,
-                typename Engine
-             >
+    template < typename Return_Type, typename Engine >
     struct von_mises
     {
+            typedef Engine                          engine_type;
             typedef typename Engine::final_type     final_type;
             typedef Return_Type                     return_type;
             typedef Return_Type                     value_type;
@@ -37,14 +37,15 @@ namespace vg
 
             value_type      a_;
             value_type      k_;
-            Engine          e_;
+            engine_type&    e_;
 
             explicit von_mises( const value_type a = value_type( 0 ),
                               const value_type k = value_type( 1 ),
                               const seed_type s = seed_type( 0 ) )
-                : a_( a ), k_( k ), e_( s )
+                : a_( a ), k_( k ), e_( singleton<engine_type>::instance() )
             {
                 asset( k > 0 );
+                e_.reset_seed( s );
             }
 
             return_type

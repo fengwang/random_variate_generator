@@ -19,15 +19,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define _WALD_HPP_INCLUDED_SDLKJ3OIUSDFLSIJDLKJSFDLKC4OIJSLKJSFADKJLSFLDEJKSLKJDLKJVNVKDJSLKALKEOIDOIJ4O98DFILIKJSLKJDOIU4LKJSFOIJ4OISFOIJE4OIJS
 
 #include <vg/distribution/inverse_gaussian.hpp>
+#include <vg/utility/singleton.hpp>
 
 #include <cassert>
 
 namespace vg
 {
 
-    template <   typename Return_Type,
-                 typename Engine
-             >
+    template < typename Return_Type, typename Engine >
     struct wald : private inverse_gaussian<Return_Type, Engine>
     {
             typedef inverse_gaussian<Return_Type, Engine>       inverse_gaussian_type;
@@ -36,17 +35,23 @@ namespace vg
             typedef typename inverse_gaussian_type::final_type  final_type;
             typedef typename inverse_gaussian_type::seed_type   seed_type;
 
-            return_type mu_;
-            return_type lambda_;
-            engine_type e_;
+            return_type     mu_;
+            return_type     lambda_;
+
+            //explicit wald( const return_type mu = 1, const return_type lambda = 1 ) 
+            //    : mu_( mu ), lambda_( lambda ) {}
+
+            engine_type&    e_;     //this engine make sense though not used within this distribution
 
             explicit wald( const return_type mu = 1,
                            const return_type lambda = 1,
-                           const seed_type sd = 0 )
-                : mu_( mu ), lambda_( lambda ), e_( sd )
+                           const seed_type sd = 0 
+                         )
+                : mu_( mu ), lambda_( lambda ), e_( singleton<engine_type>::instance() )
             {
                 assert( mu > 0 );
                 assert( lambda > 0 );
+                e_.reset_seed( sd ); //rest seed here for later use in inverse_gaussian distribution generation
             }
 
             return_type
@@ -71,8 +76,5 @@ namespace vg
 
 }//vg
 
-
 #endif//_WALD_HPP_INCLUDED_SDLKJ3OIUSDFLSIJDLKJSFDLKC4OIJSLKJSFADKJLSFLDEJKSLKJDLKJVNVKDJSLKALKEOIDOIJ4O98DFILIKJSLKJDOIU4LKJSFOIJ4OISFOIJE4OIJS
-
-
 
