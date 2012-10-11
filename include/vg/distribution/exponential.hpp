@@ -38,8 +38,7 @@ namespace vg
             return_type         lambda_;
             engine_type&        e_;
 
-            explicit exponential(	const return_type lambda = 1,
-                                    const seed_type sd = 0 )
+            explicit exponential(	const return_type lambda = 1, const seed_type sd = 0 )
                 : lambda_( lambda ), e_( singleton<engine_type>::instance() )
             {
                 assert( lambda_ > 0 );
@@ -47,21 +46,21 @@ namespace vg
             }
 
             return_type
-            operator()()
+            operator()() const
             {
                 return do_generation( lambda_ );
             }
 
         protected:
             return_type
-            do_generation( const final_type Lambda )
+            do_generation( const final_type Lambda ) const 
             {
                 return direct_exponential_impl( Lambda );
             }
 
         private:
             return_type
-            direct_exponential_impl( const final_type Lambda )
+            direct_exponential_impl( const final_type Lambda ) const
             {
                 const final_type u = e_();
                 const final_type ans =  - std::log( u ) / Lambda;

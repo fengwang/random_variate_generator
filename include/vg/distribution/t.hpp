@@ -59,14 +59,14 @@ namespace vg
             }
 
             return_type
-            operator()()
+            operator()() const
             {
                 return do_generation( mu_ );
             }
 
         protected:
             return_type
-            do_generation( const return_type mu )
+            do_generation( const return_type mu ) const
             {
                 if ( mu <= final_type( 2 ) )
                     { return direct_impl( mu ); }
@@ -76,7 +76,7 @@ namespace vg
 
         private:
             return_type
-            direct_impl( const return_type mu )
+            direct_impl( const return_type mu ) const
             {
                 const final_type y1 = proxy_normal_type::do_generation();
                 const final_type y2 = chi_square_type::do_generation( mu );
@@ -85,7 +85,7 @@ namespace vg
             }
 
             return_type
-            rejection_method( const return_type mu )
+            rejection_method( const return_type mu ) const
             {
                 for ( ;; )
                 {

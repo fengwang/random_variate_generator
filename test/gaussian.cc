@@ -17,24 +17,29 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 #include <vg.hpp>
 
+#include <cmath>
+#include <map>
 #include <iostream>
-#include <algorithm>
-#include <iterator>
-#include <numeric>
-
-
-using namespace std;
 
 int main()
 {
-    vg::vg<int, vg::polya> vg_(200, 0.3);    
+    //generate double gaussian random numbers with argument (0,4), i.e. N(0,4)
+    //using mt19937 as uniform random generator engine
+    vg::vg<double, vg::gaussian, vg::mt19937> vg_(0, 4);    
+    std::map< int, int > sample;
 
-    copy( vg_.begin(), vg_.begin()+1000, ostream_iterator<int>(cout, "\n"));
+    //generate 500 gaussian numbers and store it in a map
+    for ( auto i = vg_.begin(); i != vg_.begin()+500; ++i )
+        sample[std::round(*i)]++;
 
-
-    auto sum = accumulate( vg_.begin(), vg_.begin()+1000, 0 );
-
-    cout << sum << endl;
+    //show the number generated
+    for ( auto i = sample.begin(); i != sample.end(); ++i )
+    {
+        std::cout << (*i).first << "\t";
+        for ( auto j = 0; j < (*i).second; ++j )
+            std::cout << "*";
+        std::cout << "\n";
+    }
 
     return 0;
 }

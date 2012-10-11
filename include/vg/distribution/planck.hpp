@@ -45,9 +45,7 @@ namespace vg
             value_type          b_;
             engine_type&        e_;
 
-            explicit planck(	const value_type a = value_type( 1 ),
-                                const value_type b = value_type( 1 ),
-                                const seed_type sd = 0 )
+            explicit planck(	const value_type a = value_type( 1 ), const value_type b = value_type( 1 ), const seed_type sd = 0 )
                 : a_( a ), b_( b ), e_( singleton<engine_type>::instance() )
             {
                 assert( a > 0 );
@@ -56,21 +54,21 @@ namespace vg
             }
 
             return_type
-            operator()()
+            operator()() const
             {
                 return do_generation( a_, b_ );
             }
 
         protected:
             return_type
-            do_generation( const final_type A, const final_type B )
+            do_generation( const final_type A, const final_type B ) const
             {
                 return direct_impl( A, B );
             }
 
         private:
             return_type
-            direct_impl( const final_type A, const final_type B )
+            direct_impl( const final_type A, const final_type B ) const
             {
                 const final_type A_1 = A + final_type(1);
                 const final_type G = gamma_type::do_generation( A_1 );
@@ -81,8 +79,6 @@ namespace vg
 
     };
 }//vg
-
-
 
 #endif//_PLANCK_HPP_INCLUDED_SDFO9U3498UYASFDKLJ4H98UY3498AFSDLIJ43908UASFDOIJKSFDLKJASFDO8JI34KLXJSFDLKJAFSD 
 

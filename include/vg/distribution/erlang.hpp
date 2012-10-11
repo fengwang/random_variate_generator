@@ -48,30 +48,28 @@ namespace vg
             engine_type&    e_;
 
 
-            explicit erlang( const return_type a = return_type( 1 ),
-                             const return_type n = return_type( 10 ),
-                             const seed_type sd = 0 )
+            explicit erlang( const return_type a = return_type( 1 ), const return_type n = return_type( 10 ), const seed_type sd = 0 )
                 : a_( a ), n_( n ), e_( singleton<engine_type>::instance() )
             {
                 e_.reset_seed( sd );
             }
 
             return_type
-            operator()()
+            operator()() const
             {
                 return do_generation( a_, n_ );
             }
 
         protected:
             return_type
-            do_generation( const final_type A, const final_type N )
+            do_generation( const final_type A, const final_type N ) const
             {
                 return erlang_direct_impl( a_, n_ );
             }
 
         private:
             return_type
-            erlang_direct_impl( const final_type A, const final_type N )
+            erlang_direct_impl( const final_type A, const final_type N ) const 
             {
                 const final_type ans = gamma_type::do_generation( N, A );
                 return ans;

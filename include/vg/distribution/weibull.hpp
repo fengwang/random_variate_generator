@@ -39,9 +39,7 @@ namespace vg
             return_type     k_;
             engine_type&    e_;
 
-            explicit weibull(	const return_type lambda = 1,
-                                const return_type k = 1,
-                                const seed_type sd = 0 )
+            explicit weibull(	const return_type lambda = 1, const return_type k = 1, const seed_type sd = 0 )
                 : lambda_( lambda ), k_( k ), e_( singleton<engine_type>::instance() )
             {
                 assert( lambda_ > 0 );
@@ -50,21 +48,21 @@ namespace vg
             }
 
             return_type
-            operator()()
+            operator()() const
             {
                 return do_generation( lambda_, k_ );
             }
 
         protected:
             return_type
-            do_generation( const return_type lambda, const return_type k )
+            do_generation( const return_type lambda, const return_type k ) const
             {
                 return direct_impl( lambda, k );
             }
 
         private:
             return_type
-            direct_impl( const return_type lambda, const return_type k )
+            direct_impl( const return_type lambda, const return_type k ) const
             {
                 const final_type tmp1   =   e_();
                 const final_type tmp2   =   - std::log( - tmp1 + final_type( 1 ) ) / k;

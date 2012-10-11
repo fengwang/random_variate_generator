@@ -50,21 +50,21 @@ namespace vg
         }
 
         return_type
-        operator()()
+        operator()() const
         {
             return do_generation( a_, b_ );
         }
 
     protected:
         return_type
-        do_generation( const value_type a, const value_type b )
+        do_generation( const value_type a, const value_type b ) const
         {
             return direct_impl( a, b );
         }
 
     private:
         return_type
-        direct_impl( const value_type a, const value_type b )
+        direct_impl( const value_type a, const value_type b ) const
         {
             const final_type ans = GHgB3_type::do_generation( a, b, final_type(1) );
             return ans;

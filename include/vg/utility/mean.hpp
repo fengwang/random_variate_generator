@@ -15,27 +15,25 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-#include <vg.hpp>
+#ifndef _MEAN_HPP_INCLUDED_SDOIFJASPOIHJ4EPO9ASFOIUH3089YUAFSOIJHDKSVJNVBIOFAH98
+#define _MEAN_HPP_INCLUDED_SDOIFJASPOIHJ4EPO9ASFOIUH3089YUAFSOIJHDKSVJNVBIOFAH98
 
-#include <iostream>
-#include <algorithm>
 #include <iterator>
 #include <numeric>
 
-
-using namespace std;
-
-int main()
+namespace vg 
 {
-    vg::vg<int, vg::polya> vg_(200, 0.3);    
 
-    copy( vg_.begin(), vg_.begin()+1000, ostream_iterator<int>(cout, "\n"));
+    template< typename Input_Iterator >
+    typename std::iterator_traits<Input_Iterator>::value_type 
+    mean( Input_Iterator first, Input_Iterator last )
+    {
+        typedef typename std::iterator_traits<Input_Iterator>::value_type  value_type;
+        value_type const n = std::distance( first, last );
+        return std::accumulate( first, last, value_type(0) ) / n;
+    }
 
+}//namespace vg
 
-    auto sum = accumulate( vg_.begin(), vg_.begin()+1000, 0 );
-
-    cout << sum << endl;
-
-    return 0;
-}
+#endif//_MEAN_HPP_INCLUDED_SDOIFJASPOIHJ4EPO9ASFOIUH3089YUAFSOIJHDKSVJNVBIOFAH98
 

@@ -20,6 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define _ARCSINE_HPP_INCLUEDE_WHAOUT98U49387FSDIUJ4983UASDKLJHSJAFDHAJDFHKAJSDFHKASJDFHKJASDFHKASJFDHIU4YKJSDFHIUHFKJHSSU
 
 #include <vg/utility/singleton.hpp>
+#include <vg/distribution/beta.hpp>
 
 #include <cmath>
 
@@ -27,8 +28,9 @@ namespace vg
 {
 
     template < typename Return_Type, typename Engine >
-    struct arcsine
+    struct arcsine : private beta<Return_Type, Engine>
     {
+            typedef beta<Return_Type, Engine>       beta_type;
             typedef typename Engine::final_type     final_type;
             typedef Return_Type                     return_type;
             typedef typename Engine::seed_type      seed_type;
@@ -42,21 +44,46 @@ namespace vg
             }
 
             return_type
-            operator()()
+            operator()() const
             {
                 return do_generation();
             }
 
         protected:
             return_type
-            do_generation()
+            do_generation() const
             {
-                return direct_impl();
+                #if 0
+                Some Comment here:
+                (1) using direct impl method :
+                        Testing arcsine engine with n = 10000000
+                        |        | Theoretical Value |  Generated value |
+                       *|  Mean  |      0.5          |  0.636579    |
+                       *|Variance|     0.125         |  0.0947444   |
+                       *|Skewness|       0           |  -0.496869   |
+                        |Kurtosis|     -1.5          |  -1.49983    |
+                 (2) using beta method:
+                        Testing arcsine engine with n = 10000000
+                        |        | Theoretical Value |  Generated value |
+                        |  Mean  |      0.5          |  0.50005     |
+                        |Variance|     0.125         |  0.127052    |
+                        |Skewness|       0           |  0.000107981 |
+                       *|Kurtosis|     -1.5          |  -1.05108    |
+                #endif
+                //return direct_impl();
+                return beta_impl();
+            }
+
+        private:
+            return_type 
+            beta_impl() const 
+            {
+                return beta_type::do_generation( final_type(0.5), final_type(0.5) );
             }
 
         private:
             return_type
-            direct_impl()
+            direct_impl() const
             {
                 const final_type u = e_();
                 const final_type pi = 3.1415926535897932384626433L;

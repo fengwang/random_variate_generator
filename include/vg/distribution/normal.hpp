@@ -41,14 +41,14 @@ namespace vg
             }
 
             return_type
-            operator()()
+            operator()() const
             {
                 return do_generation();
             }
 
         protected:
             return_type
-            do_generation()
+            do_generation() const
             {
                 return kinderman_monahan_method();
             }
@@ -58,7 +58,7 @@ namespace vg
             //"Computer Generation of Random Variables Using the Ratio of Uniform Deviates,"
             //ACM Transactions on Mathematical Software 3: 257-260.
             return_type
-            kinderman_monahan_method()
+            kinderman_monahan_method() const
             {
                 const final_type u = e_();
                 const final_type v = ( e_() - 0.5L ) * 4.0L * u * std::sqrt( - std::log( u ) );
@@ -69,7 +69,7 @@ namespace vg
             //A Note on the Generation of Random Normal Deviates,
             //The Annals of Mathematical Statistics (1958), Vol. 29, No. 2 pp. 610¨C611
             return_type
-            box_muller_method()
+            box_muller_method() const
             {
                 final_type u1, u2;
                 final_type v1, v2;

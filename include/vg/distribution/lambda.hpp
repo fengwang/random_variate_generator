@@ -40,38 +40,28 @@ namespace vg
             final_type      lambda4_;
             engine_type&    e_;
 
-            explicit lambda( const return_type lambda1 = 1, 
-                             const return_type lambda2 = 1, 
-                             const return_type lambda3 = 1, 
-                             const return_type lambda4 = 1, 
-                             const seed_type sd = 0 )
+            explicit lambda( const return_type lambda1 = 1, const return_type lambda2 = 1, const return_type lambda3 = 1, const return_type lambda4 = 1, const seed_type sd = 0 )
                 : lambda1_(lambda1), lambda2_(lambda2), lambda3_(lambda3), lambda4_(lambda4), e_(singleton<engine_type>::instance()) 
             {
                 e_.reset_seed( sd );
             } 
 
             return_type
-            operator()()
+            operator()() const
             {
                 return do_generation( lambda1_, lambda2_, lambda3_, lambda4_ );
             }
 
         protected:
             return_type
-            do_generation( const final_type lambda1, 
-                           const final_type lambda2,
-                           const final_type lambda3,
-                           const final_type lambda4 )
+            do_generation( const final_type lambda1, const final_type lambda2, const final_type lambda3, const final_type lambda4 ) const
             {
                 return direct_impl( lambda1, lambda2, lambda3, lambda4 );
             }
 
         private:
             return_type
-            direct_impl(   const final_type lambda1, 
-                           const final_type lambda2,
-                           const final_type lambda3,
-                           const final_type lambda4 )
+            direct_impl(   const final_type lambda1, const final_type lambda2, const final_type lambda3, const final_type lambda4 ) const
             {
                 const final_type U1 = e_();
                 const final_type U2 = e_();

@@ -49,21 +49,21 @@ namespace vg
             }
 
             return_type
-            operator()()
+            operator()() const
             {
                 return do_generation( mu1_, mu2_ );
             }
 
         protected:
             return_type
-            do_generation( const return_type mu1, const return_type mu2 )
+            do_generation( const return_type mu1, const return_type mu2 ) const
             {
                 return direct_impl( mu1, mu2 );
             }
 
         private:
             return_type
-            direct_impl( const return_type mu1, const return_type mu2 )
+            direct_impl( const return_type mu1, const return_type mu2 ) const 
             {
                 const final_type y1 = gamma_type::do_generation( mu1 / final_type( 2 ), final_type( 2 ) );
                 const final_type y2 = gamma_type::do_generation( mu2 / final_type( 2 ), final_type( 2 ) );

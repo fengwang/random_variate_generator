@@ -54,7 +54,7 @@ namespace vg
             }
 
             return_type
-            operator()()
+            operator()() const
             {
                 return do_generation( c_ );
             }
@@ -63,7 +63,7 @@ namespace vg
             //L. Devroye, Random variate generation for the trigamma and trigamma distributions,
             //Journal of Statistical Computation and Simulation, vol. 43, pp. 197-216, 1992.
             return_type
-            do_generation( const value_type c )
+            do_generation( const value_type c ) const
             {
                 if ( c > final_type( 1.14 ) )
                     return large_c_rejection_impl( c );
@@ -72,7 +72,7 @@ namespace vg
 
         private:
             return_type
-            large_c_rejection_impl( const value_type c )
+            large_c_rejection_impl( const value_type c ) const
             {
                 for ( ;; )
                     {
@@ -83,8 +83,9 @@ namespace vg
                             { return x; }
                     }
             }
+
             return_type
-            small_c_rejection_impl( const value_type c )
+            small_c_rejection_impl( const value_type c ) const
             {
                 return digamma_type::do_generation( 0, c );
             }

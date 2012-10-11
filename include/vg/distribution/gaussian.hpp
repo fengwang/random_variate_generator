@@ -38,11 +38,8 @@ namespace vg
             return_type     mean_;
             return_type     variance_;
             engine_type&    e_;
-            //normal_type n_;
 
-            explicit gaussian( const return_type mean = 0,
-                               const return_type variance = 1,
-                               const seed_type sd = 0 )
+            explicit gaussian( const return_type mean = 0, const return_type variance = 1, const seed_type sd = 0 )
                 : mean_( mean ), variance_( variance ), e_( singleton<engine_type>::instance() )
             {
                 assert( variance > 0 );
@@ -50,20 +47,20 @@ namespace vg
             }
 
             return_type
-            operator()()
+            operator()() const 
             {
                 return do_generation( variance_, mean_ );
             }
 
         protected:
             return_type
-            do_generation( const final_type Variance, const final_type Mean )
+            do_generation( const final_type Variance, const final_type Mean ) const
             {
                 return gaussian_direct_impl( Variance, Mean );
             }
         private:
             return_type
-            gaussian_direct_impl( const final_type Variance, const final_type Mean )
+            gaussian_direct_impl( const final_type Variance, const final_type Mean ) const
             {
                 const final_type ans =  normal_type::do_generation() * Variance + Mean;
                 return ans;

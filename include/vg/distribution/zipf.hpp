@@ -46,21 +46,21 @@ namespace vg
             }
 
             return_type
-            operator()()
+            operator()() const
             {
                 return do_generation( a_ );
             }
 
         protected:
             return_type
-            do_generation( const final_type A )
+            do_generation( const final_type A ) const
             {
                 return rejection_method( A );
             }
 
         private:
             return_type
-            rejection_method( const final_type A )
+            rejection_method( const final_type A ) const
             {
                 const final_type a_1 = A - final_type(1);
                 const final_type b = std::exp2( a_1 );

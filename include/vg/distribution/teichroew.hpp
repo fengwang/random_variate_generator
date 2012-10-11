@@ -43,8 +43,7 @@ namespace vg
             return_type     alpha_;
             engine_type&    e_;
 
-            explicit teichroew( const return_type alpha = 1,
-                                const seed_type sd = 0 )
+            explicit teichroew( const return_type alpha = 1, const seed_type sd = 0 )
                 : alpha_( alpha ), e_( singleton<engine_type>::instance() )
             {
                 assert( alpha > 0 );
@@ -52,20 +51,20 @@ namespace vg
             }
 
             return_type
-            operator()()
+            operator()() const
             {
                 return do_generation( alpha_ );
             }
 
         protected:
             return_type
-            do_generation( const final_type Alpha )
+            do_generation( const final_type Alpha ) const
             {
                 return teichroew_direct_impl( Alpha );
             }
         private:
             return_type
-            teichroew_direct_impl(  const final_type Alpha )
+            teichroew_direct_impl(  const final_type Alpha ) const
             {
                 const final_type n = normal_type::do_generation();
                 const final_type g = gamma_type::do_generation( Alpha );
@@ -76,7 +75,5 @@ namespace vg
 
 }//vg
 
-
 #endif//_TEICHROEW_HPP_INCLUDED_SDOIJ3OIUSAFKLJ498YASFDKJH49IY8AFSDKLJH4IUYASFDKLJHWEIUHYWREIUY487YSFIUSFKJHCVXJHSDFKJHSF
-
 

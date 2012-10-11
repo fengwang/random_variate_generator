@@ -47,14 +47,14 @@ namespace vg
             }
 
             return_type
-            operator()()
+            operator()() const
             {
                 return do_generation( p_ );
             }
 
         protected:
             return_type
-            do_generation( const final_type P )
+            do_generation( const final_type P ) const 
             {
 
                 return polar_method( P );
@@ -62,7 +62,7 @@ namespace vg
 
         private:
             return_type
-            coin_flip_method( const final_type P )
+            coin_flip_method( const final_type P ) const
             {
                 value_type ans = 1;
 
@@ -73,7 +73,7 @@ namespace vg
             }
 
             return_type
-            polar_method( const final_type P )
+            polar_method( const final_type P ) const 
             {
                 const final_type u = e_();
                 const final_type n = std::ceil( log( u ) / log( final_type( 1 ) - P ) );

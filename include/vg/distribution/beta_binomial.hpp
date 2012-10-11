@@ -46,35 +46,36 @@ namespace vg
             value_type          n_;
             final_type          a_;
             final_type          b_;
-            engine_type         e_;
+            engine_type&        e_;
 
             explicit beta_binomial(	const value_type n = value_type( 10 ),
                                     const final_type a = final_type(1),
                                     const final_type b = final_type(1),
                                     const seed_type sd = 0 )
-                : n_(n), a_( a ), b_( b ), e_( sd )
+                : n_(n), a_( a ), b_( b ), e_( singleton<engine_type>::instance() )
             {
                 assert( n > 0 );
                 assert( a > 0 );
                 assert( b > 0 );
+                 e_.reset_seed( sd );
             }
 
             return_type
-            operator()()
+            operator()() const
             {
                 return do_generation( n_, a_, b_ );
             }
 
         protected:
             return_type
-            do_generation( const value_type N, const final_type A, const final_type B )
+            do_generation( const value_type N, const final_type A, const final_type B ) const 
             {
                 return direct_beta_binomial_impl( N, A, B );
             }
 
         private:
             return_type
-            direct_beta_binomial_impl( const value_type N, const final_type A, const final_type B )
+            direct_beta_binomial_impl( const value_type N, const final_type A, const final_type B ) const
             {
                 const final_type p = beta_type::do_generation( A, B );
                 const final_type ans = binomial_type::do_generation( N, p );

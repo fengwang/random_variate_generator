@@ -45,10 +45,7 @@ namespace vg
             return_type     lambda_;
             engine_type&    e_;
 
-            explicit polya_aeppli( const return_type beta = 1,
-                                const return_type theta = 1,
-                                const return_type lambda = 1,
-                                const seed_type sd = 0 )
+            explicit polya_aeppli( const return_type beta = 1, const return_type theta = 1, const return_type lambda = 1, const seed_type sd = 0 )
                 : beta_( beta ), theta_( theta ), lambda_( lambda ), e_( singleton<engine_type>::instance() )
             {
                 assert( beta > 0 );
@@ -58,20 +55,20 @@ namespace vg
             }
 
             return_type
-            operator()()
+            operator()() const
             {
                 return do_generation( beta_, theta_, lambda_ );
             }
 
         protected:
             return_type
-            do_generation( const final_type Beta, const final_type Theta, const final_type Lambda )
+            do_generation( const final_type Beta, const final_type Theta, const final_type Lambda ) const
             {
                 return polya_aeppli_direct_impl( Beta, Theta, Lambda );
             }
         private:
             return_type
-            polya_aeppli_direct_impl(  const final_type Beta, const final_type Theta, const final_type Lambda )
+            polya_aeppli_direct_impl(  const final_type Beta, const final_type Theta, const final_type Lambda ) const
             {
                 const final_type z = poisson_type::do_generation( Beta * Beta / ( 4.0 * Theta ) );
                 const final_type g = gamma_type::do_generation( z + Lambda );
@@ -81,7 +78,6 @@ namespace vg
     };
 
 }//vg
-
 
 #endif//_POLYA_AEPPLI_HPP_INCLUDED_DSKL4EOIUJSARIGHHEREFORYOUTHEEOIJSFLKJSFLKJASLKJSFLKJSFDLKJSDDFLKJSFLKJDJFLKJSFLKJSFLD
 

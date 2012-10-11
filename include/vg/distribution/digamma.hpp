@@ -53,7 +53,7 @@ namespace vg
             }
 
             return_type
-            operator()()
+            operator()() const
             {
                 return do_generation( a_, c_ );
             }
@@ -62,7 +62,7 @@ namespace vg
             //L. Devroye, Random variate generation for the digamma and trigamma distributions,
             //Journal of Statistical Computation and Simulation, vol. 43, pp. 197-216, 1992.
             return_type
-            do_generation( const value_type a, const value_type c )
+            do_generation( const value_type a, const value_type c ) const
             {
                 if ( c > final_type(1) && a < final_type(1) )
                     return sibuya_rejection_impl( a, c );
@@ -77,7 +77,7 @@ namespace vg
             // M. Sibuya, "Generalized hypergeometric, digamma and trigamma distributions," Annals of the
             // Institute of Statistical Mathematics. vol. 32, pp. 25-36, 1980
             return_type
-            sibuya_rejection_impl( const value_type a, const value_type c )
+            sibuya_rejection_impl( const value_type a, const value_type c ) const
             {
                 for ( ;; )
                     {
@@ -90,7 +90,7 @@ namespace vg
             }
 
             return_type
-            simple_rejection_impl( const value_type a, const value_type c )
+            simple_rejection_impl( const value_type a, const value_type c ) const
             {
                 for ( ;; )
                     {
@@ -105,7 +105,7 @@ namespace vg
             }
 
             return_type
-            joint_rejection_impl( const value_type a, const value_type c )
+            joint_rejection_impl( const value_type a, const value_type c ) const
             {
                 const final_type t = ( a - final_type( 1 ) ) / c;
                 const final_type u = std::ceil( std::log( t ) / std::log( final_type( 2 ) ) );
@@ -143,7 +143,7 @@ namespace vg
             }
 
             return_type
-            special_method_rejection_impl( const value_type a, const value_type c )
+            special_method_rejection_impl( const value_type a, const value_type c ) const
             {
                 const final_type delta = special_function::digamma()( a + c ) - special_function::digamma()( c );
                 const final_type d = std::max( a / delta / c, std::exp( ( final_type( 6 ) * a + final_type( 7 ) ) * c / final_type( 12 ) / ( final_type( 1 ) + a ) + std::lgamma( a + c ) - std::lgamma( c ) ) / delta );
@@ -163,7 +163,7 @@ namespace vg
             }
 
             return_type
-            sibuya_rejection_1979_impl( const value_type a, const value_type c )
+            sibuya_rejection_1979_impl( const value_type a, const value_type c ) const
             {
                 const final_type delta = special_function::digamma()( a + c ) - special_function::digamma()( c );
                 final_type p = a / ( c - final_type( 1 ) ) / delta;
@@ -181,24 +181,9 @@ namespace vg
                 return x;
             }
 
-
     };
 
 }//namespace vg
 
 #endif//_DIGAMMA_HPP_INCLUDED_SDOIJSDL3IOUSDFLKJASFLSSSSSSSSSSSSSSIMNDALKFJALSDKFJASDLFKJDLKJFOIJ4LKJSDFLKJASFSSSSSSSSOIJ4D89U4LKJDF 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

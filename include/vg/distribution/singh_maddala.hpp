@@ -45,11 +45,7 @@ namespace vg
             final_type          r_;
             engine_type&        e_;
 
-            explicit singh_maddala(  
-                            const final_type c = final_type(1),
-                            const final_type k = final_type(1),
-                            const final_type r = final_type(1),
-                            const seed_type sd = 0 )
+            explicit singh_maddala(  const final_type c = final_type(1), const final_type k = final_type(1), const final_type r = final_type(1), const seed_type sd = 0 )
                 : c_( c ), k_( k ), r_( r ), e_( singleton<engine_type>::instance() )
             {
                 assert( c > 0 );
@@ -58,21 +54,21 @@ namespace vg
             }
 
             return_type
-            operator()()
+            operator()() const
             {
                 return do_generation( c_, k_, r_ );
             }
 
         protected:
             final_type
-            do_generation( const final_type C, const final_type K, const final_type R )
+            do_generation( const final_type C, const final_type K, const final_type R ) const
             {
                 return direct_impl( C, K, R );
             }
 
         private:
             final_type
-            direct_impl( const size_type N, const final_type C, const final_type K, const final_type R )
+            direct_impl( const size_type N, const final_type C, const final_type K, const final_type R ) const
             {
                 return burr_type::do_generation( 12, C, K, R );
             }

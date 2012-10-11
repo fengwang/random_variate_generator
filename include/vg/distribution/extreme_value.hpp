@@ -27,9 +27,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 namespace vg
 {
 
-    template <   typename Return_Type,
-                 typename Engine
-             >
+    template < typename Return_Type, typename Engine >
     struct extreme_value
     {
             typedef Return_Type                         return_type;
@@ -43,10 +41,7 @@ namespace vg
             return_type         xi_;        //sharp
             engine_type&        e_;
 
-            explicit extreme_value(	const return_type mu = 0,
-                                    const return_type sigma = 1,
-                                    const return_type xi = 0,
-                                    const seed_type sd = 0 )
+            explicit extreme_value(	const return_type mu = 0, const return_type sigma = 1, const return_type xi = 0, const seed_type sd = 0 )
                 : mu_(mu), sigma_(sigma), xi_(xi), e_( singleton<engine_type>::instance() )
             {
                 assert( sigma_ > 0 );
@@ -54,14 +49,14 @@ namespace vg
             }
 
             return_type
-            operator()()
+            operator()() const
             {
                 return do_generation( mu_, sigma_, xi_ );
             }
 
         protected:
             return_type
-            do_generation( const final_type Mu, const final_type Sigma, const final_type Xi )
+            do_generation( const final_type Mu, const final_type Sigma, const final_type Xi ) const
             {
                 return direct_reverse_impl( Mu, Sigma, Xi );
             }
@@ -70,7 +65,7 @@ namespace vg
             //the distribution function is
             //F(x;\mu,\sigma,\xi) = \exp\left\{-\left[1+\xi\left(\frac{x-\mu}{\sigma}\right)\right]^{-1/\xi}\right\}
             return_type
-            direct_reverse_impl( const final_type Mu, const final_type Sigma, const final_type Xi )
+            direct_reverse_impl( const final_type Mu, const final_type Sigma, const final_type Xi ) const
             {
                 const final_type u = e_();
                 const final_type ans = Mu + ( std::exp(-Xi * std::log( -std::log(u) ) ) - final_type(1) ) * Sigma / Xi;
@@ -83,4 +78,5 @@ namespace vg
 
 
 #endif//_EXTREME_VALUE_HPP_INCLUDED_SDFOIU4897USFD98743KLJSFDKLJSFDOIU498YSFIU45O8IUFSOIU498UFSDIUROUIOIEULDGKJDGOIU45OIU
+
 

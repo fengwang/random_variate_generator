@@ -26,9 +26,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 namespace vg
 {
 
-    template <   typename Return_Type,
-                 typename Engine
-             >
+    template < typename Return_Type, typename Engine >
     struct logistic : private beta<Return_Type, Engine>
     {
             typedef beta<Return_Type, Engine>           beta_type;
@@ -41,9 +39,7 @@ namespace vg
             return_type         b_;
             engine_type         e_;
 
-            explicit logistic(	const return_type a = 1,
-                                const return_type b = 1,
-                                const seed_type sd = 0 )
+            explicit logistic(	const return_type a = 1, const return_type b = 1, const seed_type sd = 0 )
                 : a_( a ), b_(b), e_( sd )
             {
                 assert( a > 0 );
@@ -51,21 +47,21 @@ namespace vg
             }
 
             return_type
-            operator()()
+            operator()() const
             {
                 return do_generation( a_, b_ );
             }
 
         protected:
             return_type
-            do_generation( const final_type A, const final_type B )
+            do_generation( const final_type A, const final_type B ) const
             {
                 return beta_impl( A, B );
             }
 
         private:
             return_type
-            beta_impl( const final_type A, const final_type B )
+            beta_impl( const final_type A, const final_type B ) const
             {
                 const final_type X = beta_type::do_generation( A, B );
                 const final_type ans = std::log( X / ( final_type(1) - X ) );
@@ -75,7 +71,6 @@ namespace vg
     };
 
 }//vg
-
 
 #endif//_LOGISTIC_HPP_INCLUDED_SDOIU4398YASFKLJH3498YAFSDOIU34UIOAHSFDKLMNSFDKJH3IUHASFDAFLKJ 
 

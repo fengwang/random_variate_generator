@@ -44,21 +44,21 @@ namespace vg
             }
 
             return_type
-            operator()()
+            operator()() const
             {
                 return do_generation( mu_, b_ );
             }
 
         protected:
             return_type
-            do_generation( const return_type mu, const return_type b )
+            do_generation( const return_type mu, const return_type b ) const
             {
                 return direct_invertion_method( mu, b );
             }
 
         private:
             return_type
-            direct_invertion_method( const return_type mu, const return_type b )
+            direct_invertion_method( const return_type mu, const return_type b ) const
             {
                 for ( ;; )
                 {
@@ -79,10 +79,5 @@ namespace vg
 
 }//namespace vg
 
-
-
-
 #endif//_LAPLACE_HPP_INCLUDED_9URHFADSKJHSAFUHE9U8HDFUJHDUIHEUHFDUJHDSUI893U7FSDK
-
-
 

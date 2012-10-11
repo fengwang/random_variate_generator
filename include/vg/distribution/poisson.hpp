@@ -55,14 +55,14 @@ namespace vg
             }
 
             return_type
-            operator()()
+            operator()() const
             {
                 return do_generation( lambda_ );
             }
 
         protected:
             return_type
-            do_generation( const final_type lambda )
+            do_generation( const final_type lambda ) const
             {
                 if ( lambda < final_type( 10 ) )
                     { return exponential_inter_arrival_times_method( lambda ); }
@@ -72,7 +72,7 @@ namespace vg
 
         private:
             return_type
-            exponential_inter_arrival_times_method( const final_type lambda )
+            exponential_inter_arrival_times_method( const final_type lambda ) const
             {
                 return_type ans = 0;
                 const final_type exp_lambda = std::exp( -lambda );
@@ -88,7 +88,7 @@ namespace vg
             }
 
             return_type
-            rejection_method_from_kruth( final_type lambda )
+            rejection_method_from_kruth( final_type lambda ) const
             {
                 std::size_t ans = 0;
 
@@ -111,7 +111,7 @@ namespace vg
             }
 
             return_type
-            rejection_method( const final_type lambda )
+            rejection_method( const final_type lambda ) const 
             {
                 const final_type mu = std::floor( lambda );
                 const final_type delta = std::round( mu / final_type( 2 ) + final_type( 3 ) );
@@ -180,15 +180,7 @@ namespace vg
 
     }; // poisson 
 
-
-
-
 }//namespace vg
 
-
-
-
 #endif//_POISSON_HPP_INCLUDED_9URHFADSKJHSAFUHE9U8HDFUJHDUIHEUHFDUJHDSUI893U7FSDK
-
-
 

@@ -48,8 +48,7 @@ namespace vg
             final_type p_;
             engine_type& e_;
 
-            explicit bernoulli( final_type p = final_type( 0.5 ),
-                                const seed_type s = seed_type( 0 ) )
+            explicit bernoulli( final_type p = final_type( 0.5 ), const seed_type s = seed_type( 0 ) )
                 : p_( p ), e_( singleton<engine_type>::instance() )
             {
                 assert( p_ >= final_type( 0 ) );
@@ -58,21 +57,21 @@ namespace vg
             }
 
             return_type
-            operator()()
+            operator()() const 
             {
                 return do_generation( p_ );
             }
 
         protected:
             return_type
-            do_generation( const final_type P )
+            do_generation( const final_type P ) const
             {
                 return coin_flip_method( P );
             }
 
         private:
             return_type
-            coin_flip_method( const final_type P )
+            coin_flip_method( const final_type P ) const
             {
                 if ( e_() < p_ )
                     { return 1; }

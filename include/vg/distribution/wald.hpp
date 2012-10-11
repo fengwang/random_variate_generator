@@ -37,16 +37,9 @@ namespace vg
 
             return_type     mu_;
             return_type     lambda_;
-
-            //explicit wald( const return_type mu = 1, const return_type lambda = 1 ) 
-            //    : mu_( mu ), lambda_( lambda ) {}
-
             engine_type&    e_;     //this engine make sense though not used within this distribution
 
-            explicit wald( const return_type mu = 1,
-                           const return_type lambda = 1,
-                           const seed_type sd = 0 
-                         )
+            explicit wald( const return_type mu = 1, const return_type lambda = 1, const seed_type sd = 0 )
                 : mu_( mu ), lambda_( lambda ), e_( singleton<engine_type>::instance() )
             {
                 assert( mu > 0 );
@@ -55,20 +48,20 @@ namespace vg
             }
 
             return_type
-            operator()()
+            operator()() const
             {
                 return do_generation( lambda_, mu_ );
             }
 
         protected:
             return_type
-            do_generation( const final_type Lambda, const final_type Mu )
+            do_generation( const final_type Lambda, const final_type Mu ) const
             {
                 return direct_impl( Lambda, Mu );
             }
         private:
             return_type
-            direct_impl( const final_type Lambda, const final_type Mu )
+            direct_impl( const final_type Lambda, const final_type Mu ) const
             {
                 return inverse_gaussian_type::do_generation( Lambda, Mu );
             }

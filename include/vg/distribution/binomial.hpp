@@ -64,14 +64,14 @@ namespace vg
             }
 
             return_type
-            operator()()
+            operator()() const
             {
                 return do_generation( n_, p_ );
             }
 
         protected:
             return_type
-            do_generation( const size_type N, const final_type P )
+            do_generation( const size_type N, const final_type P ) const
             {
                 if ( 0 == N )
                     return 0;
@@ -95,7 +95,7 @@ namespace vg
 #endif
         private:
             return_type
-            coin_flip_method( const size_type N, const final_type P )
+            coin_flip_method( const size_type N, const final_type P ) const
             {
                 value_type ans = 0;
 
@@ -117,9 +117,9 @@ namespace vg
             UNTIL SUM > q
             RETURN ANS < - ANS - 1
 #endif
-        protected:
+        private:
             return_type
-            second_waiting_time_method( const size_type N, const final_type P )
+            second_waiting_time_method( const size_type N, const final_type P ) const
             {
                 const final_type p  = P > 0.5 ? 1 - P : P;
                 const final_type q  = -std::log( 1.0 - p );
@@ -140,9 +140,9 @@ namespace vg
                 return p_ > 0.5 ? N - ans : ans;
             }//second_waiting_time_method
 
-        protected:
+        private:
             return_type
-            rejection_method( const size_type N, const final_type P )
+            rejection_method( const size_type N, const final_type P ) const
             {
                 size_type   n   =   N;
                 final_type  p   =   P;

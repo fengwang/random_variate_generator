@@ -43,8 +43,7 @@ namespace vg
             return_type     delta_;
             engine_type&    e_;
 
-            explicit cauchy( const return_type delta = 1,
-                             const seed_type sd = 0 )
+            explicit cauchy( const return_type delta = 1, const seed_type sd = 0 )
                 : delta_( delta ), e_( singleton<engine_type>::instance() )
             {
                 assert( delta_ > 0 );
@@ -52,21 +51,21 @@ namespace vg
             }
 
             return_type
-            operator()()
+            operator()() const
             {
                 return do_generation( delta_ );
             }
 
         protected:
             return_type
-            do_generation( const final_type Delta )
+            do_generation( const final_type Delta ) const
             {
                 return cauchy_direct_impl( delta_ );
             }
 
         private:
             return_type
-            cauchy_direct_impl( const final_type Delta )
+            cauchy_direct_impl( const final_type Delta ) const 
             {
                 const final_type pi = 3.1415926535897932384626433L;
 

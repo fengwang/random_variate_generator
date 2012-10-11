@@ -48,14 +48,14 @@ namespace vg
             }
 
             return_type
-            operator()()
+            operator()() const
             {
                 return do_generation( a_ );
             }
 
         protected:
             return_type
-            do_generation( const final_type a )
+            do_generation( const final_type a ) const
             {
                 return exponential_impl( a );
             }
@@ -66,7 +66,7 @@ namespace vg
              */
             // H. A. Simon, "Some futher notes on a class of skew distribution functions", Information and Control, vol. 3, pp.90-98, 1960.
             return_type
-            exponential_impl( const final_type a )
+            exponential_impl( const final_type a ) const
             {
                 const final_type e1 = - exponential_type::do_generation( final_type(1) );
                 const final_type e2 = - exponential_type::do_generation( final_type(1) );

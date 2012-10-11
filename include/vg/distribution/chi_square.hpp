@@ -44,31 +44,35 @@ namespace vg
             typedef typename engine_type::size_type     size_type;
 
             size_type       k_;
-            //engine_type&    e_;
+            engine_type&    e_;
 
-            explicit chi_square( const size_type k = 10,
-                                 const seed_type sd = 0 )
-                : k_( k )//, e_( singleton<engine_type>::instance() )
+            /*
+             *  Comment here:
+             *  the engine e_ is not directedly used by chi_square, but the seed has to be set here
+             *  for the engine e_, because gamma will use it.
+             */
+            explicit chi_square( const size_type k = 10, const seed_type sd = 0 )
+                : k_( k ), e_( singleton<engine_type>::instance() )
             {
-                //e_.reset_seed( sd );
+                e_.reset_seed( sd ); 
             }
 
             return_type
-            operator()()
+            operator()() const
             {
                 return do_generation( k_ );
             }
 
         protected:
             return_type
-            do_generation( const size_type K )
+            do_generation( const size_type K ) const
             {
                 return chi_square_direct_impl( K );
             }
 
         private:
             return_type
-            chi_square_direct_impl( const size_type K )
+            chi_square_direct_impl( const size_type K ) const 
             {
                 const final_type ans = gamma_type::do_generation( final_type( K ) / final_type( 2 ) );
                 return ans + ans;

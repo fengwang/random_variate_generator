@@ -39,9 +39,7 @@ namespace vg
             return_type     b_;
             engine_type&    e_;
 
-            explicit pareto(	const return_type a = 1,
-                                const return_type b = 2,
-                                const seed_type sd = 0 )
+            explicit pareto(	const return_type a = 1, const return_type b = 2, const seed_type sd = 0 )
                 : a_( a ), b_( b ), e_( singleton<engine_type>::instance() )
             {
                 assert( a_ > 0 );
@@ -49,21 +47,21 @@ namespace vg
             }
 
             return_type
-            operator()()
+            operator()() const
             {
                 return do_generation( a_, b_ );
             }
 
         protected:
             return_type
-            do_generation( const return_type A, const return_type B )
+            do_generation( const return_type A, const return_type B ) const
             {
                 return direct_impl( A, B );
             }
 
         private:
             return_type
-            direct_impl( const return_type A, const return_type B )
+            direct_impl( const return_type A, const return_type B ) const
             {
                 const final_type u = e_();
                 const final_type tmp = std::pow( u, final_type( 1 ) / A );

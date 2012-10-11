@@ -20,6 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <vg/distribution.hpp>
 #include <vg/engine.hpp>
+#include <vg/utility.hpp>
 #include <vg/variate_generator.hpp>
 
 #endif//_RANDOM_HPP_INCLUDED_9IJHWSKJLSKJH2IU83487UY5R4KJ1H2U7HFSAKJVNCIKJNFFUHD

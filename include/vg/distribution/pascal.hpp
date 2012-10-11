@@ -43,9 +43,7 @@ namespace vg
             final_type          p_;
             engine_type&        e_;
 
-            explicit pascal(    size_type n = size_type( 1 ),
-                                final_type p = final_type( 0.5 ),
-                                const seed_type s = seed_type( 0 ) )
+            explicit pascal(    size_type n = size_type( 1 ), final_type p = final_type( 0.5 ), const seed_type s = seed_type( 0 ) )
                 : n_( n ), p_( p ), e_( singleton<engine_type>::instance() )
             {
                 assert( n != size_type( 0 ) );
@@ -55,21 +53,21 @@ namespace vg
             }
 
             return_type
-            operator()()
+            operator()() const
             {
                 return do_generation( n_, p_ );
             }
 
         protected:
             return_type
-            do_generation( const size_type N, const final_type P )
+            do_generation( const size_type N, const final_type P ) const
             {
                 return direct_impl( N, P );
             }
 
         private:
             return_type
-            direct_impl( const size_type N, const final_type P )
+            direct_impl( const size_type N, const final_type P ) const 
             {
                 const final_type ans = negative_binomial_type::do_generation( N, P );
                 return ans;

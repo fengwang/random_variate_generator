@@ -38,8 +38,7 @@ namespace vg
             return_type     delta_;
             engine_type&    e_;
 
-            explicit rayleigh_tail(	const return_type delta = 1,
-                                    const seed_type sd = 0 )
+            explicit rayleigh_tail(	const return_type delta = 1, const seed_type sd = 0 )
                 : delta_( delta ), e_( singleton<engine_type>::instance() )
             {
                 assert( delta_ > 0 );
@@ -47,21 +46,21 @@ namespace vg
             }
 
             return_type
-            operator()()
+            operator()() const
             {
                 return do_generation( delta_ );
             }
 
         protected:
             return_type
-            do_generation( const return_type delta )
+            do_generation( const return_type delta ) const
             {
                 return direct_impl( delta );
             }
 
         private:
             return_type
-            direct_impl( const return_type delta )
+            direct_impl( const return_type delta ) const
             {
                 const final_type u      =   e_();
                 const final_type tmp1   =   std::log( u );

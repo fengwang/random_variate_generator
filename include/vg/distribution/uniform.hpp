@@ -48,21 +48,21 @@ namespace vg
             }
 
             return_type
-            operator()()
+            operator()() const
             {
                 return do_generation( lower_, upper_ );
             }
 
         protected:
             return_type
-            do_generation( const value_type lower, const value_type upper )
+            do_generation( const value_type lower, const value_type upper ) const
             {
                 return direct_impl( lower, upper );
             }
 
         private:
             return_type
-            direct_impl( const value_type lower, const value_type upper )
+            direct_impl( const value_type lower, const value_type upper ) const
             {
                 const final_type lower_f    =   static_cast<final_type>( lower );
                 const final_type upper_f    =   static_cast<final_type>( upper );

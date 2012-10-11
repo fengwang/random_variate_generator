@@ -65,7 +65,6 @@ namespace vg
 				x_ += c_;
                 const final_type ans = static_cast<final_type>( x_ ) /
                                        static_cast<final_type>( std::numeric_limits<value_type>::max() );
-                                       //static_cast<final_type>( value_type(-1) );
                 return ans;
             } // end of operator()
 

@@ -27,9 +27,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 namespace vg
 {
 
-    template <   typename Return_Type,
-                 typename Engine
-             >
+    template < typename Return_Type, typename Engine >
     struct gamma : private normal<Return_Type, Engine>
     {
             typedef normal<Return_Type, Engine>                 normal_type;
@@ -44,9 +42,7 @@ namespace vg
             value_type          b_;
             engine_type&        e_;
 
-            explicit gamma(	const value_type a = value_type( 1 ),
-                            const value_type b = value_type( 1 ),
-                            const seed_type sd = 0 )
+            explicit gamma(	const value_type a = value_type( 1 ), const value_type b = value_type( 1 ), const seed_type sd = 0 )
                 : a_( a ), b_( b ), e_( singleton<engine_type>::instance() )
             {
                 assert( a > 0 );
@@ -55,20 +51,20 @@ namespace vg
             }
 
             return_type
-            operator()()
+            operator()() const
             {
                 return do_generation( a_, b_ );
             }
 
         protected:
             return_type
-            do_generation( const final_type A, const final_type B )
+            do_generation( const final_type A, const final_type B ) const
             {
                 return marsaglia_tsang_method( A ) * B;
             }
 
             return_type
-            do_generation( const final_type A )
+            do_generation( const final_type A ) const
             {
                 return marsaglia_tsang_method( A );
             }
@@ -77,7 +73,7 @@ namespace vg
             //Marsaglia and Tsang, "A Simple Method for generating gamma variables",
             //ACM Transactions on Mathematical Software, Vol 26, No 3 (2000), p363-372.
             return_type
-            marsaglia_tsang_method( const final_type A )
+            marsaglia_tsang_method( const final_type A ) const
             {
                 const final_type a = A < final_type( 1 ) ? A + final_type( 1 ) : A;
                 const final_type d = a - final_type( 1 ) / final_type( 3 );
@@ -122,7 +118,4 @@ namespace vg
 }//vg
 
 #endif//_GAMMA_HPP_INCLUDED_2I8HJFASKJLNHVJMNXVUHNZVSJHWOIUHAP9I3LKJSOIUJ3OIJSIA
-
-
-
 

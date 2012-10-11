@@ -22,16 +22,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <iterator>
 #include <numeric>
 
-using namespace vg;
+
 using namespace std;
 
 int main()
 {
-    variate_generator<double, vg::levy, vg::mt19937> vg(1.5, 1.5);    
+    vg::vg<double, vg::levy, vg::mt19937> vg_(1.5, 1.5);    
 
-    copy( vg.begin(), vg.begin()+10, ostream_iterator<double>(cout, "\n"));
+    copy( vg_.begin(), vg_.begin()+10, ostream_iterator<double>(cout, "\n"));
 
-    auto sum = accumulate( vg.begin(), vg.begin()+10, 0.0 );
+    auto sum = accumulate( vg_.begin(), vg_.begin()+10, 0.0 );
 
     cout << sum << endl;
 

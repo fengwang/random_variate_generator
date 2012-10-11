@@ -22,17 +22,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <iterator>
 #include <numeric>
 
-using namespace vg;
+
 using namespace std;
 
 int main()
 {
-    variate_generator<double, laplace> vg(11, 1.3);    
+    vg::vg<double, laplace> vg_(11, 1.3);    
 
-    copy( vg.begin(), vg.begin()+10000, ostream_iterator<int>(cout, "\n"));
+    copy( vg_.begin(), vg_.begin()+10000, ostream_iterator<int>(cout, "\n"));
 
 
-    auto sum = accumulate( vg.begin(), vg.begin()+10000, 0.0 );
+    auto sum = accumulate( vg_.begin(), vg_.begin()+10000, 0.0 );
 
     cout << sum << endl;
 

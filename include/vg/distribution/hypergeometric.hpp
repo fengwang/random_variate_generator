@@ -55,14 +55,14 @@ namespace vg
         }
 
         return_type
-        operator()()
+        operator()() const 
         {
             return do_generation( n1_, n2_, k_ );
         }
 
         protected:
         return_type
-        do_generation( const size_type n1, const size_type n2, const size_type k )
+        do_generation( const size_type n1, const size_type n2, const size_type k ) const 
         {
             const size_type n = n1 + n2;
 
@@ -83,7 +83,7 @@ namespace vg
 
         private:
         return_type
-        direct_impl( const size_type n1, const size_type n2, const size_type k )
+        direct_impl( const size_type n1, const size_type n2, const size_type k ) const 
         {
             size_type left_all = n1 + n2;
             size_type left_good = n1;
@@ -106,8 +106,6 @@ namespace vg
     };
 
 }//namespace vg
-
-
 
 #endif//_HYPERGEOMETRIC_HPP_INCLUDED_SODFIJ4OU89ASFLKJ4U89AFSKLIJH48YASFLIU498UYFDKLJ 
 

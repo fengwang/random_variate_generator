@@ -56,21 +56,21 @@ struct gumbel_1
         }
 
         return_type
-        operator()()
+        operator()() const
         {
             return do_generation( a_, b_ );
         }
 
     protected:
         return_type
-        do_generation( const return_type a, const return_type b )
+        do_generation( const return_type a, const return_type b ) const 
         {
             return direct_impl( a, b );
         }
 
     private:
         return_type
-        direct_impl( const return_type a, const return_type b )
+        direct_impl( const return_type a, const return_type b ) const 
         {
             final_type x = e_();
 

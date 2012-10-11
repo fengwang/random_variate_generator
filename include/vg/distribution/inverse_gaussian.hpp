@@ -39,9 +39,7 @@ namespace vg
             return_type     lambda_;
             engine_type&    e_;
 
-            explicit inverse_gaussian( const return_type mu = 1,
-                                       const return_type lambda = 1,
-                                       const seed_type sd = 0 )
+            explicit inverse_gaussian( const return_type mu = 1, const return_type lambda = 1, const seed_type sd = 0 )
                 : mu_( mu ), lambda_( lambda ), e_( singleton<engine_type>::instance() )
             {
                 assert( mu > 0 );
@@ -50,21 +48,21 @@ namespace vg
             }
 
             return_type
-            operator()()
+            operator()() const 
             {
                 return do_generation( lambda_, mu_ );
             }
 
         protected:
             return_type
-            do_generation( const final_type Lambda, const final_type Mu )
+            do_generation( const final_type Lambda, const final_type Mu ) const
             {
                 return michael_schucany_haas_impl( Lambda, Mu );
             }
         private:
             //Luc Devroye (1986). Non-Uniform Random Variate Generation. New York: Springer-Verlag, p. 163.
             return_type
-            michael_schucany_haas_impl( const final_type Lambda, const final_type Mu )
+            michael_schucany_haas_impl( const final_type Lambda, const final_type Mu ) const 
             {
                 const final_type N = normal_type::do_generation();
                 const final_type Y = N * N ;
@@ -78,8 +76,5 @@ namespace vg
 
 }//vg
 
-
 #endif//_INVERSE_GAUSSIAN_HPP_INCLUDED_DSOIJ3LKJSF8U4LKJDFLKCMSOIJ34OISFLKJ4OIJFSLKJSLFK34IJSLFDKJ4OIJSLKJ4OIJSLKJSOFDIJLFKJ4IJLSFKDSKLJFSJFKLOE
-
-
 

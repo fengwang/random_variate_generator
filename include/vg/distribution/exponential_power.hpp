@@ -50,23 +50,21 @@ namespace vg
             value_type          b_;
             engine_type&        e_;
 
-            explicit exponential_power( const value_type a = value_type( 1 ),
-                    const value_type b = value_type( 1 ),
-                    const seed_type sd = 0 )
+            explicit exponential_power( const value_type a = value_type( 1 ), const value_type b = value_type( 1 ), const seed_type sd = 0 )
                 : a_( a ), b_( b ), e_( singleton<engine_type>::instance() ) 
             {
                 e_.reset_seed( sd );
             }
 
             return_type
-            operator()()
+            operator()() const
             {
                 return do_generation( a_, b_ );
             }
 
         protected:
             return_type
-            do_generation( const final_type A, const final_type B )
+            do_generation( const final_type A, const final_type B ) const
             {
                 if ( final_type( 1 ) == B )
                     { return laplace_impl( A ); }
@@ -85,19 +83,19 @@ namespace vg
 
         private:
             return_type
-            laplace_impl( const final_type A )
+            laplace_impl( const final_type A ) const
             {
                 return laplace_type::do_generation( final_type(), A );
             }
 
             return_type
-            gaussian_impl( const final_type A )
+            gaussian_impl( const final_type A ) const
             {
                 return normal_type::do_generation() * A / final_type( 1.414213562373095048801688724209698 );
             }
 
             return_type
-            laplace_reject_impl( const final_type A, const final_type B )
+            laplace_reject_impl( const final_type A, const final_type B ) const
             {
                 const final_type b = std::pow( final_type( 1 ) / B, final_type( 1 ) / B );
 
@@ -117,7 +115,7 @@ namespace vg
             }
 
             return_type
-            gaussian_reject_impl( const final_type A, const final_type B )
+            gaussian_reject_impl( const final_type A, const final_type B ) const
             {
                 const final_type b = std::pow( final_type( 1 ) / B, final_type( 1 ) / B );
 
@@ -137,7 +135,7 @@ namespace vg
             }
 
             return_type
-            gamma_impl( const final_type A, const final_type B )
+            gamma_impl( const final_type A, const final_type B ) const
             {
                 const final_type x = e_();
                 const final_type y = gamm_type::do_generation( final_type( 1 ) / B, final_type( 1 ) );

@@ -22,16 +22,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <iterator>
 #include <numeric>
 
-using namespace vg;
+
 using namespace std;
 
 int main()
 {
-    variate_generator<int, vg::beta_binomial, vg::linear_congruential> vg( 200, 0.4, 3.45 );    
+    vg::vg<int, vg::beta_binomial, vg::linear_congruential> vg_( 200, 0.4, 3.45 );    
 
-    copy( vg.begin(), vg.begin()+1000, ostream_iterator<int>(cout, "\n"));
+    copy( vg_.begin(), vg_.begin()+1000, ostream_iterator<int>(cout, "\n"));
 
-    auto sum = accumulate( vg.begin(), vg.begin()+1000, 0 );
+    auto sum = accumulate( vg_.begin(), vg_.begin()+1000, 0 );
 
     cout << sum << endl;
 

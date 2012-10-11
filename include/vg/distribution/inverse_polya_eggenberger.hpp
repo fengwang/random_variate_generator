@@ -52,14 +52,14 @@ namespace vg
         }
 
         return_type
-        operator()()
+        operator()() const
         {
             return do_generation( a_, b_, c_ );
         }
 
     protected:
         return_type
-        do_generation( const value_type a, const value_type b, const value_type c )
+        do_generation( const value_type a, const value_type b, const value_type c ) const 
         {
             return direct_impl( a, b, c );
         }
@@ -67,7 +67,7 @@ namespace vg
     private:
         //N. L. Johnson and S. Kotz, "Developments in discrete distributions, 1969-1980", International Statistical Review, vol. 50, pp. 70-101, 1982.
         return_type
-        direct_impl( const value_type a, const value_type b, const value_type c )
+        direct_impl( const value_type a, const value_type b, const value_type c ) const
         {
             const final_type ans = GHgB3_type::do_generation( a, b, c );
             return ans;

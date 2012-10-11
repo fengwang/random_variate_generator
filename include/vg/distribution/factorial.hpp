@@ -50,14 +50,14 @@ namespace vg
         }
 
         return_type
-        operator()()
+        operator()() const
         {
             return do_generation( k_, r_ );
         }
 
     protected:
         return_type
-        do_generation( const value_type k, const value_type r )
+        do_generation( const value_type k, const value_type r ) const
         {
             return direct_impl( k, r );
         }
@@ -65,7 +65,7 @@ namespace vg
     private:
         // W. H. Marlow, "Factorial distributions", Annals of Mathematical Statistics, vol. 36, pp. 1066-1068, 1965
         return_type
-        direct_impl( const value_type k, const value_type r )
+        direct_impl( const value_type k, const value_type r ) const
         {
             const final_type r_1 = r - final_type(1);
             const final_type ans = GHgB3_type::do_generation( final_type(1), k - r_1, r_1 );

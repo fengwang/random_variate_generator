@@ -48,14 +48,14 @@ namespace vg
         }
 
         return_type
-        operator()()
+        operator()() const
         {
             return do_generation( a_ );
         }
 
     protected:
         return_type
-        do_generation( const value_type a )
+        do_generation( const value_type a ) const
         {
             return direct_impl( a );
         }
@@ -63,7 +63,7 @@ namespace vg
     private:
         // S. Mizutani, Vocabulary in women's magazines, Kokken-Hokoku, National Language Research Institute, Tokyo, 1953.
         return_type
-        direct_impl( const value_type a )
+        direct_impl( const value_type a ) const
         {
             const final_type ans = GHgB3_type::do_generation( a, final_type(1), final_type(1) );
             return ans;

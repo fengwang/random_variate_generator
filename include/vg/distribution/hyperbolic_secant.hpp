@@ -42,21 +42,21 @@ namespace vg
             }
 
             return_type
-            operator()()
+            operator()() const
             {
                 return do_generation();
             }
 
         protected:
             return_type
-            do_generation()
+            do_generation() const 
             {
                 return direct_impl_method();
             }
 
         private:
             return_type
-            direct_impl_method()
+            direct_impl_method() const 
             {
                 const final_type u = e_();
                 const final_type pi_2 = 3.1415926535897932384626433L / 2.0L;

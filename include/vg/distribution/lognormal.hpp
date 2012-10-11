@@ -37,31 +37,32 @@ namespace vg
             typedef typename Engine::size_type      size_type;
             typedef Engine                          engine_type;
 
-            final_type  zeta_;
-            final_type  sigma_;
-            engine_type e_;
+            final_type      zeta_;
+            final_type      sigma_;
+            engine_type&    e_;
 
             explicit lognormal( const return_type zeta = 1, const return_type sigma = 1, const seed_type sd = 0 )
-                : zeta_( zeta ), sigma_( sigma ), e_( sd )
+                : zeta_( zeta ), sigma_( sigma ), e_( singleton<engine_type>::instance() )
             {
+                e_.reset_seed( sd );
             }
 
             return_type
-            operator()()
+            operator()() const
             {
                 return do_generation( zeta_, sigma_ );
             }
 
         protected:
             return_type
-            do_generation( const return_type zeta, const return_type sigma )
+            do_generation( const return_type zeta, const return_type sigma ) const
             {
                 return direct_impl( zeta, sigma );
             }
 
         private:
             return_type
-            direct_impl( const return_type zeta, const return_type sigma )
+            direct_impl( const return_type zeta, const return_type sigma ) const
             {
                 for ( ;; )
                 {

@@ -30,10 +30,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 namespace vg
 {
 
-    template <
-                typename Return_Type,
-                typename Engine
-             >
+    template < typename Return_Type, typename Engine >
     struct generalized_hypergeometric_b3 : private proxy<gamma< typename Engine::final_type, Engine >, 1>,
                                            private proxy<poisson< typename Engine::final_type, Engine >, 2>
     {
@@ -61,14 +58,14 @@ namespace vg
         }
 
         return_type
-        operator()()
+        operator()() const
         {
             return do_generation( a_, b_, c_ );
         }
 
     protected:
         return_type
-        do_generation( const value_type a, const value_type b, const value_type c )
+        do_generation( const value_type a, const value_type b, const value_type c ) const
         {
             return direct_impl( a, b, c );
         }
@@ -76,7 +73,7 @@ namespace vg
     private:
         // Devroye, L. (1992). Random variate generation for the digamma and trigamma distributions, J. Statist. Comput. Simul. 43. 197-216
         return_type
-        direct_impl( const value_type a, const value_type b, const value_type c )
+        direct_impl( const value_type a, const value_type b, const value_type c ) const
         {
             const final_type Ga = gamma_type::do_generation( a );
             const final_type Gb = gamma_type::do_generation( b );

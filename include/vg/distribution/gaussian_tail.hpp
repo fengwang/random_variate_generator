@@ -41,9 +41,7 @@ namespace vg
             return_type     variance_;
             engine_type&    e_;
 
-            explicit gaussian_tail( const return_type a = 0,
-                                    const return_type variance = 1,
-                                    const seed_type sd = 0 )
+            explicit gaussian_tail( const return_type a = 0, const return_type variance = 1, const seed_type sd = 0 )
                 : a_( a ), variance_( variance ), e_( singleton<engine_type>::instance() )
             {
                 assert( variance > 0 );
@@ -51,14 +49,14 @@ namespace vg
             }
 
             return_type
-            operator()()
+            operator()() const
             {
                 return do_generation( a_, variance_ );
             }
 
         protected:
             return_type
-            do_generation( const final_type A, const final_type Variance )
+            do_generation( const final_type A, const final_type Variance ) const
             {
                 if ( Variance > A )
                     { return gaussian_tail_direct_impl( A, Variance ); }
@@ -68,7 +66,7 @@ namespace vg
 
         private:
             return_type
-            rectangle_wedge_tail_method( const final_type A, const final_type Variance )
+            rectangle_wedge_tail_method( const final_type A, const final_type Variance ) const
             {
                 const final_type s = A / Variance;
 
@@ -88,7 +86,7 @@ namespace vg
             }
 
             return_type
-            gaussian_tail_direct_impl( const final_type A, const final_type Variance )
+            gaussian_tail_direct_impl( const final_type A, const final_type Variance ) const
             {
                 const final_type s = A / Variance;
 

@@ -40,9 +40,7 @@ namespace vg
             return_type     alpha_;
             engine_type&    e_;
 
-            explicit levy( const return_type c = 1,
-                           const return_type alpha = 1,
-                           const seed_type sd = 0 )
+            explicit levy( const return_type c = 1, const return_type alpha = 1, const seed_type sd = 0 )
                 : c_( c ), alpha_( alpha ), e_( singleton<engine_type>::instance() )
             {
                 assert( c > 0 );
@@ -50,14 +48,14 @@ namespace vg
             }
 
             return_type
-            operator()()
+            operator()() const
             {
                 return do_generation( c_, alpha_ );
             }
 
         protected:
             return_type
-            do_generation( const final_type c, const final_type alpha )
+            do_generation( const final_type c, const final_type alpha ) const
             {
                 if ( final_type( 1 ) == alpha )
                     { return cauchy_impl( c ); }
@@ -69,7 +67,7 @@ namespace vg
             }
         private:
             return_type
-            cauchy_impl( const final_type c )
+            cauchy_impl( const final_type c ) const 
             {
                 final_type u = e_();
 
@@ -80,7 +78,7 @@ namespace vg
             }
 
             return_type
-            gaussian_impl( const final_type c )
+            gaussian_impl( const final_type c ) const
             {
                 const final_type u = ( e_() - final_type(0.5) ) * 3.1415926535897932384626433;
                 final_type v = exponential_type::do_generation( final_type( 1 ) );
@@ -91,7 +89,7 @@ namespace vg
             }
 
             return_type
-            direct_impl( const final_type c, const final_type alpha )
+            direct_impl( const final_type c, const final_type alpha ) const 
             {
                 const final_type u = ( e_() - final_type(0.5) ) * 3.1415926535897932384626433;
                 final_type v = exponential_type::do_generation( final_type( 1 ) );

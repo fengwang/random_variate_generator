@@ -59,21 +59,21 @@ namespace vg
             }
 
             return_type
-            operator()()
+            operator()() const
             {
                 return do_generation( n_, c_, k_, r_ );
             }
 
         protected:
             final_type
-            do_generation( const size_type N, const final_type C, const final_type K, const final_type R )
+            do_generation( const size_type N, const final_type C, const final_type K, const final_type R ) const
             {
                 return direct_burr_impl( N, C, K, R );
             }
 
         private:
             final_type
-            direct_burr_impl( const size_type N, const final_type C, const final_type K, const final_type R )
+            direct_burr_impl( const size_type N, const final_type C, const final_type K, const final_type R ) const 
             {
                 const final_type u = e_();
                 static const final_type l(1);

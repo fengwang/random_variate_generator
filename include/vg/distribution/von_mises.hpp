@@ -39,9 +39,7 @@ namespace vg
             value_type      k_;
             engine_type&    e_;
 
-            explicit von_mises( const value_type a = value_type( 0 ),
-                              const value_type k = value_type( 1 ),
-                              const seed_type s = seed_type( 0 ) )
+            explicit von_mises( const value_type a = value_type( 0 ), const value_type k = value_type( 1 ), const seed_type s = seed_type( 0 ) )
                 : a_( a ), k_( k ), e_( singleton<engine_type>::instance() )
             {
                 asset( k > 0 );
@@ -49,21 +47,21 @@ namespace vg
             }
 
             return_type
-            operator()()
+            operator()() const
             {
                 return do_generation( a_, k_ );
             }
 
         protected:
             return_type
-            do_generation( const value_type a, const value_type k )
+            do_generation( const value_type a, const value_type k ) const
             {
                 return direct_impl( a, k );
             }
 
         private:
             return_type
-            direct_impl( const value_type a, const value_type k )
+            direct_impl( const value_type a, const value_type k ) const
             {
                 const final_type r = final_type(1) + std::sqrt( final_type(1) + k * k * final_type(4) );
                 const final_type rho = ( r - std::sqrt( r + r ) ) / ( k + k );
@@ -86,7 +84,6 @@ namespace vg
     };
 
 }//namespace vg
-
 
 #endif//_VON_MISES_HPP_INCLUDED_SOIJ4OIUFSDLKJ4OIUKLJGDKLJROIUDGLKJFLKJDOIU5LKJDGOIUOIUDGLKJDLKJDLKJGOIJDOIJDLKJGOIJFLKJG
 

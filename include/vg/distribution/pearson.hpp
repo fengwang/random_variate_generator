@@ -58,12 +58,7 @@ namespace vg
             final_type          d_;
             engine_type&        e_;
 
-            explicit pearson( size_type  n = size_type(1),
-                              final_type a = final_type(1),
-                              final_type b = final_type(1),
-                              final_type c = final_type(1),
-                              final_type d = final_type(1),
-                              const seed_type s = seed_type( 0 ) )
+            explicit pearson( size_type  n = size_type(1), final_type a = final_type(1), final_type b = final_type(1), final_type c = final_type(1), final_type d = final_type(1), const seed_type s = seed_type( 0 ) )
                 : n_(n), a_(a), b_(b), c_(c), d_(d), e_( singleton<engine_type>::instance() ) 
             {
                 assert( n > 0 );
@@ -72,29 +67,21 @@ namespace vg
             }
 
             return_type
-            operator()()
+            operator()() const
             {
                 return do_generation( n_, a_, b_, c_, d_ );
             }
 
         protected:
             return_type
-            do_generation( const size_type N, 
-                           const final_type A, 
-                           const final_type B, 
-                           const final_type C, 
-                           const final_type D )
+            do_generation( const size_type N, const final_type A, const final_type B, const final_type C, const final_type D ) const
             {
                 return direct_impl( N, A, B, C, D );
             }
 
         private:
             return_type
-            direct_impl(   const size_type N, 
-                           const final_type A, 
-                           const final_type B, 
-                           const final_type C, 
-                           const final_type D )
+            direct_impl(   const size_type N, const final_type A, const final_type B, const final_type C, const final_type D ) const
             {
                 //Luc Devroye, ¡°Non-Uniform Random Variate Generation¡±, (Springer-
                 //Verlag, New York, 1986), Chapter IX, page 480.
