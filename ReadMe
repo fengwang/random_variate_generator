@@ -21,12 +21,12 @@ For a very quick start, here is an example(can be found in file "example/gaussia
 		// the variate type is double,
 		// default pseudo-number generator engine is mt19937,
 		// the seed for the engine is 0, which is the third argument, but is simply ignored here, or we
-		// would have to write vg<double, gaussian, vg::mt19937> vg(0, 4, 0);
-		vg::vg<double, vg::gaussian, vg::mt19937> vg(0, 4);    
+		// would have to write vg<double, gaussian, vg::mt19937> v(0, 4, 0);
+		vg::vg<double, vg::gaussian, vg::mt19937> v(0, 4);    
 
 		map< int, int > sample;
 
-		for ( auto i = vg.begin(); i != vg.begin()+500; ++i )
+		for ( auto i = v.begin(); i != v.begin()+500; ++i )
 			sample[round(*i)]++;
 
 		for ( auto i = sample.begin(); i != sample.end(); ++i )
@@ -97,25 +97,25 @@ the variate generator declaration:
 for example, the following line declares a vg<> that generate variates of logarithmic distribution,
 int type, with parameter 0.33, using mitchell_moore pseudo-random number engine, with default engine seed. 
 
-    vg<int, logarithmic> vg(0.33);
+    vg<int, logarithmic> v(0.33);
     
 which is equivalent to     
 
-    vg<int, logarithmic, mitchell_moore> vg(0.33, 0);
+    vg<int, logarithmic, mitchell_moore> v(0.33, 0);
 
 this following line declares a vg<> that generate variates of hypergeometric distribution,
 int type, with parameter 200, 200 and 200, using mt19937 pseudo-random number engine, with engine seed 987654321.
 
-    vg<int, vg::hypergeometric, vg::mt19937> vg(200, 200, 200, 987654321);
+    vg<int, vg::hypergeometric, vg::mt19937> v(200, 200, 200, 987654321);
 
 once generator vg has been defined, we can generate variates in several ways:
     
-   int i1 = vg();
-   int i2 = vg;
-   int i3 = *(vg.begin());
-   vector<int> arr1( vg.begin(), vg.begin()+100);
+   int i1 = v();
+   int i2 = v;
+   int i3 = *(v.begin());
+   vector<int> arr1( v.begin(), v.begin()+100);
    vector<int> arr2( 200 );
-   generate( arr2.begin(), arr2.end(), vg.begin() );
+   generate( arr2.begin(), arr2.end(), v );
    
 //===================================================================================================
 ********************************* 3 ENGINES AND DISTRIBUTIONS ***************************************
