@@ -21,8 +21,8 @@ For a very quick start, here is an example(can be found in file "example/gaussia
 		// the variate type is double,
 		// default pseudo-number generator engine is mt19937,
 		// the seed for the engine is 0, which is the third argument, but is simply ignored here, or we
-		// would have to write variate_generator<double, gaussian, vg::mt19937> vg(0, 4, 0);
-		vg::variate_generator<double, vg::gaussian, vg::mt19937> vg(0, 4);    
+		// would have to write vg<double, gaussian, vg::mt19937> vg(0, 4, 0);
+		vg::vg<double, vg::gaussian, vg::mt19937> vg(0, 4);    
 
 		map< int, int > sample;
 
@@ -40,7 +40,7 @@ For a very quick start, here is an example(can be found in file "example/gaussia
 //--------------------------------------------------------------
 command to compile:
 //--------------------------------------------------------------
-$g++ -o bin/gaussian_test example/gaussian_test.cc -std=c++0x -O2 -Iinclude
+$g++ -o bin/gaussian_test example/gaussian_test.cc -std=c++11 -O2 -Iinclude
 //--------------------------------------------------------------
 following output will be produced after execution:
 //--------------------------------------------------------------
@@ -91,22 +91,22 @@ the variate generator declaration:
               template<class, class> class Distribution = uniform, // (2) 
               class Engine = mitchell_moore // (3)
              >
-    struct variate_generator;
+    struct vg;
     }//namespace vg
 
-for example, the following line declares a variate_generator<> that generate variates of logarithmic distribution,
+for example, the following line declares a vg<> that generate variates of logarithmic distribution,
 int type, with parameter 0.33, using mitchell_moore pseudo-random number engine, with default engine seed. 
 
-    variate_generator<int, logarithmic> vg(0.33);
+    vg<int, logarithmic> vg(0.33);
     
 which is equivalent to     
 
-    variate_generator<int, logarithmic, mitchell_moore> vg(0.33, 0);
+    vg<int, logarithmic, mitchell_moore> vg(0.33, 0);
 
-this following line declares a variate_generator<> that generate variates of hypergeometric distribution,
+this following line declares a vg<> that generate variates of hypergeometric distribution,
 int type, with parameter 200, 200 and 200, using mt19937 pseudo-random number engine, with engine seed 987654321.
 
-    variate_generator<int, vg::hypergeometric, vg::mt19937> vg(200, 200, 200, 987654321);
+    vg<int, vg::hypergeometric, vg::mt19937> vg(200, 200, 200, 987654321);
 
 once generator vg has been defined, we can generate variates in several ways:
     
