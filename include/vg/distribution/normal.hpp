@@ -47,10 +47,24 @@ namespace vg
             }
 
         protected:
+            #if 0
+            Numerical Tests:
+            1) kinderman_monahan_method 
+                Testing [normal] engine with n = 10000000
+                |        |  Theory  |   Pseudo      |
+                |  Mean  |  0       |   0.000820568 |
+               *|Variance|  1       |   1.33298     |
+            2) box_muller_method 
+                Testing [normal] engine with n = 10000000
+                |        |  Theory  |   Pseudo      |
+                |  Mean  |  0       |   -0.000113178|
+                |Variance|  1       |   1.00028     |
+            #endif
             return_type
             do_generation() const
             {
-                return kinderman_monahan_method();
+                //return kinderman_monahan_method();
+                return box_muller_method();
             }
 
         private:
@@ -90,18 +104,9 @@ namespace vg
 
                 return static_cast<return_type>( ans );
             }
-
     };
-
-
-
 
 }//namespace vg
 
-
-
-
 #endif//_NORMAL_HPP_INCLUDED_9URHFADSKJHSAFUHE9U8HDFUJHDUIHEUHFDUJHDSUI893U7FSDK
-
-
 

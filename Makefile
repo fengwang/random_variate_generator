@@ -18,8 +18,8 @@ BIN_DIR       = ./bin
 DOC_DIR       = ./doc
 
 ####### Files
-OBJECTS       = arcsine.o bernoulli.o
-TARGET        = arcsine bernoulli
+OBJECTS       = arcsine.o bernoulli.o normal.o
+TARGET        = arcsine bernoulli normal
 DOC           = main.tex
 
 first: all
@@ -52,4 +52,8 @@ bernoulli.o : test/bernoulli.cc
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $(OBJECTS_DIR)/bernoulli.o test/bernoulli.cc
 bernoulli: bernoulli.o 
 	$(LINK) $(LFLAGS) -o $(BIN_DIR)/bernoulli $(OBJECTS_DIR)/bernoulli.o $(OBJCOMP) $(LIBS)
+normal.o : test/normal.cc
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $(OBJECTS_DIR)/normal.o test/normal.cc
+normal: normal.o 
+	$(LINK) $(LFLAGS) -o $(BIN_DIR)/normal $(OBJECTS_DIR)/normal.o $(OBJCOMP) $(LIBS)
 
