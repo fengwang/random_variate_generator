@@ -18,8 +18,8 @@ BIN_DIR       = ./bin
 DOC_DIR       = ./doc
 
 ####### Files
-OBJECTS       = arcsine.o
-TARGET        = arcsine
+OBJECTS       = arcsine.o bernoulli.o
+TARGET        = arcsine bernoulli
 DOC           = main.tex
 
 first: all
@@ -46,7 +46,10 @@ distclean: clean
 ####### Compile
 arcsine.o : test/arcsine.cc
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $(OBJECTS_DIR)/arcsine.o test/arcsine.cc
-
 arcsine: arcsine.o 
 	$(LINK) $(LFLAGS) -o $(BIN_DIR)/arcsine $(OBJECTS_DIR)/arcsine.o $(OBJCOMP) $(LIBS)
+bernoulli.o : test/bernoulli.cc
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $(OBJECTS_DIR)/bernoulli.o test/bernoulli.cc
+bernoulli: bernoulli.o 
+	$(LINK) $(LFLAGS) -o $(BIN_DIR)/bernoulli $(OBJECTS_DIR)/bernoulli.o $(OBJCOMP) $(LIBS)
 

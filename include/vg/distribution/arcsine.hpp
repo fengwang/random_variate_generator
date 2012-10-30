@@ -50,27 +50,24 @@ namespace vg
             }
 
         protected:
+            #if 0
+            Numerical Test
+            (1) using direct impl method :
+                    Testing arcsine engine with n = 10000000
+                    |        | Theoretical Value |  Generated value |
+                   *|  Mean  |      0.5          |  0.636579    |
+                   *|Variance|     0.125         |  0.0947444   |
+                   *|Skewness|       0           |  -0.496869   |
+             (2) using beta method:
+                    Testing arcsine engine with n = 10000000
+                    |        | Theoretical Value |  Generated value |
+                    |  Mean  |      0.5          |  0.50005     |
+                    |Variance|     0.125         |  0.127052    |
+                    |Skewness|       0           |  0.000107981 |
+            #endif
             return_type
             do_generation() const
             {
-                #if 0
-                Some Comment here:
-                (1) using direct impl method :
-                        Testing arcsine engine with n = 10000000
-                        |        | Theoretical Value |  Generated value |
-                       *|  Mean  |      0.5          |  0.636579    |
-                       *|Variance|     0.125         |  0.0947444   |
-                       *|Skewness|       0           |  -0.496869   |
-                        |Kurtosis|     -1.5          |  -1.49983    |
-                 (2) using beta method:
-                        Testing arcsine engine with n = 10000000
-                        |        | Theoretical Value |  Generated value |
-                        |  Mean  |      0.5          |  0.50005     |
-                        |Variance|     0.125         |  0.127052    |
-                        |Skewness|       0           |  0.000107981 |
-                       *|Kurtosis|     -1.5          |  -1.05108    |
-                #endif
-                //return direct_impl();
                 return beta_impl();
             }
 

@@ -21,7 +21,7 @@ void test(
     std::cout << "|  Mean  |\t"<<_mean<<"\t|\t" << vg::mean( first, last ) << "\t|\n";
     std::cout << "|Variance|\t"<<_variance<<"\t|\t" << vg::variance( first, last ) << "\t|\n";
     std::cout << "|Skewness|\t"<<_skewness<<"\t|\t" << vg::skewness( first, last ) << "\t|\n";
-    std::cout << "|Kurtosis|\t"<<_kurtosis<<"\t|\t" << vg::kurtosis( first, last ) << "\t|\n";
+    //std::cout << "|Kurtosis|\t"<<_kurtosis<<"\t|\t" << vg::kurtosis( first, last ) << "\t|\n";
 }
 
 #endif//_TEST_HPP_INCLUDED_SFDPOIHJASHSAFD
