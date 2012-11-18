@@ -2,7 +2,7 @@
 vg is a pseudo-random variate generator library, aiming to generate a large amount of random numbers, with a luxury kinds of built-in distributions(currently 62), aiding applications in gambling, statistical sampling, computer simulation, cryptography, completely randomized design, and other areas where producing an unpredictable result is desirable. In the wake of C++ generic template meta-programming, it is written in c++, compatible with STL.
 
 ## Quick Start
-For a very quick start, here is an example(can be found in file "example/gaussian_test.cc"):
+For a very quick start, here is an example(can be found in file "text/gaussian.cc"):
 
     #include <vg.hpp>
     #include <cmath>
