@@ -48,6 +48,12 @@ namespace vg
             iterator_ = iterator( &dt_ );
         }
 
+        template< typename ... Tn >
+        explicit variate_generator( const Tn ... tn ) : dt_(tn...)
+        {
+            iterator_ = iterator(&dt_);
+        }
+/*
         template<typename T>
         explicit variate_generator( const T t ) : dt_( t )
         {
@@ -77,7 +83,7 @@ namespace vg
         {
             iterator_ = iterator( &dt_ );
         }
-
+*/
         ~variate_generator() {}
 
     public:
@@ -102,7 +108,7 @@ namespace vg
         variate_generator( const self_type& ) = default;
         self_type& operator=( const self_type& ) = default;
         variate_generator( self_type&& ) = default;
-        self_type& operator==( self_type&& );
+        //self_type& operator==( self_type&& ) = default;
     };
 
 }//namespace vg

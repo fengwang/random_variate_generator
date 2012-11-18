@@ -67,13 +67,13 @@ The code listed in Table \ref{code:gauss} shows how to generate gaussian random 
 \end{small}
 
 As this library is header file only,
-if your c++ compiler is g++, a typical compilation and link command for the example code file \textit{test\_gaussian.cc} can be
+if your c++ compiler is g++, a typical compilation and link command for the example code whose file name is \textit{test\_gaussian.cc} can be
 
 \begin{center}
-\fcolorbox{White}{Silver}{\textcolor{Sepia}{\textbf{g++ -I\textit{PATH\_TO\_THE\_HEADER} -o test\_gaussian test\_gaussian.cc -std=c++11 -Wall}}}
+\fcolorbox{White}{Silver}{\textcolor{Sepia}{\textbf{g++ -I\textit{PATH\_TO\_THE\_HEADER} -o ./bin/gaussian\_test test\_gaussian.cc -std=c++11 -Wall}}}
 \end{center}
 
-This command will generate a executable file \textit{test\_gaussian} in current directory, 
+This command will generate a executable file \textit{test\_gaussian} in directory \textit{./bin}, 
 and its executation result is shown in figure \ref{fig:gaussian}
 
 \begin{figure}
