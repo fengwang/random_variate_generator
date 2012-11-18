@@ -24,14 +24,14 @@ namespace vg
              	template<class, class> class Distribution,
              	typename Engine
              >
-    struct vg<Return_Type, Distribution, Engine>::iterator
+    struct variate_generator<Return_Type, Distribution, Engine>::iterator
     {
     public:
         typedef iterator                                        self_type;
-        typedef typename vg::distribution_type                  distribution_type;
-        typedef typename vg::return_type                        return_type;
-        typedef typename vg::seed_type                          seed_type;
-        typedef typename vg::return_type                        value_type;
+        typedef typename variate_generator::distribution_type                  distribution_type;
+        typedef typename variate_generator::return_type                        return_type;
+        typedef typename variate_generator::seed_type                          seed_type;
+        typedef typename variate_generator::return_type                        value_type;
         typedef void                                            pointer;
         typedef void                                            reference;
         typedef std::size_t                                     size_type;

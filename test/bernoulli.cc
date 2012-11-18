@@ -24,7 +24,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 int main()
 {
-    vg::vg<double, vg::bernoulli, vg::mt19937> vg_(0.5);    
+    vg::variate_generator<double, vg::bernoulli, vg::mt19937> vg_(0.5);    
 
     std::size_t n = 10000000;
     std::vector<double> x(n);

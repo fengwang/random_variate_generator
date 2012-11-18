@@ -1,7 +1,12 @@
 ﻿%This file is encoded in UTF-8 and requires XeLaTeX to compile.
 
 %\documentclass[12pt,a4paper]{report}
-\documentclass[12pt,a4paper]{scrartcl} %for \subtitle{} macro
+\documentclass[10pt,a4paper]{scrartcl} %for \subtitle{} macro
+%\usepackage[paperwidth=95mm, paperheight=120mm, margin=2mm]{geometry}%设置页面的长宽和边距。 % 6'
+\usepackage[paperwidth=210mm, paperheight=297mm, margin=25mm]{geometry}%设置页面的长宽和边距。 % A4
+%\usepackage[paperwidth=355mm, paperheight=188mm, margin=30mm]{geometry}%设置页面的长宽和边距。 % apple mac air 13' with adobe reader
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
 \usepackage{amsmath,amsthm}
 \usepackage[utopia]{mathdesign}
 \usepackage{xunicode,xltxtra}
@@ -9,21 +14,34 @@
 \usepackage{color}
 \usepackage[usenames,dvipsnames,svgnames,table]{xcolor}
 \usepackage{makeidx}
+\usepackage{graphics}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{sidecap}
+\usepackage{longtable}
+\usepackage[font=small,labelfont=bf]{caption}
+\usepackage{lastpage}                                           
+\usepackage{layout} 
+\usepackage{fancyhdr}
 
 \makeatletter
-\usepackage{fontspec}
 \defaultfontfeatures{Mapping=tex-text}
-%\setmainfont{DejaVu Sans YuanTi}
-%\setsansfont[BoldFont={DejaVu Sans YuanTi Condensed}]{DejaVu Sans YuanTi Condensed}
-%\setmonofont[BoldFont={DejaVu Sans YuanTi Mono}]{DejaVu Sans YuanTi Mono}
-\setmainfont{DejaVu Serif}
-\setsansfont[BoldFont={DejaVu Sans Condensed}]{DejaVu Sans Condensed}
-\setmonofont[BoldFont={DejaVu Sans Mono}]{DejaVu Sans Mono}
+%\setmainfont{DejaVu Serif}
+%\setsansfont[BoldFont={DejaVu Sans Condensed}]{DejaVu Sans Condensed}
+%\setmonofont[BoldFont={DejaVu Sans Mono}]{DejaVu Sans Mono}
+\setmainfont[BoldFont=Adobe Garamond Pro Bold,ItalicFont=Apple Chancery]{Adobe Garamond Pro}
+\setmonofont{Andale Mono}
+%\floatstyle{boxed} 
+%\restylefloat{figure}
+\graphicspath{{./doc/figure/}}
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}    
 \makeatother
-
+\usepackage{fontspec}
 \setlength{\parskip}{8pt}
 \setlength{\parindent}{0mm}
 \frenchspacing
+
+\pagestyle{fancy}
 
 %Shortcuts for font family selection.
 \newcommand{\rmf}{\rmfamily}
@@ -36,10 +54,12 @@
 \newcommand{\ti}{\textit}
 \newcommand{\tbi}[1]{\textbf{\textit{#1}}}
 
+\definecolor{codeback1}{gray}{0.85}
+\definecolor{codeback2}{gray}{0.95}
 
 \title{Variate Generator Library}
 \subtitle{User's Guide}
-\author{Feng Wang}
+\author{Feng Wang\\feng.wang@uni-ulm.de}
 
 \makeindex
 

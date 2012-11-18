@@ -28,13 +28,13 @@ namespace vg
 {
 
     template < class Return_Type = double, template<class, class> class Distribution = uniform, class Engine = mitchell_moore >
-    struct vg
+    struct variate_generator
     {
         typedef Distribution<Return_Type, Engine>       distribution_type;
         typedef typename distribution_type::seed_type   seed_type;
         typedef typename distribution_type::return_type return_type;
         typedef std::size_t                             size_type;
-        typedef vg                                      self_type;
+        typedef variate_generator                                      self_type;
 
     private:
         distribution_type   dt_;
@@ -43,42 +43,42 @@ namespace vg
 
     public:
 
-        explicit vg() : dt_( 0 )
+        explicit variate_generator() : dt_( 0 )
         {
             iterator_ = iterator( &dt_ );
         }
 
         template<typename T>
-        explicit vg( const T t ) : dt_( t )
+        explicit variate_generator( const T t ) : dt_( t )
         {
             iterator_ = iterator( &dt_ );
         }
 
         template<typename T1, typename T2>
-        vg( const T1 t1, const T2 t2 ) : dt_( t1, t2 )
+        variate_generator( const T1 t1, const T2 t2 ) : dt_( t1, t2 )
         {
             iterator_ = iterator( &dt_ );
         }
 
         template<typename T1, typename T2, typename T3>
-        vg( const T1 t1, const T2 t2, const T3 t3 ) : dt_( t1, t2, t3 )
+        variate_generator( const T1 t1, const T2 t2, const T3 t3 ) : dt_( t1, t2, t3 )
         {
             iterator_ = iterator( &dt_ );
         }
 
         template<typename T1, typename T2, typename T3, typename T4>
-        vg( const T1 t1, const T2 t2, const T3 t3, const T4 t4 ) : dt_( t1, t2, t3, t4 )
+        variate_generator( const T1 t1, const T2 t2, const T3 t3, const T4 t4 ) : dt_( t1, t2, t3, t4 )
         {
             iterator_ = iterator( &dt_ );
         }
 
         template<typename T1, typename T2, typename T3, typename T4, typename T5>
-        vg( const T1 t1, const T2 t2, const T3 t3, const T4 t4, const T5 t5 ) : dt_( t1, t2, t3, t4, t5 )
+        variate_generator( const T1 t1, const T2 t2, const T3 t3, const T4 t4, const T5 t5 ) : dt_( t1, t2, t3, t4, t5 )
         {
             iterator_ = iterator( &dt_ );
         }
 
-        ~vg() {}
+        ~variate_generator() {}
 
     public:
         return_type
@@ -99,9 +99,9 @@ namespace vg
         }
 
     public:
-        vg( const self_type& ) = default;
+        variate_generator( const self_type& ) = default;
         self_type& operator=( const self_type& ) = default;
-        vg( self_type&& ) = default;
+        variate_generator( self_type&& ) = default;
         self_type& operator==( self_type&& );
     };
 

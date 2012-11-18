@@ -85,8 +85,8 @@ namespace vg
             return_type
             box_muller_method() const
             {
-                final_type u1, u2;
-                final_type v1, v2;
+                final_type u1(0), u2(0);
+                final_type v1(0), v2(0);
                 final_type s( 2 );
 
                 while ( s > final_type( 1 ) )
