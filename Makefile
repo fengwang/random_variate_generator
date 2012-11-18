@@ -20,7 +20,8 @@ DOC_DIR       = ./doc
 ####### Files
 OBJECTS       = arcsine.o bernoulli.o normal.o
 TARGET        = arcsine bernoulli normal
-DOC           = main.tex
+#DOC           = main.tex
+DOC           = vg.tex
 
 first: all
 ####### Implicit rules
@@ -28,6 +29,7 @@ first: all
 all: $(TARGET)
 
 pdf:
+	$(LATEX) -output-directory=$(DOC_DIR) $(DOC_DIR)/$(DOC)
 	$(LATEX) -output-directory=$(DOC_DIR) $(DOC_DIR)/$(DOC)
 
 $(TARGET): 
