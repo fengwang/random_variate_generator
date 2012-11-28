@@ -102,7 +102,7 @@ namespace vg
         vg( const self_type& ) = default;
         self_type& operator=( const self_type& ) = default;
         vg( self_type&& ) = default;
-        self_type& operator==( self_type&& );
+        self_type& operator=( self_type&& ) = default;
     };
 
 }//namespace vg

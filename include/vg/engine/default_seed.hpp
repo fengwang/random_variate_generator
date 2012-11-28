@@ -19,21 +19,19 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define _DEFAULT_SEED_HPP_INCLUDED_SDFOIUJ4OIUASF8U3OIAUF983ILAUFSO8U34LIUFSDLIJ
 
 #include <cstddef>
+#include <cstdint>
 #include <ctime>
-
-
-#include <iostream>
 
 namespace vg
 {
 
     struct default_seed
     {
-        typedef unsigned long long		seed_type;
+        typedef std::uint_fast64_t              seed_type;
 
         seed_type operator()() const
         {
-            const seed_type  s = static_cast<seed_type>( time( 0 ) );
+            const seed_type  s = time(0);
             int * i = new int;
             seed_type  ans = s + ( (seed_type)(i) | ((seed_type)(i) << 32) );
             ans = ( ans & 0x5555555555555555ULL ) <<  1 | ( ans & 0xAAAAAAAAAAAAAAAAULL ) >>  1;

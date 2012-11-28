@@ -21,6 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <vg/engine/default_seed.hpp>
 
 #include <cstddef>
+#include <cstdint>
 #include <limits>
 #include <mutex>
 
@@ -29,17 +30,17 @@ namespace vg
 
     struct mt19937
     {
-            typedef mt19937					self_type;
-            typedef long double 			final_type;
-            typedef unsigned long long 		value_type;
-            typedef value_type 				seed_type;
-            typedef std::size_t 			size_type;
+            typedef mt19937                 self_type;
+            typedef long double             final_type;
+            typedef std::uint_fast64_t      value_type;
+            typedef value_type              seed_type;
+            typedef std::size_t             size_type;
 
         private:
-            value_type mt[312];
-            value_type mag01[2];
-            size_type mti;
-            mutable std::mutex mtx;
+            value_type                      mt[312];
+            value_type                      mag01[2];
+            size_type                       mti;
+            mutable std::mutex              mtx;
 
         public:
             mt19937( const seed_type s = 0 )
@@ -102,9 +103,8 @@ namespace vg
                 x ^= ( x << 17 ) & 0x71D67FFFEDA60000ULL;
                 x ^= ( x << 37 ) & 0xFFF7EEE000000000ULL;
                 x ^= ( x >> 43 );
-                const final_type ans =	static_cast<final_type>( static_cast<final_type>( x ) )  /
+                const final_type ans =  static_cast<final_type>( static_cast<final_type>( x ) )  /
                                         static_cast<final_type>( std::numeric_limits<value_type>::max() );
-                                        //static_cast<final_type>( static_cast<value_type>( -1 ) );
                 return ans;
             }
 

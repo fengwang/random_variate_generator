@@ -21,6 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <vg/engine/default_seed.hpp>
 
 #include <cstddef>
+#include <cstdint>
 #include <mutex>
 #include <limits>
 
@@ -28,17 +29,17 @@ namespace vg
 {
     struct linear_congruential
     {
-            typedef linear_congruential		self_type;
-            typedef long double				final_type;
-            typedef unsigned long long		value_type;
-            typedef value_type				seed_type;
+            typedef linear_congruential     self_type;
+            typedef long double             final_type;
+            typedef std::uint_fast64_t      value_type;
+            typedef value_type              seed_type;
             typedef std::size_t             size_type;
 
         private:
-			static const value_type a_ = 6364136223846793005ULL;
-			static const value_type c_ = 1442695040888963407ULL;
-			value_type x_;
-            mutable std::mutex mtx;
+            static const value_type         a_ = 6364136223846793005ULL;
+            static const value_type         c_ = 1442695040888963407ULL;
+            value_type                      x_;
+            mutable std::mutex              mtx;
 
         public:
             linear_congruential( const seed_type s = 0 )
@@ -61,8 +62,8 @@ namespace vg
             {
                 std::lock_guard<std::mutex> l( mtx );
 
-				x_ *= a_;
-				x_ += c_;
+                x_ *= a_;
+                x_ += c_;
                 const final_type ans = static_cast<final_type>( x_ ) /
                                        static_cast<final_type>( std::numeric_limits<value_type>::max() );
                 return ans;
