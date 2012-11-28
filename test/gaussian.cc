@@ -25,7 +25,7 @@ int main()
 {
     //generate double gaussian random numbers with argument (0,4), i.e. N(0,4)
     //using mt19937 as uniform random generator engine
-    vg::vg<double, vg::gaussian, vg::mt19937> vg_(0, 4);    
+    vg::variate_generator<double, vg::gaussian, vg::mt19937> vg_(0, 4);    
     std::map< int, int > sample;
 
     //generate 500 gaussian numbers and store it in a map

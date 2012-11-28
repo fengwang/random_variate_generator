@@ -1,0 +1,183 @@
+\section{An Overview of VG}
+
+A random variate generator consists of three parts:
+%\begin{description}
+%\begin{enumerate}
+\begin{itemize}
+    \item   variate type
+    \item   distribution type
+    \item   engine type
+\end{itemize}
+%\end{enumerate}
+%\end{description}
+
+
+\subsection{struct variate\_generator}
+
+
+The basic struct used for a generator is variate\_generator, which is decleared as:
+
+\begin{small}
+\begin{ttfamily}
+
+\begin{center}
+\rowcolors{1}{codeback1}{codeback2}
+%\rowcolors{1}{White}{Silver}
+%\begin{tabular}{|l|}
+\begin{longtable}{|l|}
+\caption{variate\_generator struct} \\
+\label{code:variate_generator} \\
+%%code
+\hline
+\mbox{}\textbf{\textcolor{Blue}{namespace}}\ vg \\
+\mbox{}\textcolor{Red}{\{} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{template}} \\
+\mbox{}\ \ \ \ \textcolor{BrickRed}{\textless{}}\ \ \  \\
+\mbox{}\ \ \ \ \ \textbf{\textcolor{Blue}{class}}\ \textcolor{TealBlue}{T}\ \textcolor{BrickRed}{=}\ \textcolor{ForestGreen}{double}\textcolor{BrickRed}{,}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{//variate}} \\
+\mbox{}\ \ \ \ \ \textbf{\textcolor{Blue}{template}}\textcolor{BrickRed}{\textless{}}\textbf{\textcolor{Blue}{class}}\textcolor{BrickRed}{,}\ \textbf{\textcolor{Blue}{class}}\textcolor{BrickRed}{\textgreater{}}\ \textbf{\textcolor{Blue}{class}}\ \textcolor{TealBlue}{Distribution}\ \textcolor{BrickRed}{=}\ Uniform\textcolor{BrickRed}{,}\textit{\textcolor{Brown}{//distribution}} \\
+\mbox{}\ \ \ \ \ \textbf{\textcolor{Blue}{class}}\ \textcolor{TealBlue}{Engine}\ \textcolor{BrickRed}{=}\ mitchell$\_$moore\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textit{\textcolor{Brown}{//engine\ }} \\
+\mbox{}\ \ \ \ \textcolor{BrickRed}{\textgreater{}} \\
+\mbox{}\ \ \ \ \textbf{\textcolor{Blue}{struct}}\ \textcolor{TealBlue}{variate$\_$generator} \\
+\mbox{}\ \ \ \ \textcolor{Red}{\{} \\
+\mbox{}\ \ \ \ \ \ \ \textbf{\textcolor{Blue}{template}}\textcolor{BrickRed}{\textless{}}\ \textbf{\textcolor{Blue}{typename}}\ \textcolor{BrickRed}{...}\ Tn\ \textcolor{BrickRed}{\textgreater{}} \\
+\mbox{}\ \ \ \ \ \ \ \textbf{\textcolor{Black}{variate$\_$generator}}\textcolor{BrickRed}{(}\ \textbf{\textcolor{Blue}{const}}\ Tn\ \textcolor{BrickRed}{...}\ \textcolor{BrickRed}{);} \\
+\mbox{}\ \ \ \ \ \ \ \textcolor{TealBlue}{T}\ \textbf{\textcolor{Blue}{operator}}\textcolor{BrickRed}{()()}\ \textbf{\textcolor{Blue}{const}}\textcolor{BrickRed}{;}\  \\
+\mbox{}\ \ \ \ \ \ \ \textbf{\textcolor{Blue}{operator}}\ \textbf{\textcolor{Black}{T}}\textcolor{BrickRed}{()}\ \textbf{\textcolor{Blue}{const}}\textcolor{BrickRed}{;} \\
+\mbox{}\ \ \ \ \ \ \ \textcolor{TealBlue}{iterator}\ \textbf{\textcolor{Black}{begin}}\textcolor{BrickRed}{()}\ \textbf{\textcolor{Blue}{const}}\textcolor{BrickRed}{;} \\
+\mbox{}\ \ \ \ \textcolor{Red}{\}}\textcolor{BrickRed}{;} \\
+\mbox{}\textcolor{Red}{\}}\textcolor{BrickRed}{;} \\
+\hline
+\end{longtable}
+\end{center}
+
+\end{ttfamily}
+\end{small}
+
+\subsubsection{declaration}
+
+So to make a generator to product variates of int type and lagarithmic distribution, with a parameter 0.33, we can simply declare:
+
+\noindent
+\mbox{}vg\textcolor{BrickRed}{::}\textcolor{TealBlue}{variate$\_$generator\textless{}int,\ vg::lagarithmic\textgreater{}}\ \textbf{\textcolor{Black}{v}}\textcolor{BrickRed}{(}\ \textcolor{Purple}{0.33}\ \textcolor{BrickRed}{);} \\
+\mbox{}
+
+which it is equivalent to 
+
+\noindent
+\mbox{}vg\textcolor{BrickRed}{::}\textcolor{TealBlue}{variate$\_$generator\textless{}int,\ vg::lagarithmic,\ vg::mitchell$\_$moore\textgreater{}}\ \textbf{\textcolor{Black}{v}}\textcolor{BrickRed}{(}\ \textcolor{Purple}{0.33}\textcolor{BrickRed}{,}\ \textcolor{Purple}{0}\ \textcolor{BrickRed}{);} \\
+\mbox{}
+
+where the last argument 0 is the default engine seed.
+
+Also, to make a generator to product variates of hypergeometric distribution, with int type and paramenters (200, 200, 200), using mt19937 persudo--random engine and engine seed 987654321, we can declare it with one line code like this:
+
+\noindent
+\mbox{}vg\textcolor{BrickRed}{::}\textcolor{TealBlue}{variate$\_$generator\textless{}int,\ vg::hypergeometric,\ vg::mt19937\textgreater{}}\ \textbf{\textcolor{Black}{v}}\textcolor{BrickRed}{(}\ \textcolor{Purple}{200}\textcolor{BrickRed}{,}\ \textcolor{Purple}{200}\textcolor{BrickRed}{,}\ \textcolor{Purple}{200}\textcolor{BrickRed}{,}\ \textcolor{Purple}{987654321}\ \textcolor{BrickRed}{);} \\
+\mbox{}
+
+\subsubsection{Generation}
+
+After the generator $v$ has been declared, we can generate variate in several ways:
+
+%\begin{description}
+%    \item[One Variate] \\
+                        %\noindent
+
+                        Generate only one variate: 
+
+                        \noindent
+                        \mbox{}\textbf{\textcolor{Blue}{auto}}\ i\ \textcolor{BrickRed}{=}\ \textbf{\textcolor{Black}{v}}\textcolor{BrickRed}{();} \\
+                        \mbox{}\textcolor{ForestGreen}{int}\ j\ \textcolor{BrickRed}{=}\ v\textcolor{BrickRed}{;} \\
+                        \mbox{}\textbf{\textcolor{Blue}{auto}}\ k\ \textcolor{BrickRed}{=}\ \textcolor{BrickRed}{*(}v\textcolor{BrickRed}{.}\textbf{\textcolor{Black}{begin}}\textcolor{BrickRed}{());} \\
+                        \mbox{}
+%    \item[Multiple Variates] \\
+
+                        Generate multiple variates: 
+
+                        \noindent
+                        \mbox{}std\textcolor{BrickRed}{::}\textcolor{TealBlue}{vector\textless{}int\textgreater{}}\ \textbf{\textcolor{Black}{array1}}\textcolor{BrickRed}{(}\ v\textcolor{BrickRed}{.}\textbf{\textcolor{Black}{begin}}\textcolor{BrickRed}{(),}\ v\textcolor{BrickRed}{.}\textbf{\textcolor{Black}{begin}}\textcolor{BrickRed}{()+}\textcolor{Purple}{100}\textcolor{BrickRed}{);} \\
+                        \mbox{}std\textcolor{BrickRed}{::}\textcolor{TealBlue}{vector\textless{}int\textgreater{}}\ \textbf{\textcolor{Black}{array2}}\textcolor{BrickRed}{(}\ \textcolor{Purple}{100}\ \textcolor{BrickRed}{);}\  \\
+                        \mbox{}std\textcolor{BrickRed}{::}\textbf{\textcolor{Black}{generate}}\textcolor{BrickRed}{(}\ array2\textcolor{BrickRed}{.}\textbf{\textcolor{Black}{begin}}\textcolor{BrickRed}{(),}\ array2\textcolor{BrickRed}{.}\textbf{\textcolor{Black}{end}}\textcolor{BrickRed}{(),}\ v\ \textcolor{BrickRed}{);} \\
+                        \mbox{}std\textcolor{BrickRed}{::}\textcolor{TealBlue}{vector\textless{}int\textgreater{}}\ array3\textcolor{BrickRed}{;}\  \\
+                        \mbox{}std\textcolor{BrickRed}{::}\textbf{\textcolor{Black}{copy}}\textcolor{BrickRed}{(}\ v\textcolor{BrickRed}{.}\textbf{\textcolor{Black}{begin}}\textcolor{BrickRed}{(),}\ v\textcolor{BrickRed}{.}\textbf{\textcolor{Black}{begin}}\textcolor{BrickRed}{()+}\textcolor{Purple}{100}\textcolor{BrickRed}{,}\ std\textcolor{BrickRed}{::}\textbf{\textcolor{Black}{back$\_$inserter}}\textcolor{BrickRed}{(}\ array3\ \textcolor{BrickRed}{)}\ \textcolor{BrickRed}{);} \\
+                        \mbox{}
+
+%\end{description}
+
+\subsection{Built-in Distributions}
+
+Curent we have about fifty distributions implemented:
+\begin{itemize}
+    \item arcsine distribution
+    \item bernoulli distribution
+    \item beta distribution
+    \item beta\_binomial distribution
+    \item beta\_pascal distribution
+    \item binomial distribution
+    \item burr distribution
+    \item cauchy distribution
+    \item chi\_square distribution
+    \item digamma distribution
+    \item erlang distribution
+    \item exponential distribution
+    \item exponential\_power distribution
+    \item extreme\_value distribution
+    \item f distribution
+    \item factorial distribution
+    \item gamma distribution
+    \item gaussian distribution
+    \item gaussian\_tail distribution
+    \item generalized\_hypergeometric\_b3 distribution
+    \item generalized\_waring distribution
+    \item geometric distribution
+    \item grassia distribution
+    \item gumbel\_1 distribution
+    \item gumbel\_2 distribution
+    \item hyperbolic\_secant distribution
+    \item hypergeometric distribution
+    \item inverse\_gaussian distribution
+    \item inverse\_polya\_eggenberger distribution
+    \item lambda distribution
+    \item laplace distribution
+    \item levy distribution
+    \item list distribution
+    \item logarithmic distribution
+    \item logistic distribution
+    \item lognormal distribution
+    \item mizutani distribution
+    \item negative\_binomial distribution
+    \item negative\_binomial\_beta distribution
+    \item normal distribution
+    \item pareto distribution
+    \item pascal distribution
+    \item pearson distribution
+    \item planck distribution
+    \item poisson distribution
+    \item polya distribution
+    \item polya\_aeppli distribution
+    \item rayleigh distribution
+    \item rayleigh\_tail distribution
+    \item singh\_maddala distribution
+    \item t distribution
+    \item teichroew distribution
+    \item triangular distribution
+    \item trigamma distribution
+    \item uniform distribution
+    \item von\_mises distribution
+    \item wald distribution
+    \item waring distribution
+    \item weibull distribution
+    \item yule distribution
+    \item zipf distribution
+\end{itemize}
+
+\subsection{Engines}
+Currently we have 3 engines implemented:
+\begin{itemize}
+    \item linear\_congruential
+    \item mitchell\_moore
+    \item mt19937
+\end{itemize}
+
+
+
