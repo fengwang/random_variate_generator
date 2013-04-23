@@ -61,11 +61,11 @@ namespace vg
             }
 
             /*
-            Testing [beta_binomial with n = 100, alpha = 0.1, beta = 0.2] distribution with N = 10000000
-            |        |              Theory          |               Pseudo          |
-            |  Mean  |      33.3333333333333        |       33.3264832000000        |
-            |Variance|      1714.52991452991        |       1714.49191808349        |
-            |Skewness|      12.8188529096048        |       0.701374380851282       |  
+                Testing [beta_binomial with n = 100, alpha = 0.1, beta = 0.2] distribution with N = 10000000
+                |        |              Theory          |               Pseudo          |
+                |  Mean  |      33.3333333333333        |       33.3264832000000        |
+                |Variance|      1714.52991452991        |       1714.49191808349        |
+                |Skewness|      12.8188529096048        |       0.701374380851282       |  
             */
             return_type
             operator()() const

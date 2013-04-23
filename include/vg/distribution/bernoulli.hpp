@@ -56,14 +56,13 @@ namespace vg
                 e_.reset_seed( s );
             }
 
-            #if 0
-            Numerical Test:
+            /*
                 testing [bernoulli] engine with n = 10000000, with parameter 0.5
                 |        |  Theory  |   Pseudo  |
                 |  Mean  |  0.5     |   0.499889|
                 |Variance|  0.25    |   0.25    |
                 |Skewness|  0       |   0.000442|
-            #endif
+            */
             return_type
             operator()() const 
             {

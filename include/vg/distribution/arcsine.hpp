@@ -50,7 +50,7 @@ namespace vg
             }
 
         protected:
-            #if 0
+            /*
             Numerical Test
             (1) using direct impl method :
                     Testing arcsine engine with n = 10000000
@@ -64,7 +64,7 @@ namespace vg
                     |  Mean  |      0.5          |  0.50005     |
                     |Variance|     0.125         |  0.127052    |
                     |Skewness|       0           |  0.000107981 |
-            #endif
+            */
             return_type
             do_generation() const
             {
