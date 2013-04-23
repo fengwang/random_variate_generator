@@ -58,7 +58,7 @@ namespace vg
 
             #if 0
             Numerical Test:
-                testing [bernoulli] engine with n = 10000000
+                testing [bernoulli] engine with n = 10000000, with parameter 0.5
                 |        |  Theory  |   Pseudo  |
                 |  Mean  |  0.5     |   0.499889|
                 |Variance|  0.25    |   0.25    |

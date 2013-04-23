@@ -34,7 +34,7 @@ namespace vg
         typedef typename distribution_type::seed_type   seed_type;
         typedef typename distribution_type::return_type return_type;
         typedef std::size_t                             size_type;
-        typedef variate_generator                                      self_type;
+        typedef variate_generator                       self_type;
 
     private:
         distribution_type   dt_;
@@ -53,37 +53,7 @@ namespace vg
         {
             iterator_ = iterator(&dt_);
         }
-/*
-        template<typename T>
-        explicit variate_generator( const T t ) : dt_( t )
-        {
-            iterator_ = iterator( &dt_ );
-        }
 
-        template<typename T1, typename T2>
-        variate_generator( const T1 t1, const T2 t2 ) : dt_( t1, t2 )
-        {
-            iterator_ = iterator( &dt_ );
-        }
-
-        template<typename T1, typename T2, typename T3>
-        variate_generator( const T1 t1, const T2 t2, const T3 t3 ) : dt_( t1, t2, t3 )
-        {
-            iterator_ = iterator( &dt_ );
-        }
-
-        template<typename T1, typename T2, typename T3, typename T4>
-        variate_generator( const T1 t1, const T2 t2, const T3 t3, const T4 t4 ) : dt_( t1, t2, t3, t4 )
-        {
-            iterator_ = iterator( &dt_ );
-        }
-
-        template<typename T1, typename T2, typename T3, typename T4, typename T5>
-        variate_generator( const T1 t1, const T2 t2, const T3 t3, const T4 t4, const T5 t5 ) : dt_( t1, t2, t3, t4, t5 )
-        {
-            iterator_ = iterator( &dt_ );
-        }
-*/
         ~variate_generator() {}
 
     public:
