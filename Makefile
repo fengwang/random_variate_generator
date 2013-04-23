@@ -18,8 +18,8 @@ BIN_DIR       = ./bin
 DOC_DIR       = ./doc
 
 ####### Files
-OBJECTS       = arcsine.o bernoulli.o normal.o beta_binomial.o
-TARGET        = arcsine bernoulli normal beta_binomial
+OBJECTS       = arcsine.o bernoulli.o normal.o beta_binomial.o rademacher.o
+TARGET        = arcsine bernoulli normal beta_binomial rademacher
 #DOC           = main.tex
 DOC           = vg.tex
 
@@ -62,4 +62,8 @@ beta_binomial.o : test/beta_binomial.cc
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $(OBJECTS_DIR)/beta_binomial.o test/beta_binomial.cc
 beta_binomial: beta_binomial.o 
 	$(LINK) $(LFLAGS) -o $(BIN_DIR)/beta_binomial $(OBJECTS_DIR)/beta_binomial.o $(OBJCOMP) $(LIBS)
+rademacher.o : test/rademacher.cc
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $(OBJECTS_DIR)/rademacher.o test/rademacher.cc
+rademacher: rademacher.o 
+	$(LINK) $(LFLAGS) -o $(BIN_DIR)/rademacher $(OBJECTS_DIR)/rademacher.o $(OBJCOMP) $(LIBS)
 
