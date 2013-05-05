@@ -1,10 +1,10 @@
 ####### Compiler, tools and options
-CXX           = g++
+CXX           = g++-4.9
 DEFINES       = -Wall -std=c++11
 CFLAGS        = -O2 $(DEFINES)
 CXXFLAGS        = -O2 $(DEFINES)
 INCPATH       = -Iinclude 
-LINK          = g++
+LINK          = $(CXX)
 LATEX         = xelatex
 LFLAGS        = 
 DEL_FILE      = rm -f
