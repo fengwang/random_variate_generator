@@ -24,14 +24,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 int main()
 {
-    vg::variate_generator<double, vg::arcsine, vg::mt19937> vg_;    
+    vg::variate_generator<double, vg::rademacher, vg::mt19937> vg_;
 
     std::size_t n = 10000000;
     std::vector<double> x(n);
 
     std::generate( x.begin(), x.end(), vg_ );
 
-    test( x.begin(), x.end(), "arcsine", 0.5, 0.125, 0, -1.5 ); 
+    test( x.begin(), x.end(), "bernoulli", 0, 1, 0, -2 ); 
 
     return 0;
 }

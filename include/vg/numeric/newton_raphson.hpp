@@ -54,7 +54,7 @@ struct newton_raphson
         for ( size_type i = 0; i < times_; ++i )
         {
             assert( (ans-first_)*(ans-last_) < value_type(0) );
-            ans -= f(ans) / df(ans);
+            ans -= f_(ans) / df(ans);
         }
 
         return ans;
