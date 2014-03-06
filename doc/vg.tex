@@ -1,9 +1,11 @@
 ﻿%This file is encoded in UTF-8 and requires XeLaTeX to compile.
 
 %\documentclass[12pt,a4paper]{report}
-\documentclass[10pt,a4paper]{scrartcl} %for \subtitle{} macro
+%\documentclass[12pt,a4paper]{scrartcl} %for \subtitle{} macro
+\documentclass[9pt,a4paper]{scrartcl} %for \subtitle{} macro
 %\usepackage[paperwidth=95mm, paperheight=120mm, margin=2mm]{geometry}%设置页面的长宽和边距。 % 6'
 \usepackage[paperwidth=210mm, paperheight=297mm, margin=25mm]{geometry}%设置页面的长宽和边距。 % A4
+%\usepackage[paperwidth=360mm, paperheight=2970mm, margin=25mm]{geometry}%设置页面的长宽和边距。 % for single page html
 %\usepackage[paperwidth=355mm, paperheight=188mm, margin=30mm]{geometry}%设置页面的长宽和边距。 % apple mac air 13' with adobe reader
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
@@ -20,22 +22,48 @@
 \usepackage{sidecap}
 \usepackage{longtable}
 \usepackage[font=small,labelfont=bf]{caption}
-\usepackage{lastpage}                                           
-\usepackage{layout} 
+\usepackage{lastpage}
+\usepackage{layout}
 \usepackage{fancyhdr}
 \usepackage{enumerate}
+\usepackage{soul}
+\usepackage{hyperref}
+\hypersetup{
+    bookmarks=true,         % show bookmarks bar?
+    unicode=false,          % non-Latin characters in Acrobat’s bookmarks
+    pdftoolbar=true,        % show Acrobat’s toolbar?
+    pdfmenubar=true,        % show Acrobat’s menu?
+    pdffitwindow=false,     % window fit to page when opened
+    pdfstartview={FitH},    % fits the width of the page to the window
+    pdftitle={Variate Generate Library},    % title
+    pdfauthor={Feng Wang},     % author
+    pdfsubject={non-uniform variate generator manual},   % subject of the document
+    pdfcreator={Feng Wang},   % creator of the document
+    pdfproducer={Xelatex}, % producer of the document
+    pdfkeywords={variate} {generator} {random}, % list of keywords
+    pdfnewwindow=true,      % links in new window
+    colorlinks=true,       % false: boxed links; true: colored links
+    linkcolor=blue,          % color of internal links (change box color with linkbordercolor)
+    citecolor=green,        % color of links to bibliography
+    filecolor=magenta,      % color of file links
+    urlcolor=cyan           % color of external links
+}
+
+\input{code_color.tex}
+
+
 
 \makeatletter
 \defaultfontfeatures{Mapping=tex-text}
 %\setmainfont{DejaVu Serif}
-%\setsansfont[BoldFont={DejaVu Sans Condensed}]{DejaVu Sans Condensed}
-%\setmonofont[BoldFont={DejaVu Sans Mono}]{DejaVu Sans Mono}
-\setmainfont[BoldFont=Adobe Garamond Pro Bold,ItalicFont=Apple Chancery]{Adobe Garamond Pro}
-\setmonofont{Andale Mono}
-%\floatstyle{boxed} 
+\setsansfont[BoldFont={DejaVu Sans Condensed}]{DejaVu Sans Condensed}
+\setmonofont[BoldFont={DejaVu Sans Mono}]{DejaVu Sans Mono}
+%\setmainfont[BoldFont=Adobe Garamond Pro Bold,ItalicFont=Apple Chancery]{Adobe Garamond Pro}
+%\setmonofont{Andale Mono}
+%\floatstyle{boxed}
 %\restylefloat{figure}
 \graphicspath{{./doc/figure/}}
-\renewcommand{\thefootnote}{\fnsymbol{footnote}}    
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
 \makeatother
 \usepackage{fontspec}
 \setlength{\parskip}{8pt}
@@ -59,7 +87,7 @@
 \definecolor{codeback2}{gray}{0.95}
 
 \title{Variate Generator Library}
-\subtitle{User's Guide}
+%\subtitle{User's Guide}
 \author{Feng Wang\\feng.wang@uni-ulm.de}
 
 \makeindex
@@ -67,20 +95,21 @@
 \begin{document}
 
 \maketitle
-\newpage
+%\newpage
 
 \tableofcontents
-\newpage
+%\newpage
 
 \input{./section/1_getting_started.tex}
-\newpage
+%\newpage
 \input{./section/2_overview.tex}
-\newpage
+%\newpage
 \input{./section/3_distribution.tex}
 \input{./section/4_engine.tex}
 
 
-
+%highlight
+%highlight --out-format=latex -i main.cpp -o main.cpp.tex
 
 
 \end{document}

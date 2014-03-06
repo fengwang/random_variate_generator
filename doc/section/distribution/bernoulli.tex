@@ -1,0 +1,61 @@
+\subsection{Bernoulli Distribution} \label{bernoullidistribution}
+
+%\subsubsection{Description}
+The Bernoulli distribution is a discrete distribution having two possible outcomes labelled by $n = 0$ and $n = 1$, in which $n = 1$( ''success'' ) occurs with probability $p$ and $n = 0$( ''failure'' ) occurs with probability $q = 1 - p$, where $0 < p < 1$.
+
+
+\subsubsection{Characterization}
+
+Probability density function is
+\begin{equation}
+ f(k,p) = \left\{
+  \begin{array}{c l}
+      p   & \quad \text{if $k=1$} \\
+      1-p &  \quad \text{otherwise} \\
+  \end{array} \right.
+\end{equation}
+
+Cumulative distribution function is
+\begin{equation}
+ F(k,p) = \left\{
+  \begin{array}{c l}
+      0                                    & \quad \text{if $k < 0$} \\
+      1-p                                  & \quad \text{if $0 \leq k < 1$}\\
+      1                                    & \quad \text{otherwise}
+  \end{array} \right.
+\end{equation}
+
+
+\subsubsection{Usage}
+
+Bernoulli variate generator is supposed to be initialized with probability $p$ and seed $s$, defalut values are $p = 0.5$ and $s = 0$.
+
+\begin{small}
+\begin{ttfamily}
+\begin{center}
+\rowcolors{1}{codeback1}{codeback2}
+\begin{longtable}{|l|}
+\caption{bernoulli distribution example code} \\
+\hline 
+\input{section/distribution/bernoulli_code.tex}
+\hline
+\end{longtable}
+\end{center}
+\end{ttfamily}
+\end{small}
+
+
+\begin{center}
+\rowcolors{1}{codeback1}{codeback2}
+\begin{longtable}{|l | c c c|}
+\caption{bernoulli distribution example code output} \\
+\hline 
+           &       Mean                  & Variance             & Skewness \\
+Theory     &      0.500000000000000      & 0.250000000000000    & 0.00000000000000  \\
+Generated  &      0.500000200000000      & 0.249999999999885    & -7.99999992907318e-07 \\
+\hline
+\end{longtable}
+\end{center}
+
+
+%\subsubsection{Reference}

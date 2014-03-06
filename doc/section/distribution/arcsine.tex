@@ -1,0 +1,59 @@
+\subsection{Arcsine Distribution} \label{arcsinedistribution}
+
+%\subsubsection{Description}
+Arcsine distribution is a special case of beta distribution when $\alpha = \beta = 0.5$.
+
+\subsubsection{Characterization}
+
+Probability density function is
+\begin{equation}
+ f(x) = \left\{
+  \begin{array}{c l}
+      \frac{1}{\pi \sqrt{x(1-x)}} & \quad \text{if $0 < x < 1$}\\
+    0 & \quad \text{otherwise}
+  \end{array} \right.
+\end{equation}
+
+Cumulative distribution function is
+\begin{equation}
+ F(x) = \left\{
+  \begin{array}{c l}
+      0                                    & \quad \text{if $x < 0$} \\
+      \frac{2 \arcsin(\sqrt{x}) }{\pi}     & \quad \text{if $0 \leq x < 1$}\\
+      1                                    & \quad \text{otherwise}
+  \end{array} \right.
+\end{equation}
+
+
+\subsubsection{Usage}
+
+Arcsine variate generator is supposed to be initialized with seed $s$, which is $0$ by default.
+
+\begin{small}
+\begin{ttfamily}
+\begin{center}
+\rowcolors{1}{codeback1}{codeback2}
+\begin{longtable}{|l|}
+\caption{arcsine distribution example code} \\
+\hline 
+\input{section/distribution/arcsine_code.tex}
+\hline
+\end{longtable}
+\end{center}
+\end{ttfamily}
+\end{small}
+
+
+\begin{center}
+\rowcolors{1}{codeback1}{codeback2}
+\begin{longtable}{|l | c c c|}
+\caption{arcsine distribution example code output} \\
+\hline 
+           &       Mean                  & Variance             & Skewness \\
+Theory     &      0.500000000000000      & 0.125000000000000    & 0.00000000000000  \\
+Generated  &      0.500215862149786      & 0.125018618223430    & -0.000983748428920325 \\
+\hline
+\end{longtable}
+\end{center}
+
+%\subsubsection{Reference}

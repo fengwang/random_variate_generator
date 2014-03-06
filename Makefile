@@ -66,4 +66,8 @@ rademacher.o : test/rademacher.cc
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $(OBJECTS_DIR)/rademacher.o test/rademacher.cc
 rademacher: rademacher.o 
 	$(LINK) $(LFLAGS) -o $(BIN_DIR)/rademacher $(OBJECTS_DIR)/rademacher.o $(OBJCOMP) $(LIBS)
+uniform.o : test/uniform.cc
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $(OBJECTS_DIR)/uniform.o test/uniform.cc
+uniform: uniform.o 
+	$(LINK) $(LFLAGS) -o $(BIN_DIR)/uniform $(OBJECTS_DIR)/uniform.o $(OBJCOMP) $(LIBS)
 
