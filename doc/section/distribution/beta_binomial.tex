@@ -1,0 +1,49 @@
+\subsection{Beta-binomial Distribution} \label{beta-binomialdistribution}
+
+Beta-binomial distribution is distributed as a binomial distribution with parameter $p$, where $p$ is distribution with a beta distribution characterized by parameters $\alpha$ and $\beta$.
+\subsubsection{Characterization}
+
+Probability density function is
+\begin{equation}
+    f(x,n,\alpha,\beta) = \frac{B(x+\alpha,n-x+\beta)\binom{n}{x}}{B(\alpha, \beta)} 
+\end{equation}
+
+Cumulative distribution function is
+\begin{equation}
+    F(x,n,\alpha,\beta)=1-\frac{n B(\beta+n-x-1,\alpha+x+1)\Gamma(n)F_n(\alpha,\beta;x)}{B(\alpha,\beta)B(n-x,x+2)\Gamma(n+2)}
+\end{equation}
+
+
+\subsubsection{Usage}
+
+Beta-binomial variate generator is supposed to be initialized with parameters $n$, $\alpha$, $\beta$ and seed $s$, default values are $n=10$, $\alpha = 1$, $\beta = 1$ and $s = 0$.
+
+\begin{tiny}
+\begin{ttfamily}
+\begin{center}
+\rowcolors{1}{codeback1}{codeback2}
+\begin{longtable}{|l|}
+\caption{beta-binomial distribution example code} \\
+\hline 
+\input{section/distribution/beta_binomial_code.tex}
+\hline
+\end{longtable}
+\end{center}
+\end{ttfamily}
+\end{tiny}
+
+
+\begin{center}
+\rowcolors{1}{codeback1}{codeback2}
+\begin{longtable}{|l | c c c|}
+\caption{beta-binomial distribution example code output} \\
+\hline 
+           &       Mean                  & Variance             & Skewness \\
+Theory     &      33.3333333333333      & 1714.52991452991    & 12.8188529096048  \\
+Generated  &      33.3402505000000      & 1714.34470241029    & 0.700684542622759  \\
+\hline
+\end{longtable}
+\end{center}
+
+
+%\subsubsection{Reference}
