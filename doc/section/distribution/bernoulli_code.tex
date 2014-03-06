@@ -1,0 +1,13 @@
+\hlstd{}\hlppc{\#include\ $<$vg.hpp$>$}{}\\
+\hlstd{}\hlppc{\#include\ }\hlpps{"test.hpp"}\hlppc{}{}\\
+\hlstd{}\hlppc{\#include\ $<$vector$>$}{}\\
+\hlstd{}\hlppc{\#include\ $<$cstddef$>$}{}\\
+\hlstd{}\hlkwb{int\ }\hlstd{}\hlkwd{main}\hlstd{}\hlopt{()}{}\\
+\hlstd{}\hlopt{\{}{}\\
+\hlstd{}\hlstd{\ \ \ \ }\hlstd{vg}\hlopt{::}\hlstd{variate\textunderscore generator}\hlopt{$<$}\hlstd{}\hlkwb{double}\hlstd{}\hlopt{,\ }\hlstd{vg}\hlopt{::}\hlstd{bernoulli}\hlopt{,\ }\hlstd{vg}\hlopt{::}\hlstd{mt19937}\hlopt{$>$\ }\hlstd{}\hlkwd{vg\textunderscore }\hlstd{}\hlopt{(}\hlstd{}\hlnum{0.5}\hlstd{}\hlopt{);}\hlstd{\ \ \ \ }\hlopt{}{}\\
+\hlstd{}\hlstd{\ \ \ \ }\hlstd{std}\hlopt{::}\hlstd{}\hlkwb{size\textunderscore t\ }\hlstd{n\ }\hlopt{=\ }\hlstd{}\hlnum{10000000}\hlstd{}\hlopt{;}{}\\
+\hlstd{}\hlstd{\ \ \ \ }\hlstd{std}\hlopt{::}\hlstd{vector}\hlopt{$<$}\hlstd{}\hlkwb{double}\hlstd{}\hlopt{$>$\ }\hlstd{}\hlkwd{x}\hlstd{}\hlopt{(}\hlstd{n}\hlopt{);}{}\\
+\hlstd{}\hlstd{\ \ \ \ }\hlstd{std}\hlopt{::}\hlstd{}\hlkwd{generate}\hlstd{}\hlopt{(\ }\hlstd{x}\hlopt{.}\hlstd{}\hlkwd{begin}\hlstd{}\hlopt{(),\ }\hlstd{x}\hlopt{.}\hlstd{}\hlkwd{end}\hlstd{}\hlopt{(),\ }\hlstd{vg\textunderscore \ }\hlopt{);}{}\\
+\hlstd{}\hlstd{\ \ \ \ }\hlstd{}\hlkwd{test}\hlstd{}\hlopt{(\ }\hlstd{x}\hlopt{.}\hlstd{}\hlkwd{begin}\hlstd{}\hlopt{(),\ }\hlstd{x}\hlopt{.}\hlstd{}\hlkwd{end}\hlstd{}\hlopt{(),\ }\hlstd{}\hlstr{"bernoulli"}\hlstd{}\hlopt{,\ }\hlstd{}\hlnum{0.5}\hlstd{}\hlopt{,\ }\hlstd{}\hlnum{0.25}\hlstd{}\hlopt{,\ }\hlstd{}\hlnum{0\ }\hlstd{}\hlopt{);\ }{}\\
+\hlstd{}\hlstd{\ \ \ \ }\hlstd{}\hlkwa{return\ }\hlstd{}\hlnum{0}\hlstd{}\hlopt{;}{}\\
+\hlstd{}\hlopt{\}}\hlstd{}{}\\
