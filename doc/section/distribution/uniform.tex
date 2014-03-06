@@ -1,12 +1,36 @@
-\subsection{Uniform Distribution}
+\subsection{Uniform Distribution} \label{uniformdistribution}
 
-Generate pseudo random variables that uniformly distributed within interval $[a,b]$.
+%\subsubsection{Description}
+Uniform distribution generates pseudo random variables that uniformly distributed within interval $[a,b]$.
+
+\subsubsection{Characterization}
+
+Probability density function is
+\begin{equation}
+ f(x) = \left\{
+  \begin{array}{c l}
+      \frac{1}{b-a} & \quad \text{if $a \leq x \leq b$}\\
+    0 & \quad \text{otherwise}
+  \end{array} \right.
+\end{equation}
+
+Cumulative distribution function is
+\begin{equation}
+ F(x) = \left\{
+  \begin{array}{c l}
+      0               & \quad \text{if $x < a$} \\
+      \frac{x-a}{b-a} & \quad \text{if $a \leq x < b$}\\
+      1               & \quad \text{otherwise}
+  \end{array} \right.
+\end{equation}
+
 
 \subsubsection{Usage}
- 
+
+Uniform variate generator is supposed to be initialized with parameters $a$ and $b$, default values are $0.0$ and $1.0$.
+
 \begin{small}
 \begin{ttfamily}
-
 \begin{center}
 \rowcolors{1}{codeback1}{codeback2}
 \begin{longtable}{|l|}
@@ -20,16 +44,22 @@ Generate pseudo random variables that uniformly distributed within interval $[a,
 \end{small}
 
 
+\begin{center}
+\rowcolors{1}{codeback1}{codeback2}
+\begin{longtable}{|l | c c c|}
+\caption{uniform distribution example code output} \\
+\hline 
+           &       Mean                  & Variance             & Skewness \\
+Theory     &      0.00000000000000       & 0.333333333333333    & 0.00000000000000  \\
+Generated  &      -3.12801617330395e-06  & 0.333229960243464    & -6.33178467221793e-05 \\
+\hline
+\end{longtable}
+\end{center}
 
 
 
-\subsubsection{Numeric Experiment}
 
 
-\subsubsection{Description}
 
-ssdsd
 
-\subsubsection{Characterization}
-
-\subsubsection{Reference}
+%\subsubsection{Reference}
