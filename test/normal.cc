@@ -31,7 +31,7 @@ int main()
 
     std::generate( x.begin(), x.end(), vg_ );
 
-    test( x.begin(), x.end(), "normal", 0, 1, 0, -2 ); 
+    test( x.begin(), x.end(), "normal", 0, 1, 0); 
 
     return 0;
 }

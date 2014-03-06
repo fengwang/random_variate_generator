@@ -26,7 +26,7 @@
 \usepackage{layout}
 \usepackage{fancyhdr}
 \usepackage{enumerate}
-
+\usepackage{soul}
 \usepackage{hyperref}
 \hypersetup{
     bookmarks=true,         % show bookmarks bar?
@@ -49,6 +49,7 @@
     urlcolor=cyan           % color of external links
 }
 
+\input{code_color.tex}
 
 
 
@@ -107,7 +108,8 @@
 \input{./section/4_engine.tex}
 
 
-
+%highlight
+%highlight --out-format=latex -i main.cpp -o main.cpp.tex
 
 
 \end{document}
