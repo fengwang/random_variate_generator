@@ -70,4 +70,8 @@ uniform.o : test/uniform.cc
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $(OBJECTS_DIR)/uniform.o test/uniform.cc
 uniform: uniform.o 
 	$(LINK) $(LFLAGS) -o $(BIN_DIR)/uniform $(OBJECTS_DIR)/uniform.o $(OBJCOMP) $(LIBS)
+gaussian_test.o : test/gaussian_test.cc
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $(OBJECTS_DIR)/gaussian_test.o test/gaussian_test.cc
+gaussian_test: gaussian_test.o 
+	$(LINK) $(LFLAGS) -o $(BIN_DIR)/gaussian_test $(OBJECTS_DIR)/gaussian_test.o $(OBJCOMP) $(LIBS)
 

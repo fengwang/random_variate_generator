@@ -1,0 +1,50 @@
+\subsection{Gaussian Distribution} \label{gaussiandistribution}
+
+Gaussian distribution is characterized with mean $\mu$ and variance $\sigma^2$.
+
+\subsubsection{Characterization}
+
+Probability density function is
+\begin{equation}
+f(x,\mu,\sigma) = \frac{e^{-\frac{(x-\mu)^2}{2\sigma^2}}}{\sqrt{2\pi \sigma^2}}
+\end{equation}
+
+Cumulative distribution function is
+\begin{equation}
+ F(x,\mu,\sigma) = \frac{1 + \operatorname{erf}\left( \frac{x-\mu}{\sqrt{2\sigma^2}}\right)}{2}
+\end{equation}
+
+
+\subsubsection{Usage}
+
+Gaussian variate generator is supposed to be initialized with mean $\mu$, square root variance $\sigma$ and seed $s$, default values are
+$\mu = 0$, $\sigma = 1$ and $s = 0$.
+
+\begin{small}
+\begin{ttfamily}
+\begin{center}
+\rowcolors{1}{codeback1}{codeback2}
+\begin{longtable}{|l|}
+\caption{gaussian distribution example code} \\
+\hline 
+\input{section/distribution/gaussian_code.tex}
+\hline
+\end{longtable}
+\end{center}
+\end{ttfamily}
+\end{small}
+
+
+\begin{center}
+\rowcolors{1}{codeback1}{codeback2}
+\begin{longtable}{|l | c c c|}
+\caption{gaussian distribution example code output} \\
+\hline 
+           &       Mean                  & Variance            & Skewness \\
+Theory     &      1.00000000000000       & 4.00000000000000    & 0.00000000000000  \\
+Generated  &      0.999445434917687      & 4.00030636223379    & -0.000860101027174915 \\
+\hline
+\end{longtable}
+\end{center}
+
+%\subsubsection{Reference}
