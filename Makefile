@@ -1,10 +1,10 @@
 ####### Compiler, tools and options
-CXX           = g++
+CXX           = g++-4.9
 DEFINES       = -Wall -std=c++11
 CFLAGS        = -O2 $(DEFINES)
 CXXFLAGS        = -O2 $(DEFINES)
 INCPATH       = -Iinclude 
-LINK          = g++
+LINK          = $(CXX)
 LATEX         = xelatex
 LFLAGS        = 
 DEL_FILE      = rm -f
@@ -70,4 +70,8 @@ uniform.o : test/uniform.cc
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $(OBJECTS_DIR)/uniform.o test/uniform.cc
 uniform: uniform.o 
 	$(LINK) $(LFLAGS) -o $(BIN_DIR)/uniform $(OBJECTS_DIR)/uniform.o $(OBJCOMP) $(LIBS)
+gaussian_test.o : test/gaussian_test.cc
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $(OBJECTS_DIR)/gaussian_test.o test/gaussian_test.cc
+gaussian_test: gaussian_test.o 
+	$(LINK) $(LFLAGS) -o $(BIN_DIR)/gaussian_test $(OBJECTS_DIR)/gaussian_test.o $(OBJCOMP) $(LIBS)
 
