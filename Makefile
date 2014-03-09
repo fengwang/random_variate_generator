@@ -40,6 +40,7 @@ makedir:
 
 clean: 
 	-$(DEL_FILE) $(OBJECTS_DIR)/*.o
+	-$(DEL_FILE) $(DOC_DIR)/*.aux $(DOC_DIR)/*.idx $(DOC_DIR)/*.log $(DOC_DIR)/*.out $(DOC_DIR)/*.toc
 	-$(DEL_FILE) *~ core *.core
 
 distclean: clean
