@@ -1,5 +1,5 @@
 ####### Compiler, tools and options
-CXX           = g++-4.9
+CXX           = g++
 DEFINES       = -Wall -std=c++11
 CFLAGS        = -O2 $(DEFINES)
 CXXFLAGS        = -O2 $(DEFINES)
