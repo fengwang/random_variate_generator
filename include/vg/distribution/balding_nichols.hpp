@@ -38,7 +38,7 @@ namespace vg
             final_type          p_;
             engine_type&        e_;
 
-            explicit balding_nichols(   const final_type f = final_type(0.5), const final_type p = final_type(0.5), const seed_type sd = 0 ) : f_( f ), p_( p ), e_( singleton<engine_type>::instance() )
+            explicit balding_nichols( const final_type f = final_type(0.5), const final_type p = final_type(0.5), const seed_type sd = 0 ) noexcept : f_( f ), p_( p ), e_( singleton<engine_type>::instance() )
             {
                 assert( f > final_type{0} );
                 assert( f < final_type{1} );
@@ -47,23 +47,30 @@ namespace vg
                  e_.reset_seed( sd );
             }
 
-            return_type operator()() const
+            /*
+            Testing [balding_nichols] distribution with n = 10000000, parameter(0.5,0.5)
+            |        |      Theory          |       Pseudo              |
+            |  Mean  |  0.500000000000000   |   0.500126787066542       |
+            |Variance|  0.125000000000000   |   0.124951107077455       |
+            |Skewness|  0.00000000000000    |   -0.000512026835995461   |
+            */
+            return_type operator()() const noexcept
             {
                 return do_generation( f_, p_ );
             }
 
         protected:
-            return_type do_generation( const final_type F, const final_type P ) const 
+            return_type do_generation( const final_type F, const final_type P ) const noexcept
             {
                 return direct_balding_nichols_impl( F, P );
             }
 
         private:
-            return_type direct_balding_nichols_impl( const final_type F, const final_type P ) const
+            return_type direct_balding_nichols_impl( const final_type F, const final_type P ) const noexcept
             {
                 const final_type l = final_type{1};
                 const final_type ans = beta_type::do_generation( P*(l-F)/F, (l-P)*(l-F)/F );
-                return ans;
+                return static_cast<return_type>(ans);
             }
     };
 

@@ -67,7 +67,7 @@ namespace vg
                 const final_type lower_f    =   static_cast<final_type>( lower );
                 const final_type upper_f    =   static_cast<final_type>( upper );
                 const final_type ans        =   lower_f + e_() * ( upper_f - lower_f );
-                return ans;
+                return static_cast<return_type>(ans);
             }
     };
 

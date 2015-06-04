@@ -26,14 +26,14 @@ namespace vg
             mutable std::mutex              mtx;
 
         public:
-            lagged_fibonacci( const seed_type s = 0 )
+            lagged_fibonacci( const seed_type s = 0 ) noexcept
             {
                 std::lock_guard<std::mutex> l( mtx );
 
                 init( s );
             }
 
-            void reset_seed( const seed_type s = 0 )
+            void reset_seed( const seed_type s = 0 ) noexcept
             {
                 if ( 0 == s ) return;
 
@@ -42,7 +42,7 @@ namespace vg
             }
 
         private:
-            void refill()
+            void refill() noexcept
             {
                 std::copy( data+21034, data+44497, data );
                 
@@ -53,7 +53,7 @@ namespace vg
             }
 
 
-            void init( const seed_type s )
+            void init( const seed_type s ) noexcept
             {
                 mti = s ? s : default_seed{}();
                 mti %= 21034;
@@ -66,7 +66,7 @@ namespace vg
             }
 
         public:
-            final_type operator()()
+            final_type operator()() noexcept
             {
                 std::lock_guard<std::mutex> l( mtx );
 

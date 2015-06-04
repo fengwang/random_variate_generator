@@ -1,8 +1,10 @@
 ####### Compiler, tools and options
-CXX           = g++
+#CXX           = g++
 DEFINES       = -Wall -std=c++11
-CFLAGS        = -O2 $(DEFINES)
-CXXFLAGS        = -O2 $(DEFINES)
+CXX 	      = clang++
+DEFINES       =  -std=c++1y -stdlib=libc++ -O3 -ferror-limit=2 -DNDEBUG -Weverything -Wno-c++98-compat -Wno-c++98-compat-pedantic -Wno-sign-conversion -Wno-exit-time-destructors -Wno-float-equal -Wno-global-constructors -Wno-missing-declarations -Wno-unused-parameter -Wno-padded -Wno-shadow -Wno-weak-vtables -Wno-missing-prototypes -Wno-unused-variable
+CFLAGS        = $(DEFINES)
+CXXFLAGS      = $(DEFINES)
 INCPATH       = -Iinclude 
 LINK          = $(CXX)
 LATEX         = xelatex
@@ -75,4 +77,29 @@ gaussian_test.o : test/gaussian_test.cc
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $(OBJECTS_DIR)/gaussian_test.o test/gaussian_test.cc
 gaussian_test: gaussian_test.o 
 	$(LINK) $(LFLAGS) -o $(BIN_DIR)/gaussian_test $(OBJECTS_DIR)/gaussian_test.o $(OBJCOMP) $(LIBS)
+
+balding_nichols_test.o : test/balding_nichols_test.cc
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $(OBJECTS_DIR)/balding_nichols_test.o test/balding_nichols_test.cc
+balding_nichols_test: balding_nichols_test.o 
+	$(LINK) $(LFLAGS) -o $(BIN_DIR)/balding_nichols_test $(OBJECTS_DIR)/balding_nichols_test.o $(OBJCOMP) $(LIBS)
+
+uniform_example.o : test/uniform_example.cc
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $(OBJECTS_DIR)/uniform_example.o test/uniform_example.cc
+uniform_example: uniform_example.o 
+	$(LINK) $(LFLAGS) -o $(BIN_DIR)/uniform_example $(OBJECTS_DIR)/uniform_example.o $(OBJCOMP) $(LIBS)
+
+variate_generator_example.o : test/variate_generator_example.cc
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $(OBJECTS_DIR)/variate_generator_example.o test/variate_generator_example.cc
+variate_generator_example: variate_generator_example.o 
+	$(LINK) $(LFLAGS) -o $(BIN_DIR)/variate_generator_example $(OBJECTS_DIR)/variate_generator_example.o $(OBJCOMP) $(LIBS)
+
+first_test.o : test/first_test.cc
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $(OBJECTS_DIR)/first_test.o test/first_test.cc
+first_test: first_test.o 
+	$(LINK) $(LFLAGS) -o $(BIN_DIR)/first_test $(OBJECTS_DIR)/first_test.o $(OBJCOMP) $(LIBS)
+
+arcsine_example.o : test/arcsine_example.cc
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $(OBJECTS_DIR)/arcsine_example.o test/arcsine_example.cc
+arcsine_example: arcsine_example.o 
+	$(LINK) $(LFLAGS) -o $(BIN_DIR)/arcsine_example $(OBJECTS_DIR)/arcsine_example.o $(OBJCOMP) $(LIBS)
 

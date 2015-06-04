@@ -28,8 +28,7 @@ namespace vg
             mutable std::mutex              mtx;
 
         public:
-            mitchell_moore( const seed_type s = 0 )
-                : next_( 0 ), next_p_( 31 )
+            mitchell_moore( const seed_type s = 0 ) noexcept : next_( 0 ), next_p_( 31 )
             {
                 std::lock_guard<std::mutex> l( mtx );
 
@@ -37,7 +36,7 @@ namespace vg
                 initial( s );
             }
 
-            void reset_seed( const seed_type s = 0 )
+            void reset_seed( const seed_type s = 0 ) noexcept
             {
                 if ( 0 == s ) return;
 
@@ -45,7 +44,7 @@ namespace vg
                 initial( s );
             }
 
-            final_type operator()()
+            final_type operator()() noexcept
             {
                 std::lock_guard<std::mutex> l( mtx );
 
@@ -63,7 +62,7 @@ namespace vg
             } // end of operator()
 
         private:
-            void initial( const seed_type s )
+            void initial( const seed_type s ) noexcept
             {
                 const seed_type seed = s ? s : default_seed()();
                 value_type mj = ini_seed_ - seed;

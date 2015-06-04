@@ -12,11 +12,11 @@ namespace vg
     {
         typedef std::uint_fast64_t              seed_type;
 
-        seed_type operator()() const
+        seed_type operator()() const noexcept
         {
             const seed_type  s = time(0);
             int * i = new int;
-            seed_type  ans = s + ( (seed_type)(i) | ((seed_type)(i) << 32) );
+            seed_type  ans = s + ( reinterpret_cast<seed_type>(i) | (reinterpret_cast<seed_type>(i) << 32) );
             ans = ( ans & 0x5555555555555555ULL ) <<  1 | ( ans & 0xAAAAAAAAAAAAAAAAULL ) >>  1;
             ans = ( ans & 0x3333333333333333ULL ) <<  2 | ( ans & 0xCCCCCCCCCCCCCCCCULL ) >>  2;
             ans = ( ans & 0x0F0F0F0F0F0F0F0FULL ) <<  4 | ( ans & 0xF0F0F0F0F0F0F0F0ULL ) >>  4;

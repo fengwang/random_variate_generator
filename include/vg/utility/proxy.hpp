@@ -27,12 +27,10 @@ template< typename T, std::size_t Level = 0 >
 struct proxy;
 
 template< typename T, std::size_t Level >
-struct proxy : proxy< T, Level - 1 >
-{};
+struct proxy : proxy< T, Level - 1 > {};
 
 template< typename T >
-struct proxy<T, 0> : T
-{};
+struct proxy<T, 0> : T {};
 
 
 }//namespace vg

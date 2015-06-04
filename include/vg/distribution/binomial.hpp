@@ -137,7 +137,7 @@ namespace vg
                     ++ans;
                 }
 
-                return p_ > 0.5 ? N - ans : ans;
+                return static_cast<return_type>(p_ > 0.5 ? N - ans : ans);
             }//second_waiting_time_method
 
         private:
@@ -168,7 +168,7 @@ namespace vg
                 }
 
                 ans += coin_flip_method( n, p );
-                return ans;
+                return static_cast<return_type>(ans);
             }//rejection_method
 
 #if 0

@@ -67,18 +67,18 @@ namespace vg
             const size_type n = n1 + n2;
 
             if ( k >= n )
-                { return n1; }
+                { return static_cast<return_type>(n1); }
 
             if ( 0 == n1 )
-                { return 0; }
+                { return static_cast<return_type>(0); }
 
             if ( 0 == n2 )
-                { return k; }
+                { return static_cast<return_type>(k); }
 
             if ( k < ( n >> 1 ) )
                 { return direct_impl( n1, n2, k ); }
 
-            return n1 - direct_impl( n1, n2, n - k );
+            return static_cast<return_type>(n1 - direct_impl( n1, n2, n - k ) );
         }
 
         private:
@@ -101,7 +101,7 @@ namespace vg
                 }
             }
 
-            return ans;
+            return static_cast<return_type>(ans);
         }
     };
 

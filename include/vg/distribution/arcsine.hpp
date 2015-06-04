@@ -20,13 +20,12 @@ namespace vg
 
             engine_type& e_;
 
-            explicit arcsine( const seed_type sd = 0 ) : e_( singleton<engine_type>::instance() )
+            explicit arcsine( const seed_type sd = 0 ) noexcept : e_( singleton<engine_type>::instance() )
             {
                 e_.reset_seed( sd );
             }
 
-            return_type
-            operator()() const
+            return_type operator()() const noexcept
             {
                 return do_generation();
             }
@@ -47,22 +46,19 @@ namespace vg
                     |Variance|     0.125         |  0.127052    |
                     |Skewness|       0           |  0.000107981 |
             */
-            return_type
-            do_generation() const
+            return_type do_generation() const noexcept
             {
                 return beta_impl();
             }
 
         private:
-            return_type 
-            beta_impl() const 
+            return_type beta_impl() const noexcept
             {
                 return beta_type::do_generation( final_type(0.5), final_type(0.5) );
             }
 
         private:
-            return_type
-            direct_impl() const
+            return_type direct_impl() const noexcept
             {
                 const final_type u = e_();
                 const final_type pi = 3.1415926535897932384626433L;

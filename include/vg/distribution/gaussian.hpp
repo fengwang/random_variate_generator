@@ -63,7 +63,7 @@ namespace vg
             gaussian_direct_impl( const final_type Variance, const final_type Mean ) const
             {
                 const final_type ans =  normal_type::do_generation() * Variance + Mean;
-                return ans;
+                return static_cast<return_type>(ans);
             }
     };
 

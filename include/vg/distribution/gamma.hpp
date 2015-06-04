@@ -111,7 +111,7 @@ namespace vg
                 if ( A < 1 )
                     { ans *= std::pow( e_(), final_type( 1 ) / A ); }
 
-                return ans;
+                return static_cast<return_type>(ans);
             }
 
     };

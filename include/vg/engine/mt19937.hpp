@@ -26,14 +26,14 @@ namespace vg
             mutable std::mutex              mtx;
 
         public:
-            mt19937( const seed_type s = 0 )
+            mt19937( const seed_type s = 0 ) noexcept
             {
                 std::lock_guard<std::mutex> l( mtx );
 
                 init( s );
             }
 
-            void reset_seed( const seed_type s = 0 )
+            void reset_seed( const seed_type s = 0 ) noexcept
             {
                 if ( 0 == s ) return;
 
@@ -42,7 +42,7 @@ namespace vg
             }
 
         private:
-            void init( const seed_type s )
+            void init( const seed_type s ) noexcept
             {
                 mt[0] = s ? s : default_seed()();
                 mag01[0] = 0ULL;
@@ -56,7 +56,7 @@ namespace vg
             }
 
         public:
-            final_type operator()()
+            final_type operator()() noexcept
             {
                 std::lock_guard<std::mutex> l( mtx );
 

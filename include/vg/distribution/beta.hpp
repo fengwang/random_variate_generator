@@ -71,7 +71,7 @@ namespace vg
             {
                 const final_type a =  gamma_type::do_generation( A );
                 const final_type b =  gamma_type::do_generation( B );
-                return  a / ( a + b );
+                return  static_cast<return_type>(a / ( a + b ));
             }
     };
 

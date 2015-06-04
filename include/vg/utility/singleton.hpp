@@ -18,15 +18,15 @@ namespace vg
         private:
             struct constuctor
             {
-                constuctor() { self_type::instance(); }
-                inline void null_action() const { }
+                constuctor() noexcept { self_type::instance(); }
+                inline void null_action() const noexcept { }
             };
 
             static constuctor constuctor_;
 
         public:
             static value_type&
-            instance()
+            instance() noexcept
             {
                 static value_type instance_;
                 constuctor_.null_action();

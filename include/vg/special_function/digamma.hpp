@@ -31,7 +31,7 @@ namespace vg
         struct digamma
         {
 
-            long double operator()( long double x ) const
+            long double operator()( long double x ) const noexcept
             {
                 static const long double S = 1.0e-10L;
                 static const long double C = 255.0L;
@@ -44,7 +44,7 @@ namespace vg
 
             // \psi(x) = - \gamma - \frac{1}{x} + O{x} \ldots x -> 0
             // x -- [0, S]
-            long double less_than_s( const long double x ) const 
+            long double less_than_s( const long double x ) const noexcept
             {
                 static const long double euler_constant = 0.57721566490153286060651209008240243104215933593992L;
                 return euler_constant - 1.0L / x;
@@ -52,21 +52,21 @@ namespace vg
 
             // \psi(x+1) = \psi(x) + \frac{1}{x}
             // x -- ( S, C )
-            long double between_s_and_c( const long double x ) const 
+            long double between_s_and_c( const long double x ) const noexcept
             {
                 return 1.0L / x + digamma()( x - 1.0L );
             }
 
             // \psi(x+1) - \frac{1}{x}= \psi(x)
             // x -- ( S, C )
-            long double between_s_and_c_se( const long double x ) const 
+            long double between_s_and_c_se( const long double x ) const noexcept
             {
                 return -1.0L / x + digamma()( x + 1.0L );
             }
 
             // \psi(x) = ln(x) - \frac{1}{2x} - \frac{1}{12x^2} + \frac{1}{120x^4} - \frac{1}{252x^6} + O\(\frac{1}{x^8}\) \ldots x -> \infinit
             // x -- ( [ C, +infinit)
-            long double greater_than_c( const long double x ) const 
+            long double greater_than_c( const long double x ) const noexcept
             {
                 static const long double a1 = 0.5L;
                 static const long double a2 = 1.0L / 12.0L;

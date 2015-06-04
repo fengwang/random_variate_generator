@@ -26,7 +26,7 @@ namespace vg
 
     template< typename Input_Iterator >
     typename std::iterator_traits<Input_Iterator>::value_type 
-    mean( Input_Iterator first, Input_Iterator last )
+    mean( Input_Iterator first, Input_Iterator last ) noexcept
     {
         typedef typename std::iterator_traits<Input_Iterator>::value_type  value_type;
         value_type const n = std::distance( first, last );

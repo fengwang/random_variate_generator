@@ -39,7 +39,7 @@ namespace vg
 #endif
     template< typename Input_Iterator >
     typename std::iterator_traits<Input_Iterator>::value_type 
-    kurtosis( Input_Iterator first, Input_Iterator last ) 
+    kurtosis( Input_Iterator first, Input_Iterator last ) noexcept
     {
         typedef typename std::iterator_traits<Input_Iterator>::value_type value_type;
         std::vector<value_type> x2( first, last );

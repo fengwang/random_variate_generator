@@ -98,7 +98,7 @@ namespace vg
                     const final_type X = gamma_type::do_generation( static_cast<final_type>( M ) );
 
                     if ( X > lambda )
-                        { return ans + binomial_type::do_generation( M - 1, lambda / X ); }
+                        { return static_cast<return_type>(ans + binomial_type::do_generation( M - 1, lambda / X )); }
                     else
                     {
                         ans += M;
@@ -106,7 +106,7 @@ namespace vg
                     }
 
                     if ( lambda < 10 )
-                        { return ans + exponential_inter_arrival_times_method( lambda ); }
+                        { return static_cast<return_type>(ans + exponential_inter_arrival_times_method( lambda )); }
                 }
             }
 

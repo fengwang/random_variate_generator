@@ -36,54 +36,95 @@ namespace vg
         typedef std::size_t                             size_type;
         typedef variate_generator                       self_type;
 
-    private:
         distribution_type   dt_;
+
+        //explicit variate_generator() noexcept : dt_( 0 ) {}
+
+        template< typename ... Args >
+        explicit variate_generator( Args ... args ) noexcept : dt_( args... ) {}
+
+        return_type operator()() const noexcept
+        {
+            return dt_();
+        }
+#if 0
+        operator return_type () const noexcept
+        {
+            return dt_();
+        }
+#endif
+#if 0 
         struct              iterator; 
         iterator            iterator_;
 
     public:
 
-        explicit variate_generator() : dt_( 0 )
+        explicit variate_generator() noexcept : dt_( 0 )
         {
             iterator_ = iterator( &dt_ );
         }
 
         template< typename ... Tn >
-        explicit variate_generator( const Tn ... tn ) : dt_(tn...)
+        explicit variate_generator( const Tn ... tn ) noexcept : dt_(tn...)
         {
             iterator_ = iterator(&dt_);
         }
 
         ~variate_generator() {}
 
-    public:
-        return_type
-        operator()() const
+        return_type operator()() const noexcept
         {
             return dt_();
         }
 
-        operator return_type () const
+        operator return_type () const noexcept
         {
             return dt_();
         }
 
-        iterator
-        begin() const
+        iterator begin() const noexcept
         {
             return iterator_;
         }
 
-    public:
-        variate_generator( const self_type& ) = default;
-        self_type& operator=( const self_type& ) = default;
-        variate_generator( self_type&& ) = default;
-        self_type& operator=( self_type&& ) = default;
+        variate_generator( const self_type& ) = delete;
+        self_type& operator=( const self_type& ) = delete;
+        variate_generator( self_type&& ) = delete;
+        self_type& operator=( self_type&& ) = delete;
+#endif
     };
+
+    template < class Return_Type, template<class, class> class Distribution, class Engine, typename... Args >
+    variate_generator<Return_Type, Distribution, Engine>
+    make_variate_generator( Args ... args ) noexcept
+    {
+        return variate_generator<Return_Type, Distribution, Engine>{ args... };
+    }
+
+    template < class Return_Type, template<class, class> class Distribution,  typename... Args >
+    variate_generator<Return_Type, Distribution, mitchell_moore>
+    make_variate_generator( Args ... args ) noexcept
+    {
+        return variate_generator<Return_Type, Distribution, mitchell_moore>{ args... };
+    }
+
+    template < class Return_Type, typename... Args >
+    variate_generator<Return_Type, uniform, mitchell_moore>
+    make_variate_generator( Args ... args ) noexcept
+    {
+        return variate_generator<Return_Type, uniform, mitchell_moore>{ args... };
+    }
+
+    template < typename... Args >
+    variate_generator<double, uniform, mitchell_moore>
+    make_variate_generator( Args ... args ) noexcept
+    {
+        return variate_generator<double, uniform, mitchell_moore>{ args... };
+    }
 
 }//namespace vg
 
-#include <vg/variate_generator/variate_generator.tcc>
+//#include <vg/variate_generator/variate_generator.tcc>
 
 #endif//_VARIATE_GENERATOR_HPP_INCLUDED_IUH398UHFKJH29U8HSFIOUHE98UHDUHE98UH23UJ
 

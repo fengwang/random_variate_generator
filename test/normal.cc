@@ -7,6 +7,7 @@
 
 int main()
 {
+    //vg::variate_generator<double, vg::normal, vg::mt19937> vg_(13);    
     vg::variate_generator<double, vg::normal, vg::mt19937> vg_;    
     //vg::variate_generator<double, vg::normal, vg::lagged_fibonacci> vg_;    
 

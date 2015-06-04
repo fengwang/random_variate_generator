@@ -20,18 +20,17 @@ namespace vg
 {
 
     template <
-				typename Return_Type,
-             	template<class, class> class Distribution,
-             	typename Engine
+                typename Return_Type,
+                template<class, class> class Distribution,
+                typename Engine
              >
     struct variate_generator<Return_Type, Distribution, Engine>::iterator
     {
-    public:
         typedef iterator                                        self_type;
-        typedef typename variate_generator::distribution_type                  distribution_type;
-        typedef typename variate_generator::return_type                        return_type;
-        typedef typename variate_generator::seed_type                          seed_type;
-        typedef typename variate_generator::return_type                        value_type;
+        typedef typename variate_generator::distribution_type   distribution_type;
+        typedef typename variate_generator::return_type         return_type;
+        typedef typename variate_generator::seed_type           seed_type;
+        typedef typename variate_generator::return_type         value_type;
         typedef void                                            pointer;
         typedef void                                            reference;
         typedef std::size_t                                     size_type;
@@ -43,92 +42,76 @@ namespace vg
         size_type counter_;
 
     public:
-        iterator( distribution_type* dt = 0 ) : dt_( dt ), counter_( 0 ) {}
+        iterator( distribution_type* dt = 0 ) noexcept : dt_( dt ), counter_( 0 ) {}
 
-        iterator( const self_type& other )
+        iterator( const self_type& other ) noexcept
         {
             operator = ( other );
         }
 
-        self_type& 
-		operator = ( const self_type& other )
+        self_type& operator = ( const self_type& other ) noexcept
         {
             dt_ = other.dt_;
             counter_ = other.counter_;
             return *this;
         }
 
-        self_type& 
-		operator ++ ()
+        self_type& operator ++ () noexcept
         {
             ++counter_;
             return *this;
         }
 
-        const self_type 
-		operator ++( int )
+        const self_type operator ++( int ) noexcept
         {
             self_type ans( *this );
             ++( *this );
             return ans;
         }
 
-        self_type& 
-		operator -- ()
+        self_type& operator -- () noexcept
         {
             --counter_;
             return *this;
         }
 
-        const self_type 
-		operator --( int )
+        const self_type operator --( int ) noexcept
         {
             self_type ans( *this );
             --( *this );
             return ans;
         }
 
-        value_type 
-		operator* ()
+        value_type operator* () noexcept
         {
             return ( *dt_ )();
         }
 
-        friend
-        const self_type 
-		operator + ( const self_type& lhs, const size_type& rhs )
+        friend const self_type operator + ( const self_type& lhs, const size_type& rhs ) noexcept
         {
             self_type ans( lhs );
             ans.counter_ += rhs;
             return ans;
         }
 
-        friend
-        const self_type 
-		operator + ( const size_type& lhs, const self_type& rhs )
+        friend const self_type operator + ( const size_type& lhs, const self_type& rhs ) noexcept
         {
             return rhs + lhs;
         }
 
-        friend
-        const self_type 
-		operator - ( const self_type& lhs, const size_type& rhs )
+        friend const self_type operator - ( const self_type& lhs, const size_type& rhs ) noexcept
         {
             self_type ans( lhs );
             ans.counter_ -= rhs;
             return ans;
         }
 
-        friend
-        bool 
-		operator != ( const self_type& lhs, const self_type& rhs )
+        friend bool operator != ( const self_type& lhs, const self_type& rhs ) noexcept
         {
             return lhs.counter_ != rhs.counter_;
         }
 
-        friend
-        bool 
-		operator == ( const self_type& lhs, const self_type& rhs )
+        friend bool operator == ( const self_type& lhs, const self_type& rhs ) noexcept
         {
             return lhs.counter_ == rhs.counter_;
         }

@@ -25,14 +25,14 @@ namespace vg
             mutable std::mutex              mtx;
 
         public:
-            linear_congruential( const seed_type s = 0 )
+            linear_congruential( const seed_type s = 0 ) noexcept
             {
                 std::lock_guard<std::mutex> l( mtx );
 
                 x_ = s ? s : default_seed()();
             }
 
-            void reset_seed( const seed_type s = 0 )
+            void reset_seed( const seed_type s = 0 ) noexcept
             {
                 if ( s )
                 {
@@ -41,14 +41,13 @@ namespace vg
                 }
             }
 
-            final_type operator()()
+            final_type operator()() noexcept
             {
                 std::lock_guard<std::mutex> l( mtx );
 
                 x_ *= a_;
                 x_ += c_;
-                const final_type ans = static_cast<final_type>( x_ ) /
-                                       static_cast<final_type>( std::numeric_limits<value_type>::max() );
+                const final_type ans = static_cast<final_type>( x_ ) / static_cast<final_type>( std::numeric_limits<value_type>::max() );
                 return ans;
             } // end of operator()
 

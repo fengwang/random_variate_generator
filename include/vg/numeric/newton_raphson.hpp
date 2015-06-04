@@ -42,12 +42,11 @@ struct newton_raphson
                     const value_type last,     // x2
                     const function_type f,     // f(x)
                     const function_type df,    // f'(x)
-                    const size_type times = 20 ) :
+                    const size_type times = 20 ) noexcept :
         first_(first), last_(last), f_(f), df_(df), times_(times) 
     {}
 
-    value_type 
-    operator()() const 
+    value_type operator()() const noexcept
     {
         value_type ans = ( first_ + last_ ) / value_type(2);
 
