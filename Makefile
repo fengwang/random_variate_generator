@@ -103,3 +103,34 @@ arcsine_example.o : test/arcsine_example.cc
 arcsine_example: arcsine_example.o 
 	$(LINK) $(LFLAGS) -o $(BIN_DIR)/arcsine_example $(OBJECTS_DIR)/arcsine_example.o $(OBJCOMP) $(LIBS)
 
+balding_nichols_example.o : test/balding_nichols_example.cc
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $(OBJECTS_DIR)/balding_nichols_example.o test/balding_nichols_example.cc
+balding_nichols_example: balding_nichols_example.o 
+	$(LINK) $(LFLAGS) -o $(BIN_DIR)/balding_nichols_example $(OBJECTS_DIR)/balding_nichols_example.o $(OBJCOMP) $(LIBS)
+
+bernoulli_example.o : test/bernoulli_example.cc
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $(OBJECTS_DIR)/bernoulli_example.o test/bernoulli_example.cc
+bernoulli_example: bernoulli_example.o 
+	$(LINK) $(LFLAGS) -o $(BIN_DIR)/bernoulli_example $(OBJECTS_DIR)/bernoulli_example.o $(OBJCOMP) $(LIBS)
+
+beta_example.o : test/beta_example.cc
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $(OBJECTS_DIR)/beta_example.o test/beta_example.cc
+beta_example: beta_example.o 
+	$(LINK) $(LFLAGS) -o $(BIN_DIR)/beta_example $(OBJECTS_DIR)/beta_example.o $(OBJCOMP) $(LIBS)
+
+beta_binomial_example.o : test/beta_binomial_example.cc
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $(OBJECTS_DIR)/beta_binomial_example.o test/beta_binomial_example.cc
+beta_binomial_example: beta_binomial_example.o 
+	$(LINK) $(LFLAGS) -o $(BIN_DIR)/beta_binomial_example $(OBJECTS_DIR)/beta_binomial_example.o $(OBJCOMP) $(LIBS)
+
+binomial_example.o : test/binomial_example.cc
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $(OBJECTS_DIR)/binomial_example.o test/binomial_example.cc
+binomial_example: binomial_example.o 
+	$(LINK) $(LFLAGS) -o $(BIN_DIR)/binomial_example $(OBJECTS_DIR)/binomial_example.o $(OBJCOMP) $(LIBS)
+
+burr_example.o : test/burr_example.cc
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $(OBJECTS_DIR)/burr_example.o test/burr_example.cc
+burr_example: burr_example.o 
+	$(LINK) $(LFLAGS) -o $(BIN_DIR)/burr_example $(OBJECTS_DIR)/burr_example.o $(OBJCOMP) $(LIBS)
+
+

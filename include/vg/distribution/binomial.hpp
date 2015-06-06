@@ -54,7 +54,7 @@ namespace vg
 
             explicit binomial( size_type n = size_type( 1 ),
                                final_type p = final_type( 0.5 ),
-                               const seed_type sd = seed_type( 0 ) )
+                               const seed_type sd = seed_type( 0 ) ) noexcept
                 : n_( n ), p_( p ), e_( singleton<engine_type>::instance() )
             {
                 assert( n_ != size_type( 0 ) );
@@ -64,14 +64,14 @@ namespace vg
             }
 
             return_type
-            operator()() const
+            operator()() const noexcept
             {
                 return do_generation( n_, p_ );
             }
 
         protected:
             return_type
-            do_generation( const size_type N, const final_type P ) const
+            do_generation( const size_type N, const final_type P ) const noexcept
             {
                 if ( 0 == N )
                     return 0;
@@ -95,7 +95,7 @@ namespace vg
 #endif
         private:
             return_type
-            coin_flip_method( const size_type N, const final_type P ) const
+            coin_flip_method( const size_type N, const final_type P ) const noexcept
             {
                 value_type ans = 0;
 
@@ -119,7 +119,7 @@ namespace vg
 #endif
         private:
             return_type
-            second_waiting_time_method( const size_type N, const final_type P ) const
+            second_waiting_time_method( const size_type N, const final_type P ) const noexcept
             {
                 const final_type p  = P > 0.5 ? 1 - P : P;
                 const final_type q  = -std::log( 1.0 - p );
@@ -142,7 +142,7 @@ namespace vg
 
         private:
             return_type
-            rejection_method( const size_type N, const final_type P ) const
+            rejection_method( const size_type N, const final_type P ) const noexcept
             {
                 size_type   n   =   N;
                 final_type  p   =   P;

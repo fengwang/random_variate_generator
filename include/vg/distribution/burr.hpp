@@ -48,7 +48,7 @@ namespace vg
                             const final_type c = final_type(1),
                             const final_type k = final_type(1),
                             const final_type r = final_type(1),
-                            const seed_type sd = 0 )
+                            const seed_type sd = 0 ) noexcept
                 : n_(n), c_( c ), k_( k ), r_( r ), e_( singleton<engine_type>::instance() )
             {
                 assert( n > 0 );
@@ -59,21 +59,21 @@ namespace vg
             }
 
             return_type
-            operator()() const
+            operator()() const noexcept
             {
-                return do_generation( n_, c_, k_, r_ );
+                return static_cast<return_type>(do_generation( n_, c_, k_, r_ ));
             }
 
         protected:
             final_type
-            do_generation( const size_type N, const final_type C, const final_type K, const final_type R ) const
+            do_generation( const size_type N, const final_type C, const final_type K, const final_type R ) const noexcept
             {
                 return direct_burr_impl( N, C, K, R );
             }
 
         private:
             final_type
-            direct_burr_impl( const size_type N, const final_type C, const final_type K, const final_type R ) const 
+            direct_burr_impl( const size_type N, const final_type C, const final_type K, const final_type R ) const noexcept
             {
                 const final_type u = e_();
                 static const final_type l(1);
@@ -81,40 +81,41 @@ namespace vg
                 
                 // Note: c++0x support required here
                 //                                  u           c            k           r
+                // Burr, I. W. (1942). "Cumulative frequency functions". Annals of Mathematical Statistics 13 (2): 215¨C232. doi:10.1214/aoms/1177731607. JSTOR 2235756.
                 const std::function< final_type( final_type, final_type, final_type, final_type ) > inverse_function[12] = 
                 {
                     // F1(x) = x
-                    []( const final_type u, const final_type c, const final_type k, const final_type r ) -> final_type
+                    []( const final_type u, const final_type c, const final_type k, const final_type r ) noexcept -> final_type
                     { return u; },
                     // F2(x) = (1+e^{-x})^{-r}
-                    []( const final_type u, const final_type c, const final_type k, const final_type r ) -> final_type
+                    []( const final_type u, const final_type c, const final_type k, const final_type r ) noexcept -> final_type
                     { return - std::log( -l + std::pow(u, -l/r) ); },
                     // F3(x) = (1+x^{-k})^{-r}
-                    []( const final_type u, const final_type c, const final_type k, const final_type r ) -> final_type
+                    []( const final_type u, const final_type c, const final_type k, const final_type r ) noexcept -> final_type
                     { return std::pow( (std::pow( u, -l/r ) - l ), -l/k); },
                     // F4(x) = (1+((c-x)/x)^(1/c))^(-r)
-                    []( const final_type u, const final_type c, const final_type k, const final_type r ) -> final_type
+                    []( const final_type u, const final_type c, const final_type k, const final_type r ) noexcept -> final_type
                     { return c / ( l + std::pow(std::pow(u, -l/r) - l, c) ); },
                     // F5(x) = ( 1 + k e^{-tan(x)} )^r    
-                    []( const final_type u, const final_type c, const final_type k, const final_type r ) -> final_type
+                    []( const final_type u, const final_type c, const final_type k, const final_type r ) noexcept -> final_type
                     { return std::atan( - std::log( (std::pow(u, -l/r)-l ) / k ) );},
                     // F6(x) = ( 1 + k e^{-sinh(x)} )^r    
-                    []( const final_type u, const final_type c, const final_type k, const final_type r ) -> final_type
+                    []( const final_type u, const final_type c, const final_type k, const final_type r ) noexcept -> final_type
                     { return std::asinh( - std::log( (std::pow(u, -l/r)-l ) / k ) );},
                     // F7(x) = 2^{-r}(1+tanh(x))^{r}    
-                    []( const final_type u, const final_type c, const final_type k, const final_type r ) -> final_type
+                    []( const final_type u, const final_type c, const final_type k, const final_type r ) noexcept -> final_type
                     { return std::atanh( std::pow(std::pow(ll, r)*u, l/r) - l);},
                     // F8(x) = \frac{2}{pi} arctan(e^x)   
-                    []( const final_type u, const final_type c, const final_type k, const final_type r ) -> final_type
+                    []( const final_type u, const final_type c, const final_type k, const final_type r ) noexcept -> final_type
                     { const final_type pi_2 = 1.5707963267948966142313216L; return std::log(std::tan(pi_2*std::pow(u, l/r)));},
                     // F9(x) = 1-\frac{2}{1+k((1+e^x)^r-1)}
-                    []( const final_type u, const final_type c, const final_type k, const final_type r ) -> final_type
+                    []( const final_type u, const final_type c, const final_type k, const final_type r ) noexcept -> final_type
                     { return std::log(std::pow(l+(ll/(l-u)-l)/k, l/r)-l);},
-                    // F10(x) = (1+e^{-x^2})^r
-                    []( const final_type u, const final_type c, const final_type k, const final_type r ) -> final_type
-                    { return std::sqrt(-std::log(std::pow(u,l/r)-l));},
+                    // F10(x) = (1-e^{-x^2})^r
+                    []( const final_type u, const final_type c, const final_type k, const final_type r ) noexcept -> final_type
+                    { return std::sqrt(-std::log(-std::pow(u,l/r)+l));},
                     // F11(x) = ( x - \frac{\sin 2 \pi x}{2\pi})^r
-                    []( const final_type u, const final_type c, const final_type k, const final_type r ) -> final_type
+                    []( const final_type u, const final_type c, const final_type k, const final_type r ) noexcept -> final_type
                     {
                         const final_type two_pi = final_type(2) * 3.1415926535897932384626433;
                         std::function<final_type(final_type)> f = [&](final_type x) { return std::pow( x - std::sin(two_pi*x)/two_pi ,r); };
@@ -123,8 +124,8 @@ namespace vg
                         return ans;
                     },
                     // F12(x) = 1 - ( 1 + x^c ) ^ {-k}
-                    []( const final_type u, const final_type c, const final_type k, const final_type r ) -> final_type
-                    { return std::pow( std::pow(l-u, l/k)-l, l/c);}
+                    []( const final_type u, const final_type c, const final_type k, const final_type r ) noexcept -> final_type
+                    { return std::pow( std::pow(l-u, -l/k)-l, l/c);}
                 };
                 return inverse_function[N-1]( u, C, K, R );
             }

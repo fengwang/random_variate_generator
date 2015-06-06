@@ -44,7 +44,7 @@ namespace vg
 
             explicit beta(	const value_type a = value_type( 1 ),
                             const value_type b = value_type( 1 ),
-                            const seed_type sd = 0 )
+                            const seed_type sd = 0 ) noexcept
                 : a_( a ), b_( b ), e_( singleton<engine_type>::instance() )
             {
                 assert( a_ > 0 );
@@ -53,21 +53,21 @@ namespace vg
             }
 
             return_type
-            operator()() const
+            operator()() const noexcept
             {
                 return do_generation( a_, b_ );
             }
 
         protected:
             return_type
-            do_generation( const final_type A, const final_type B ) const
+            do_generation( const final_type A, const final_type B ) const noexcept
             {
                 return direct_beta_impl( A, B );
             }
 
         private:
             return_type
-            direct_beta_impl( const final_type A, const final_type B ) const 
+            direct_beta_impl( const final_type A, const final_type B ) const noexcept
             {
                 const final_type a =  gamma_type::do_generation( A );
                 const final_type b =  gamma_type::do_generation( B );

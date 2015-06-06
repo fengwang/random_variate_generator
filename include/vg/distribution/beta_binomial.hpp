@@ -51,7 +51,7 @@ namespace vg
             explicit beta_binomial(	const value_type n = value_type( 10 ),
                                     const final_type a = final_type(1),
                                     const final_type b = final_type(1),
-                                    const seed_type sd = 0 )
+                                    const seed_type sd = 0 ) noexcept
                 : n_(n), a_( a ), b_( b ), e_( singleton<engine_type>::instance() )
             {
                 assert( n > 0 );
@@ -68,25 +68,25 @@ namespace vg
                 |Skewness|      12.8188529096048        |       0.701374380851282       |  
             */
             return_type
-            operator()() const
+            operator()() const noexcept
             {
                 return do_generation( n_, a_, b_ );
             }
 
         protected:
             return_type
-            do_generation( const value_type N, const final_type A, const final_type B ) const 
+            do_generation( const value_type N, const final_type A, const final_type B ) const noexcept
             {
                 return direct_beta_binomial_impl( N, A, B );
             }
 
         private:
             return_type
-            direct_beta_binomial_impl( const value_type N, const final_type A, const final_type B ) const
+            direct_beta_binomial_impl( const value_type N, const final_type A, const final_type B ) const noexcept
             {
-                const final_type p = beta_type::do_generation( A, B );
-                const final_type ans = binomial_type::do_generation( N, p );
-                return ans;
+                const final_type p = static_cast<final_type>(beta_type::do_generation( A, B ));
+                const final_type ans = static_cast<final_type>(binomial_type::do_generation( static_cast<size_type>(N), p ));
+                return static_cast<return_type>(ans);
             }
     };
 
