@@ -169,7 +169,7 @@ is defined in  __'include/vg/variate_generator.hpp'__
 ***
 
 ##### Member Types
-The following alias is a member type of class _variate\_generator_:
+The following alias defined as member types of class _variate\_generator_:
 
 ***
 >__distribution\_type__
@@ -631,15 +631,15 @@ see [Member Types in varaite_generator](#member-types).
                    const final_type c = final_type(1),
                    const final_type k = final_type(1),
                    const final_type r = final_type(1),
-                   const seed_type sd = 0 ) noexcept
+                   const seed_type sd = 0 ) noexcept;
     
-The constructor expects 5 paremeters. The first parameter, _n_, is an interger representing index of the distribution in Burr family subject to 0 < n < 13, while _c_, _k_ and _r_ are positive real numbers, and the last paremeter, _sd_, is for the engine employed by the distrubtion, and if _sd_ is not provided, a default one will be used.
+The constructor expects 5 paremeters. The first parameter, _n_, is an interger representing index of the distribution in Burr family, which is subject to 0 < n < 13, while _c_, _k_ and _r_ are positive real numbers, and the last paremeter, _sd_, is for the engine employed by the distrubtion, and if _sd_ is not provided, a default one will be used.
 
 ###### Burr operator()
 
 	return_type operator()() const noexcept;
 
-Generates a new random variate that follows Binomial distribution.
+Generates a new random variate that follows __Burr__ distribution.
 
 ##### Burr Example
 
@@ -690,3 +690,57 @@ Output:
 	Burr--[12]:
 	2.42904	0.217242	0.0023998	0.13086	0.939905	0.197871	0.00245561	0.282117	2.11047	1.83234
 
+####Chi Square Distirubtion
+
+Produces random variates that are following [Chi Square Distirubtion](http://en.wikipedia.org/wiki/Chi-squared_distribution).
+
+The template class
+
+    template < typename Return_Type, typename Engine >
+    struct chi_square;
+    
+is defined in ['include/vg/distribution/chi_squre.hpp'](./include/vg/distribution/chi_square.hpp).
+
+##### Chi Square Template Parameters
+
+see [Template Parameters in variate_generator](#template-parameters).
+
+##### Chi Square Member Types
+
+see [Member Types in varaite_generator](#member-types).
+
+##### Chi Square Member Functions
+
+###### Chi Square constructor
+
+    explicit chi_square( const size_type k = 10, const seed_type sd = 0 ) noexcept;
+    
+The constructor expects 2 paremeters. The first parameter, _k_, is a positive interger representing the degrees of freedom, and the last paremeter, _sd_, is for the engine employed by the distrubtion, and if _sd_ is not provided, a default one will be used.
+
+###### Chi Square operator()
+
+	return_type operator()() const noexcept;
+
+Generates a new random variate that follows __Chi Square__ distribution.
+
+##### Chi Square Example
+
+    #include <vg.hpp>
+	#include <iostream>
+
+	int main()
+	{
+    	vg::variate_generator<double, vg::chi_square> v{ 10 };
+
+    	for ( unsigned long int i = 0; i != 10; ++i )
+        	std::cout << v() << "\t";
+
+    	std::cout << "\n";
+
+    	return 0;
+	}
+
+    
+Output:
+
+   	25.0486	12.4258	22.4472	14.5258	17.4818	13.0089	8.77502	13.2517	7.47055	11.0505

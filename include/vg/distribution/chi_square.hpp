@@ -51,38 +51,34 @@ namespace vg
              *  the engine e_ is not directedly used by chi_square, but the seed has to be set here
              *  for the engine e_, because gamma will use it.
              */
-            explicit chi_square( const size_type k = 10, const seed_type sd = 0 )
+            explicit chi_square( const size_type k = 10, const seed_type sd = 0 ) noexcept
                 : k_( k ), e_( singleton<engine_type>::instance() )
             {
                 e_.reset_seed( sd ); 
             }
 
             return_type
-            operator()() const
+            operator()() const noexcept
             {
                 return do_generation( k_ );
             }
 
         protected:
             return_type
-            do_generation( const size_type K ) const
+            do_generation( const size_type K ) const noexcept
             {
                 return chi_square_direct_impl( K );
             }
 
         private:
             return_type
-            chi_square_direct_impl( const size_type K ) const 
+            chi_square_direct_impl( const size_type K ) const noexcept 
             {
                 const final_type ans = gamma_type::do_generation( final_type( K ) / final_type( 2 ) );
-                return ans + ans;
+                return static_cast<return_type>(ans + ans);
             }
-
     };
-
 }//vg
 
-
 #endif//_CHI_SQUARE_HPP_INCLUDED_MBSDLKJ98USIJEIJHFD984KJHSDFIOUHJS98E3D8EOIUHS9
-
 

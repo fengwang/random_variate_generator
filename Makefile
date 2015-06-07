@@ -143,3 +143,8 @@ gaussian.o : test/gaussian.cc
 gaussian: gaussian.o 
 	$(LINK) $(LFLAGS) -o $(BIN_DIR)/gaussian $(OBJECTS_DIR)/gaussian.o $(OBJCOMP) $(LIBS)
 
+chi_square_example.o : test/chi_square_example.cc
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $(OBJECTS_DIR)/chi_square_example.o test/chi_square_example.cc
+chi_square_example: chi_square_example.o 
+	$(LINK) $(LFLAGS) -o $(BIN_DIR)/chi_square_example $(OBJECTS_DIR)/chi_square_example.o $(OBJCOMP) $(LIBS)
+
