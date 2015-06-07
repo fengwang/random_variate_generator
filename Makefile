@@ -133,4 +133,13 @@ burr_example.o : test/burr_example.cc
 burr_example: burr_example.o 
 	$(LINK) $(LFLAGS) -o $(BIN_DIR)/burr_example $(OBJECTS_DIR)/burr_example.o $(OBJCOMP) $(LIBS)
 
+make_passwd.o : test/make_passwd.cc
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $(OBJECTS_DIR)/make_passwd.o test/make_passwd.cc
+make_passwd: make_passwd.o 
+	$(LINK) $(LFLAGS) -o $(BIN_DIR)/make_passwd $(OBJECTS_DIR)/make_passwd.o $(OBJCOMP) $(LIBS)
+
+gaussian.o : test/gaussian.cc
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o $(OBJECTS_DIR)/gaussian.o test/gaussian.cc
+gaussian: gaussian.o 
+	$(LINK) $(LFLAGS) -o $(BIN_DIR)/gaussian $(OBJECTS_DIR)/gaussian.o $(OBJCOMP) $(LIBS)
 

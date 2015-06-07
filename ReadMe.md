@@ -13,7 +13,7 @@
 * [index](#index)
 * [A Very Short Introduction](#a-very-short-introduction)
 * [A Quick Start](#a-quick-start)
-* [Reference in Detail](#reference-in-detail)
+* [Reference](#reference)
     + [Variate Generator](#variate-generator)
     + [Distributions](#distributions)
         - [Arcsine Distribution](#arcsine-distribution)
@@ -36,7 +36,7 @@ This library
 
 ## A Quick Start
 
-source code:
+Quick start source code(1):
 
     //test.cc
 	#include <vg.hpp>
@@ -68,7 +68,7 @@ source code:
 
 command to compile:
 
-    $g++ -o ./gaussian_test ./test.cc -std=c++14 -O2 -Iinclude(PATH_TO_HEADER_FILES)
+    $g++ -o ./gaussian_test ./test.cc -std=c++14 -O2 -Iinclude(PATH)
 
 Output:
 
@@ -104,7 +104,38 @@ Output:
     16  *
 
 
-## Reference in Detail
+Quick start source code(2):
+
+    //make_passwd.cc
+    #include <vg.hpp>
+	#include <iostream>
+	#include <vector>
+	#include <iterator>
+	#include <algorithm>
+
+	int main()
+	{
+    	char chars[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+    	//char chars[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890`~!@#$%^&*()_+\\|[]{}'\";:/?>.<,";
+    	vg::variate_generator<unsigned long> v{ 0UL, sizeof(chars)/sizeof(char) };
+    	unsigned long const password_length = std::max( v(), 10UL );
+    	std::vector<char> password( password_length );
+    	std::generate( password.begin(), password.end(), [&](){ return chars[v()]; } );
+    	std::copy( password.begin(), password.end(), std::ostream_iterator<char>( std::cout, "" ) );
+    	std::cout << "\n";
+
+    	return 0;
+	}
+
+compile:
+
+    g++ -o make_passwd make_passwd.cc -std=c++14 -O2 -I(PATH)
+
+Output:
+
+    5Tq5kxmmnULP3qh1qa5pT9bOYzJ
+
+##Reference
 
 #### variate_generator 
 
