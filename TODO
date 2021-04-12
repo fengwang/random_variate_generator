@@ -1,4 +1,4 @@
 1. update the interface, to make it compatible with the random library in standard C++;
 2. complete the documentation for each distribution, and run 10^8 times to check the variance and mean;
-3. implement the other distributions listed in file distributions.todo.txt.
-
+3. implement the other distributions listed in file distributions.todo.txt;
+4. make the library as c++20 as possible.
