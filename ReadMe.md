@@ -2,9 +2,9 @@
 
 >
 > 無種而有生
-> 
+>
 > 生已而覆滅
-> 
+>
 > ------ 聖入楞伽寶經名為諸佛所說心髓品
 
 
@@ -27,7 +27,7 @@
 
 ## A Very Short Introduction
 
-This library 
+This library
 
 + is a C++ library
 + is a header-only library
@@ -137,29 +137,29 @@ Output:
 
 ##Reference
 
-#### variate_generator 
+#### variate_generator
 
 The class template
 
-    vg::variate_generator 
-    
+    vg::variate_generator
 
-is defined in  __'include/vg/variate_generator.hpp'__   
+
+is defined in  __'include/vg/variate_generator.hpp'__
 
     template < class Return_Type = double, template<class, class> class Distribution = uniform, class Engine = mitchell_moore >
     struct variate_generator;
 
-##### Template Parameters   
+##### Template Parameters
 
 ***
 
->__Return_Type__ 
+>__Return_Type__
 >> the variate __type__ this generator will generate, default is _double_
 
 ***
 
 >__Distribution__
->> the variate __kind__ this generator will generate, default is _uniform_; 
+>> the variate __kind__ this generator will generate, default is _uniform_;
 
 ***
 
@@ -203,10 +203,10 @@ The following alias defined as member types of class _variate\_generator_:
 * [operator ()](#-variate_generator-example) -- generate a new variate of the specified distribution
 
 ###### variate_generator:: __(constructor)__
-    
+
     template< typename ... Args >
-    explicit variate_generator( Args ... args ) noexcept; 
-    
+    explicit variate_generator( Args ... args ) noexcept;
+
 Constructs a __variate\_generator__ with the specified given argument(s).  All the argument(s) will be passed to the constructor of the [__Distribution__ type](#distributions), which is specified in the [template parameters](#template-parameters).
 
 ####### variate_generator example:
@@ -228,7 +228,7 @@ Constructs a __variate\_generator__ with the specified given argument(s).  All t
     	for ( unsigned long int index = 0; index != N; ++index )
         	std::cout << vg_possion() << "\t";
     	std::cout << "\n";
-    	
+
     	vg::variate_generator<unsigned int, vg::hypergeometric, vg::mt19937> vg_hypergeometric( 3, 4, 5 );
     	std::cout << "hypergeometric(3, 4, 5):\n";
     	for ( unsigned long int index = 0; index != N; ++index )
@@ -257,9 +257,9 @@ Returns a new random variate following the __Distribution__ parameters associate
 Return Type:
 
 > A new random number.
-> 
+>
 > return_type is a member type, defined as an alias of the first class [template parameter](#template-parameters) (__Return\_Type_).
-> 
+>
 
 ###### variate_generator operator() example:
 
@@ -296,11 +296,11 @@ see [Member Types in varaite_generator](#member-types).
 
 The constructor expects a parameter _sd_ for the engine inside this distrubtion class, and if this parameter is not given, a default _sd_ will be used.
 
-	
+
 ###### arcsine::operator()
-	
+
 	return_type operator()() const noexcept
-	
+
 Generates a new random variate following the __Arcsine__ distribution.
 
 ##### arcsine Example:
@@ -318,12 +318,12 @@ Generates a new random variate following the __Arcsine__ distribution.
     	std::cout << "\n";
 
     	return 0;
-	} 	
-	 
+	}
+
 Output:
 
 	0.0548315	0.92341	0.884892	0.441578	0.985113	0.460975	0.0877635	0.164131	0.999518	0.531236
-		
+
 
 ####	Balding–Nichols Distirubtion
 
@@ -333,7 +333,7 @@ The template class
 
     template < typename Return_Type, typename Engine >
     struct balding_nichols;
-    
+
 is defined in ['include/vg/distribution/balding_nichols.hpp'](./include/vg/distribution/balding_nichols.hpp).
 
 ##### Balding–Nichols Template Parameters
@@ -349,7 +349,7 @@ see [Member Types in varaite_generator](#member-types).
 ###### Balding-Nichols constructor
 
     explicit balding_nichols( const final_type f = final_type(0.5), const final_type p = final_type(0.5), const seed_type sd = 0 ) noexcept;
-    
+
 The constructor expects three paremeters. The first two real parameters f and p, are subject to 0 < f < 1 and 0 < p < 1, and the third paremeter, _sd_, is for the engine employed by the distrubtion, and if _sd_ is not provided, a default one will be used.
 
 ###### Balding-Nichols operator()
@@ -373,8 +373,8 @@ Generates a new random variate that follows Balding Nichols distribution.
     	std::cout << "\n";
 
     	return 0;
-    } 
-    
+    }
+
 Output:
 
     0.947175	0.232065	0.783228	0.942613	0.404222	0.789025	0.916455	0.941101	0.533812	0.822633
@@ -387,7 +387,7 @@ The template class
 
     template < typename Return_Type, typename Engine >
     struct bernoulli;
-    
+
 is defined in ['include/vg/distribution/bernoulli.hpp'](./include/vg/distribution/bernoulli.hpp).
 
 ##### Bernoulli Template Parameters
@@ -403,7 +403,7 @@ see [Member Types in varaite_generator](#member-types).
 ###### Bernoulli constructor
 
     explicit bernoulli( final_type p = final_type( 0.5 ), const seed_type s = seed_type( 0 ) ) noexcept;
-    
+
 The constructor expects two paremeters. The first p is subject to 0 < p < 1, and the last paremeter, _s_, is for the engine employed by the distrubtion, and if _s_ is not provided, a default one will be used.
 
 ###### Bernoulli operator()
@@ -428,7 +428,7 @@ Generates a new random variate that follows __Bernoulli__ distribution.
 
     	return 0;
 	}
-    
+
 Output:
 
     0	0	1	0	0	1	1	1	0	1
@@ -443,7 +443,7 @@ The template class
 
     template < typename Return_Type, typename Engine >
     struct beta;
-    
+
 is defined in ['include/vg/distribution/beta.hpp'](./include/vg/distribution/beta.hpp).
 
 ##### Beta Template Parameters
@@ -459,7 +459,7 @@ see [Member Types in varaite_generator](#member-types).
 ###### Beta constructor
 
     explicit beta( const value_type a = value_type( 1 ), const value_type b = value_type( 1 ), const seed_type sd = 0 ) noexcept;
-    
+
 The constructor expects three paremeters. The first two are positive shape parameters, and the last paremeter, _sd_, is for the engine employed by the distrubtion, and if _sd_ is not provided, a default one will be used.
 
 ###### Beta operator()
@@ -484,7 +484,7 @@ Generates a new random variate that follows __Beta__ distribution.
 
     	return 0;
 	}
-    
+
 Output:
 
     0.141858	1.60925e-06	9.89096e-05	7.39141e-05	0.00105271	6.55803e-09	0.724791	0.0842294	0.0221139	0.436397
@@ -497,7 +497,7 @@ The template class
 
     template < typename Return_Type, typename Engine >
     struct beta_binomial;
-    
+
 is defined in ['include/vg/distribution/beta_binomial.hpp'](./include/vg/distribution/beta_binomial.hpp).
 
 ##### Beta Binomial Template Parameters
@@ -516,7 +516,7 @@ see [Member Types in varaite_generator](#member-types).
                             const final_type a = final_type(1),
                             const final_type b = final_type(1),
                             const seed_type sd = 0 ) noexcept;
-    
+
 The constructor expects 4 paremeters. The first parameter, _n_, is an interger representing Bernoulli trials, while _a_ and _b_ are two positive shape parameters, and the last paremeter, _sd_, is for the engine employed by the distrubtion, and if _sd_ is not provided, a default one will be used.
 
 ###### Beta Binomial operator()
@@ -541,7 +541,7 @@ Generates a new random variate that follows __Beta Binomial__ distribution.
 
     	return 0;
 	}
-    
+
 Output:
 
    1	6	0	1	0	0	0	1	0	3
@@ -554,7 +554,7 @@ The template class
 
     template < typename Return_Type, typename Engine >
     struct binomial;
-    
+
 is defined in ['include/vg/distribution/binomial.hpp'](./include/vg/distribution/binomial.hpp).
 
 ##### Binomial Template Parameters
@@ -572,7 +572,7 @@ see [Member Types in varaite_generator](#member-types).
     explicit binomial( size_type n = size_type( 1 ),
                        final_type p = final_type( 0.5 ),
                        const seed_type sd = seed_type( 0 ) ) noexcept;
-    
+
 The constructor expects 3 paremeters. The first parameter, _n_, is an interger representing number of trials, while _p_ is a positive parameter of the success probability of the trial, and the last paremeter, _sd_, is for the engine employed by the distrubtion, and if _sd_ is not provided, a default one will be used.
 
 ###### Binomial operator()
@@ -598,21 +598,21 @@ Generates a new random variate that follows Binomial distribution.
     	return 0;
 	}
 
-    
+
 Output:
 
    3	4	3	3	3	6	4	5	4	5
 
 ####Burr Distirubtion
 
-Produces random variates that are following [Burr Distirubtion 
+Produces random variates that are following [Burr Distirubtion
 Family](http://dx.doi.org/10.1214%2Faoms%2F1177731607).
 
 The template class
 
     template < typename Return_Type, typename Engine >
     struct burr;
-    
+
 is defined in ['include/vg/distribution/burr.hpp'](./include/vg/distribution/burr.hpp).
 
 ##### Burr Template Parameters
@@ -632,7 +632,7 @@ see [Member Types in varaite_generator](#member-types).
                    const final_type k = final_type(1),
                    const final_type r = final_type(1),
                    const seed_type sd = 0 ) noexcept;
-    
+
 The constructor expects 5 paremeters. The first parameter, _n_, is an interger representing index of the distribution in Burr family, which is subject to 0 < n < 13, while _c_, _k_ and _r_ are positive real numbers, and the last paremeter, _sd_, is for the engine employed by the distrubtion, and if _sd_ is not provided, a default one will be used.
 
 ###### Burr operator()
@@ -662,7 +662,7 @@ Generates a new random variate that follows __Burr__ distribution.
     	return 0;
 	}
 
-    
+
 Output:
 
    	Burr--[1]:
@@ -698,7 +698,7 @@ The template class
 
     template < typename Return_Type, typename Engine >
     struct chi_square;
-    
+
 is defined in ['include/vg/distribution/chi_squre.hpp'](./include/vg/distribution/chi_square.hpp).
 
 ##### Chi Square Template Parameters
@@ -714,7 +714,7 @@ see [Member Types in varaite_generator](#member-types).
 ###### Chi Square constructor
 
     explicit chi_square( const size_type k = 10, const seed_type sd = 0 ) noexcept;
-    
+
 The constructor expects 2 paremeters. The first parameter, _k_, is a positive interger representing the degrees of freedom, and the last paremeter, _sd_, is for the engine employed by the distrubtion, and if _sd_ is not provided, a default one will be used.
 
 ###### Chi Square operator()
@@ -740,7 +740,8 @@ Generates a new random variate that follows __Chi Square__ distribution.
     	return 0;
 	}
 
-    
+
 Output:
 
    	25.0486	12.4258	22.4472	14.5258	17.4818	13.0089	8.77502	13.2517	7.47055	11.0505
+

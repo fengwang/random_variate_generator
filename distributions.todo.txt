@@ -1,0 +1,192 @@
+--Arcsine
+--Bernoulli
+--Beta
+--Beta-Pascal
+--Beta-binomial
+--Binomial
+--Burr
+--Cauchy
+--Chi-squared
+--Digamma
+--Erlang
+--Exponential
+--Exponential power
+--F
+--Factorial
+--Gamma
+--Gaussian tail
+--General hypergeometric
+--General waring
+--Geometric
+--Grassia
+--Gumbel - Type 1
+--Gumbel - Type 2
+--Hyperbolic secant
+--Hypergeometric
+--Inverse Gaussian
+--Inverse polya eggenberger
+--Lambda
+--Laplace
+--Levy
+--Log-normal
+--Logarithmic
+--Logistic
+--Mizutani
+--Negative binomial
+--Negative binomial beta
+--Normal (Gaussian)
+--Pareto
+--Pascal
+--Pearson
+--Planck
+--Poisson
+--Polya
+--Polya aeppli
+--Rademacher
+--Rayleigh
+--Rayleigh Tail
+--Singh Maddala
+--Student's t
+--Teichroew
+--Triangular
+--Trigamma
+--Uniform
+--Von Mises
+--Wald
+--Waring
+--Weibull
+--Yule
+--Zipf
+ARGUS
+Balding-Nichols
+Bates
+Benford
+Benini
+Benktander 1st kind
+Benktander 2nd kind
+Beta negative binomial
+Beta prime
+Beta rectangular
+Bingham
+Bivariate von Mises
+Borel
+Cantor
+Categorical
+Chi
+Circular
+Circular uniform
+Compound Poisson
+Conway-Maxwell-Poisson
+Coxian
+Dagum
+Davis
+Delaporte
+Dirac delta function
+Dirichlet
+Dirichlet-multinomial
+Discrete degenerate
+Discrete phase-type
+Discrete uniform
+EL
+Elliptical
+Ewens
+Extended negative binomial
+Fisher's z
+Flory-Schulz
+Folded normal
+Frechet
+Gamma/Gompertz
+Gauss-Kuzmin
+Generalized Dirichlet
+Generalized Pareto
+Generalized extreme value
+Generalized hyperbolic
+Generalized inverse Gaussian
+Generalized normal
+Geometric stable
+Gompertz
+Gumbel
+Half-logistic
+Half-normal
+Holtsmark
+Hotelling's T-squared
+Hyper-Erlang
+Hyperexponential
+Inverse chi-squared (scaled inverse chi-squared)
+Inverse gamma
+Inverse matrix gamma
+Inverse-Wishart
+Irwin-Hall
+Johnson SU
+Kent
+Kolmogorov
+Kumaraswamy
+Landau
+Levy
+Linnik
+Location-scale
+Log-Cauchy
+Log-Laplace
+Log-logistic
+Logit-normal
+Matrix gamma
+Matrix normal
+Matrix t
+Matrix-exponential
+Maximum entropy
+Maxwell-Boltzmann
+Maxwell-Juttner
+Mittag-Leffler
+Mixture
+Multinomial
+Multivariate Student
+Multivariate normal
+Multivariate stable
+Nakagami
+Natural exponential
+Negative multinomial
+Noncentral beta
+Noncentral chi-squared
+Noncentral t
+Normal-Wishart
+Normal-gamma
+Normal-inverse Gaussian
+Normal-inverse-Wishart
+Normal-scaled inverse gamma
+Parabolic fractal
+Poisson binomial
+Poly-Weibull
+Q-Gaussian
+Q-exponential
+Raised cosine
+Rectified Gaussian
+Relativistic Breit-Wigner
+Rice
+Rosin-Rammler
+Shifted Gompertz
+Shifted log-logistic
+Skellam
+Skew normal
+Slash
+Stable
+Truncated normal
+Tukey lambda
+Tweedie
+U-quadratic
+Univariate von Mises
+Variance-gamma
+Voigt
+Von Mises-Fisher
+Wigner semicircle
+Wilks' lambda
+Wishart
+Wrapped
+Wrapped Cauchy
+Wrapped Levy
+Wrapped exponential
+Wrapped normal
+Xenakis
+Yule-Simon
+Zeta
+Zipf-Mandelbrot
+phase-type
