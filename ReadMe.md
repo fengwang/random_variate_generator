@@ -1,12 +1,5 @@
 # Non-Uniform Random Variate Generator
 
->
-> 無種而有生
->
-> 生已而覆滅
->
-> ------ 聖入楞伽寶經名為諸佛所說心髓品
-
 
 ## Index
 
