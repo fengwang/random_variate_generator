@@ -19,7 +19,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define _SPECIAL_FUNCTION_HPP_INCLUDED_SDFKJ4OIUASFD98U4KLJFDOUI48OUASKJLREOPIUJDFGLKJASDFLKJTOIJDGOIU498UDFIJGLKJFOIJROIJGFIOJD 
 
 
-#include <vg/special_function/digamma.hpp>
+#include "./special_function/digamma.hpp"
 
 
 

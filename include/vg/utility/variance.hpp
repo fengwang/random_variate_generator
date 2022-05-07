@@ -18,12 +18,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef _VARIANCE_HPP_INCLUDED_FSDOJ34Y89ASFKLJNASDSUH43OUISHDFKLJAFKLJAHSFILJHS
 #define _VARIANCE_HPP_INCLUDED_FSDOJ34Y89ASFKLJNASDSUH43OUISHDFKLJAFKLJAHSFILJHS
 
-#include <vg/utility/mean.hpp>
+#include "./mean.hpp"
 
+/*
 #include <iterator>
 #include <numeric>
 #include <vector>
 #include <algorithm>
+*/
 
 namespace vg 
 {

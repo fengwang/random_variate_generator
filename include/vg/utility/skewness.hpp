@@ -18,14 +18,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef _SKEWNESS_HPP_INCLUDED_SDOASOSFDPOIHJ498YUASFKLJH439YAFLKHFASYUH498Y98YA
 #define _SKEWNESS_HPP_INCLUDED_SDOASOSFDPOIHJ498YUASFKLJH439YAFLKHFASYUH498Y98YA
 
-#include <vg/utility/mean.hpp>
-#include <vg/utility/variance.hpp>
+#include "./mean.hpp"
+#include "./variance.hpp"
 
+/*
 #include <iterator>
 #include <numeric>
 #include <vector>
 #include <algorithm>
 #include <cmath>
+*/
 
 namespace vg 
 {

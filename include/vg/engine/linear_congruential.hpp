@@ -1,12 +1,14 @@
 #ifndef _LINEAR_CONGRUENTIAL_HPP_INCLUDED_3UHSFKJHNSAIFUNVCJMNZKJHDEIUHE3IUHSIKUJHEE8
 #define _LINEAR_CONGRUENTIAL_HPP_INCLUDED_3UHSFKJHNSAIFUNVCJMNZKJHDEIUHE3IUHSIKUJHEE8
 
-#include <vg/engine/default_seed.hpp>
+#include "./default_seed.hpp"
 
+/*
 #include <cstddef>
 #include <cstdint>
 #include <mutex>
 #include <limits>
+*/
 
 namespace vg
 {
@@ -22,13 +24,10 @@ namespace vg
             static const value_type         a_ = 6364136223846793005ULL;
             static const value_type         c_ = 1442695040888963407ULL;
             value_type                      x_;
-            mutable std::mutex              mtx;
 
         public:
             linear_congruential( const seed_type s = 0 ) noexcept
             {
-                std::lock_guard<std::mutex> l( mtx );
-
                 x_ = s ? s : default_seed()();
             }
 
@@ -36,15 +35,12 @@ namespace vg
             {
                 if ( s )
                 {
-                    std::lock_guard<std::mutex> l( mtx );
                     x_ = s;
                 }
             }
 
             final_type operator()() noexcept
             {
-                std::lock_guard<std::mutex> l( mtx );
-
                 x_ *= a_;
                 x_ += c_;
                 const final_type ans = static_cast<final_type>( x_ ) / static_cast<final_type>( std::numeric_limits<value_type>::max() );

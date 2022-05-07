@@ -18,13 +18,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef _UTILITY_HPP_INCLUDED_SDOIFJ34O8UASFLKJ4OIUJAFLDSKJASFKLMNCVOILJASDFO8UI
 #define _UTILITY_HPP_INCLUDED_SDOIFJ34O8UASFLKJ4OIUJAFLDSKJASFKLMNCVOILJASDFO8UI
 
-#include <vg/utility/kurtosis.hpp>
-#include <vg/utility/mean.hpp>
-#include <vg/utility/proxy.hpp>
-#include <vg/utility/singleton.hpp>
-#include <vg/utility/skewness.hpp>
-#include <vg/utility/variance.hpp>
+#include "./utility/kurtosis.hpp"
+#include "./utility/mean.hpp"
+#include "./utility/proxy.hpp"
+#include "./utility/singleton.hpp"
+#include "./utility/skewness.hpp"
+#include "./utility/variance.hpp"
 
 #endif//_UTILITY_HPP_INCLUDED_SDOIFJ34O8UASFLKJ4OIUJAFLDSKJASFKLMNCVOILJASDFO8UI
-
-

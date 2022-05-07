@@ -29,9 +29,11 @@ called a Bernoulli experiment or Bernoulli trial.
 #include <vg/distribution/beta.hpp>
 #include <vg/utility/singleton.hpp>
 
+/*
 #include <cassert>
 #include <cstddef>
 #include <cmath>
+*/
 
 
 namespace vg

@@ -1,13 +1,15 @@
 #ifndef _MITCHELL_MOORE_HPP_INCLUDED_3UHSFKJHNSAIFUNVCJMNZKJHDEIUHE3IUHSIKUJHEE8
 #define _MITCHELL_MOORE_HPP_INCLUDED_3UHSFKJHNSAIFUNVCJMNZKJHDEIUHE3IUHSIKUJHEE8
 
-#include <vg/engine/default_seed.hpp>
+#include "./default_seed.hpp"
 
+/*
 #include <cstddef>
 #include <cstdint>
 #include <algorithm>
 #include <mutex>
 #include <limits>
+*/
 
 namespace vg
 {
@@ -25,13 +27,10 @@ namespace vg
             value_type                      a_[56];
             size_type                       next_;
             size_type                       next_p_;
-            mutable std::mutex              mtx;
 
         public:
             mitchell_moore( const seed_type s = 0 ) noexcept : next_( 0 ), next_p_( 31 )
             {
-                std::lock_guard<std::mutex> l( mtx );
-
                 std::fill( a_, a_+56, value_type(0) ); //just to kill valgrind uninitialization error report
                 initial( s );
             }
@@ -40,14 +39,11 @@ namespace vg
             {
                 if ( 0 == s ) return;
 
-                std::lock_guard<std::mutex> l( mtx );
                 initial( s );
             }
 
             final_type operator()() noexcept
             {
-                std::lock_guard<std::mutex> l( mtx );
-
                 if ( ++next_ == 56 )
                     { next_ = 1; }
 

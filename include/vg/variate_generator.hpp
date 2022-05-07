@@ -18,11 +18,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef _VARIATE_GENERATOR_HPP_INCLUDED_IUH398UHFKJH29U8HSFIOUHE98UHDUHE98UH23UJ
 #define _VARIATE_GENERATOR_HPP_INCLUDED_IUH398UHFKJH29U8HSFIOUHE98UHDUHE98UH23UJ
 
-#include <vg/distribution.hpp>
-#include <vg/engine.hpp>
-
+#include "./distribution.hpp"
+#include "./engine.hpp"
+/*
 #include <cstddef>
 #include <iterator>
+*/
 
 namespace vg
 {
@@ -64,37 +65,6 @@ namespace vg
         }
     }; // struct variate_generator
 
-#if 0
-    template < class Return_Type, template<class, class> class Distribution, class Engine, typename... Args >
-    variate_generator<Return_Type, Distribution, Engine>
-    make_variate_generator( Args ... args ) noexcept
-    {
-        return variate_generator<Return_Type, Distribution, Engine>{ args... };
-    }
-
-    template < class Return_Type, template<class, class> class Distribution,  typename... Args >
-    variate_generator<Return_Type, Distribution, mitchell_moore>
-    make_variate_generator( Args ... args ) noexcept
-    {
-        return variate_generator<Return_Type, Distribution, mitchell_moore>{ args... };
-    }
-
-    template < class Return_Type, typename... Args >
-    variate_generator<Return_Type, uniform, mitchell_moore>
-    make_variate_generator( Args ... args ) noexcept
-    {
-        return variate_generator<Return_Type, uniform, mitchell_moore>{ args... };
-    }
-
-    template < typename... Args >
-    variate_generator<double, uniform, mitchell_moore>
-    make_variate_generator( Args ... args ) noexcept
-    {
-        return variate_generator<double, uniform, mitchell_moore>{ args... };
-    }
-#endif
-
 }//namespace vg
 
 #endif//_VARIATE_GENERATOR_HPP_INCLUDED_IUH398UHFKJH29U8HSFIOUHE98UHDUHE98UH23UJ
-

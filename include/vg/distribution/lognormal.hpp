@@ -18,17 +18,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef _LOGNORMAL_HPP_INCLUDED_SODIJASOI84U98AU7FSKLJ349P8AFSLIU3498UAFSLIU34OI
 #define _LOGNORMAL_HPP_INCLUDED_SODIJASOI84U98AU7FSKLJ349P8AFSLIU3498UAFSLIU34OI
 
+/*
 #include <cmath>
 #include <cstddef>
 #include <limits>
 #include <cassert>
+*/
 
 namespace vg
 {
 
-    template <   typename Return_Type,
-                 typename Engine
-             >
+    template <   typename Return_Type, typename Engine > 
     struct lognormal
     {
             typedef typename Engine::final_type     final_type;

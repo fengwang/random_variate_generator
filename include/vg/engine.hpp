@@ -1,10 +1,10 @@
 #ifndef _ENGINE_HPP_INCLUDED_49388943OIUSDFH98U3498UHAF98UH3KUHJNFKNVCSUIODNHJFF
 #define _ENGINE_HPP_INCLUDED_49388943OIUSDFH98U3498UHAF98UH3KUHJNFKNVCSUIODNHJFF
 
-#include <vg/engine/linear_congruential.hpp>
-#include <vg/engine/mitchell_moore.hpp>
-#include <vg/engine/mt19937.hpp>
-#include <vg/engine/lagged_fibonacci.hpp>
+#include "./engine/linear_congruential.hpp"
+#include "./engine/mitchell_moore.hpp"
+#include "./engine/mt19937.hpp"
+#include "./engine/lagged_fibonacci.hpp"
 
 /*
     //TODO
@@ -20,11 +20,10 @@
     *Mersenne twister
     Multiply-with-carry
     Naor-Reingold Pseudorandom Function
-    Park¨CMiller random number generator
+    Parkï¿½CMiller random number generator
     RC4 PRGA
     Well Equidistributed Long-period Linear
     Xorshift
     Rule 30
 */
 #endif//_ENGINE_HPP_INCLUDED_49388943OIUSDFH98U3498UHAF98UH3KUHJNFKNVCSUIODNHJFF
-

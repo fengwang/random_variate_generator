@@ -18,7 +18,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef _DIGAMMA_HPP_INCLUDED_SLKJSDLKJSDFKLJCM3USDKJH498YSDKJHSIUHEKJHSIUHSAKFJHASKJH4IUHSFKDJH4EIUHSKJHSKJHASKJHLASDFKJHFDSDF
 #define _DIGAMMA_HPP_INCLUDED_SLKJSDLKJSDFKLJCM3USDKJH498YSDKJHSIUHEKJHSIUHSAKFJHASKJH4IUHSFKDJH4EIUHSKJHSKJHASKJHLASDFKJHFDSDF 
 
-#include <cmath>
+//#include <cmath>
 
 namespace vg
 {
@@ -26,7 +26,7 @@ namespace vg
     namespace special_function
     {
         //Abramowitz, M. and Stegun, I. A. (Eds.). "psi (Digamma) Function." 
-        //¡ì6.3 in Handbook of Mathematical Functions with Formulas, Graphs, and Mathematical Tables, 9th printing. 
+        //ï¿½ï¿½6.3 in Handbook of Mathematical Functions with Formulas, Graphs, and Mathematical Tables, 9th printing. 
         //New York: Dover, pp. 258-259, 1972.
         struct digamma
         {

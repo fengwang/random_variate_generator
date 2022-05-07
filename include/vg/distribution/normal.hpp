@@ -20,7 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <vg/utility/singleton.hpp>
 
-#include <cmath>
+//#include <cmath>
 
 namespace vg
 {
@@ -81,7 +81,7 @@ namespace vg
 
             //G. E. P. Box and Mervin E. Muller,
             //A Note on the Generation of Random Normal Deviates,
-            //The Annals of Mathematical Statistics (1958), Vol. 29, No. 2 pp. 610¨C611
+            //The Annals of Mathematical Statistics (1958), Vol. 29, No. 2 pp. 610ï¿½C611
             return_type
             box_muller_method() const
             {

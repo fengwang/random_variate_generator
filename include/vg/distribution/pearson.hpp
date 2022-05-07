@@ -25,9 +25,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <vg/distribution/beta.hpp>
 #include <vg/utility/singleton.hpp>
 
+/*
 #include <cassert>
 #include <cstddef>
 #include <cmath>
+*/
 
 
 namespace vg
@@ -83,7 +85,7 @@ namespace vg
             return_type
             direct_impl(   const size_type N, const final_type A, const final_type B, const final_type C, const final_type D ) const
             {
-                //Luc Devroye, ¡°Non-Uniform Random Variate Generation¡±, (Springer-
+                //Luc Devroye, ï¿½ï¿½Non-Uniform Random Variate Generationï¿½ï¿½, (Springer-
                 //Verlag, New York, 1986), Chapter IX, page 480.
                 //http://cgm.cs.mcgill.ca/~luc/rnbookindex.html
                 typedef std::function<final_type(final_type, final_type, final_type, final_type)> function_type;

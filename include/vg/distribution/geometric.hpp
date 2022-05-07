@@ -20,7 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <vg/utility/singleton.hpp>
 
-#include <cassert>
+//#include <cassert>
 
 namespace vg
 {

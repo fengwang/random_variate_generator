@@ -8,15 +8,16 @@
 #include <vg/utility.hpp>
 
 template<typename Input_Iterator>
-void test( 
-           Input_Iterator first, Input_Iterator last, 
-           const std::string& name, 
+void test(
+           Input_Iterator first, Input_Iterator last,
+           const std::string& name,
            const typename std::iterator_traits<Input_Iterator>::value_type _mean,
            const typename std::iterator_traits<Input_Iterator>::value_type _variance,
            const typename std::iterator_traits<Input_Iterator>::value_type _skewness,
            const typename std::iterator_traits<Input_Iterator>::value_type _kurtosis = 0
          )
 {
+    (void) _kurtosis;
     std::cout << "\nTesting ["<< name << "] distribution with n = " << std::distance( first, last ) << "\n";
     std::cout << "|        |\t\tTheory\t\t|\t\tPseudo\t\t|\n";
     std::cout.precision(15);

@@ -21,8 +21,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <vg/distribution/exponential.hpp>
 #include <vg/utility/singleton.hpp>
 
-#include <cassert>
-#include <cmath>
+//#include <cassert>
+//#include <cmath>
 
 namespace vg
 {

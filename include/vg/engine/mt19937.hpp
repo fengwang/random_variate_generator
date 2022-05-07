@@ -1,12 +1,14 @@
 #ifndef _MT19937_HPP_INCLUDED28903RUAFSLDKJASFDOIJ4890UAFOPSI1209AFLKJ34OIUFJKDS
 #define _MT19937_HPP_INCLUDED28903RUAFSLDKJASFDOIJ4890UAFOPSI1209AFLKJ34OIUFJKDS
 
-#include <vg/engine/default_seed.hpp>
+#include "./default_seed.hpp"
 
+/*
 #include <cstddef>
 #include <cstdint>
 #include <limits>
 #include <mutex>
+*/
 
 namespace vg
 {
@@ -23,21 +25,16 @@ namespace vg
             value_type                      mt[312];
             value_type                      mag01[2];
             size_type                       mti;
-            mutable std::mutex              mtx;
 
         public:
             mt19937( const seed_type s = 0 ) noexcept
             {
-                std::lock_guard<std::mutex> l( mtx );
-
                 init( s );
             }
 
             void reset_seed( const seed_type s = 0 ) noexcept
             {
                 if ( 0 == s ) return;
-
-                std::lock_guard<std::mutex> l( mtx );
                 init( s );
             }
 
@@ -58,8 +55,6 @@ namespace vg
         public:
             final_type operator()() noexcept
             {
-                std::lock_guard<std::mutex> l( mtx );
-
                 value_type x;
 
                 if ( mti > 311 )

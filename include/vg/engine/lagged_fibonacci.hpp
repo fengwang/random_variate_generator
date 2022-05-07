@@ -1,12 +1,14 @@
 #ifndef RGODGIABHAUJSROAIUONLWGKCBNMYJRDWATDIGDNRDEPJQUVDCESQINNINICYTWSHRFDHXFLQ
 #define RGODGIABHAUJSROAIUONLWGKCBNMYJRDWATDIGDNRDEPJQUVDCESQINNINICYTWSHRFDHXFLQ
 
-#include <vg/engine/default_seed.hpp>
+#include "./default_seed.hpp"
 
+/*
 #include <cstddef>
 #include <cstdint>
 #include <limits>
 #include <mutex>
+*/
 
 namespace vg
 {
@@ -23,21 +25,16 @@ namespace vg
         private:
             value_type                      data[44497];
             size_type                       mti;
-            mutable std::mutex              mtx;
 
         public:
             lagged_fibonacci( const seed_type s = 0 ) noexcept
             {
-                std::lock_guard<std::mutex> l( mtx );
-
                 init( s );
             }
 
             void reset_seed( const seed_type s = 0 ) noexcept
             {
                 if ( 0 == s ) return;
-
-                std::lock_guard<std::mutex> l( mtx );
                 init( s );
             }
 
@@ -68,8 +65,6 @@ namespace vg
         public:
             final_type operator()() noexcept
             {
-                std::lock_guard<std::mutex> l( mtx );
-
                 if ( mti > 21034 ) refill();
 
                 size_type const mtj = mti + 23463;

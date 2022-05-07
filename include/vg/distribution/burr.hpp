@@ -21,9 +21,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <vg/numeric/newton_raphson.hpp>
 #include <vg/utility/singleton.hpp>
 
+/*
 #include <functional>
 #include <cmath>
 #include <cassert>
+*/
 
 namespace vg
 {
@@ -81,7 +83,7 @@ namespace vg
                 
                 // Note: c++0x support required here
                 //                                  u           c            k           r
-                // Burr, I. W. (1942). "Cumulative frequency functions". Annals of Mathematical Statistics 13 (2): 215¨C232. doi:10.1214/aoms/1177731607. JSTOR 2235756.
+                // Burr, I. W. (1942). "Cumulative frequency functions". Annals of Mathematical Statistics 13 (2): 215ï¿½C232. doi:10.1214/aoms/1177731607. JSTOR 2235756.
                 const std::function< final_type( final_type, final_type, final_type, final_type ) > inverse_function[12] = 
                 {
                     // F1(x) = x

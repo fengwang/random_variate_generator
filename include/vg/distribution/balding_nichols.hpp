@@ -18,9 +18,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef _BALDING_NICHOLS_HPP_INCLUDED_SDFPONA34P98ASLFKDJH43U89HASDFKMNBSFDALKHF 
 #define _BALDING_NICHOLS_HPP_INCLUDED_SDFPONA34P98ASLFKDJH43U89HASDFKMNBSFDALKHF 
 
-#include <vg/distribution/beta.hpp>
+#include "./beta.hpp"
 
-#include <cassert>
+//#include <cassert>
 
 namespace vg
 {
@@ -44,7 +44,7 @@ namespace vg
                 assert( f < final_type{1} );
                 assert( p > final_type{0} );
                 assert( p < final_type{1} );
-                 e_.reset_seed( sd );
+                e_.reset_seed( sd );
             }
 
             /*

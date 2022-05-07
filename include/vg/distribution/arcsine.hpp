@@ -1,10 +1,10 @@
 #ifndef _ARCSINE_HPP_INCLUEDE_WHAOUT98U49387FSDIUJ4983UASDKLJHSJAFDHAJDFHKAJSDFHKASJDFHKJASDFHKASJFDHIU4YKJSDFHIUHFKJHSSU
 #define _ARCSINE_HPP_INCLUEDE_WHAOUT98U49387FSDIUJ4983UASDKLJHSJAFDHAJDFHKAJSDFHKASJDFHKJASDFHKASJFDHIU4YKJSDFHIUHFKJHSSU
 
-#include <vg/utility/singleton.hpp>
-#include <vg/distribution/beta.hpp>
+#include "../utility/singleton.hpp"
+#include "./beta.hpp"
 
-#include <cmath>
+//#include <cmath>
 
 namespace vg
 {
@@ -39,7 +39,7 @@ namespace vg
                    *|  Mean  |      0.5          |  0.636579    |
                    *|Variance|     0.125         |  0.0947444   |
                    *|Skewness|       0           |  -0.496869   |
-             (2) using beta method:
+            (2) using beta method:
                     Testing arcsine engine with n = 10000000
                     |        | Theoretical Value |  Generated value |
                     |  Mean  |      0.5          |  0.50005     |

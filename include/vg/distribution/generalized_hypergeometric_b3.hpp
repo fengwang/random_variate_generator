@@ -23,16 +23,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <vg/distribution/poisson.hpp>
 #include <vg/utility/singleton.hpp>
 
+/*
 #include <cassert>
 #include <cstddef>
 #include <cmath>
+*/
 
 namespace vg
 {
 
     template < typename Return_Type, typename Engine >
-    struct generalized_hypergeometric_b3 : private proxy<gamma< typename Engine::final_type, Engine >, 1>,
-                                           private proxy<poisson< typename Engine::final_type, Engine >, 2>
+    struct generalized_hypergeometric_b3 : private proxy<gamma< typename Engine::final_type, Engine >, 1>, private proxy<poisson< typename Engine::final_type, Engine >, 2>
     {
         typedef proxy<gamma< typename Engine::final_type, Engine >, 1>       gamma_type;
         typedef proxy<poisson< typename Engine::final_type, Engine >, 2>     poisson_type;

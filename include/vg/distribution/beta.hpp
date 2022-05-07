@@ -21,8 +21,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <vg/distribution/gamma.hpp>
 #include <vg/utility/singleton.hpp>
 
+/*
 #include <cmath>
 #include <cassert>
+*/
 
 namespace vg
 {

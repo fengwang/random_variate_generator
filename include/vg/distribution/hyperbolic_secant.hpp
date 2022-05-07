@@ -20,7 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include <vg/utility/singleton.hpp>
 
-#include <cmath>
+//#include <cmath>
 
 namespace vg
 {

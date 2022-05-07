@@ -21,9 +21,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <vg/distribution/negative_binomial.hpp>
 #include <vg/utility/singleton.hpp>
 
+/*
 #include <cassert>
 #include <cstddef>
 #include <cmath>
+*/
 
 namespace vg
 {

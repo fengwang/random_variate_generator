@@ -22,17 +22,16 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <vg/distribution/binomial.hpp>
 #include <vg/utility.hpp>
 
+/*
 #include <cmath>
 #include <cassert>
+*/
 
 namespace vg
 {
 
-    template <   typename Return_Type,
-                 typename Engine
-             >
-    struct beta_binomial: private proxy<beta<typename Engine::final_type, Engine> >,
-                          private proxy<binomial<Return_Type, Engine> >  
+    template < typename Return_Type, typename Engine >
+    struct beta_binomial: private proxy<beta<typename Engine::final_type, Engine> >, private proxy<binomial<Return_Type, Engine> >  
     {
             typedef proxy<beta<typename Engine::final_type, Engine> >   beta_type;
             typedef proxy<binomial<Return_Type, Engine> >               binomial_type;
@@ -57,7 +56,7 @@ namespace vg
                 assert( n > 0 );
                 assert( a > 0 );
                 assert( b > 0 );
-                 e_.reset_seed( sd );
+                e_.reset_seed( sd );
             }
 
             /*

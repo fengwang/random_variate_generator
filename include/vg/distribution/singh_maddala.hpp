@@ -22,9 +22,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <vg/distribution/burr.hpp>
 #include <vg/utility/singleton.hpp>
 
+/*
 #include <functional>
 #include <cmath>
 #include <cassert>
+*/
 
 namespace vg
 {

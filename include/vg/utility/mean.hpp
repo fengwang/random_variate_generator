@@ -18,8 +18,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef _MEAN_HPP_INCLUDED_SDOIFJASPOIHJ4EPO9ASFOIUH3089YUAFSOIJHDKSVJNVBIOFAH98
 #define _MEAN_HPP_INCLUDED_SDOIFJASPOIHJ4EPO9ASFOIUH3089YUAFSOIJHDKSVJNVBIOFAH98
 
+/*
 #include <iterator>
 #include <numeric>
+*/
 
 namespace vg 
 {

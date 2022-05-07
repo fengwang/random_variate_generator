@@ -18,12 +18,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #ifndef _KURTOSIS_HPP_INCLUDED_SDOASFO9Y839Y8AFUHFASDO9Y8WE9Y8AFSIOUH4398YAFKLJB
 #define _KURTOSIS_HPP_INCLUDED_SDOASFO9Y839Y8AFUHFASDO9Y8WE9Y8AFSIOUH4398YAFKLJB
 
-#include <vg/utility/mean.hpp>
+#include "./mean.hpp"
 
+/*
 #include <iterator>
 #include <numeric>
 #include <vector>
 #include <algorithm>
+*/
 
 namespace vg 
 {

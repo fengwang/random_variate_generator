@@ -21,7 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <vg/distribution/bernoulli.hpp>
 #include <vg/utility/singleton.hpp>
 
-#include <cassert>
+//#include <cassert>
 
 namespace vg
 {
@@ -43,11 +43,11 @@ namespace vg
             }
 
             /*
-                 Testing [bernoulli] distribution with n = 10000000
-                 |        |              Theory          |               Pseudo          |
-                 |  Mean  |      0.00000000000000        |       0.000145200000000000    |
-                 |Variance|      1.00000000000000        |       0.999999978937111       |
-                 |Skewness|      0.00000000000000        |       -0.000290400003026988   |
+                Testing [bernoulli] distribution with n = 10000000
+                |        |              Theory          |               Pseudo          |
+                |  Mean  |      0.00000000000000        |       0.000145200000000000    |
+                |Variance|      1.00000000000000        |       0.999999978937111       |
+                |Skewness|      0.00000000000000        |       -0.000290400003026988   |
              */
 
             return_type operator()() const 

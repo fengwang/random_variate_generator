@@ -22,9 +22,11 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <vg/special_function/digamma.hpp>
 #include <vg/utility/singleton.hpp>
 
+/*
 #include <cmath>
 #include <algorithm>
 #include <cassert>
+*/
 
 namespace vg
 {

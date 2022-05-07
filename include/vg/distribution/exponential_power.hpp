@@ -23,18 +23,14 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <vg/distribution/normal.hpp>
 #include <vg/utility.hpp>
 
-#include <cmath>
-#include <cassert>
+//#include <cmath>
+//#include <cassert>
 
 namespace vg
 {
 
     template < typename Return_Type, typename Engine >
-    struct exponential_power :
-        private gamma<Return_Type, Engine>,
-        private laplace<Return_Type, Engine>,
-        private proxy<normal<Return_Type, Engine> >
-
+    struct exponential_power : private gamma<Return_Type, Engine>, private laplace<Return_Type, Engine>, private proxy<normal<Return_Type, Engine> >
     {
             typedef gamma<Return_Type, Engine>                  gamm_type;
             typedef laplace<Return_Type, Engine>                laplace_type;

@@ -26,8 +26,8 @@ The Cauchy distribution, also called the Lorentzian distribution or Lorentz dist
 
 #include <vg/utility/singleton.hpp>
 
-#include <cmath>
-#include <cassert>
+//#include <cmath>
+//#include <cassert>
 
 namespace vg
 {

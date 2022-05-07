@@ -23,9 +23,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include <vg/utility/singleton.hpp>
 #include <vg/utility/proxy.hpp>
 
-#include <cmath>
-#include <algorithm>
-#include <cassert>
+//#include <cmath>
+//#include <algorithm>
+//#include <cassert>
 
 namespace vg
 {
