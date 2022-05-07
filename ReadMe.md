@@ -1,30 +1,7 @@
 # Non-Uniform Random Variate Generator
 
+This is a non-uniform random variate generator library, in c++20, single-file and header-only.
 
-## Index
-
-* [index](#index)
-* [A Very Short Introduction](#a-very-short-introduction)
-* [A Quick Start](#a-quick-start)
-* [Reference](#reference)
-    + [Variate Generator](#variate-generator)
-    + [Distributions](#distributions)
-        - [Arcsine Distribution](#arcsine-distribution)
-        - [Balding–Nichols Distirubtion](#balding–nichols-distirubtion)
-        - [Bernoulli Distribution](#bernoulli-distribution)
-        - [Beta Distribution](#beta-distribution)
-        - [Beta Binomial Distribution](#beta-binomial-distribution)
-        - Beta Pascal Distribution
-        - [Binomial Distribution](#binomial-distribution)
-        - [Burr Distribution](#burr-distribution)
-
-## A Very Short Introduction
-
-This library
-
-+ is a C++ library
-+ is a header-only library
-+ contains 62 kinds of non-uniform random variate generator
 
 
 ## A Quick Start
