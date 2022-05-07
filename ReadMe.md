@@ -1,13 +1,86 @@
 # Non-Uniform Random Variate Generator
 
-This is a non-uniform random variate generator library, single-file and header-only in C++.
+This is a non-uniform random variate generator, a single-file header-only library written in C++.
 
+
+--------
+
++ [Start](#a-quick-start)
++ [Usage](#basic-usage)
++ [Examples](#examples)
+    - [arcsin distribution](#arcsin-distribution)
+    - [balding_nichols distribution](#balding_nichols-distribution)
+    - [bernoulli distribution](#bernoulli-distribution)
+    - [beta distribution](#beta-distribution)
+    - [beta_binomial distribution](#beta_binomial-distribution)
+    - [beta_pascal distribution](#beta_pascal-distribution)
+    - [beta_pascal distribution](#beta_pascal-distribution)
+    - [binomial distribution](#binomial-distribution)
+    - [burr distribution](#burr-distribution)
+    - [cauchy distribution](#cauchy-distribution)
+    - [chi_square distribution](#chi_square-distribution)
+    - [digamma distribution](#digamma-distribution)
+    - [erlang distribution](#erlang-distribution)
+    - [exponential distribution](#exponential-distribution)
+    - [exponential_power distribution](#exponential_power-distribution)
+    - [extreme_value distribution](#extreme_value-distribution)
+    - [f distribution](#f-distribution)
+    - [factorial distribution](#factorial-distribution)
+    - [gamma distribution](#gamma-distribution)
+    - [gaussian distribution](#gaussian-distribution)
+    - [gaussian_tail distribution](#gaussian_tail-distribution)
+    - [generalized_hypergeometric_b3 distribution](#generalized_hypergeometric_b3-distribution)
+    - [generalized_waring distribution](#generalized_waring-distribution)
+    - [geometric distribution](#geometric-distribution)
+    - [grassia distribution](#grassia-distribution)
+    - [gumbel_1 distribution](#gumbel_1-distribution)
+    - [gumbel_2 distribution](#gumbel_2-distribution)
+    - [hyperbolic_secant distribution](#hyperbolic_secant-distribution)
+    - [hypergeometric distribution](#hypergeometric-distribution)
+    - [inverse_gaussian distribution](#inverse_gaussian-distribution)
+    - [inverse_polya_eggenberger distribution](#inverse_polya_eggenberger-distribution)
+    - [lambda distribution](#lambda-distribution)
+    - [laplace distribution](#laplace-distribution)
+    - [levy distribution](#levy-distribution)
+    - [logarithmic distribution](#logarithmic-distribution)
+    - [logistic distribution](#logistic-distribution)
+    - [lognormal distribution](#lognormal-distribution)
+    - [mizutani distribution](#mizutani-distribution)
+    - [negative_binomial distribution](#negative_binomial-distribution)
+    - [negative_binomial_beta distribution](#negative_binomial_beta-distribution)
+    - [normal distribution](#normal-distribution)
+    - [pareto distribution](#pareto-distribution)
+    - [pascal distribution](#pascal-distribution)
+    - [pearson distribution](#pearson-distribution)
+    - [planck distribution](#planck-distribution)
+    - [poisson distribution](#poisson-distribution)
+    - [polya distribution](#polya-distribution)
+    - [polya_aeppli distribution](#polya_aeppli-distribution)
+    - [rademacher distribution](#rademacher-distribution)
+    - [rayleigh distribution](#rayleigh-distribution)
+    - [rayleigh_tail distribution](#rayleigh_tail-distribution)
+    - [singh_maddala distribution](#singh_maddala-distribution)
+    - [t distribution](#t-distribution)
+    - [teichroew distribution](#teichroew-distribution)
+    - [triangular distribution](#triangular-distribution)
+    - [trigamma distribution](#trigamma-distribution)
+    - [uniform distribution](#uniform-distribution)
+    - [von_mises distribution](#von_mises-distribution)
+    - [wald distribution](#wald-distribution)
+    - [waring distribution](#waring-distribution)
+    - [weibull distribution](#weibull-distribution)
+    - [yule distribution](#yule-distribution)
+    - [zipf distribution](#zipf-distribution)
++ [License](#license)
+
+--------
 
 
 ## A Quick Start
 
 Quick start source code(1):
 
+```cpp
     //test.cc
 	#include <vg.hpp> // just copy this file  from include/vg.hpp
 	#include <cmath>
@@ -35,13 +108,17 @@ Quick start source code(1):
 
     	return 0;
 	}
+```
 
 command to compile:
 
+```bash
     $g++ -o ./gaussian_test ./test.cc -std=c++14 -O2 -Iinclude(PATH)
+```
 
 Output:
 
+```bash
     -16 *
     -13 ***
     -12 ***
@@ -72,10 +149,12 @@ Output:
     14  *
     15  *
     16  *
+```
 
 
 Quick start source code(2):
 
+```cpp
     //make_passwd.cc
     #include <vg.hpp>
 	#include <iostream>
@@ -96,622 +175,1556 @@ Quick start source code(2):
 
     	return 0;
 	}
+```
 
 compile:
 
+```bash
     g++ -o make_passwd make_passwd.cc -std=c++14 -O2 -I(PATH)
+```
 
 Output:
 
     5Tq5kxmmnULP3qh1qa5pT9bOYzJ
 
-##Reference
 
-#### variate_generator
+## Basic usage
 
-The class template
+First create a generator
+```cpp
+vg::variate_generator<double, vg::exponential, vg::mt19937> gen{ 1.0 };
+```
+in which
+- `double` is the data type we want to generate,
+- `vg::exponentional` is the random distribution,
+- `vg::mt19937` is the random number engine, and
+- `1.0` is the parameter possed to the random distribution `vg::exponential`.
 
-    vg::variate_generator
+With `gen`, we use it as a generator/functor to generator random variates
 
+```cpp
+for ( int i = 0; i < 10; ++i )
+    std::cout << gen();
+```
 
-is defined in  __'include/vg/variate_generator.hpp'__
 
-    template < class Return_Type = double, template<class, class> class Distribution = uniform, class Engine = mitchell_moore >
-    struct variate_generator;
 
-##### Template Parameters
+## Examples
 
-***
 
->__Return_Type__
->> the variate __type__ this generator will generate, default is _double_
+### arcsin distribution
 
-***
+```cpp
+#include <vg.hpp>
+#include <vector>
+#include <iostream>
 
->__Distribution__
->> the variate __kind__ this generator will generate, default is _uniform_;
+int main()
+{
+    unsigned long const n = 1000000;
+    std::vector<double> x(n);
+    vg::variate_generator<double, vg::arcsin, vg::mt19937> gen{  };
+    for ( unsigned long idx = 0; idx < n; ++idx ) x[idx] = gen();
 
-***
+    std::cout << "Testing arcsin distribution: with " << n << " examples.\n" ;
+    std::cout << "Mean:	" << vg::mean( x.begin(), x.end() ) << "\n";
+    std::cout << "Variance:	" << vg::variance( x.begin(), x.end() ) << "\n";
+    std::cout << "Skewness:	" << vg::skewness( x.begin(), x.end() ) << "\n";
 
->__Engine__
->> the pseudo-random number generator engine generating _unsigned long long_ interger employed by the generator, default is _vg::mitchell\_moore_, can also be one of _vg::lagged\_fibonacci_, _vg::linear\_congruential_ and _vg::mt19937_.
+    return 0;
+}
+```
 
-***
 
-##### Member Types
-The following alias defined as member types of class _variate\_generator_:
+### balding_nichols distribution
 
-***
->__distribution\_type__
->> Distribution\<Return_Type, Engine\>
+```cpp
+#include <vg.hpp>
+#include <vector>
+#include <iostream>
 
-***
+int main()
+{
+    unsigned long const n = 1000000;
+    std::vector<double> x(n);
+    vg::variate_generator<double, vg::balding_nichols, vg::mt19937> gen{ 0.5, 0.5 };
+    for ( unsigned long idx = 0; idx < n; ++idx ) x[idx] = gen();
 
->__seed\_type__
->> typename distribution_type::seed_type
+    std::cout << "Testing arcsin distribution: with " << n << " examples.\n" ;
+    std::cout << "Mean:	" << vg::mean( x.begin(), x.end() ) << "\n";
+    std::cout << "Variance:	" << vg::variance( x.begin(), x.end() ) << "\n";
+    std::cout << "Skewness:	" << vg::skewness( x.begin(), x.end() ) << "\n";
 
-***
+    return 0;
+}
+```
 
->__return\_type__
->> typename distribution_type::return_type
 
-***
+### bernoulli distribution
 
->__size\_type__
->> std::size_t
+```cpp
+#include <vg.hpp>
+#include <vector>
+#include <iostream>
 
-***
+int main()
+{
+    unsigned long const n = 1000000;
+    std::vector<double> x(n);
+    vg::variate_generator<double, vg::bernoulli, vg::mt19937> gen{ 0.5 };
+    for ( unsigned long idx = 0; idx < n; ++idx ) x[idx] = gen();
 
->__self\_type__
->> variate_generator
+    std::cout << "Testing arcsin distribution: with " << n << " examples.\n" ;
+    std::cout << "Mean:	" << vg::mean( x.begin(), x.end() ) << "\n";
+    std::cout << "Variance:	" << vg::variance( x.begin(), x.end() ) << "\n";
+    std::cout << "Skewness:	" << vg::skewness( x.begin(), x.end() ) << "\n";
 
-***
+    return 0;
+}
+```
 
-##### Member Functions
 
-* [Constructor](#variate_generator-constructor)  -- creating instance of a variate generator
-* [operator ()](#-variate_generator-example) -- generate a new variate of the specified distribution
+### beta distribution
 
-###### variate_generator:: __(constructor)__
+```cpp
+#include <vg.hpp>
+#include <vector>
+#include <iostream>
+
+int main()
+{
+    unsigned long const n = 1000000;
+    std::vector<double> x(n);
+    vg::variate_generator<double, vg::beta, vg::mt19937> gen{ 1.0, 1.0 };
+    for ( unsigned long idx = 0; idx < n; ++idx ) x[idx] = gen();
+
+    std::cout << "Testing arcsin distribution: with " << n << " examples.\n" ;
+    std::cout << "Mean:	" << vg::mean( x.begin(), x.end() ) << "\n";
+    std::cout << "Variance:	" << vg::variance( x.begin(), x.end() ) << "\n";
+    std::cout << "Skewness:	" << vg::skewness( x.begin(), x.end() ) << "\n";
+
+    return 0;
+}
+```
 
-    template< typename ... Args >
-    explicit variate_generator( Args ... args ) noexcept;
 
-Constructs a __variate\_generator__ with the specified given argument(s).  All the argument(s) will be passed to the constructor of the [__Distribution__ type](#distributions), which is specified in the [template parameters](#template-parameters).
+### beta_binomial distribution
+
+```cpp
+#include <vg.hpp>
+#include <vector>
+#include <iostream>
+
+int main()
+{
+    unsigned long const n = 1000000;
+    std::vector<double> x(n);
+    vg::variate_generator<double, vg::beta_binomial, vg::mt19937> gen{ 10.0, 1.0, 1.0 };
+    for ( unsigned long idx = 0; idx < n; ++idx ) x[idx] = gen();
+
+    std::cout << "Testing arcsin distribution: with " << n << " examples.\n" ;
+    std::cout << "Mean:	" << vg::mean( x.begin(), x.end() ) << "\n";
+    std::cout << "Variance:	" << vg::variance( x.begin(), x.end() ) << "\n";
+    std::cout << "Skewness:	" << vg::skewness( x.begin(), x.end() ) << "\n";
+
+    return 0;
+}
+```
 
-####### variate_generator example:
 
-    #include <vg.hpp>
-	#include <iostream>
+### beta_pascal distribution
+
+```cpp
+#include <vg.hpp>
+#include <vector>
+#include <iostream>
+
+int main()
+{
+    unsigned long const n = 1000000;
+    std::vector<double> x(n);
+    vg::variate_generator<double, vg::beta_pascal, vg::mt19937> gen{ 3.0, 3.0 };
+    for ( unsigned long idx = 0; idx < n; ++idx ) x[idx] = gen();
+
+    std::cout << "Testing arcsin distribution: with " << n << " examples.\n" ;
+    std::cout << "Mean:	" << vg::mean( x.begin(), x.end() ) << "\n";
+    std::cout << "Variance:	" << vg::variance( x.begin(), x.end() ) << "\n";
+    std::cout << "Skewness:	" << vg::skewness( x.begin(), x.end() ) << "\n";
+
+    return 0;
+}
+```
 
-	int main()
-	{
-    	unsigned long int N = 10;
-    	vg::variate_generator<int> vg( 0, 10 );
-    	std::cout << "Uniform in [0,10):\n";
-    	for ( unsigned long int index = 0; index != N; ++index )
-      	  	std::cout << vg() << "\t";
-    	std::cout << "\n";
 
-    	vg::variate_generator<unsigned int, vg::poisson> vg_possion( 3 );
-    	std::cout << "possion(3):\n";
-    	for ( unsigned long int index = 0; index != N; ++index )
-        	std::cout << vg_possion() << "\t";
-    	std::cout << "\n";
+### beta_pascal distribution
+
+```cpp
+#include <vg.hpp>
+#include <vector>
+#include <iostream>
+
+int main()
+{
+    unsigned long const n = 1000000;
+    std::vector<double> x(n);
+    vg::variate_generator<double, vg::beta_pascal, vg::mt19937> gen{ 3.0, 3.0 };
+    for ( unsigned long idx = 0; idx < n; ++idx ) x[idx] = gen();
+
+    std::cout << "Testing arcsin distribution: with " << n << " examples.\n" ;
+    std::cout << "Mean:	" << vg::mean( x.begin(), x.end() ) << "\n";
+    std::cout << "Variance:	" << vg::variance( x.begin(), x.end() ) << "\n";
+    std::cout << "Skewness:	" << vg::skewness( x.begin(), x.end() ) << "\n";
+
+    return 0;
+}
+```
 
-    	vg::variate_generator<unsigned int, vg::hypergeometric, vg::mt19937> vg_hypergeometric( 3, 4, 5 );
-    	std::cout << "hypergeometric(3, 4, 5):\n";
-    	for ( unsigned long int index = 0; index != N; ++index )
-        	std::cout << vg_hypergeometric() << "\t";
-    	std::cout << "\n";
 
-    	return 0;
-	}
+### binomial distribution
+
+```cpp
+#include <vg.hpp>
+#include <vector>
+#include <iostream>
+
+int main()
+{
+    unsigned long const n = 1000000;
+    std::vector<double> x(n);
+    vg::variate_generator<double, vg::binomial, vg::mt19937> gen{ 1, 0.5 };
+    for ( unsigned long idx = 0; idx < n; ++idx ) x[idx] = gen();
+
+    std::cout << "Testing arcsin distribution: with " << n << " examples.\n" ;
+    std::cout << "Mean:	" << vg::mean( x.begin(), x.end() ) << "\n";
+    std::cout << "Variance:	" << vg::variance( x.begin(), x.end() ) << "\n";
+    std::cout << "Skewness:	" << vg::skewness( x.begin(), x.end() ) << "\n";
+
+    return 0;
+}
+```
 
-Output:
 
-	Uniform in [0,10):
-	8	3	7	2	1	3	5	4	3	7
-	possion(3):
-	1	4	1	3	4	3	0	2	3	4
-	hypergeometric(3, 4, 5):
-	2	2	3	2	3	1	2	3	3	2
+### burr distribution
+
+```cpp
+#include <vg.hpp>
+#include <vector>
+#include <iostream>
+
+int main()
+{
+    unsigned long const n = 1000000;
+    std::vector<double> x(n);
+    vg::variate_generator<double, vg::burr, vg::mt19937> gen{ 1, 1.0, 1.0, 1.0 };
+    for ( unsigned long idx = 0; idx < n; ++idx ) x[idx] = gen();
+
+    std::cout << "Testing arcsin distribution: with " << n << " examples.\n" ;
+    std::cout << "Mean:	" << vg::mean( x.begin(), x.end() ) << "\n";
+    std::cout << "Variance:	" << vg::variance( x.begin(), x.end() ) << "\n";
+    std::cout << "Skewness:	" << vg::skewness( x.begin(), x.end() ) << "\n";
+
+    return 0;
+}
+```
 
 
-###### variate_generator:: __operator()__
+### cauchy distribution
+
+```cpp
+#include <vg.hpp>
+#include <vector>
+#include <iostream>
+
+int main()
+{
+    unsigned long const n = 1000000;
+    std::vector<double> x(n);
+    vg::variate_generator<double, vg::cauchy, vg::mt19937> gen{ 1.0 };
+    for ( unsigned long idx = 0; idx < n; ++idx ) x[idx] = gen();
+
+    std::cout << "Testing arcsin distribution: with " << n << " examples.\n" ;
+    std::cout << "Mean:	" << vg::mean( x.begin(), x.end() ) << "\n";
+    std::cout << "Variance:	" << vg::variance( x.begin(), x.end() ) << "\n";
+    std::cout << "Skewness:	" << vg::skewness( x.begin(), x.end() ) << "\n";
+
+    return 0;
+}
+```
 
-    return_type operator()() const noexcept;
 
-Returns a new random variate following the __Distribution__ parameters associated to this generator.
+### chi_square distribution
+
+```cpp
+#include <vg.hpp>
+#include <vector>
+#include <iostream>
+
+int main()
+{
+    unsigned long const n = 1000000;
+    std::vector<double> x(n);
+    vg::variate_generator<double, vg::chi_square, vg::mt19937> gen{ 10 };
+    for ( unsigned long idx = 0; idx < n; ++idx ) x[idx] = gen();
+
+    std::cout << "Testing arcsin distribution: with " << n << " examples.\n" ;
+    std::cout << "Mean:	" << vg::mean( x.begin(), x.end() ) << "\n";
+    std::cout << "Variance:	" << vg::variance( x.begin(), x.end() ) << "\n";
+    std::cout << "Skewness:	" << vg::skewness( x.begin(), x.end() ) << "\n";
+
+    return 0;
+}
+```
 
-Return Type:
 
-> A new random number.
->
-> return_type is a member type, defined as an alias of the first class [template parameter](#template-parameters) (__Return\_Type_).
->
+### digamma distribution
+
+```cpp
+#include <vg.hpp>
+#include <vector>
+#include <iostream>
+
+int main()
+{
+    unsigned long const n = 1000000;
+    std::vector<double> x(n);
+    vg::variate_generator<double, vg::digamma, vg::mt19937> gen{ 3, 3 };
+    for ( unsigned long idx = 0; idx < n; ++idx ) x[idx] = gen();
+
+    std::cout << "Testing arcsin distribution: with " << n << " examples.\n" ;
+    std::cout << "Mean:	" << vg::mean( x.begin(), x.end() ) << "\n";
+    std::cout << "Variance:	" << vg::variance( x.begin(), x.end() ) << "\n";
+    std::cout << "Skewness:	" << vg::skewness( x.begin(), x.end() ) << "\n";
+
+    return 0;
+}
+```
 
-###### variate_generator operator() example:
 
-see [variate_generator::constructor example](#-variate_generator-example) above.
+### erlang distribution
+
+```cpp
+#include <vg.hpp>
+#include <vector>
+#include <iostream>
+
+int main()
+{
+    unsigned long const n = 1000000;
+    std::vector<double> x(n);
+    vg::variate_generator<double, vg::erlang, vg::mt19937> gen{ 1.0, 10.0 };
+    for ( unsigned long idx = 0; idx < n; ++idx ) x[idx] = gen();
+
+    std::cout << "Testing arcsin distribution: with " << n << " examples.\n" ;
+    std::cout << "Mean:	" << vg::mean( x.begin(), x.end() ) << "\n";
+    std::cout << "Variance:	" << vg::variance( x.begin(), x.end() ) << "\n";
+    std::cout << "Skewness:	" << vg::skewness( x.begin(), x.end() ) << "\n";
+
+    return 0;
+}
+```
 
-### Distributions
 
-There should be some indeces here. TODO:
+### exponential distribution
+
+```cpp
+#include <vg.hpp>
+#include <vector>
+#include <iostream>
+
+int main()
+{
+    unsigned long const n = 1000000;
+    std::vector<double> x(n);
+    vg::variate_generator<double, vg::exponential, vg::mt19937> gen{ 1.0 };
+    for ( unsigned long idx = 0; idx < n; ++idx ) x[idx] = gen();
+
+    std::cout << "Testing arcsin distribution: with " << n << " examples.\n" ;
+    std::cout << "Mean:	" << vg::mean( x.begin(), x.end() ) << "\n";
+    std::cout << "Variance:	" << vg::variance( x.begin(), x.end() ) << "\n";
+    std::cout << "Skewness:	" << vg::skewness( x.begin(), x.end() ) << "\n";
+
+    return 0;
+}
+```
 
-#### Arcsine Distribution
 
-Produces random variates that are following [arcsine distribution](http://en.wikipedia.org/wiki/Arcsine_distribution).
+### exponential_power distribution
+
+```cpp
+#include <vg.hpp>
+#include <vector>
+#include <iostream>
+
+int main()
+{
+    unsigned long const n = 1000000;
+    std::vector<double> x(n);
+    vg::variate_generator<double, vg::exponential_power, vg::mt19937> gen{ 1.0, 1.0 };
+    for ( unsigned long idx = 0; idx < n; ++idx ) x[idx] = gen();
+
+    std::cout << "Testing arcsin distribution: with " << n << " examples.\n" ;
+    std::cout << "Mean:	" << vg::mean( x.begin(), x.end() ) << "\n";
+    std::cout << "Variance:	" << vg::variance( x.begin(), x.end() ) << "\n";
+    std::cout << "Skewness:	" << vg::skewness( x.begin(), x.end() ) << "\n";
+
+    return 0;
+}
+```
 
-The template class
 
-	template < typename Return_Type, typename Engine >
-    struct arcsine;
+### extreme_value distribution
+
+```cpp
+#include <vg.hpp>
+#include <vector>
+#include <iostream>
+
+int main()
+{
+    unsigned long const n = 1000000;
+    std::vector<double> x(n);
+    vg::variate_generator<double, vg::extreme_value, vg::mt19937> gen{ 0.0, 1.0, 0.0 };
+    for ( unsigned long idx = 0; idx < n; ++idx ) x[idx] = gen();
+
+    std::cout << "Testing arcsin distribution: with " << n << " examples.\n" ;
+    std::cout << "Mean:	" << vg::mean( x.begin(), x.end() ) << "\n";
+    std::cout << "Variance:	" << vg::variance( x.begin(), x.end() ) << "\n";
+    std::cout << "Skewness:	" << vg::skewness( x.begin(), x.end() ) << "\n";
+
+    return 0;
+}
+```
 
-is defined in ['include/vg/distribution/arcsine.hpp'](./include/vg/distribution/arcsine.hpp).
 
-##### arcsine Template Parameters
+### f distribution
+
+```cpp
+#include <vg.hpp>
+#include <vector>
+#include <iostream>
+
+int main()
+{
+    unsigned long const n = 1000000;
+    std::vector<double> x(n);
+    vg::variate_generator<double, vg::f, vg::mt19937> gen{ 2.0, 2.0 };
+    for ( unsigned long idx = 0; idx < n; ++idx ) x[idx] = gen();
+
+    std::cout << "Testing arcsin distribution: with " << n << " examples.\n" ;
+    std::cout << "Mean:	" << vg::mean( x.begin(), x.end() ) << "\n";
+    std::cout << "Variance:	" << vg::variance( x.begin(), x.end() ) << "\n";
+    std::cout << "Skewness:	" << vg::skewness( x.begin(), x.end() ) << "\n";
+
+    return 0;
+}
+```
 
-see [Template Parameters in variate_generator](#template-parameters).
 
-##### arcsine Member Types
+### factorial distribution
+
+```cpp
+#include <vg.hpp>
+#include <vector>
+#include <iostream>
+
+int main()
+{
+    unsigned long const n = 1000000;
+    std::vector<double> x(n);
+    vg::variate_generator<double, vg::factorial, vg::mt19937> gen{ 3.0, 3.0 };
+    for ( unsigned long idx = 0; idx < n; ++idx ) x[idx] = gen();
+
+    std::cout << "Testing arcsin distribution: with " << n << " examples.\n" ;
+    std::cout << "Mean:	" << vg::mean( x.begin(), x.end() ) << "\n";
+    std::cout << "Variance:	" << vg::variance( x.begin(), x.end() ) << "\n";
+    std::cout << "Skewness:	" << vg::skewness( x.begin(), x.end() ) << "\n";
+
+    return 0;
+}
+```
 
-see [Member Types in varaite_generator](#member-types).
 
-##### arcsine Member Functions
+### gamma distribution
+
+```cpp
+#include <vg.hpp>
+#include <vector>
+#include <iostream>
+
+int main()
+{
+    unsigned long const n = 1000000;
+    std::vector<double> x(n);
+    vg::variate_generator<double, vg::gamma, vg::mt19937> gen{ 1.0, 1.0 };
+    for ( unsigned long idx = 0; idx < n; ++idx ) x[idx] = gen();
+
+    std::cout << "Testing arcsin distribution: with " << n << " examples.\n" ;
+    std::cout << "Mean:	" << vg::mean( x.begin(), x.end() ) << "\n";
+    std::cout << "Variance:	" << vg::variance( x.begin(), x.end() ) << "\n";
+    std::cout << "Skewness:	" << vg::skewness( x.begin(), x.end() ) << "\n";
+
+    return 0;
+}
+```
 
-###### arcsine::constructor:
 
-	explicit arcsine( const seed_type sd = 0 ) noexcept;
+### gaussian distribution
+
+```cpp
+#include <vg.hpp>
+#include <vector>
+#include <iostream>
+
+int main()
+{
+    unsigned long const n = 1000000;
+    std::vector<double> x(n);
+    vg::variate_generator<double, vg::gaussian, vg::mt19937> gen{ 0.0, 1.0 };
+    for ( unsigned long idx = 0; idx < n; ++idx ) x[idx] = gen();
+
+    std::cout << "Testing arcsin distribution: with " << n << " examples.\n" ;
+    std::cout << "Mean:	" << vg::mean( x.begin(), x.end() ) << "\n";
+    std::cout << "Variance:	" << vg::variance( x.begin(), x.end() ) << "\n";
+    std::cout << "Skewness:	" << vg::skewness( x.begin(), x.end() ) << "\n";
+
+    return 0;
+}
+```
 
-The constructor expects a parameter _sd_ for the engine inside this distrubtion class, and if this parameter is not given, a default _sd_ will be used.
 
+### gaussian_tail distribution
+
+```cpp
+#include <vg.hpp>
+#include <vector>
+#include <iostream>
+
+int main()
+{
+    unsigned long const n = 1000000;
+    std::vector<double> x(n);
+    vg::variate_generator<double, vg::gaussian_tail, vg::mt19937> gen{ 0.0, 1.0 };
+    for ( unsigned long idx = 0; idx < n; ++idx ) x[idx] = gen();
+
+    std::cout << "Testing arcsin distribution: with " << n << " examples.\n" ;
+    std::cout << "Mean:	" << vg::mean( x.begin(), x.end() ) << "\n";
+    std::cout << "Variance:	" << vg::variance( x.begin(), x.end() ) << "\n";
+    std::cout << "Skewness:	" << vg::skewness( x.begin(), x.end() ) << "\n";
+
+    return 0;
+}
+```
 
-###### arcsine::operator()
 
-	return_type operator()() const noexcept
+### generalized_hypergeometric_b3 distribution
+
+```cpp
+#include <vg.hpp>
+#include <vector>
+#include <iostream>
+
+int main()
+{
+    unsigned long const n = 1000000;
+    std::vector<double> x(n);
+    vg::variate_generator<double, vg::generalized_hypergeometric_b3, vg::mt19937> gen{ 1.0, 1.0, 1.0 };
+    for ( unsigned long idx = 0; idx < n; ++idx ) x[idx] = gen();
+
+    std::cout << "Testing arcsin distribution: with " << n << " examples.\n" ;
+    std::cout << "Mean:	" << vg::mean( x.begin(), x.end() ) << "\n";
+    std::cout << "Variance:	" << vg::variance( x.begin(), x.end() ) << "\n";
+    std::cout << "Skewness:	" << vg::skewness( x.begin(), x.end() ) << "\n";
+
+    return 0;
+}
+```
 
-Generates a new random variate following the __Arcsine__ distribution.
 
-##### arcsine Example:
+### generalized_waring distribution
+
+```cpp
+#include <vg.hpp>
+#include <vector>
+#include <iostream>
+
+int main()
+{
+    unsigned long const n = 1000000;
+    std::vector<double> x(n);
+    vg::variate_generator<double, vg::generalized_waring, vg::mt19937> gen{ 1.0, 1.0, 1.0 };
+    for ( unsigned long idx = 0; idx < n; ++idx ) x[idx] = gen();
+
+    std::cout << "Testing arcsin distribution: with " << n << " examples.\n" ;
+    std::cout << "Mean:	" << vg::mean( x.begin(), x.end() ) << "\n";
+    std::cout << "Variance:	" << vg::variance( x.begin(), x.end() ) << "\n";
+    std::cout << "Skewness:	" << vg::skewness( x.begin(), x.end() ) << "\n";
+
+    return 0;
+}
+```
 
-	#include <vg.hpp>
-	#include <iostream>
 
-	int main()
-	{
-    	vg::variate_generator<double, vg::arcsine> v;
+### geometric distribution
+
+```cpp
+#include <vg.hpp>
+#include <vector>
+#include <iostream>
+
+int main()
+{
+    unsigned long const n = 1000000;
+    std::vector<double> x(n);
+    vg::variate_generator<double, vg::geometric, vg::mt19937> gen{ 0.5 };
+    for ( unsigned long idx = 0; idx < n; ++idx ) x[idx] = gen();
+
+    std::cout << "Testing arcsin distribution: with " << n << " examples.\n" ;
+    std::cout << "Mean:	" << vg::mean( x.begin(), x.end() ) << "\n";
+    std::cout << "Variance:	" << vg::variance( x.begin(), x.end() ) << "\n";
+    std::cout << "Skewness:	" << vg::skewness( x.begin(), x.end() ) << "\n";
+
+    return 0;
+}
+```
 
-    	for ( unsigned long int i = 0; i != 10; ++i )
-        	std::cout << v() << "\t";
 
-    	std::cout << "\n";
+### grassia distribution
+
+```cpp
+#include <vg.hpp>
+#include <vector>
+#include <iostream>
+
+int main()
+{
+    unsigned long const n = 1000000;
+    std::vector<double> x(n);
+    vg::variate_generator<double, vg::grassia, vg::mt19937> gen{ 1.0, 1.0 };
+    for ( unsigned long idx = 0; idx < n; ++idx ) x[idx] = gen();
+
+    std::cout << "Testing arcsin distribution: with " << n << " examples.\n" ;
+    std::cout << "Mean:	" << vg::mean( x.begin(), x.end() ) << "\n";
+    std::cout << "Variance:	" << vg::variance( x.begin(), x.end() ) << "\n";
+    std::cout << "Skewness:	" << vg::skewness( x.begin(), x.end() ) << "\n";
+
+    return 0;
+}
+```
 
-    	return 0;
-	}
 
-Output:
+### gumbel_1 distribution
+
+```cpp
+#include <vg.hpp>
+#include <vector>
+#include <iostream>
+
+int main()
+{
+    unsigned long const n = 1000000;
+    std::vector<double> x(n);
+    vg::variate_generator<double, vg::gumbel_1, vg::mt19937> gen{ 1.0, 1.0 };
+    for ( unsigned long idx = 0; idx < n; ++idx ) x[idx] = gen();
+
+    std::cout << "Testing arcsin distribution: with " << n << " examples.\n" ;
+    std::cout << "Mean:	" << vg::mean( x.begin(), x.end() ) << "\n";
+    std::cout << "Variance:	" << vg::variance( x.begin(), x.end() ) << "\n";
+    std::cout << "Skewness:	" << vg::skewness( x.begin(), x.end() ) << "\n";
+
+    return 0;
+}
+```
 
-	0.0548315	0.92341	0.884892	0.441578	0.985113	0.460975	0.0877635	0.164131	0.999518	0.531236
 
+### gumbel_2 distribution
+
+```cpp
+#include <vg.hpp>
+#include <vector>
+#include <iostream>
+
+int main()
+{
+    unsigned long const n = 1000000;
+    std::vector<double> x(n);
+    vg::variate_generator<double, vg::gumbel_2, vg::mt19937> gen{ 1.0, 1.0 };
+    for ( unsigned long idx = 0; idx < n; ++idx ) x[idx] = gen();
+
+    std::cout << "Testing arcsin distribution: with " << n << " examples.\n" ;
+    std::cout << "Mean:	" << vg::mean( x.begin(), x.end() ) << "\n";
+    std::cout << "Variance:	" << vg::variance( x.begin(), x.end() ) << "\n";
+    std::cout << "Skewness:	" << vg::skewness( x.begin(), x.end() ) << "\n";
+
+    return 0;
+}
+```
 
-####	Balding–Nichols Distirubtion
 
-Produces random variates that are following [Balding–Nichols Distirubtion](http://en.wikipedia.org/wiki/Balding%E2%80%93Nichols_model).
+### hyperbolic_secant distribution
+
+```cpp
+#include <vg.hpp>
+#include <vector>
+#include <iostream>
+
+int main()
+{
+    unsigned long const n = 1000000;
+    std::vector<double> x(n);
+    vg::variate_generator<double, vg::hyperbolic_secant, vg::mt19937> gen{  };
+    for ( unsigned long idx = 0; idx < n; ++idx ) x[idx] = gen();
+
+    std::cout << "Testing arcsin distribution: with " << n << " examples.\n" ;
+    std::cout << "Mean:	" << vg::mean( x.begin(), x.end() ) << "\n";
+    std::cout << "Variance:	" << vg::variance( x.begin(), x.end() ) << "\n";
+    std::cout << "Skewness:	" << vg::skewness( x.begin(), x.end() ) << "\n";
+
+    return 0;
+}
+```
 
-The template class
 
-    template < typename Return_Type, typename Engine >
-    struct balding_nichols;
+### hypergeometric distribution
+
+```cpp
+#include <vg.hpp>
+#include <vector>
+#include <iostream>
+
+int main()
+{
+    unsigned long const n = 1000000;
+    std::vector<double> x(n);
+    vg::variate_generator<double, vg::hypergeometric, vg::mt19937> gen{ 1, 0, 1 };
+    for ( unsigned long idx = 0; idx < n; ++idx ) x[idx] = gen();
+
+    std::cout << "Testing arcsin distribution: with " << n << " examples.\n" ;
+    std::cout << "Mean:	" << vg::mean( x.begin(), x.end() ) << "\n";
+    std::cout << "Variance:	" << vg::variance( x.begin(), x.end() ) << "\n";
+    std::cout << "Skewness:	" << vg::skewness( x.begin(), x.end() ) << "\n";
+
+    return 0;
+}
+```
 
-is defined in ['include/vg/distribution/balding_nichols.hpp'](./include/vg/distribution/balding_nichols.hpp).
 
-##### Balding–Nichols Template Parameters
+### inverse_gaussian distribution
+
+```cpp
+#include <vg.hpp>
+#include <vector>
+#include <iostream>
+
+int main()
+{
+    unsigned long const n = 1000000;
+    std::vector<double> x(n);
+    vg::variate_generator<double, vg::inverse_gaussian, vg::mt19937> gen{ 1.0, 1.0 };
+    for ( unsigned long idx = 0; idx < n; ++idx ) x[idx] = gen();
+
+    std::cout << "Testing arcsin distribution: with " << n << " examples.\n" ;
+    std::cout << "Mean:	" << vg::mean( x.begin(), x.end() ) << "\n";
+    std::cout << "Variance:	" << vg::variance( x.begin(), x.end() ) << "\n";
+    std::cout << "Skewness:	" << vg::skewness( x.begin(), x.end() ) << "\n";
+
+    return 0;
+}
+```
 
-see [Template Parameters in variate_generator](#template-parameters).
 
-##### Balding–Nichols Member Types
+### inverse_polya_eggenberger distribution
+
+```cpp
+#include <vg.hpp>
+#include <vector>
+#include <iostream>
+
+int main()
+{
+    unsigned long const n = 1000000;
+    std::vector<double> x(n);
+    vg::variate_generator<double, vg::inverse_polya_eggenberger, vg::mt19937> gen{ 1.0, 1.0, 1.0 };
+    for ( unsigned long idx = 0; idx < n; ++idx ) x[idx] = gen();
+
+    std::cout << "Testing arcsin distribution: with " << n << " examples.\n" ;
+    std::cout << "Mean:	" << vg::mean( x.begin(), x.end() ) << "\n";
+    std::cout << "Variance:	" << vg::variance( x.begin(), x.end() ) << "\n";
+    std::cout << "Skewness:	" << vg::skewness( x.begin(), x.end() ) << "\n";
+
+    return 0;
+}
+```
 
-see [Member Types in varaite_generator](#member-types).
 
-##### Balding–Nichols Member Functions
+### lambda distribution
+
+```cpp
+#include <vg.hpp>
+#include <vector>
+#include <iostream>
+
+int main()
+{
+    unsigned long const n = 1000000;
+    std::vector<double> x(n);
+    vg::variate_generator<double, vg::lambda, vg::mt19937> gen{ 1.0, 1.0, 1.0, 1.0 };
+    for ( unsigned long idx = 0; idx < n; ++idx ) x[idx] = gen();
+
+    std::cout << "Testing arcsin distribution: with " << n << " examples.\n" ;
+    std::cout << "Mean:	" << vg::mean( x.begin(), x.end() ) << "\n";
+    std::cout << "Variance:	" << vg::variance( x.begin(), x.end() ) << "\n";
+    std::cout << "Skewness:	" << vg::skewness( x.begin(), x.end() ) << "\n";
+
+    return 0;
+}
+```
 
-###### Balding-Nichols constructor
 
-    explicit balding_nichols( const final_type f = final_type(0.5), const final_type p = final_type(0.5), const seed_type sd = 0 ) noexcept;
+### laplace distribution
+
+```cpp
+#include <vg.hpp>
+#include <vector>
+#include <iostream>
+
+int main()
+{
+    unsigned long const n = 1000000;
+    std::vector<double> x(n);
+    vg::variate_generator<double, vg::laplace, vg::mt19937> gen{ 1.0, 1.0 };
+    for ( unsigned long idx = 0; idx < n; ++idx ) x[idx] = gen();
+
+    std::cout << "Testing arcsin distribution: with " << n << " examples.\n" ;
+    std::cout << "Mean:	" << vg::mean( x.begin(), x.end() ) << "\n";
+    std::cout << "Variance:	" << vg::variance( x.begin(), x.end() ) << "\n";
+    std::cout << "Skewness:	" << vg::skewness( x.begin(), x.end() ) << "\n";
+
+    return 0;
+}
+```
 
-The constructor expects three paremeters. The first two real parameters f and p, are subject to 0 < f < 1 and 0 < p < 1, and the third paremeter, _sd_, is for the engine employed by the distrubtion, and if _sd_ is not provided, a default one will be used.
 
-###### Balding-Nichols operator()
+### levy distribution
+
+```cpp
+#include <vg.hpp>
+#include <vector>
+#include <iostream>
+
+int main()
+{
+    unsigned long const n = 1000000;
+    std::vector<double> x(n);
+    vg::variate_generator<double, vg::levy, vg::mt19937> gen{ 1.0, 1.0 };
+    for ( unsigned long idx = 0; idx < n; ++idx ) x[idx] = gen();
+
+    std::cout << "Testing arcsin distribution: with " << n << " examples.\n" ;
+    std::cout << "Mean:	" << vg::mean( x.begin(), x.end() ) << "\n";
+    std::cout << "Variance:	" << vg::variance( x.begin(), x.end() ) << "\n";
+    std::cout << "Skewness:	" << vg::skewness( x.begin(), x.end() ) << "\n";
+
+    return 0;
+}
+```
 
-	return_type operator()() const noexcept;
 
-Generates a new random variate that follows Balding Nichols distribution.
+### logarithmic distribution
+
+```cpp
+#include <vg.hpp>
+#include <vector>
+#include <iostream>
+
+int main()
+{
+    unsigned long const n = 1000000;
+    std::vector<double> x(n);
+    vg::variate_generator<double, vg::logarithmic, vg::mt19937> gen{ 0.5 };
+    for ( unsigned long idx = 0; idx < n; ++idx ) x[idx] = gen();
+
+    std::cout << "Testing arcsin distribution: with " << n << " examples.\n" ;
+    std::cout << "Mean:	" << vg::mean( x.begin(), x.end() ) << "\n";
+    std::cout << "Variance:	" << vg::variance( x.begin(), x.end() ) << "\n";
+    std::cout << "Skewness:	" << vg::skewness( x.begin(), x.end() ) << "\n";
+
+    return 0;
+}
+```
 
-##### Balding-Nichols Example
 
-    #include <vg.hpp>
-    #include <iostream>
+### logistic distribution
+
+```cpp
+#include <vg.hpp>
+#include <vector>
+#include <iostream>
+
+int main()
+{
+    unsigned long const n = 1000000;
+    std::vector<double> x(n);
+    vg::variate_generator<double, vg::logistic, vg::mt19937> gen{ 1.0, 1.0 };
+    for ( unsigned long idx = 0; idx < n; ++idx ) x[idx] = gen();
+
+    std::cout << "Testing arcsin distribution: with " << n << " examples.\n" ;
+    std::cout << "Mean:	" << vg::mean( x.begin(), x.end() ) << "\n";
+    std::cout << "Variance:	" << vg::variance( x.begin(), x.end() ) << "\n";
+    std::cout << "Skewness:	" << vg::skewness( x.begin(), x.end() ) << "\n";
+
+    return 0;
+}
+```
 
-    int main()
-    {
-    	vg::variate_generator<double, vg::balding_nichols> v{ 0.2, 0.7 };
 
-    	for ( unsigned long int i = 0; i != 10; ++i )
-        	std::cout << v() << "\t";
+### lognormal distribution
+
+```cpp
+#include <vg.hpp>
+#include <vector>
+#include <iostream>
+
+int main()
+{
+    unsigned long const n = 1000000;
+    std::vector<double> x(n);
+    vg::variate_generator<double, vg::lognormal, vg::mt19937> gen{ 1.0, 1.0 };
+    for ( unsigned long idx = 0; idx < n; ++idx ) x[idx] = gen();
+
+    std::cout << "Testing arcsin distribution: with " << n << " examples.\n" ;
+    std::cout << "Mean:	" << vg::mean( x.begin(), x.end() ) << "\n";
+    std::cout << "Variance:	" << vg::variance( x.begin(), x.end() ) << "\n";
+    std::cout << "Skewness:	" << vg::skewness( x.begin(), x.end() ) << "\n";
+
+    return 0;
+}
+```
 
-    	std::cout << "\n";
 
-    	return 0;
-    }
+### mizutani distribution
+
+```cpp
+#include <vg.hpp>
+#include <vector>
+#include <iostream>
+
+int main()
+{
+    unsigned long const n = 1000000;
+    std::vector<double> x(n);
+    vg::variate_generator<double, vg::mizutani, vg::mt19937> gen{ 1.0 };
+    for ( unsigned long idx = 0; idx < n; ++idx ) x[idx] = gen();
+
+    std::cout << "Testing arcsin distribution: with " << n << " examples.\n" ;
+    std::cout << "Mean:	" << vg::mean( x.begin(), x.end() ) << "\n";
+    std::cout << "Variance:	" << vg::variance( x.begin(), x.end() ) << "\n";
+    std::cout << "Skewness:	" << vg::skewness( x.begin(), x.end() ) << "\n";
+
+    return 0;
+}
+```
 
-Output:
 
-    0.947175	0.232065	0.783228	0.942613	0.404222	0.789025	0.916455	0.941101	0.533812	0.822633
+### negative_binomial distribution
+
+```cpp
+#include <vg.hpp>
+#include <vector>
+#include <iostream>
+
+int main()
+{
+    unsigned long const n = 1000000;
+    std::vector<double> x(n);
+    vg::variate_generator<double, vg::negative_binomial, vg::mt19937> gen{ 1, 0.5 };
+    for ( unsigned long idx = 0; idx < n; ++idx ) x[idx] = gen();
+
+    std::cout << "Testing arcsin distribution: with " << n << " examples.\n" ;
+    std::cout << "Mean:	" << vg::mean( x.begin(), x.end() ) << "\n";
+    std::cout << "Variance:	" << vg::variance( x.begin(), x.end() ) << "\n";
+    std::cout << "Skewness:	" << vg::skewness( x.begin(), x.end() ) << "\n";
+
+    return 0;
+}
+```
 
-####	Bernoulli Distirubtion
 
-Produces random variates that are following [Bernoulli Distirubtion](http://en.wikipedia.org/wiki/Bernoulli_distribution).
+### negative_binomial_beta distribution
+
+```cpp
+#include <vg.hpp>
+#include <vector>
+#include <iostream>
+
+int main()
+{
+    unsigned long const n = 1000000;
+    std::vector<double> x(n);
+    vg::variate_generator<double, vg::negative_binomial_beta, vg::mt19937> gen{ 1.0, 1.0, 1.0 };
+    for ( unsigned long idx = 0; idx < n; ++idx ) x[idx] = gen();
+
+    std::cout << "Testing arcsin distribution: with " << n << " examples.\n" ;
+    std::cout << "Mean:	" << vg::mean( x.begin(), x.end() ) << "\n";
+    std::cout << "Variance:	" << vg::variance( x.begin(), x.end() ) << "\n";
+    std::cout << "Skewness:	" << vg::skewness( x.begin(), x.end() ) << "\n";
+
+    return 0;
+}
+```
 
-The template class
 
-    template < typename Return_Type, typename Engine >
-    struct bernoulli;
+### normal distribution
+
+```cpp
+#include <vg.hpp>
+#include <vector>
+#include <iostream>
+
+int main()
+{
+    unsigned long const n = 1000000;
+    std::vector<double> x(n);
+    vg::variate_generator<double, vg::normal, vg::mt19937> gen{  };
+    for ( unsigned long idx = 0; idx < n; ++idx ) x[idx] = gen();
+
+    std::cout << "Testing arcsin distribution: with " << n << " examples.\n" ;
+    std::cout << "Mean:	" << vg::mean( x.begin(), x.end() ) << "\n";
+    std::cout << "Variance:	" << vg::variance( x.begin(), x.end() ) << "\n";
+    std::cout << "Skewness:	" << vg::skewness( x.begin(), x.end() ) << "\n";
+
+    return 0;
+}
+```
 
-is defined in ['include/vg/distribution/bernoulli.hpp'](./include/vg/distribution/bernoulli.hpp).
 
-##### Bernoulli Template Parameters
+### pareto distribution
+
+```cpp
+#include <vg.hpp>
+#include <vector>
+#include <iostream>
+
+int main()
+{
+    unsigned long const n = 1000000;
+    std::vector<double> x(n);
+    vg::variate_generator<double, vg::pareto, vg::mt19937> gen{ 1.0, 2.0 };
+    for ( unsigned long idx = 0; idx < n; ++idx ) x[idx] = gen();
+
+    std::cout << "Testing arcsin distribution: with " << n << " examples.\n" ;
+    std::cout << "Mean:	" << vg::mean( x.begin(), x.end() ) << "\n";
+    std::cout << "Variance:	" << vg::variance( x.begin(), x.end() ) << "\n";
+    std::cout << "Skewness:	" << vg::skewness( x.begin(), x.end() ) << "\n";
+
+    return 0;
+}
+```
 
-see [Template Parameters in variate_generator](#template-parameters).
 
-##### Bernoulli Member Types
+### pascal distribution
+
+```cpp
+#include <vg.hpp>
+#include <vector>
+#include <iostream>
+
+int main()
+{
+    unsigned long const n = 1000000;
+    std::vector<double> x(n);
+    vg::variate_generator<double, vg::pascal, vg::mt19937> gen{ 1.0, 0.5 };
+    for ( unsigned long idx = 0; idx < n; ++idx ) x[idx] = gen();
+
+    std::cout << "Testing arcsin distribution: with " << n << " examples.\n" ;
+    std::cout << "Mean:	" << vg::mean( x.begin(), x.end() ) << "\n";
+    std::cout << "Variance:	" << vg::variance( x.begin(), x.end() ) << "\n";
+    std::cout << "Skewness:	" << vg::skewness( x.begin(), x.end() ) << "\n";
+
+    return 0;
+}
+```
 
-see [Member Types in varaite_generator](#member-types).
 
-##### Bernoulli Member Functions
+### pearson distribution
+
+```cpp
+#include <vg.hpp>
+#include <vector>
+#include <iostream>
+
+int main()
+{
+    unsigned long const n = 1000000;
+    std::vector<double> x(n);
+    vg::variate_generator<double, vg::pearson, vg::mt19937> gen{ 1.0, 1.0, 1.0, 1.0, 1.0 };
+    for ( unsigned long idx = 0; idx < n; ++idx ) x[idx] = gen();
+
+    std::cout << "Testing arcsin distribution: with " << n << " examples.\n" ;
+    std::cout << "Mean:	" << vg::mean( x.begin(), x.end() ) << "\n";
+    std::cout << "Variance:	" << vg::variance( x.begin(), x.end() ) << "\n";
+    std::cout << "Skewness:	" << vg::skewness( x.begin(), x.end() ) << "\n";
+
+    return 0;
+}
+```
 
-###### Bernoulli constructor
 
-    explicit bernoulli( final_type p = final_type( 0.5 ), const seed_type s = seed_type( 0 ) ) noexcept;
+### planck distribution
+
+```cpp
+#include <vg.hpp>
+#include <vector>
+#include <iostream>
+
+int main()
+{
+    unsigned long const n = 1000000;
+    std::vector<double> x(n);
+    vg::variate_generator<double, vg::planck, vg::mt19937> gen{ 1.0, 1.0 };
+    for ( unsigned long idx = 0; idx < n; ++idx ) x[idx] = gen();
+
+    std::cout << "Testing arcsin distribution: with " << n << " examples.\n" ;
+    std::cout << "Mean:	" << vg::mean( x.begin(), x.end() ) << "\n";
+    std::cout << "Variance:	" << vg::variance( x.begin(), x.end() ) << "\n";
+    std::cout << "Skewness:	" << vg::skewness( x.begin(), x.end() ) << "\n";
+
+    return 0;
+}
+```
 
-The constructor expects two paremeters. The first p is subject to 0 < p < 1, and the last paremeter, _s_, is for the engine employed by the distrubtion, and if _s_ is not provided, a default one will be used.
 
-###### Bernoulli operator()
+### poisson distribution
+
+```cpp
+#include <vg.hpp>
+#include <vector>
+#include <iostream>
+
+int main()
+{
+    unsigned long const n = 1000000;
+    std::vector<double> x(n);
+    vg::variate_generator<double, vg::poisson, vg::mt19937> gen{ 10.0 };
+    for ( unsigned long idx = 0; idx < n; ++idx ) x[idx] = gen();
+
+    std::cout << "Testing arcsin distribution: with " << n << " examples.\n" ;
+    std::cout << "Mean:	" << vg::mean( x.begin(), x.end() ) << "\n";
+    std::cout << "Variance:	" << vg::variance( x.begin(), x.end() ) << "\n";
+    std::cout << "Skewness:	" << vg::skewness( x.begin(), x.end() ) << "\n";
+
+    return 0;
+}
+```
 
-	return_type operator()() const noexcept;
 
-Generates a new random variate that follows __Bernoulli__ distribution.
+### polya distribution
+
+```cpp
+#include <vg.hpp>
+#include <vector>
+#include <iostream>
+
+int main()
+{
+    unsigned long const n = 1000000;
+    std::vector<double> x(n);
+    vg::variate_generator<double, vg::polya, vg::mt19937> gen{ 1.0, 0.5 };
+    for ( unsigned long idx = 0; idx < n; ++idx ) x[idx] = gen();
+
+    std::cout << "Testing arcsin distribution: with " << n << " examples.\n" ;
+    std::cout << "Mean:	" << vg::mean( x.begin(), x.end() ) << "\n";
+    std::cout << "Variance:	" << vg::variance( x.begin(), x.end() ) << "\n";
+    std::cout << "Skewness:	" << vg::skewness( x.begin(), x.end() ) << "\n";
+
+    return 0;
+}
+```
 
-##### Bernoulli Example
 
-    #include <vg.hpp>
-	#include <iostream>
+### polya_aeppli distribution
+
+```cpp
+#include <vg.hpp>
+#include <vector>
+#include <iostream>
+
+int main()
+{
+    unsigned long const n = 1000000;
+    std::vector<double> x(n);
+    vg::variate_generator<double, vg::polya_aeppli, vg::mt19937> gen{ 1.0, 1.0, 1.0 };
+    for ( unsigned long idx = 0; idx < n; ++idx ) x[idx] = gen();
+
+    std::cout << "Testing arcsin distribution: with " << n << " examples.\n" ;
+    std::cout << "Mean:	" << vg::mean( x.begin(), x.end() ) << "\n";
+    std::cout << "Variance:	" << vg::variance( x.begin(), x.end() ) << "\n";
+    std::cout << "Skewness:	" << vg::skewness( x.begin(), x.end() ) << "\n";
+
+    return 0;
+}
+```
 
-	int main()
-	{
-    	vg::variate_generator<int, vg::bernoulli> v{ 0.34 };
 
-    	for ( unsigned long int i = 0; i != 10; ++i )
-        	std::cout << v() << "\t";
+### rademacher distribution
+
+```cpp
+#include <vg.hpp>
+#include <vector>
+#include <iostream>
+
+int main()
+{
+    unsigned long const n = 1000000;
+    std::vector<double> x(n);
+    vg::variate_generator<double, vg::rademacher, vg::mt19937> gen{  };
+    for ( unsigned long idx = 0; idx < n; ++idx ) x[idx] = gen();
+
+    std::cout << "Testing arcsin distribution: with " << n << " examples.\n" ;
+    std::cout << "Mean:	" << vg::mean( x.begin(), x.end() ) << "\n";
+    std::cout << "Variance:	" << vg::variance( x.begin(), x.end() ) << "\n";
+    std::cout << "Skewness:	" << vg::skewness( x.begin(), x.end() ) << "\n";
+
+    return 0;
+}
+```
 
-    	std::cout << "\n";
 
-    	return 0;
-	}
+### rayleigh distribution
+
+```cpp
+#include <vg.hpp>
+#include <vector>
+#include <iostream>
+
+int main()
+{
+    unsigned long const n = 1000000;
+    std::vector<double> x(n);
+    vg::variate_generator<double, vg::rayleigh, vg::mt19937> gen{ 1.0 };
+    for ( unsigned long idx = 0; idx < n; ++idx ) x[idx] = gen();
+
+    std::cout << "Testing arcsin distribution: with " << n << " examples.\n" ;
+    std::cout << "Mean:	" << vg::mean( x.begin(), x.end() ) << "\n";
+    std::cout << "Variance:	" << vg::variance( x.begin(), x.end() ) << "\n";
+    std::cout << "Skewness:	" << vg::skewness( x.begin(), x.end() ) << "\n";
+
+    return 0;
+}
+```
 
-Output:
 
-    0	0	1	0	0	1	1	1	0	1
+### rayleigh_tail distribution
+
+```cpp
+#include <vg.hpp>
+#include <vector>
+#include <iostream>
+
+int main()
+{
+    unsigned long const n = 1000000;
+    std::vector<double> x(n);
+    vg::variate_generator<double, vg::rayleigh_tail, vg::mt19937> gen{ 1.0 };
+    for ( unsigned long idx = 0; idx < n; ++idx ) x[idx] = gen();
+
+    std::cout << "Testing arcsin distribution: with " << n << " examples.\n" ;
+    std::cout << "Mean:	" << vg::mean( x.begin(), x.end() ) << "\n";
+    std::cout << "Variance:	" << vg::variance( x.begin(), x.end() ) << "\n";
+    std::cout << "Skewness:	" << vg::skewness( x.begin(), x.end() ) << "\n";
+
+    return 0;
+}
+```
 
 
+### singh_maddala distribution
+
+```cpp
+#include <vg.hpp>
+#include <vector>
+#include <iostream>
+
+int main()
+{
+    unsigned long const n = 1000000;
+    std::vector<double> x(n);
+    vg::variate_generator<double, vg::singh_maddala, vg::mt19937> gen{ 1.0, 1.0, 1.0 };
+    for ( unsigned long idx = 0; idx < n; ++idx ) x[idx] = gen();
+
+    std::cout << "Testing arcsin distribution: with " << n << " examples.\n" ;
+    std::cout << "Mean:	" << vg::mean( x.begin(), x.end() ) << "\n";
+    std::cout << "Variance:	" << vg::variance( x.begin(), x.end() ) << "\n";
+    std::cout << "Skewness:	" << vg::skewness( x.begin(), x.end() ) << "\n";
+
+    return 0;
+}
+```
 
-####Beta Distirubtion
 
-Produces random variates that are following [Beta Distirubtion](http://en.wikipedia.org/wiki/Beta_distribution).
+### t distribution
+
+```cpp
+#include <vg.hpp>
+#include <vector>
+#include <iostream>
+
+int main()
+{
+    unsigned long const n = 1000000;
+    std::vector<double> x(n);
+    vg::variate_generator<double, vg::t, vg::mt19937> gen{ 1.0 };
+    for ( unsigned long idx = 0; idx < n; ++idx ) x[idx] = gen();
+
+    std::cout << "Testing arcsin distribution: with " << n << " examples.\n" ;
+    std::cout << "Mean:	" << vg::mean( x.begin(), x.end() ) << "\n";
+    std::cout << "Variance:	" << vg::variance( x.begin(), x.end() ) << "\n";
+    std::cout << "Skewness:	" << vg::skewness( x.begin(), x.end() ) << "\n";
+
+    return 0;
+}
+```
 
-The template class
 
-    template < typename Return_Type, typename Engine >
-    struct beta;
+### teichroew distribution
+
+```cpp
+#include <vg.hpp>
+#include <vector>
+#include <iostream>
+
+int main()
+{
+    unsigned long const n = 1000000;
+    std::vector<double> x(n);
+    vg::variate_generator<double, vg::teichroew, vg::mt19937> gen{ 1.0 };
+    for ( unsigned long idx = 0; idx < n; ++idx ) x[idx] = gen();
+
+    std::cout << "Testing arcsin distribution: with " << n << " examples.\n" ;
+    std::cout << "Mean:	" << vg::mean( x.begin(), x.end() ) << "\n";
+    std::cout << "Variance:	" << vg::variance( x.begin(), x.end() ) << "\n";
+    std::cout << "Skewness:	" << vg::skewness( x.begin(), x.end() ) << "\n";
+
+    return 0;
+}
+```
 
-is defined in ['include/vg/distribution/beta.hpp'](./include/vg/distribution/beta.hpp).
 
-##### Beta Template Parameters
+### triangular distribution
+
+```cpp
+#include <vg.hpp>
+#include <vector>
+#include <iostream>
+
+int main()
+{
+    unsigned long const n = 1000000;
+    std::vector<double> x(n);
+    vg::variate_generator<double, vg::triangular, vg::mt19937> gen{ 1.0 };
+    for ( unsigned long idx = 0; idx < n; ++idx ) x[idx] = gen();
+
+    std::cout << "Testing arcsin distribution: with " << n << " examples.\n" ;
+    std::cout << "Mean:	" << vg::mean( x.begin(), x.end() ) << "\n";
+    std::cout << "Variance:	" << vg::variance( x.begin(), x.end() ) << "\n";
+    std::cout << "Skewness:	" << vg::skewness( x.begin(), x.end() ) << "\n";
+
+    return 0;
+}
+```
 
-see [Template Parameters in variate_generator](#template-parameters).
 
-##### Beta Member Types
+### trigamma distribution
+
+```cpp
+#include <vg.hpp>
+#include <vector>
+#include <iostream>
+
+int main()
+{
+    unsigned long const n = 1000000;
+    std::vector<double> x(n);
+    vg::variate_generator<double, vg::trigamma, vg::mt19937> gen{ 3.0 };
+    for ( unsigned long idx = 0; idx < n; ++idx ) x[idx] = gen();
+
+    std::cout << "Testing arcsin distribution: with " << n << " examples.\n" ;
+    std::cout << "Mean:	" << vg::mean( x.begin(), x.end() ) << "\n";
+    std::cout << "Variance:	" << vg::variance( x.begin(), x.end() ) << "\n";
+    std::cout << "Skewness:	" << vg::skewness( x.begin(), x.end() ) << "\n";
+
+    return 0;
+}
+```
 
-see [Member Types in varaite_generator](#member-types).
 
-##### Beta Member Functions
+### uniform distribution
+
+```cpp
+#include <vg.hpp>
+#include <vector>
+#include <iostream>
+
+int main()
+{
+    unsigned long const n = 1000000;
+    std::vector<double> x(n);
+    vg::variate_generator<double, vg::uniform, vg::mt19937> gen{ 0.0, 1.0 };
+    for ( unsigned long idx = 0; idx < n; ++idx ) x[idx] = gen();
+
+    std::cout << "Testing arcsin distribution: with " << n << " examples.\n" ;
+    std::cout << "Mean:	" << vg::mean( x.begin(), x.end() ) << "\n";
+    std::cout << "Variance:	" << vg::variance( x.begin(), x.end() ) << "\n";
+    std::cout << "Skewness:	" << vg::skewness( x.begin(), x.end() ) << "\n";
+
+    return 0;
+}
+```
 
-###### Beta constructor
 
-    explicit beta( const value_type a = value_type( 1 ), const value_type b = value_type( 1 ), const seed_type sd = 0 ) noexcept;
+### von_mises distribution
+
+```cpp
+#include <vg.hpp>
+#include <vector>
+#include <iostream>
+
+int main()
+{
+    unsigned long const n = 1000000;
+    std::vector<double> x(n);
+    vg::variate_generator<double, vg::von_mises, vg::mt19937> gen{ 0.0, 1.0 };
+    for ( unsigned long idx = 0; idx < n; ++idx ) x[idx] = gen();
+
+    std::cout << "Testing arcsin distribution: with " << n << " examples.\n" ;
+    std::cout << "Mean:	" << vg::mean( x.begin(), x.end() ) << "\n";
+    std::cout << "Variance:	" << vg::variance( x.begin(), x.end() ) << "\n";
+    std::cout << "Skewness:	" << vg::skewness( x.begin(), x.end() ) << "\n";
+
+    return 0;
+}
+```
 
-The constructor expects three paremeters. The first two are positive shape parameters, and the last paremeter, _sd_, is for the engine employed by the distrubtion, and if _sd_ is not provided, a default one will be used.
 
-###### Beta operator()
+### wald distribution
+
+```cpp
+#include <vg.hpp>
+#include <vector>
+#include <iostream>
+
+int main()
+{
+    unsigned long const n = 1000000;
+    std::vector<double> x(n);
+    vg::variate_generator<double, vg::wald, vg::mt19937> gen{ 1.0, 1.0 };
+    for ( unsigned long idx = 0; idx < n; ++idx ) x[idx] = gen();
+
+    std::cout << "Testing arcsin distribution: with " << n << " examples.\n" ;
+    std::cout << "Mean:	" << vg::mean( x.begin(), x.end() ) << "\n";
+    std::cout << "Variance:	" << vg::variance( x.begin(), x.end() ) << "\n";
+    std::cout << "Skewness:	" << vg::skewness( x.begin(), x.end() ) << "\n";
+
+    return 0;
+}
+```
+
 
-	return_type operator()() const noexcept;
+### waring distribution
 
-Generates a new random variate that follows __Beta__ distribution.
+```cpp
+#include <vg.hpp>
+#include <vector>
+#include <iostream>
 
-##### Beta Example
+int main()
+{
+    unsigned long const n = 1000000;
+    std::vector<double> x(n);
+    vg::variate_generator<double, vg::waring, vg::mt19937> gen{ 1.0, 1.0 };
+    for ( unsigned long idx = 0; idx < n; ++idx ) x[idx] = gen();
 
-    #include <vg.hpp>
-	#include <iostream>
+    std::cout << "Testing arcsin distribution: with " << n << " examples.\n" ;
+    std::cout << "Mean:	" << vg::mean( x.begin(), x.end() ) << "\n";
+    std::cout << "Variance:	" << vg::variance( x.begin(), x.end() ) << "\n";
+    std::cout << "Skewness:	" << vg::skewness( x.begin(), x.end() ) << "\n";
 
-	int main()
-	{
-    	vg::variate_generator<double, vg::beta, vg::mt19937> v{ 0.1, 0.2, 19876238763287ULL };
+    return 0;
+}
+```
 
-    	for ( unsigned long int i = 0; i != 10; ++i )
-        	std::cout << v() << "\t";
 
-    	std::cout << "\n";
+### weibull distribution
 
-    	return 0;
-	}
+```cpp
+#include <vg.hpp>
+#include <vector>
+#include <iostream>
 
-Output:
+int main()
+{
+    unsigned long const n = 1000000;
+    std::vector<double> x(n);
+    vg::variate_generator<double, vg::weibull, vg::mt19937> gen{ 1.0, 1.0 };
+    for ( unsigned long idx = 0; idx < n; ++idx ) x[idx] = gen();
 
-    0.141858	1.60925e-06	9.89096e-05	7.39141e-05	0.00105271	6.55803e-09	0.724791	0.0842294	0.0221139	0.436397
+    std::cout << "Testing arcsin distribution: with " << n << " examples.\n" ;
+    std::cout << "Mean:	" << vg::mean( x.begin(), x.end() ) << "\n";
+    std::cout << "Variance:	" << vg::variance( x.begin(), x.end() ) << "\n";
+    std::cout << "Skewness:	" << vg::skewness( x.begin(), x.end() ) << "\n";
 
-####Beta Binomial Distirubtion
+    return 0;
+}
+```
 
-Produces random variates that are following [Beta Binomial Distirubtion](http://en.wikipedia.org/wiki/Beta-binomial_distribution).
 
-The template class
+### yule distribution
 
-    template < typename Return_Type, typename Engine >
-    struct beta_binomial;
+```cpp
+#include <vg.hpp>
+#include <vector>
+#include <iostream>
 
-is defined in ['include/vg/distribution/beta_binomial.hpp'](./include/vg/distribution/beta_binomial.hpp).
+int main()
+{
+    unsigned long const n = 1000000;
+    std::vector<double> x(n);
+    vg::variate_generator<double, vg::yule, vg::mt19937> gen{ 2.0 };
+    for ( unsigned long idx = 0; idx < n; ++idx ) x[idx] = gen();
 
-##### Beta Binomial Template Parameters
+    std::cout << "Testing arcsin distribution: with " << n << " examples.\n" ;
+    std::cout << "Mean:	" << vg::mean( x.begin(), x.end() ) << "\n";
+    std::cout << "Variance:	" << vg::variance( x.begin(), x.end() ) << "\n";
+    std::cout << "Skewness:	" << vg::skewness( x.begin(), x.end() ) << "\n";
 
-see [Template Parameters in variate_generator](#template-parameters).
+    return 0;
+}
+```
 
-##### Beta Binomial Member Types
 
-see [Member Types in varaite_generator](#member-types).
+### zipf distribution
 
-##### Beta Binomial Member Functions
+```cpp
+#include <vg.hpp>
+#include <vector>
+#include <iostream>
 
-###### Beta Binomial constructor
+int main()
+{
+    unsigned long const n = 1000000;
+    std::vector<double> x(n);
+    vg::variate_generator<double, vg::zipf, vg::mt19937> gen{ 2.0 };
+    for ( unsigned long idx = 0; idx < n; ++idx ) x[idx] = gen();
 
-    explicit beta_binomial( const value_type n = value_type( 10 ),
-                            const final_type a = final_type(1),
-                            const final_type b = final_type(1),
-                            const seed_type sd = 0 ) noexcept;
+    std::cout << "Testing arcsin distribution: with " << n << " examples.\n" ;
+    std::cout << "Mean:	" << vg::mean( x.begin(), x.end() ) << "\n";
+    std::cout << "Variance:	" << vg::variance( x.begin(), x.end() ) << "\n";
+    std::cout << "Skewness:	" << vg::skewness( x.begin(), x.end() ) << "\n";
 
-The constructor expects 4 paremeters. The first parameter, _n_, is an interger representing Bernoulli trials, while _a_ and _b_ are two positive shape parameters, and the last paremeter, _sd_, is for the engine employed by the distrubtion, and if _sd_ is not provided, a default one will be used.
+    return 0;
+}
+```
 
-###### Beta Binomial operator()
+## License
 
-	return_type operator()() const noexcept;
+LGPL
 
-Generates a new random variate that follows __Beta Binomial__ distribution.
-
-##### Beta Binomial Example
-
-    #include <vg.hpp>
-	#include <iostream>
-
-	int main()
-	{
-    	vg::variate_generator<int, vg::beta_binomial, vg::linear_congruential> v{ 10, 0.4, 0.5, 98187638263287932ULL };
-
-    	for ( unsigned long int i = 0; i != 10; ++i )
-        	std::cout << v() << "\t";
-
-    	std::cout << "\n";
-
-    	return 0;
-	}
-
-Output:
-
-   1	6	0	1	0	0	0	1	0	3
-
-####Binomial Distirubtion
-
-Produces random variates that are following [Binomial Distirubtion](http://en.wikipedia.org/wiki/Binomial_distribution).
-
-The template class
-
-    template < typename Return_Type, typename Engine >
-    struct binomial;
-
-is defined in ['include/vg/distribution/binomial.hpp'](./include/vg/distribution/binomial.hpp).
-
-##### Binomial Template Parameters
-
-see [Template Parameters in variate_generator](#template-parameters).
-
-##### Binomial Member Types
-
-see [Member Types in varaite_generator](#member-types).
-
-##### Binomial Member Functions
-
-###### Binomial constructor
-
-    explicit binomial( size_type n = size_type( 1 ),
-                       final_type p = final_type( 0.5 ),
-                       const seed_type sd = seed_type( 0 ) ) noexcept;
-
-The constructor expects 3 paremeters. The first parameter, _n_, is an interger representing number of trials, while _p_ is a positive parameter of the success probability of the trial, and the last paremeter, _sd_, is for the engine employed by the distrubtion, and if _sd_ is not provided, a default one will be used.
-
-###### Binomial operator()
-
-	return_type operator()() const noexcept;
-
-Generates a new random variate that follows Binomial distribution.
-
-##### Binomial Example
-
-   	#include <vg.hpp>
-	#include <iostream>
-
-	int main()
-	{
-    	vg::variate_generator<int, vg::binomial> v{ 10, 0.4 };
-
-    	for ( unsigned long int i = 0; i != 10; ++i )
-        	std::cout << v() << "\t";
-
-    	std::cout << "\n";
-
-    	return 0;
-	}
-
-
-Output:
-
-   3	4	3	3	3	6	4	5	4	5
-
-####Burr Distirubtion
-
-Produces random variates that are following [Burr Distirubtion
-Family](http://dx.doi.org/10.1214%2Faoms%2F1177731607).
-
-The template class
-
-    template < typename Return_Type, typename Engine >
-    struct burr;
-
-is defined in ['include/vg/distribution/burr.hpp'](./include/vg/distribution/burr.hpp).
-
-##### Burr Template Parameters
-
-see [Template Parameters in variate_generator](#template-parameters).
-
-##### Burr Member Types
-
-see [Member Types in varaite_generator](#member-types).
-
-##### Burr Member Functions
-
-###### Burr constructor
-
-    explicit burr( const size_type  n = size_type(1),
-                   const final_type c = final_type(1),
-                   const final_type k = final_type(1),
-                   const final_type r = final_type(1),
-                   const seed_type sd = 0 ) noexcept;
-
-The constructor expects 5 paremeters. The first parameter, _n_, is an interger representing index of the distribution in Burr family, which is subject to 0 < n < 13, while _c_, _k_ and _r_ are positive real numbers, and the last paremeter, _sd_, is for the engine employed by the distrubtion, and if _sd_ is not provided, a default one will be used.
-
-###### Burr operator()
-
-	return_type operator()() const noexcept;
-
-Generates a new random variate that follows __Burr__ distribution.
-
-##### Burr Example
-
-   	#include <vg.hpp>
-	#include <iostream>
-
-	int main()
-	{
-    	for ( unsigned long int index = 1; index != 13; ++index )
-    	{
-        	vg::variate_generator<double, vg::burr> v{ index, 1.0, 2.0, 3.0 };
-
-        	std::cout << "Burr--[" << index << "]:\n";
-        	for ( unsigned long int i = 0; i != 10; ++i )
-            	std::cout << v() << "\t";
-
-        	std::cout << "\n";
-    	}
-
-    	return 0;
-	}
-
-
-Output:
-
-   	Burr--[1]:
-	0.691701	0.503969	0.775365	0.616878	0.910301	0.259373	0.340916	0.0500518	0.293938	0.555238
-	Burr--[2]:
-	1.05542	2.71497	-0.218548	-0.0761166	1.17026	1.78444	0.884203	1.30093	0.631601	1.54087
-	Burr--[3]:
-	1.64714	2.00575	1.65232	0.591113	1.67746	2.43094	1.13836	2.05393	1.5601	2.298
-	Burr--[4]:
-	0.928387	0.684173	0.857723	0.601024	0.630111	0.956288	0.776311	0.991735	0.571119	0.595129
-	Burr--[5]:
-	1.3221	0.957629	0.889189	0.543457	1.11291	1.23837	1.17445	0.887858	1.13989	0.448486
-	Burr--[6]:
-	1.33317	1.61416	0.587275	1.88367	1.85513	1.26575	2.03609	1.54311	1.2578	-0.0170988
-	Burr--[7]:
-	1.25635	0.459867	1.49758	-0.127729	0.960515	-0.0670914	0.794886	2.48393	0.868511	1.0654
-	Burr--[8]:
-	-0.715498	-0.0967954	3.51838	0.233612	0.0809866	2.07674	0.828366	1.38016	0.396843	-0.630856
-	Burr--[9]:
-	-0.421246	-0.766305	-1.65146	-1.37102	-0.257663	-1.15828	-1.11598	-0.930168	-0.9182	-1.67391
-	Burr--[10]:
-	1.05374	1.24458	1.11537	1.22802	0.920393	1.60435	1.11702	0.712841	2.09835	1.50033
-	Burr--[11]:
-	0.000104468	0.000104468	0.000104468	0.000104468	0.000104468	0.000104468	0.000104468	0.000104468	0.000104468	0.000104468
-	Burr--[12]:
-	2.42904	0.217242	0.0023998	0.13086	0.939905	0.197871	0.00245561	0.282117	2.11047	1.83234
-
-####Chi Square Distirubtion
-
-Produces random variates that are following [Chi Square Distirubtion](http://en.wikipedia.org/wiki/Chi-squared_distribution).
-
-The template class
-
-    template < typename Return_Type, typename Engine >
-    struct chi_square;
-
-is defined in ['include/vg/distribution/chi_squre.hpp'](./include/vg/distribution/chi_square.hpp).
-
-##### Chi Square Template Parameters
-
-see [Template Parameters in variate_generator](#template-parameters).
-
-##### Chi Square Member Types
-
-see [Member Types in varaite_generator](#member-types).
-
-##### Chi Square Member Functions
-
-###### Chi Square constructor
-
-    explicit chi_square( const size_type k = 10, const seed_type sd = 0 ) noexcept;
-
-The constructor expects 2 paremeters. The first parameter, _k_, is a positive interger representing the degrees of freedom, and the last paremeter, _sd_, is for the engine employed by the distrubtion, and if _sd_ is not provided, a default one will be used.
-
-###### Chi Square operator()
-
-	return_type operator()() const noexcept;
-
-Generates a new random variate that follows __Chi Square__ distribution.
-
-##### Chi Square Example
-
-    #include <vg.hpp>
-	#include <iostream>
-
-	int main()
-	{
-    	vg::variate_generator<double, vg::chi_square> v{ 10 };
-
-    	for ( unsigned long int i = 0; i != 10; ++i )
-        	std::cout << v() << "\t";
-
-    	std::cout << "\n";
-
-    	return 0;
-	}
-
-
-Output:
-
-   	25.0486	12.4258	22.4472	14.5258	17.4818	13.0089	8.77502	13.2517	7.47055	11.0505
 
