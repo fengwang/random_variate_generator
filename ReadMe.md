@@ -1,6 +1,6 @@
 # Non-Uniform Random Variate Generator
 
-This is a non-uniform random variate generator library, in c++20, single-file and header-only.
+This is a non-uniform random variate generator library, single-file and header-only in C++.
 
 
 
@@ -9,7 +9,7 @@ This is a non-uniform random variate generator library, in c++20, single-file an
 Quick start source code(1):
 
     //test.cc
-	#include <vg.hpp>
+	#include <vg.hpp> // just copy this file  from include/vg.hpp
 	#include <cmath>
 	#include <map>
 	#include <iostream>
