@@ -200,7 +200,7 @@ in which
 - `vg::mt19937` is the random number engine, and
 - `1.0` is the parameter possed to the random distribution `vg::exponential`.
 
-With `gen`, we use it as a generator/functor to generator random variates
+we use `gen` as a generator/functor
 
 ```cpp
 for ( int i = 0; i < 10; ++i )
@@ -210,6 +210,7 @@ for ( int i = 0; i < 10; ++i )
 
 
 ## Examples
+
 
 
 ### arcsin distribution
@@ -391,7 +392,7 @@ int main()
 {
     unsigned long const n = 1000000;
     std::vector<double> x(n);
-    vg::variate_generator<double, vg::binomial, vg::mt19937> gen{ 1, 0.5 };
+    vg::variate_generator<unsigned long, vg::binomial, vg::mt19937> gen{ 1, 0.5 };
     for ( unsigned long idx = 0; idx < n; ++idx ) x[idx] = gen();
 
     std::cout << "Testing arcsin distribution: with " << n << " examples.\n" ;
@@ -895,7 +896,7 @@ int main()
 {
     unsigned long const n = 1000000;
     std::vector<double> x(n);
-    vg::variate_generator<double, vg::hypergeometric, vg::mt19937> gen{ 1, 0, 1 };
+    vg::variate_generator<unsigned long, vg::hypergeometric, vg::mt19937> gen{ 1, 0, 1 };
     for ( unsigned long idx = 0; idx < n; ++idx ) x[idx] = gen();
 
     std::cout << "Testing arcsin distribution: with " << n << " examples.\n" ;
@@ -1723,8 +1724,15 @@ int main()
 }
 ```
 
+
+
+
+
+
 ## License
 
 LGPL
+
+
 
 
